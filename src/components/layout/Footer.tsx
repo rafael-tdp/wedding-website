@@ -62,6 +62,14 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/admin"
+                  className="text-sm text-gray-300 hover:text-yellow-50 transition-colors opacity-75"
+                >
+                  Admin
+                </Link>
+              </li>
             </ul>
           </div>
 

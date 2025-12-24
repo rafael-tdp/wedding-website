@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ConfigWarning } from "@/components/ui/ConfigWarning";
+import PWAInit from "@/components/pwa/PWAInit";
 import { I18nProvider } from "@/lib/i18n/context";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
@@ -31,6 +32,22 @@ export const metadata: Metadata = {
     icon: "/favicon.png",
     apple: "/favicon.png",
   },
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Ana & Rafael - Mariage",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  themeColor: "#d4af37",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
 };
 
 export default async function RootLayout({
@@ -46,6 +63,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${parisienne.variable} antialiased min-h-screen flex flex-col`}
       >
+        <PWAInit />
         <I18nProvider locale={locale} dict={dict}>
           <ConfigWarning />
           <Navbar />

@@ -2,8 +2,7 @@
 
 const CACHE_NAME = 'wedding-app-v1';
 const urlsToCache = [
-  '/',
-  '/offline.html'
+  '/'
 ];
 
 // Installation du service worker
@@ -13,7 +12,10 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('[ServiceWorker] Cache ouvert');
-        return cache.addAll(urlsToCache);
+        return cache.addAll(urlsToCache).catch(err => {
+          console.warn('[ServiceWorker] Erreur lors du caching initial:', err);
+          return Promise.resolve();
+        });
       })
       .then(() => self.skipWaiting())
   );

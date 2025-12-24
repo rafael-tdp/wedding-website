@@ -40,7 +40,7 @@ export default function PhotoCard({
 	return (
 		<div className="bg-white rounded-lg shadow-lg overflow-hidden">
 			{/* Image */}
-			<div className="relative w-full h-48 bg-gray-200">
+			<div className="relative w-full h-32 sm:h-48 bg-gray-200">
 				<img
 					src={photo.public_url}
 					alt={photo.alt_text || "Photo"}
@@ -49,8 +49,8 @@ export default function PhotoCard({
 			</div>
 
 			{/* Info */}
-			<div className="p-3">
-				<p className="text-sm font-semibold text-foreground truncate">
+			<div className="p-2 sm:p-3">
+				<p className="text-xs sm:text-sm font-semibold text-foreground truncate">
 					{photo.uploaded_by ||
 						"Utilisateur"}
 				</p>
@@ -64,32 +64,32 @@ export default function PhotoCard({
 				</p>
 
 				{/* Actions */}
-				<div className="flex items-center gap-1 mt-3 text-xs">
+				<div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 mt-2 sm:mt-3 text-xs">
 					<button
 						onClick={() => onToggleVisibility(photo.id)}
 						disabled={isHiding}
-						className="text-foreground-muted hover:text-gray-900 underline transition-colors disabled:opacity-50 flex items-center gap-1"
+						className="text-foreground-muted hover:text-gray-900 underline transition-colors disabled:opacity-50 flex items-center gap-1 w-full sm:w-auto"
 						title={photo.is_visible ? "Désactiver la photo" : "Activer la photo"}
 					>
 						{isHiding
 							? "..."
 							: photo.is_visible ? (
 								<>
-									<IoEyeOutline className="w-4 h-4" />
+									<IoEyeOutline className="w-3 h-3 sm:w-4 sm:h-4" />
 									Désactiver
 								</>
 							) : (
 								<>
-									<IoEyeOffOutline className="w-4 h-4" />
+									<IoEyeOffOutline className="w-3 h-3 sm:w-4 sm:h-4" />
 									Activer
 								</>
 							)}
 					</button>
-					<span className="text-gray-300">│</span>
+					<span className="hidden sm:block text-gray-300">│</span>
 					<button
 						onClick={() => onDelete(photo.id)}
 						disabled={isDeleting}
-						className="text-foreground-muted hover:text-red-600 underline transition-colors disabled:opacity-50"
+						className="text-foreground-muted hover:text-red-600 underline transition-colors disabled:opacity-50 w-full sm:w-auto text-left sm:text-inherit"
 						title="Supprimer la photo"
 					>
 						{isDeleting

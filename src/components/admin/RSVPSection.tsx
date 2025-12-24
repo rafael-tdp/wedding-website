@@ -65,7 +65,7 @@ export default function RSVPSection({
 	return (
 		<>
 			{/* Statistiques */}
-			<div className="grid md:grid-cols-5 gap-4 mb-8">
+			<div className="hidden md:grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-4 mb-8">
 				<StatCard
 					label="Total de réponses"
 					value={stats.total}
@@ -92,6 +92,30 @@ export default function RSVPSection({
 					color="green"
 				/>
 			</div>
+
+            {/* Statistiques pour mobile */}
+            <div className="md:hidden grid grid-cols-2 gap-2 mb-6">
+                <div className="text-sm">
+                    <span className="text-gray-600">Total: </span>
+                    <span className="font-bold text-blue-600">{stats.total}</span>
+                </div>
+                <div className="text-sm">
+                    <span className="text-gray-600">Présents: </span>
+                    <span className="font-bold text-green-600">{stats.attending}</span>
+                </div>
+                <div className="text-sm">
+                    <span className="text-gray-600">Absents: </span>
+                    <span className="font-bold text-red-600">{stats.notAttending}</span>
+                </div>
+                <div className="text-sm">
+                    <span className="text-gray-600">Avec groupe: </span>
+                    <span className="font-bold text-blue-600">{stats.withFamilyMembers}</span>
+                </div>
+                <div className="text-sm">
+                    <span className="text-gray-600">Total invités: </span>
+                    <span className="font-bold text-green-600">{stats.totalGuests}</span>
+                </div>
+            </div>
 
 			{/* Filtres */}
 			<div className="mb-8 flex gap-3 flex-wrap">

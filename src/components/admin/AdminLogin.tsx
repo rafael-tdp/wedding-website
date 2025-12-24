@@ -42,7 +42,7 @@ export default function AdminLogin() {
   if (success) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-xl p-8 max-w-md text-center space-y-4">
+        <div className="bg-white rounded-lg shadow-xl p-6 sm:p-8 max-w-md w-full text-center space-y-4">
           <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
             <svg
               className="w-8 h-8 text-primary"
@@ -58,8 +58,8 @@ export default function AdminLogin() {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-serif text-foreground">Connexion réussie</h2>
-          <p className="text-foreground-muted">Redirection en cours...</p>
+          <h2 className="text-xl sm:text-2xl font-serif text-foreground">Connexion réussie</h2>
+          <p className="text-sm sm:text-base text-foreground-muted">Redirection en cours...</p>
         </div>
       </div>
     );
@@ -67,11 +67,11 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full space-y-6">
+      <div className="bg-white rounded-lg shadow-xl p-6 sm:p-8 max-w-md w-full text-center space-y-4">
         {/* Header */}
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-serif text-foreground">💍 Admin</h1>
-          <p className="text-foreground-muted">
+          <h1 className="text-2xl sm:text-3xl font-serif text-foreground">💍 Admin</h1>
+          <p className="text-xs sm:text-sm text-foreground-muted">
             Accès réservé aux mariés
           </p>
         </div>

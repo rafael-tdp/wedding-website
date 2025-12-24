@@ -100,18 +100,18 @@ export default function AdminProgrammeManager({ showForm, setShowForm }: { showF
 
   const handleEdit = (event: ProgrammeEvent) => {
     setFormData({
-      title: event.title,
-      description: event.description,
-      event_time: event.event_time,
+      title: event.title || "",
+      description: event.description || "",
+      event_time: event.event_time || "",
       duration_minutes: event.duration_minutes ? String(event.duration_minutes) : "",
-      location: event.location,
+      location: event.location || "",
       address: event.address || "",
       display_order: event.display_order,
       icon: event.icon || "",
-      title_fr: event.title_fr,
-      description_fr: event.description_fr,
-      title_pt: event.title_pt,
-      description_pt: event.description_pt,
+      title_fr: event.title_fr || "",
+      description_fr: event.description_fr || "",
+      title_pt: event.title_pt || "",
+      description_pt: event.description_pt || "",
     });
     setEditingId(event.id);
     setShowForm(true);
@@ -140,8 +140,8 @@ export default function AdminProgrammeManager({ showForm, setShowForm }: { showF
           {events.map((event) =>
             editingId === event.id ? (
               /* Formulaire d'édition à la place de l'élément */
-              <form key={event.id} onSubmit={handleSubmit} className="bg-background-soft p-6 rounded-lg space-y-4 border border-primary">
-                <div className="grid grid-cols-2 gap-4">
+              <form key={event.id} onSubmit={handleSubmit} className="bg-background-soft p-4 sm:p-6 rounded-lg space-y-4 border border-primary">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Titre (FR)</label>
                     <input
@@ -244,11 +244,11 @@ export default function AdminProgrammeManager({ showForm, setShowForm }: { showF
               </form>
             ) : (
               /* Affichage normal de l'élément */
-              <div key={event.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-                <div className="flex justify-between items-start gap-4">
+              <div key={event.id} className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
+                <div className="flex flex-col gap-2">
                   <div className="flex-1">
-                    <h3 className="font-semibold text-lg text-gray-900">{event.title_fr}</h3>
-                    <div className="flex items-center gap-2 mt-2 text-sm text-gray-600">
+                    <h3 className="font-semibold text-base sm:text-lg text-gray-900">{event.title_fr}</h3>
+                    <div className="flex flex-wrap items-center gap-1 sm:gap-2 mt-1 text-xs sm:text-sm text-gray-600">
                       <span>{event.event_time}{event.duration_minutes ? ` (${event.duration_minutes}min)` : ""}</span>
                       {event.location && (
                         <>
@@ -258,21 +258,21 @@ export default function AdminProgrammeManager({ showForm, setShowForm }: { showF
                       )}
                     </div>
                     {event.description_fr && (
-                      <p className="text-sm text-gray-600 mt-2">{event.description_fr}</p>
+                      <p className="text-xs sm:text-sm text-gray-600 mt-1">{event.description_fr}</p>
                     )}
                   </div>
-                  <div className="flex gap-1 flex-shrink-0">
+                  <div className="flex justify-end gap-2 flex-shrink-0">
                     <button
                       onClick={() => handleEdit(event)}
                       title="Modifier"
-                      className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-all"
+                      className="w-8 h-8 flex items-center justify-center bg-primary/10 text-primary hover:bg-primary/20 rounded transition-all text-sm"
                     >
                       ✎
                     </button>
                     <button
                       onClick={() => handleDelete(event.id)}
                       title="Supprimer"
-                      className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-all"
+                      className="w-8 h-8 flex items-center justify-center bg-accent/10 text-accent hover:bg-accent/20 rounded transition-all text-sm"
                     >
                       ✕
                     </button>

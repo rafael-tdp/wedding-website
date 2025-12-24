@@ -99,18 +99,18 @@ export default function AdminHebergementManager({ showForm, setShowForm }: { sho
 
   const handleEdit = (hebergement: Hebergement) => {
     setFormData({
-      name: hebergement.name,
-      description: hebergement.description,
-      price: hebergement.price,
-      phone: hebergement.phone,
-      website: hebergement.website,
+      name: hebergement.name || "",
+      description: hebergement.description || "",
+      price: hebergement.price || "",
+      phone: hebergement.phone || "",
+      website: hebergement.website || "",
       image_url: hebergement.image_url || "",
-      name_fr: hebergement.name_fr,
-      description_fr: hebergement.description_fr,
-      price_note_fr: hebergement.price_note_fr,
-      name_pt: hebergement.name_pt,
-      description_pt: hebergement.description_pt,
-      price_note_pt: hebergement.price_note_pt,
+      name_fr: hebergement.name_fr || "",
+      description_fr: hebergement.description_fr || "",
+      price_note_fr: hebergement.price_note_fr || "",
+      name_pt: hebergement.name_pt || "",
+      description_pt: hebergement.description_pt || "",
+      price_note_pt: hebergement.price_note_pt || "",
     });
     setEditingId(hebergement.id);
     setShowForm(true);
@@ -139,8 +139,8 @@ export default function AdminHebergementManager({ showForm, setShowForm }: { sho
           {hebergements.map((hebergement) =>
             editingId === hebergement.id ? (
               /* Formulaire d'édition à la place de l'élément */
-              <form key={hebergement.id} onSubmit={handleSubmit} className="p-6 rounded-lg space-y-4 border border-primary bg-background-soft">
-                <div className="grid grid-cols-2 gap-4">
+              <form key={hebergement.id} onSubmit={handleSubmit} className="p-4 sm:p-6 rounded-lg space-y-4 border border-primary bg-background-soft">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Nom (FR)</label>
                     <input
@@ -266,42 +266,53 @@ export default function AdminHebergementManager({ showForm, setShowForm }: { sho
               </form>
             ) : (
               /* Affichage normal de l'élément */
-              <div key={hebergement.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-                <div className="flex justify-between items-start gap-4">
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-lg text-gray-900">{hebergement.name_fr}</h3>
-                    {hebergement.description_fr && (
-                      <p className="text-sm text-gray-600 mt-2">{hebergement.description_fr}</p>
-                    )}
-                    <div className="flex flex-wrap gap-4 mt-3 text-sm text-gray-600">
-                      {hebergement.price && (
-                        <span>{hebergement.price}</span>
-                      )}
-                      {hebergement.phone && (
-                        <span>{hebergement.phone}</span>
-                      )}
-                      {hebergement.website && (
-                        <a href={hebergement.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
-                          {hebergement.website}
-                        </a>
-                      )}
+              <div key={hebergement.id} className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  {hebergement.image_url && (
+                    <div className="w-full sm:w-40 sm:h-40 flex-shrink-0">
+                      <img
+                        src={hebergement.image_url}
+                        alt={hebergement.name_fr}
+                        className="w-full h-40 sm:h-40 object-cover rounded-lg"
+                      />
                     </div>
-                  </div>
-                  <div className="flex gap-1 flex-shrink-0">
-                    <button
-                      onClick={() => handleEdit(hebergement)}
-                      title="Modifier"
-                      className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-all"
-                    >
-                      ✎
-                    </button>
-                    <button
-                      onClick={() => handleDelete(hebergement.id)}
-                      title="Supprimer"
-                      className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-all"
-                    >
-                      ✕
-                    </button>
+                  )}
+                  <div className="flex-1">
+                    <div className="flex flex-col sm:flex-row justify-between items-start gap-2 sm:gap-4">
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-base sm:text-lg text-gray-900">{hebergement.name_fr}</h3>
+                        {hebergement.description_fr && (
+                          <p className="text-xs sm:text-sm text-gray-600 mt-1">{hebergement.description_fr}</p>
+                        )}
+                        <div className="flex flex-col gap-1 mt-2 text-xs sm:text-sm text-gray-600">
+                          {hebergement.price && (
+                            <span><span className="font-medium text-gray-700">Prix:</span> {hebergement.price}</span>
+                          )}
+                          {hebergement.phone && (
+                            <span><span className="font-medium text-gray-700">Tél:</span> {hebergement.phone}</span>
+                          )}
+                          {hebergement.website && (
+                            <span><span className="font-medium text-gray-700">Site:</span> <a href={hebergement.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 break-all">{hebergement.website}</a></span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex gap-2 flex-shrink-0">
+                        <button
+                          onClick={() => handleEdit(hebergement)}
+                          title="Modifier"
+                          className="w-8 h-8 flex items-center justify-center bg-primary/10 text-primary hover:bg-primary/20 rounded transition-all text-sm"
+                        >
+                          ✎
+                        </button>
+                        <button
+                          onClick={() => handleDelete(hebergement.id)}
+                          title="Supprimer"
+                          className="w-8 h-8 flex items-center justify-center bg-accent/10 text-accent hover:bg-accent/20 rounded transition-all text-sm"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

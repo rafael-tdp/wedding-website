@@ -44,16 +44,16 @@ export default function RSVPCard({
 	isDeleting,
 }: RSVPCardProps) {
 	return (
-		<div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+		<div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
 			{/* En-tête */}
-			<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-				<div>
-					<h3 className="text-lg font-semibold text-gray-900">
+			<div className="flex flex-col sm:flex-row sm:items-start md:items-center md:justify-between gap-3 sm:gap-4 mb-4">
+				<div className="min-w-0">
+					<h3 className="text-base sm:text-lg font-semibold text-gray-900 truncate">
 						{rsvp.guest_name}
 					</h3>
-					<div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-600">
+					<div className="flex flex-col sm:flex-wrap gap-1 sm:gap-4 mt-2 text-xs sm:text-sm text-gray-600">
 						{rsvp.guest_email && (
-							<span>📧 {rsvp.guest_email}</span>
+							<span className="truncate">📧 {rsvp.guest_email}</span>
 						)}
 						{rsvp.guest_phone && (
 							<span>📱 {rsvp.guest_phone}</span>
@@ -63,9 +63,9 @@ export default function RSVPCard({
 						</span>
 					</div>
 				</div>
-				<div className="flex items-center gap-3">
+				<div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
 					<span
-						className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap ${
+						className={`inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap ${
 							rsvp.attending
 								? "bg-green-100 text-green-800"
 								: "bg-red-100 text-red-800"
@@ -76,11 +76,11 @@ export default function RSVPCard({
 							: "✗ Absent"}
 					</span>
 					{/* Menu d'actions */}
-					<div className="flex gap-1">
+					<div className="flex gap-2">
 						<button
 							onClick={() => onEdit(rsvp)}
 							title="Modifier"
-							className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-all"
+							className="w-8 h-8 flex items-center justify-center bg-primary/10 text-primary hover:bg-primary/20 rounded transition-all text-sm"
 						>
 							✎
 						</button>
@@ -88,7 +88,7 @@ export default function RSVPCard({
 							onClick={() => onDelete(rsvp.id)}
 							disabled={isDeleting}
 							title="Supprimer"
-							className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-all disabled:opacity-50"
+							className="w-8 h-8 flex items-center justify-center bg-accent/10 text-accent hover:bg-accent/20 rounded transition-all text-sm disabled:opacity-50"
 						>
 							{isDeleting ? "⟳" : "✕"}
 						</button>

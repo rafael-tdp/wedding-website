@@ -209,7 +209,7 @@ export default function PhotoGrid({
 
 	return (
 		<>
-			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+			<div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1">
 				{photos.map((photo, index) => (
 					<PhotoGridItem
 						key={photo.id}

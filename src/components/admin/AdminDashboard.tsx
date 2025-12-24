@@ -265,18 +265,19 @@ export default function AdminDashboard({
 
 	return (
 		<main className="min-h-screen bg-background">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-32">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-24 md:pt-32">
 				{/* Header */}
 				<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
 					<div>
-						<h1 className="text-4xl font-serif text-foreground mb-2">
+						<h1 className="text-2xl md:text-4xl font-serif text-foreground mb-2">
 							Tableau de bord
 						</h1>
 						<p className="text-foreground-muted"> 
 							Gestion du mariage
 						</p>
 					</div>
-					<div className="flex items-center gap-4 text-sm">
+					<div className="flex items-center gap-4 text-sm w-full md:w-auto justify-end">
+						
 						{/* Boutons adaptés à l'onglet actif */}
 						{activeTab === "rsvp" && (
 							<>
@@ -285,7 +286,8 @@ export default function AdminDashboard({
 									className="text-foreground-muted hover:text-foreground underline transition-colors"
 									title="Ajouter un invité"
 								>
-									<BiPlus className="inline mr-0.5" />Ajouter un invité
+									<span className="hidden sm:inline"><BiPlus className="inline mr-0.5" />Ajouter un invité</span>
+									<span className="sm:hidden"><BiPlus className="inline mr-0.5" />Ajouter</span>
 								</button>
 								<span className="text-foreground-muted">│</span>
 								<button
@@ -294,7 +296,8 @@ export default function AdminDashboard({
 									className="text-foreground-muted hover:text-foreground underline transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
 									title="Exporter en CSV"
 								>
-									<BiDownload className="inline mr-1" />{exportLoading ? "Export..." : "Exporter CSV"}
+									<span className="hidden sm:inline"><BiDownload className="inline mr-1" />{exportLoading ? "Export..." : "Exporter CSV"}</span>
+									<span className="sm:hidden"><BiDownload className="inline mr-1" />{exportLoading ? "Export..." : "Exporter"}</span>
 								</button>
 								<span className="text-foreground-muted">│</span>
 							</>
@@ -306,7 +309,8 @@ export default function AdminDashboard({
 									className="text-foreground-muted hover:text-foreground underline transition-colors"
 									title="Ajouter une FAQ"
 								>
-									<BiPlus className="inline mr-0.5" />Ajouter une FAQ
+									<span className="hidden sm:inline"><BiPlus className="inline mr-0.5" />Ajouter une FAQ</span>
+									<span className="sm:hidden"><BiPlus className="inline mr-0.5" />Ajouter</span>
 								</button>
 								<span className="text-foreground-muted">│</span>
 							</>
@@ -318,7 +322,8 @@ export default function AdminDashboard({
 									className="text-foreground-muted hover:text-foreground underline transition-colors"
 									title="Ajouter un événement"
 								>
-									<BiPlus className="inline mr-0.5" />Ajouter un événement
+									<span className="hidden sm:inline"><BiPlus className="inline mr-0.5" />Ajouter un événement</span>
+									<span className="sm:hidden"><BiPlus className="inline mr-0.5" />Ajouter</span>
 								</button>
 								<span className="text-foreground-muted">│</span>
 							</>
@@ -330,7 +335,8 @@ export default function AdminDashboard({
 									className="text-foreground-muted hover:text-foreground underline transition-colors"
 									title="Ajouter un hébergement"
 								>
-									<BiPlus className="inline mr-0.5" />Ajouter un hébergement
+									<span className="hidden sm:inline"><BiPlus className="inline mr-0.5" />Ajouter un hébergement</span>
+									<span className="sm:hidden"><BiPlus className="inline mr-0.5" />Ajouter</span>
 								</button>
 								<span className="text-foreground-muted">│</span>
 							</>
@@ -347,57 +353,64 @@ export default function AdminDashboard({
 				</div>
 
 				{/* Onglets */}
-			<div className="flex gap-4 mb-8 border-b border-gray-300 flex-wrap">
-				<button
-					onClick={() => setActiveTab("rsvp")}
-					className={`px-6 py-3 font-medium transition-all border-b-2 ${
-						activeTab === "rsvp"
-							? "border-primary text-primary"
-							: "border-transparent text-foreground-muted hover:text-foreground"
-					}`}
-				>
-					RSVPs ({rsvps.length})
-				</button>
-				<button
-					onClick={() => setActiveTab("photos")}
-					className={`px-6 py-3 font-medium transition-all border-b-2 ${
-						activeTab === "photos"
-							? "border-primary text-primary"
-							: "border-transparent text-foreground-muted hover:text-foreground"
-					}`}
-				>
-					Photos ({photos.length})
-				</button>
-				<button
-					onClick={() => setActiveTab("faq")}
-					className={`px-6 py-3 font-medium transition-all border-b-2 ${
-						activeTab === "faq"
-							? "border-primary text-primary"
-							: "border-transparent text-foreground-muted hover:text-foreground"
-					}`}
-				>
-					FAQs ({faqCount})
-				</button>
-				<button
-					onClick={() => setActiveTab("programme")}
-					className={`px-6 py-3 font-medium transition-all border-b-2 ${
-						activeTab === "programme"
-							? "border-primary text-primary"
-							: "border-transparent text-foreground-muted hover:text-foreground"
-					}`}
-				>
-					Programme ({programmeCount})
-				</button>
-				<button
-					onClick={() => setActiveTab("hebergements")}
-					className={`px-6 py-3 font-medium transition-all border-b-2 ${
-						activeTab === "hebergements"
-							? "border-primary text-primary"
-							: "border-transparent text-foreground-muted hover:text-foreground"
-					}`}
-				>
-					Hébergements ({hebergementCount})
-				</button>
+			<div className="overflow-x-auto sm:overflow-visible -mx-4 sm:mx-0 px-4 sm:px-0 mb-6 sm:mb-8 border-b border-gray-300">
+				<div className="flex gap-1 sm:gap-4 flex-nowrap sm:flex-wrap">
+					<button
+						onClick={() => setActiveTab("rsvp")}
+						className={`px-2 sm:px-6 py-2 sm:py-3 font-medium transition-all border-b-2 text-xs sm:text-base whitespace-nowrap ${
+							activeTab === "rsvp"
+								? "border-primary text-primary"
+								: "border-transparent text-foreground-muted hover:text-foreground"
+						}`}
+					>
+						<span className="sm:hidden">RSVP ({rsvps.length})</span>
+						<span className="hidden sm:inline">RSVPs ({rsvps.length})</span>
+					</button>
+					<button
+						onClick={() => setActiveTab("photos")}
+						className={`px-2 sm:px-6 py-2 sm:py-3 font-medium transition-all border-b-2 text-xs sm:text-base whitespace-nowrap ${
+							activeTab === "photos"
+								? "border-primary text-primary"
+								: "border-transparent text-foreground-muted hover:text-foreground"
+						}`}
+					>
+						<span className="sm:hidden">Photos ({photos.length})</span>
+						<span className="hidden sm:inline">Photos ({photos.length})</span>
+					</button>
+					<button
+						onClick={() => setActiveTab("faq")}
+						className={`px-2 sm:px-6 py-2 sm:py-3 font-medium transition-all border-b-2 text-xs sm:text-base whitespace-nowrap ${
+							activeTab === "faq"
+								? "border-primary text-primary"
+								: "border-transparent text-foreground-muted hover:text-foreground"
+						}`}
+					>
+						<span className="sm:hidden">FAQ ({faqCount})</span>
+						<span className="hidden sm:inline">FAQ ({faqCount})</span>
+					</button>
+					<button
+						onClick={() => setActiveTab("programme")}
+						className={`px-2 sm:px-6 py-2 sm:py-3 font-medium transition-all border-b-2 text-xs sm:text-base whitespace-nowrap ${
+							activeTab === "programme"
+								? "border-primary text-primary"
+								: "border-transparent text-foreground-muted hover:text-foreground"
+						}`}
+					>
+						<span className="sm:hidden">Prog ({programmeCount})</span>
+						<span className="hidden sm:inline">Programme ({programmeCount})</span>
+					</button>
+					<button
+						onClick={() => setActiveTab("hebergements")}
+						className={`px-2 sm:px-6 py-2 sm:py-3 font-medium transition-all border-b-2 text-xs sm:text-base whitespace-nowrap ${
+							activeTab === "hebergements"
+								? "border-primary text-primary"
+								: "border-transparent text-foreground-muted hover:text-foreground"
+						}`}
+					>
+						<span className="sm:hidden">Héb ({hebergementCount})</span>
+						<span className="hidden sm:inline">Hébergements ({hebergementCount})</span>
+					</button>
+				</div>
 			</div>
 
 			{/* Section RSVPs */}
@@ -440,24 +453,23 @@ export default function AdminDashboard({
 
 			{/* Modal pour ajouter un invité */}
 			{showAddGuestForm && (
-				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-					<div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-						{/* En-tête du modal */}
-						<div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
-							<h2 className="text-2xl font-serif text-foreground">
-								Ajouter un invité
-							</h2>
-							<button
-								onClick={() => setShowAddGuestForm(false)}
-								className="text-gray-500 hover:text-gray-700 text-2xl"
-							>
-								✕
-							</button>
-						</div>
+			<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+				<div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+					{/* En-tête du modal */}
+					<div className="sticky top-0 bg-white border-b border-gray-200 px-4 sm:px-6 py-4 flex justify-between items-center gap-2">
+						<h2 className="text-lg sm:text-2xl font-serif text-foreground">
+							Ajouter un invité
+						</h2>
+						<button
+							onClick={() => setShowAddGuestForm(false)}
+							className="text-gray-500 hover:text-gray-700 text-xl sm:text-2xl flex-shrink-0"
+						>
+							✕
+						</button>
+					</div>
 
-						{/* Contenu du formulaire */}
-						<div className="p-6">
-							<RSVPForm onSuccess={handleAddGuestSuccess} />
+					{/* Contenu du formulaire */}
+					<div className="p-4 sm:p-6">
 						</div>
 					</div>
 				</div>

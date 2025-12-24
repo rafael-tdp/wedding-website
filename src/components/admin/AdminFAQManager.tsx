@@ -86,12 +86,12 @@ export default function AdminFAQManager({ showForm, setShowForm }: { showForm: b
 
   const handleEdit = (faq: FAQItem) => {
     setFormData({
-      question_fr: faq.question_fr,
-      answer_fr: faq.answer_fr,
-      category_fr: faq.category_fr,
-      question_pt: faq.question_pt,
-      answer_pt: faq.answer_pt,
-      category_pt: faq.category_pt,
+      question_fr: faq.question_fr || "",
+      answer_fr: faq.answer_fr || "",
+      category_fr: faq.category_fr || "",
+      question_pt: faq.question_pt || "",
+      answer_pt: faq.answer_pt || "",
+      category_pt: faq.category_pt || "",
     });
     setEditingId(faq.id);
     setShowForm(true);
@@ -120,15 +120,15 @@ export default function AdminFAQManager({ showForm, setShowForm }: { showForm: b
           {faqs.map((faq) =>
             editingId === faq.id ? (
               /* Formulaire d'édition à la place de l'élément */
-              <form key={faq.id} onSubmit={handleSubmit} className="bg-background-soft p-6 rounded-lg space-y-4 border border-primary">
-                <div className="grid grid-cols-2 gap-4">
+              <form key={faq.id} onSubmit={handleSubmit} className="bg-background-soft p-4 sm:p-6 rounded-lg space-y-4 border border-primary">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Question (FR)</label>
                     <input
                       type="text"
                       value={formData.question_fr}
                       onChange={(e) => setFormData({ ...formData, question_fr: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg"
+                      className="w-full px-3 py-2 border rounded-lg text-sm"
                       required
                     />
             </div>
@@ -138,19 +138,19 @@ export default function AdminFAQManager({ showForm, setShowForm }: { showForm: b
                 type="text"
                 value={formData.question_pt}
                 onChange={(e) => setFormData({ ...formData, question_pt: e.target.value })}
-                className="w-full px-3 py-2 border rounded-lg"
+                className="w-full px-3 py-2 border rounded-lg text-sm"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium mb-1">Catégorie (FR)</label>
               <input
                 type="text"
                 value={formData.category_fr}
                 onChange={(e) => setFormData({ ...formData, category_fr: e.target.value })}
-                className="w-full px-3 py-2 border rounded-lg"
+                className="w-full px-3 py-2 border rounded-lg text-sm"
               />
             </div>
             <div>
@@ -159,12 +159,12 @@ export default function AdminFAQManager({ showForm, setShowForm }: { showForm: b
                 type="text"
                 value={formData.category_pt}
                 onChange={(e) => setFormData({ ...formData, category_pt: e.target.value })}
-                className="w-full px-3 py-2 border rounded-lg"
+                className="w-full px-3 py-2 border rounded-lg text-sm"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium mb-1">Réponse (FR)</label>
               <textarea
@@ -209,30 +209,32 @@ export default function AdminFAQManager({ showForm, setShowForm }: { showForm: b
               </form>
             ) : (
               /* Affichage normal de l'élément */
-              <div key={faq.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-                <div className="flex justify-between items-start gap-4">
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-lg text-gray-900">{faq.question_fr}</h3>
-                    <p className="text-sm text-gray-600 mt-2">{faq.answer_fr}</p>
-                    {faq.category_fr && (
-                      <p className="text-xs text-gray-400 mt-3 font-medium">{faq.category_fr}</p>
-                    )}
+              <div key={faq.id} className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
+                <div className="flex flex-col gap-2">
+                  <div className="flex-1 w-full">
+                    <h3 className="font-semibold text-sm sm:text-lg text-gray-900">{faq.question_fr}</h3>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">{faq.answer_fr}</p>
                   </div>
-                  <div className="flex gap-1 flex-shrink-0">
-                    <button
-                      onClick={() => handleEdit(faq)}
-                      title="Modifier"
-                      className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-all"
-                    >
-                      ✎
-                    </button>
-                    <button
-                      onClick={() => handleDelete(faq.id)}
-                      title="Supprimer"
-                      className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-all"
-                    >
-                      ✕
-                    </button>
+                  <div className="flex justify-between items-center gap-2">
+                    {faq.category_fr && (
+                      <p className="text-xs text-gray-400 font-medium">{faq.category_fr}</p>
+                    )}
+                    <div className="flex gap-2 flex-shrink-0">
+                      <button
+                        onClick={() => handleEdit(faq)}
+                        title="Modifier"
+                        className="w-8 h-8 flex items-center justify-center bg-primary/10 text-primary hover:bg-primary/20 rounded transition-all text-sm"
+                      >
+                        ✎
+                      </button>
+                      <button
+                        onClick={() => handleDelete(faq.id)}
+                        title="Supprimer"
+                        className="w-8 h-8 flex items-center justify-center bg-accent/10 text-accent hover:bg-accent/20 rounded transition-all text-sm"
+                      >
+                        ✕
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

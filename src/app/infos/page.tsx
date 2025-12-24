@@ -80,18 +80,18 @@ export default async function InfosPage() {
               <ul className="space-y-2 text-foreground-muted text-sm">
                 <li>✓ Consultez le programme détaillé</li>
                 <li>✓ Confirmez votre présence avant la date limite</li>
-                <li>✓ Réservez votre hébergement à l'avance</li>
-                <li>✓ Vérifiez les conditions d'accès au lieu</li>
+                <li>✓ Réservez votre hébergement à l&apos;avance</li>
+                <li>✓ Vérifiez les conditions d&apos;accès au lieu</li>
               </ul>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
               <h3 className="text-lg font-serif text-primary mb-3">Le Jour J</h3>
               <ul className="space-y-2 text-foreground-muted text-sm">
-                <li>✓ Arrivez 15 minutes avant l'événement</li>
+                <li>✓ Arrivez 15 minutes avant l&apos;événement</li>
                 <li>✓ Utilisez les parkings mis à disposition</li>
                 <li>✓ Consultez le programme pour les horaires</li>
-                <li>✓ N'hésitez pas à nous contacter en cas de besoin</li>
+                <li>✓ N&apos;hésitez pas à nous contacter en cas de besoin</li>
               </ul>
             </div>
           </div>
@@ -103,7 +103,7 @@ export default async function InfosPage() {
         <div className="max-w-2xl mx-auto text-center space-y-6 bg-gradient-to-br from-primary/5 to-secondary/5 p-8 rounded-lg">
           <h2 className="text-2xl font-serif text-primary">Des questions ?</h2>
           <p className="text-foreground-muted">
-            Consultez notre FAQ pour trouver les réponses à vos questions, ou n'hésitez pas à nous contacter directement.
+            Consultez notre FAQ pour trouver les réponses à vos questions, ou n&apos;hésitez pas à nous contacter directement.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 

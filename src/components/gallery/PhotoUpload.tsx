@@ -449,7 +449,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
                     }
                   `}
                 >
-                  <span className="text-sm text-gray-700">+ Ajouter d'autres photos</span>
+                  <span className="text-sm text-gray-700">+ Ajouter d&apos;autres photos</span>
                 </label>
               </div>
 
@@ -474,7 +474,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>
               <div className="flex-1">
-                <p className="font-semibold text-red-800 mb-1">Erreur lors de l'upload</p>
+                <p className="font-semibold text-red-800 mb-1">Erreur lors de l&apos;upload</p>
                 <p className="text-sm text-red-700">{uploadError.message}</p>
                 {uploadError.fields && Object.keys(uploadError.fields).length > 0 && (
                   <ul className="mt-2 text-sm text-red-700 list-disc list-inside">
@@ -502,7 +502,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
           <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
             <p className="text-sm text-yellow-800">
               Vous avez atteint la limite de {MAX_PHOTOS_PER_SESSION} photos par session.
-              Revenez dans 30 minutes pour en ajouter d'autres.
+              Revenez dans 30 minutes pour en ajouter d&apos;autres.
             </p>
           </div>
         )}

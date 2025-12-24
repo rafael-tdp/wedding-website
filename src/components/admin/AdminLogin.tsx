@@ -130,7 +130,7 @@ export default function AdminLogin() {
         {/* Info */}
         <div className="p-4 bg-primary/5 rounded-lg">
           <p className="text-sm text-foreground-muted">
-            <strong>Note:</strong> Vous devez d'abord créer un compte dans Supabase avec vos identifiants.
+            <strong>Note:</strong> Vous devez d&apos;abord créer un compte dans Supabase avec vos identifiants.
           </p>
         </div>
       </div>

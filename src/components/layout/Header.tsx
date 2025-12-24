@@ -1,19 +1,21 @@
+import Link from "next/link";
+
 export default function Header() {
   return (
     <header className="border-b">
       <nav className="container mx-auto px-4 py-4">
         <ul className="flex gap-6">
           <li>
-            <a href="/">Accueil</a>
+            <Link href="/">Accueil</Link>
           </li>
           <li>
-            <a href="/infos">Infos</a>
+            <Link href="/infos">Infos</Link>
           </li>
           <li>
-            <a href="/rsvp">RSVP</a>
+            <Link href="/rsvp">RSVP</Link>
           </li>
           <li>
-            <a href="/gallery">Galerie</a>
+            <Link href="/gallery">Galerie</Link>
           </li>
         </ul>
       </nav>

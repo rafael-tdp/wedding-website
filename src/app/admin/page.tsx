@@ -111,7 +111,7 @@ export default async function AdminPage() {
         <div className="bg-white rounded-lg shadow-lg p-8 max-w-md text-center">
           <h1 className="text-2xl font-serif text-red-600 mb-4">Configuration requise</h1>
           <p className="text-foreground-muted">
-            Supabase n'est pas configuré. Veuillez définir les variables d'environnement.
+            Supabase n&apos;est pas configuré. Veuillez définir les variables d&apos;environnement.
           </p>
         </div>
       </div>

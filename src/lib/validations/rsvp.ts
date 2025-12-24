@@ -20,9 +20,7 @@ export const familyMemberSchema = z.object({
     .max(255, "Le nom est trop long")
     .trim(),
   
-  attending: z.boolean({
-    errorMap: () => ({ message: "Veuillez indiquer la présence" }),
-  }),
+  attending: z.boolean(),
 
   isChild: z.boolean().default(false),
 

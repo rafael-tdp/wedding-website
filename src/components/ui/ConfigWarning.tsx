@@ -53,7 +53,7 @@ export function ConfigWarning() {
               ⚙️ Configuration requise
             </h3>
             <p className="text-sm mb-2">
-              Supabase n'est pas encore configuré. Le site ne fonctionnera pas
+              Supabase n&apos;est pas encore configuré. Le site ne fonctionnera pas
               correctement.
             </p>
             <div className="text-sm space-y-1">

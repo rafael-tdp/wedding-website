@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * THÈME GLOBAL DU SITE DE MARIAGE
+ * 
+ * Pour modifier le thème, changez uniquement les valeurs ci-dessous.
+ * Toutes les couleurs utilisent le format RGB (sans 'rgb()') pour permettre
+ * l'utilisation avec opacity : bg-primary/50
+ */
+
+:root {
+  /* === COULEURS PRINCIPALES === */
+  
+  /* Primary - Vert sauge doux et naturel */
+  --primary: 147 166 143;           /* Vert sauge principal */
+  --primary-light: 180 196 177;     /* Version plus claire */
+  --primary-dark: 114 133 110;      /* Version plus foncée */
+  
+  /* Secondary - Beige chaleureux */
+  --secondary: 212 196 173;         /* Beige sable */
+  --secondary-light: 230 220 205;   /* Version plus claire */
+  --secondary-dark: 180 164 141;    /* Version plus foncée */
+  
+  /* Accent - Vert bouteille pour accentuation */
+  --accent: 64 89 74;               /* Vert bouteille profond */
+  --accent-light: 94 119 104;       /* Version plus claire */
+  --accent-dark: 44 69 54;          /* Version plus foncée */
+  
+  /* === COULEURS DE BASE === */
+  
+  /* Backgrounds */
+  --background: 252 251 248;        /* Blanc cassé crème */
+  --background-soft: 245 242 237;   /* Beige très clair pour sections */
+  --background-dark: 44 69 54;      /* Vert bouteille foncé pour footer */
+  
+  /* Texte */
+  --foreground: 45 45 45;           /* Presque noir */
+  --foreground-muted: 115 115 115;  /* Gris pour texte secondaire */
+  
+  /* === TYPOGRAPHIE === */
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  
+  /* === ESPACEMENTS === */
+  --section-spacing: 5rem;          /* Espacement entre sections (mobile: auto-réduit) */
+}
+
+/* === STYLES DE BASE === */
+
+body {
+  color: rgb(var(--foreground));
+  background: rgb(var(--background));
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* === UTILITIES PERSONNALISÉES === */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Gradient élégant pour les héros */
+  .gradient-elegant {
+    background: linear-gradient(
+      135deg,
+      rgb(var(--primary) / 0.1) 0%,
+      rgb(var(--background)) 50%,
+      rgb(var(--secondary) / 0.1) 100%
+    );
+  }
+  
+  /* Ombre douce pour les cartes */
+  .shadow-elegant {
+    box-shadow: 0 4px 6px -1px rgb(var(--primary) / 0.1),
+                0 2px 4px -1px rgb(var(--primary) / 0.06);
+  }
+}
+
+/* === RESPONSIVE === */
+
+@media (max-width: 768px) {
+  :root {
+    --section-spacing: 3rem;
+  }
+}

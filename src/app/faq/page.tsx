@@ -1,0 +1,182 @@
+import Section from "@/components/ui/Section";
+import Title from "@/components/ui/Title";
+import FAQItem from "@/components/faq/FAQItem";
+import {
+  getFAQ,
+  getFAQTranslation,
+  FAQ as FAQType,
+} from "@/lib/supabase/queries";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { getLocale } from "@/lib/i18n/get-locale";
+
+export const metadata = {
+  title: "FAQ - Notre Mariage",
+  description: "Questions fréquemment posées sur notre mariage",
+};
+
+/**
+ * PAGE : FAQ (Questions Fréquentes - Multilingue)
+ * 
+ * Server Component qui récupère les FAQ depuis Supabase
+ * et les affiche groupées par catégorie avec traductions.
+ */
+export default async function FAQPage() {
+  const locale = await getLocale();
+  const dict = await getDictionary(locale);
+  // Récupération des données côté serveur
+  const faqs = await getFAQ();
+
+  // Fonction pour obtenir la traduction
+  const getTranslatedFAQ = (faq: FAQType) => {
+    return getFAQTranslation(faq, locale === "pt" ? "pt" : "fr");
+  };
+
+  // Grouper les FAQ par catégorie traduite
+  const faqsByCategory = faqs.reduce(
+    (acc, faq) => {
+      const translated = getTranslatedFAQ(faq);
+      const categoryName = translated.category;
+      if (!acc[categoryName]) {
+        acc[categoryName] = [];
+      }
+      acc[categoryName].push(faq);
+      return acc;
+    },
+    {} as Record<string, FAQType[]>
+  );
+
+  return (
+    <main className="min-h-screen">
+      {/* Hero Section */}
+      <Section variant="gradient" spacing="md" isHero>
+        <div className="text-center space-y-4">
+          <Title level="h1" align="center" withAccent>
+            {dict.faq.title}
+          </Title>
+          <p className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto">
+            {dict.faq.subtitle}
+          </p>
+        </div>
+      </Section>
+
+      {/* FAQ par catégorie */}
+      {Object.keys(faqsByCategory).length > 0 ? (
+        <Section variant="default" spacing="lg">
+          <div className="max-w-4xl mx-auto space-y-12">
+            {Object.entries(faqsByCategory).map(([categoryName, categoryFaqs]) => (
+              <div key={categoryName}>
+                <h2 className="text-2xl md:text-3xl font-serif text-foreground mb-6 pb-3 border-b border-primary/20">
+                  {categoryName}
+                </h2>
+
+                <div className="space-y-4">
+                  {categoryFaqs.map((faq) => {
+                    const translated = getTranslatedFAQ(faq);
+                    return (
+                      <FAQItem
+                        key={faq.id}
+                        question={translated.question}
+                        answer={translated.answer}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+      ) : (
+        // Message si aucune FAQ
+        <Section variant="default" spacing="lg">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-foreground-muted">
+              {dict.faq.empty}
+            </p>
+          </div>
+        </Section>
+      )}
+
+      {/* Contact */}
+      <Section variant="soft" spacing="lg">
+        <div className="max-w-3xl mx-auto text-center space-y-6">
+          <Title level="h2" align="center" withAccent>
+            {dict.faq.contact.title}
+          </Title>
+          <p className="text-foreground-muted text-lg">
+            {dict.faq.contact.subtitle}
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+            <a
+              href="mailto:tavaresrafael93@gmail.com"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-md font-medium bg-primary text-white hover:bg-primary-dark transition-colors"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+              {dict.faq.contact.email}
+            </a>
+            <a
+              href="tel:+33695224932"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-md font-medium border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                />
+              </svg>
+              {dict.faq.contact.phone}
+            </a>
+          </div>
+
+          {/* Navigation */}
+          <div className="pt-8 border-t border-primary/10">
+            <p className="text-foreground-muted mb-4">
+              {dict.faq.see.title}
+            </p>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <a
+                href="/programme"
+                className="text-primary hover:text-primary-dark underline"
+              >
+                {dict.faq.see.programme}
+              </a>
+              <span className="text-foreground-muted">•</span>
+              <a
+                href="/lieu"
+                className="text-primary hover:text-primary-dark underline"
+              >
+                {dict.faq.see.venue}
+              </a>
+              <span className="text-foreground-muted">•</span>
+              <a
+                href="/hebergements"
+                className="text-primary hover:text-primary-dark underline"
+              >
+                {dict.faq.see.accommodation}
+              </a>
+            </div>
+          </div>
+        </div>
+      </Section>
+    </main>
+  );
+}

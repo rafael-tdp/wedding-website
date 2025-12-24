@@ -1,0 +1,327 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "required": "Obligatoire",
+    "optional": "Optionnel",
+    "close": "Fermer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "back": "Retour"
+  },
+  "nav": {
+    "home": "Accueil",
+    "programme": "Programme",
+    "venue": "Lieu & Accès",
+    "accommodation": "Hébergements",
+    "gallery": "Galerie",
+    "rsvp": "RSVP",
+    "faq": "FAQ"
+  },
+  "navbar": {
+    "home": "Accueil",
+    "programme": "Programme",
+    "venue": "Lieu & Accès",
+    "accommodation": "Hébergements",
+    "gallery": "Galerie",
+    "rsvp": "RSVP",
+    "faq": "FAQ"
+  },
+  "home": {
+    "hero": {
+      "title": "Ana & Rafael",
+      "subtitle": "Nous nous marions !",
+      "date": "Le 15 Août 2026 · Quinta das Tulipas",
+      "confirmPresence": "Confirmer ma présence",
+      "seeProgramme": "Voir le programme"
+    },
+    "countdown": {
+      "title": "Ana & Rafael <br/> Ont le plaisir de vous inviter",
+      "description": "À leur mariage le <strong>15 Août 2026</strong> <br /> À 14h00 à Quinta das Tulipas."
+    },
+    "story": {
+      "title": "Notre Histoire",
+      "subtitle": "Découvrez comment tout a commencé",
+      "meeting": {
+        "label": "Notre Rencontre",
+        "title": "C'était une journée d'été",
+        "text": "C'était un jour d'été, le 7 juillet 2024, dans une fête avec des amis communs. Même si nous ne nous sommes pas parlé beaucoup ce jour-là, un petit intérêt s'est allumé entre nous.",
+        "image": "/images/story-meeting.svg"
+      },
+      "proposal": {
+        "label": "La Demande",
+        "title": "Un moment inoubliable au lac de Côme",
+        "text": "Lors d'un voyage en Italie au bord du lac de Côme, Rafael a (presque) surpris avec une demande en mariage dans une belle villa au bord de l'eau. Un moment inoubliable rempli d'émotions et de joie.",
+        "image": "/images/story-proposal.svg"
+      },
+      "firstDate": {
+        "label": "Notre Premier Rendez-vous",
+        "title": "Une balade à Paris",
+        "text": "Notre premier rendez-vous officiel a eu lieu à Paris avec une balade le long des Passages Couverts, suivie d'un dîner. Ce fut le début d'une belle aventure ensemble.",
+        "image": "/images/story-3.svg"
+      }
+    },
+    "info": {
+      "title": "Informations Pratiques",
+      "subtitle": "Retrouvez ici tous les détails pratiques pour préparer votre venue à notre mariage",
+      "programme": {
+        "title": "Programme",
+        "description": "Découvrez le déroulement complet de la journée"
+      },
+      "venue": {
+        "title": "Lieu & Accès",
+        "description": "Comment nous rejoindre au Quinta das Tulipas"
+      },
+      "accommodation": {
+        "title": "Hébergements",
+        "description": "Nos recommandations pour votre séjour"
+      },
+      "gallery": {
+        "title": "Galerie Photos",
+        "description": "Partagez vos plus beaux souvenirs avec nous"
+      },
+      "rsvp": {
+        "title": "RSVP",
+        "description": "Confirmez votre présence avant le 15 juillet 2026"
+      },
+      "faq": {
+        "title": "FAQ",
+        "description": "Réponses aux questions fréquentes"
+      }
+    },
+    "cta": {
+      "title": "Nous avons hâte de vous voir !",
+      "text": "Votre présence est le plus beau cadeau que vous puissiez nous offrir. N'oubliez pas de confirmer votre participation et de consulter toutes les informations pratiques pour profiter pleinement de cette journée.",
+      "confirmPresence": "Confirmer ma présence",
+      "seeQuestions": "Questions fréquentes"
+    }
+  },
+  "rsvp": {
+    "title": "Confirmer votre présence",
+    "subtitle": "Nous serions ravis de partager ce jour spécial avec vous",
+    "important": "Informations Importantes",
+    "deadline": "Date limite",
+    "deadlineText": "Merci de confirmer votre présence avant le 1er juillet 2026 pour nous permettre de finaliser l'organisation.",
+    "menu": "Menu",
+    "menuText": "N'oubliez pas de nous indiquer vos éventuelles restrictions alimentaires ou allergies pour que nous puissions préparer un menu adapté.",
+    "music": "Musique",
+    "musicText": "Vous pouvez nous envoyer vos suggestions de chansons pour la soirée dansante !",
+    "questions": "Questions",
+    "questionsText": "Pour toute question, consultez notre FAQ ou contactez-nous directement.",
+    "seeProgramme": "Voir le programme",
+    "seeAccommodation": "Trouver un hébergement",
+    "form": {
+      "optional": "(optionnel)",
+      "infoSection": "Vos informations",
+      "attendingSection": "Confirmation de présence",
+      "practicalSection": "Informações práticas",
+      "name": "Votre nom",
+      "namePlaceholder": "Prénom Nom",
+      "email": "Votre email",
+      "emailPlaceholder": "prenom@exemple.fr",
+      "emailHelper": "Si vous le fournissez, nous pourrons vous contacter pour des détails pratiques",
+      "phone": "Téléphone",
+      "attending": "Serez-vous présent(e) ?",
+      "yes": "Oui, je serai présent(e)",
+      "no": "Non, je ne pourrai pas venir",
+      "plusOne": "Venez-vous accompagné(e) ?",
+      "plusOneName": "Nom de votre accompagnant(e)",
+      "plusOneNamePlaceholder": "Prénom Nom",
+      "dietary": "Votre régime alimentaire (végétarien, vegan, sans gluten...)",
+      "dietaryPlaceholder": "Végétarien",
+      "message": "Message pour les mariés",
+      "messagePlaceholder": "Un petit mot pour nous...",
+      "messageHelper": "Max 2000 caractères",
+      "submit": "Envoyer ma réponse",
+      "submitting": "Envoi en cours...",
+      "gdprNote": "Vos données sont stockées de manière sécurisée et ne seront utilisées que pour l'organisation du mariage. Vous pouvez modifier votre réponse à tout moment en soumettant à nouveau ce formulaire.",
+      "familySection": "Personnes de mon groupe/famille",
+      "person": "personne",
+      "persons": "personnes",
+      "familyDescription": "Vous êtes déjà comptabilisé(e). Indiquez ici les autres personnes de votre groupe/famille (conjoint(e), enfants, proches) qui assisteront au mariage. Cela nous aide à avoir un décompte précis des invités.",
+      "removePerson": "Supprimer cette personne",
+      "type": "Type",
+      "adult": "Adulte",
+      "child": "Enfant",
+      "age": "Âge",
+      "agePlaceholder": "Âge en années",
+      "allergies": "Allergies alimentaires",
+      "allergiesPlaceholder": "Arachides, fruits de mer...",
+      "familyYes": "Oui, sera présent(e)",
+      "familyNo": "Non, ne pourra pas venir",
+      "addPerson": "Ajouter une personne"
+    },
+    "success": {
+      "title": "Merci !",
+      "attending": "Votre présence est confirmée. Nous sommes ravis de vous compter parmi nous !",
+      "notAttending": "Merci de nous avoir prévenus. Vous serez dans nos pensées !"
+    },
+    "errors": {
+      "nameRequired": "Le nom est obligatoire",
+      "nameMin": "Le nom doit contenir au moins 2 caractères",
+      "emailRequired": "L'email est obligatoire",
+      "emailInvalid": "Email invalide",
+      "attendingRequired": "Veuillez indiquer si vous serez présent(e)",
+      "plusOneNameRequired": "Le nom de l'accompagnant(e) est obligatoire",
+      "generic": "Une erreur est survenue. Veuillez réessayer."
+    }
+  },
+  "programme": {
+    "title": "Programme de la Journée",
+    "subtitle": "Voici le déroulé de notre grand jour. Nous avons hâte de partager ces moments magiques avec vous !",
+    "empty": "Le programme sera bientôt disponible.",
+    "practical": "Informations pratiques",
+    "practicalDescription": "Nous vous recommandons d'arriver 15 minutes avant le début de chaque événement. Un parking est disponible sur place.",
+    "seeVenue": "Voir le lieu",
+    "seeAccommodation": "Hébergements",
+    "events": {
+      "arrival": "Arrivée des invités",
+      "ceremony": "Cérémonie",
+      "cocktail": "Cocktail de bienvenue",
+      "aperitif": "Apéritif",
+      "dinner": "Dîner",
+      "toasts": "Toasts",
+      "cake": "Gâteau & Moments sucrés",
+      "party": "Danse & Célébration",
+      "photo": "Photos de famille",
+      "photo_group": "Photo de groupe",
+      "fireworks": "Feu d'artifice",
+      "goodbye": "Au revoir"
+    }
+  },
+  "venue": {
+    "title": "Lieu & Accès",
+    "subtitle": "Toutes les informations pour nous rejoindre le jour J",
+    "byCar": "En Voiture",
+    "byCarText": "Parking gratuit sur place\nEnviron 200 places disponibles",
+    "byTrain": "En Train",
+    "byTrainText": "Gare la plus proche : Paris Gare de Lyon\nPuis 15 min en taxi",
+    "byPlane": "En Avion",
+    "byPlaneText": "Aéroport Paris-CDG\nPuis 45 min en voiture",
+    "gps": "Coordonnées GPS",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "openMaps": "Ouvrir dans Google Maps",
+    "practical": "Informations Pratiques",
+    "contact": "Contact du Lieu",
+    "website": "Site web du château",
+    "accessibility": "Accessibilité",
+    "accessibilityText": "Le lieu est accessible aux personnes à mobilité réduite. Des places de parking réservées sont disponibles à proximité de l'entrée. N'hésitez pas à nous contacter pour toute question spécifique.",
+    "seeProgramme": "Voir le programme",
+    "seeAccommodation": "Hébergements"
+  },
+  "accommodation": {
+    "title": "Hébergements",
+    "subtitle": "Nous avons sélectionné pour vous des hébergements de qualité à proximité du lieu du mariage",
+    "recommended": "Nos Recommandations",
+    "recommendedText": "Ces hébergements sont nos coups de cœur, testés et approuvés !",
+    "practicalTips": "Conseils Pratiques",
+    "bookEarly": {
+      "title": "Réservez tôt",
+      "description": "Nous vous conseillons de réserver dès que possible, surtout pour les hébergements recommandés qui se remplissent rapidement."
+    },
+    "carpooling": {
+      "title": "Covoiturage",
+      "description": "N'hésitez pas à organiser des covoiturages entre invités. Contactez-nous si vous souhaitez être mis en relation."
+    },
+    "distance": {
+      "title": "Distance",
+      "description": "Tous les hébergements sont à moins de 10 km du lieu du mariage, soit environ 15 minutes en voiture."
+    },
+    "questions": {
+      "title": "Questions",
+      "description": "Pour toute question sur les hébergements, consultez notre FAQ ou contactez-nous directement."
+    },
+    "seeVenue": "Voir le lieu",
+    "seeProgramme": "Programme",
+    "comingSoon": "La liste des hébergements sera bientôt disponible."
+  },
+  "faq": {
+    "title": "Questions Fréquentes",
+    "subtitle": "Vous trouverez ici les réponses aux questions les plus courantes",
+    "empty": "Les questions fréquentes seront bientôt disponibles.",
+    "contact": {
+      "title": "Vous avez d'autres questions ?",
+      "subtitle": "N'hésitez pas à nous contacter directement. Nous serons ravis de vous répondre !",
+      "email": "Nous contacter par email",
+      "phone": "Nous appeler au +33 6 95 22 49 32"
+    },
+    "see": {
+      "title": "Consultez également :",
+      "programme": "Programme",
+      "venue": "Lieu & Accès",
+      "accommodation": "Hébergements"
+    }
+  },
+  "gallery": {
+    "title": "Galerie Photo",
+    "subtitle": "Partagez vos plus beaux souvenirs de notre mariage !",
+    "upload": {
+      "title": "Partagez vos photos",
+      "subtitle": "Uploadez vos photos préférées de la journée. Ajoutez votre nom et un petit message si vous le souhaitez !",
+      "formats": "Formats : JPG, PNG, WEBP",
+      "maxSize": "Max. 10 MB",
+      "maxPhotos": "5 photos par session",
+      "name": "Votre nom",
+      "namePlaceholder": "Prénom Nom",
+      "message": "Message",
+      "messagePlaceholder": "Ajoutez un petit mot pour accompagner votre photo...",
+      "photo": "Photo",
+      "selectFile": "Cliquez pour choisir",
+      "dragDrop": "ou glissez-déposez",
+      "compressing": "Compression en cours...",
+      "remove": "Supprimer",
+      "submit": "Partager ma photo",
+      "submitting": "Upload en cours...",
+      "remaining": "photo(s) restante(s) dans cette session"
+    },
+    "gallery": {
+      "title": "Nos souvenirs partagés",
+      "subtitle": "Découvrez les photos uploadées par nos invités",
+      "empty": "Aucune photo pour le moment",
+      "emptySubtitle": "Soyez le premier à partager vos souvenirs !",
+      "count": "photo(s) partagée(s)"
+    },
+    "download": {
+      "title": "Téléchargement HD après le mariage",
+      "text": "Toutes les photos en haute définition seront disponibles au téléchargement quelques jours après le mariage. Vous recevrez un lien par email pour accéder à l'album complet."
+    },
+    "success": "Photo uploadée avec succès ! Elle sera visible après modération.",
+    "errors": {
+      "noFile": "Veuillez sélectionner une photo",
+      "invalidFormat": "Format non accepté. Formats autorisés : JPG, PNG, WEBP, HEIC",
+      "tooLarge": "Le fichier est trop volumineux. Taille max : 10 MB",
+      "limitReached": "Vous avez atteint la limite de 5 photos par session (30 minutes). Réessayez plus tard.",
+      "generic": "Erreur lors de l'upload. Veuillez réessayer."
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "Ana & Rafael",
+      "text": "Nous sommes ravis de partager ce jour spécial avec vous. Merci de faire partie de notre histoire."
+    },
+    "navigation": "Navigation",
+    "contact": {
+      "title": "Contact",
+      "email": "tavaresrafael93@gmail.com",
+      "phone": "06 95 22 49 32",
+      "date": "15 Août 2026"
+    },
+    "copyright": "Tous droits réservés.",
+    "madeWith": "Créé avec ❤️ pour notre grand jour"
+  },
+  "config": {
+    "warning": {
+      "title": "Configuration requise",
+      "text": "Supabase n'est pas encore configuré. Le site ne fonctionnera pas correctement.",
+      "steps": "Étapes rapides :",
+      "step1": "Créez un projet sur supabase.com (gratuit)",
+      "step2": "Copiez votre URL et clé API (Settings → API)",
+      "step3": "Modifiez le fichier .env.local",
+      "step4": "Redémarrez le serveur (npm run dev)",
+      "guide": "Guide complet : Consultez CONFIGURATION.md"
+    }
+  }
+}

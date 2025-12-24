@@ -1,0 +1,327 @@
+{
+	"common": {
+		"loading": "Carregando...",
+		"error": "Erro",
+		"success": "Sucesso",
+		"required": "Obrigatório",
+		"optional": "Opcional",
+		"close": "Fechar",
+		"save": "Guardar",
+		"cancel": "Cancelar",
+		"confirm": "Confirmar",
+		"back": "Voltar"
+	},
+	"nav": {
+		"home": "Início",
+		"programme": "Programa",
+		"venue": "Local & Acesso",
+		"accommodation": "Alojamento",
+		"gallery": "Galeria",
+		"rsvp": "RSVP",
+		"faq": "FAQ"
+	},
+	"navbar": {
+		"home": "Início",
+		"programme": "Programa",
+		"venue": "Local & Acesso",
+		"accommodation": "Alojamento",
+		"gallery": "Galeria",
+		"rsvp": "RSVP",
+		"faq": "FAQ"
+	},
+	"home": {
+		"hero": {
+			"title": "Ana & Rafael",
+			"subtitle": "Vamos casar!",
+			"date": "15 de Agosto de 2026 · Quinta das Tulipas",
+			"confirmPresence": "Confirmar presença",
+			"seeProgramme": "Ver programa"
+		},
+		"countdown": {
+			"title": "Ana & Rafael <br/> Têm o prazer de vos convidar",
+			"description": "Ao seu casamento no <strong>15 de Agosto de 2026</strong> as 14:00 <br /> Na Quinta das Tulipas."
+		},
+		"story": {
+			"title": "A Nossa História",
+			"subtitle": "Descubra como tudo começou",
+			"meeting": {
+				"label": "O Nosso Encontro",
+				"title": "Foi um dia de verão",
+				"text": "Foi num dia de verão, no dia 7 de Julho de 2024, que nos conhecemos numa festa de amigos em comum. Mesmo se não falamos muito nesse dia, algo especial estava a começar.",
+				"image": "/images/story-meeting.svg"
+			},
+			"proposal": {
+				"label": "O Pedido",
+				"title": "Um momento inesquecível no lago de Como",
+				"text": "Durante uma viagem à Itália à beira do lago de Como, Rafael (quase) surpreendeu com um pedido de casamento numa bela villa à beira da água. Um momento inesquecível cheio de emoções e alegria.",
+				"image": "/images/story-proposal.svg"
+			},
+			"firstDate": {
+				"label": "Nosso Primeiro Encontro",
+				"title": "Uma tarde inesquecível em Paris",
+				"text": "O nosso primeiro encontro oficial aconteceu em Paris com um passeio pelas Passagens Cobertas, seguido de um jantar. Foi o início de uma bela aventura juntos.",
+				"image": "/images/story-3.svg"
+			}
+		},
+		"info": {
+			"title": "Informações Práticas",
+			"subtitle": "Encontre aqui todos os detalhes práticos para preparar a sua presença no nosso casamento",
+			"programme": {
+				"title": "Programa",
+				"description": "Descubra o desenrolar completo do dia"
+			},
+			"venue": {
+				"title": "Local & Acesso",
+				"description": "Como chegar ao Quinta das Tulipas"
+			},
+			"accommodation": {
+				"title": "Alojamento",
+				"description": "As nossas recomendações para a sua estadia"
+			},
+			"gallery": {
+				"title": "Galeria de Fotos",
+				"description": "Partilhe as suas melhores recordações connosco"
+			},
+			"rsvp": {
+				"title": "RSVP",
+				"description": "Confirme a sua presença antes de 15 de julho de 2026"
+			},
+			"faq": {
+				"title": "FAQ",
+				"description": "Respostas às perguntas frequentes"
+			}
+		},
+		"cta": {
+			"title": "Mal podemos esperar para vos ver!",
+			"text": "A vossa presença é o melhor presente que nos podem oferecer. Não se esqueçam de confirmar a participação e de consultar todas as informações práticas para aproveitarem ao máximo este dia.",
+			"confirmPresence": "Confirmar presença",
+			"seeQuestions": "Perguntas frequentes"
+		}
+	},
+	"rsvp": {
+		"title": "Confirmar presença",
+		"subtitle": "Ficaríamos muito felizes em partilhar este dia especial convosco",
+		"important": "Informações Importantes",
+		"deadline": "Prazo",
+		"deadlineText": "Por favor confirmem até 1º de julho de 2026 para que possamos finalizar a organização.",
+		"menu": "Menu",
+		"menuText": "Não se esqueçam de nos indicar eventuais restrições alimentares ou alergias para que possamos preparar um menu adequado.",
+		"music": "Música",
+		"musicText": "Podem enviar-nos as vossas sugestões de músicas para a noite de dança!",
+		"questions": "Perguntas",
+		"questionsText": "Para qualquer dúvida, consultem as nossas Perguntas Frequentes ou contactem-nos diretamente.",
+		"seeProgramme": "Ver programa",
+		"seeAccommodation": "Encontrar alojamento",
+		"form": {
+			"optional": "(opcional)",
+			"infoSection": "Os seus dados",
+			"attendingSection": "Confirmação de presença",
+			"practicalSection": "Informações práticas",
+			"name": "O seu nome",
+			"namePlaceholder": "Nome Apelido",
+			"email": "O seu email",
+			"emailPlaceholder": "nome@exemplo.pt",
+			"emailHelper": "Se o fornecer, poderemos contactá-lo para detalhes práticos",
+			"phone": "Telefone",
+			"attending": "Estará presente?",
+			"yes": "Sim, estarei presente",
+			"no": "Não, não poderei ir",
+			"plusOne": "Vem acompanhado(a)?",
+			"plusOneName": "Nome do acompanhante",
+			"plusOneNamePlaceholder": "Nome Apelido",
+			"dietary": "O seu regime alimentar (vegetariano, vegan, sem glúten...)",
+			"dietaryPlaceholder": "Vegetariano",
+			"message": "Mensagem para os noivos",
+			"messagePlaceholder": "Uma palavrinha para nós...",
+			"messageHelper": "Máximo 2000 caracteres",
+			"submit": "Enviar resposta",
+			"submitting": "A enviar...",
+			"gdprNote": "Os seus dados são armazenados com segurança e serão utilizados apenas para a organização do casamento. Pode modificar a sua resposta a qualquer momento reapresentando este formulário.",
+			"familySection": "Pessoas do meu grupo/família",
+			"person": "pessoa",
+			"persons": "pessoas",
+			"familyDescription": "Você já está contabilizado. Indique aqui as outras pessoas do seu grupo/família (cônjuge, filhos, próximos) que participarão do casamento. Isso nos ajuda a ter uma contagem precisa de convidados.",
+			"removePerson": "Remover esta pessoa",
+			"type": "Tipo",
+			"adult": "Adulto",
+			"child": "Criança",
+			"age": "Idade",
+			"agePlaceholder": "Idade em anos",
+			"allergies": "Alergias alimentares",
+			"allergiesPlaceholder": "Amendoins, frutos do mar...",
+			"familyYes": "Sim, estará presente",
+			"familyNo": "Não, não poderá ir",
+			"addPerson": "Adicionar uma pessoa"
+		},
+		"success": {
+			"title": "Obrigado!",
+			"attending": "A sua presença está confirmada. Estamos muito felizes por vos ter connosco!",
+			"notAttending": "Obrigado por nos terem avisado. Estarão nos nossos pensamentos!"
+		},
+		"errors": {
+			"nameRequired": "O nome é obrigatório",
+			"nameMin": "O nome deve ter pelo menos 2 caracteres",
+			"emailRequired": "O email é obrigatório",
+			"emailInvalid": "Email inválido",
+			"attendingRequired": "Por favor indique se estará presente",
+			"plusOneNameRequired": "O nome do acompanhante é obrigatório",
+			"generic": "Ocorreu um erro. Por favor tente novamente."
+		}
+	},
+	"programme": {
+		"title": "Programa do Dia",
+		"subtitle": "Eis o desenrolar do nosso grande dia. Mal podemos esperar para partilhar estes momentos mágicos convosco!",
+		"empty": "O programa estará brevemente disponível.",
+		"practical": "Informações práticas",
+		"practicalDescription": "Recomendamos que cheguem 15 minutos antes do início de cada evento. Há estacionamento disponível no local.",
+		"seeVenue": "Ver local",
+		"seeAccommodation": "Alojamento",
+		"events": {
+			"arrival": "Chegada dos convidados",
+			"ceremony": "Cerimónia",
+			"cocktail": "Coquetel de boas-vindas",
+			"aperitif": "Aperitivo",
+			"dinner": "Jantar",
+			"toasts": "Brindas",
+			"cake": "Bolo & Momentos doces",
+			"party": "Dança & Celebração",
+			"photo": "Fotos de família",
+			"photo_group": "Foto de grupo",
+			"fireworks": "Fogo de artifício",
+			"goodbye": "Despedida"
+		}
+	},
+	"venue": {
+		"title": "Local & Acesso",
+		"subtitle": "Todas as informações para nos encontrarem no dia",
+		"byCar": "De Carro",
+		"byCarText": "Estacionamento gratuito no local\nAproximadamente 200 lugares disponíveis",
+		"byTrain": "De Comboio",
+		"byTrainText": "Estação mais próxima: Paris Gare de Lyon\nDepois 15 min de táxi",
+		"byPlane": "De Avião",
+		"byPlaneText": "Aeroporto Paris-CDG\nDepois 45 min de carro",
+		"gps": "Coordenadas GPS",
+		"latitude": "Latitude",
+		"longitude": "Longitude",
+		"openMaps": "Abrir no Google Maps",
+		"practical": "Informações Práticas",
+		"contact": "Contacto do Local",
+		"website": "Website do castelo",
+		"accessibility": "Acessibilidade",
+		"accessibilityText": "O local é acessível para pessoas com mobilidade reduzida. Há lugares de estacionamento reservados perto da entrada. Não hesitem em contactar-nos para qualquer dúvida específica.",
+		"seeProgramme": "Ver programa",
+		"seeAccommodation": "Alojamento"
+	},
+	"accommodation": {
+		"title": "Alojamento",
+		"subtitle": "Selecionámos para si alojamentos de qualidade perto do local do casamento",
+		"recommended": "As Nossas Recomendações",
+		"recommendedText": "Estes alojamentos são os nossos favoritos, testados e aprovados!",
+		"practicalTips": "Dicas Práticas",
+		"bookEarly": {
+			"title": "Reserve cedo",
+			"description": "Recomendamos que reserve o mais cedo possível, especialmente para os alojamentos recomendados que se enchem rapidamente."
+		},
+		"carpooling": {
+			"title": "Partilha de carro",
+			"description": "Sinta-se à vontade para organizar caronas entre convidados. Entre em contacto connosco se quiser ser apresentado a outros."
+		},
+		"distance": {
+			"title": "Distância",
+			"description": "Todos os alojamentos estão a menos de 10 km do local do casamento, ou seja, cerca de 15 minutos de carro."
+		},
+		"questions": {
+			"title": "Dúvidas",
+			"description": "Para qualquer dúvida sobre alojamento, consulte as nossas Perguntas Frequentes ou entre em contacto connosco diretamente."
+		},
+		"seeVenue": "Ver local",
+		"seeProgramme": "Programa",
+		"comingSoon": "A lista de alojamentos estará brevemente disponível."
+	},
+	"faq": {
+		"title": "Perguntas Frequentes",
+		"subtitle": "Aqui encontrará respostas às perguntas mais comuns",
+		"empty": "As perguntas frequentes estarão brevemente disponíveis.",
+		"contact": {
+			"title": "Tem outras dúvidas?",
+			"subtitle": "Sinta-se à vontade para nos contactar diretamente. Ficaremos muito felizes em responder!",
+			"email": "Contacte-nos por email",
+			"phone": "Ligue-nos para +33 6 95 22 49 32"
+		},
+		"see": {
+			"title": "Consulte também:",
+			"programme": "Programa",
+			"venue": "Local & Acesso",
+			"accommodation": "Alojamento"
+		}
+	},
+	"gallery": {
+		"title": "Galeria de Fotos",
+		"subtitle": "Partilhe as suas melhores recordações do nosso casamento!",
+		"upload": {
+			"title": "Partilhe as suas fotos",
+			"subtitle": "Carregue as suas fotos preferidas do dia. Adicione o seu nome e uma mensagem se quiser!",
+			"formats": "Formatos: JPG, PNG, WEBP",
+			"maxSize": "Máx. 10 MB",
+			"maxPhotos": "5 fotos por sessão",
+			"name": "O seu nome",
+			"namePlaceholder": "Nome Apelido",
+			"message": "Mensagem",
+			"messagePlaceholder": "Adicione uma palavrinha para acompanhar a sua foto...",
+			"photo": "Foto",
+			"selectFile": "Clique para escolher",
+			"dragDrop": "ou arraste e solte",
+			"compressing": "A comprimir...",
+			"remove": "Remover",
+			"submit": "Partilhar foto",
+			"submitting": "A carregar...",
+			"remaining": "foto(s) restante(s) nesta sessão"
+		},
+		"gallery": {
+			"title": "As nossas recordações partilhadas",
+			"subtitle": "Descubra as fotos carregadas pelos nossos convidados",
+			"empty": "Ainda não há fotos",
+			"emptySubtitle": "Seja o primeiro a partilhar as suas recordações!",
+			"count": "foto(s) partilhada(s)"
+		},
+		"download": {
+			"title": "Download HD após o casamento",
+			"text": "Todas as fotos em alta definição estarão disponíveis para download alguns dias após o casamento. Receberão um link por email para aceder ao álbum completo."
+		},
+		"success": "Foto carregada com sucesso! Será visível após moderação.",
+		"errors": {
+			"noFile": "Por favor selecione uma foto",
+			"invalidFormat": "Formato não aceite. Formatos permitidos: JPG, PNG, WEBP, HEIC",
+			"tooLarge": "O ficheiro é demasiado grande. Tamanho máx: 10 MB",
+			"limitReached": "Atingiu o limite de 5 fotos por sessão (30 minutos). Tente mais tarde.",
+			"generic": "Erro ao carregar. Por favor tente novamente."
+		}
+	},
+	"footer": {
+		"about": {
+			"title": "Ana & Rafael",
+			"text": "Estamos muito felizes por partilhar este dia especial convosco. Obrigado por fazerem parte da nossa história."
+		},
+		"navigation": "Navegação",
+		"contact": {
+			"title": "Contacto",
+			"email": "tavaresrafael93@gmail.com",
+			"phone": "06 95 22 49 32",
+			"date": "15 de Agosto de 2026"
+		},
+		"copyright": "Todos os direitos reservados.",
+		"madeWith": "Criado com ❤️ para o nosso grande dia"
+	},
+	"config": {
+		"warning": {
+			"title": "Configuração necessária",
+			"text": "O Supabase ainda não está configurado. O site não funcionará corretamente.",
+			"steps": "Passos rápidos:",
+			"step1": "Crie um projeto em supabase.com (grátis)",
+			"step2": "Copie o URL e a chave API (Settings → API)",
+			"step3": "Modifique o ficheiro .env.local",
+			"step4": "Reinicie o servidor (npm run dev)",
+			"guide": "Guia completo: Consulte CONFIGURATION.md"
+		}
+	}
+}

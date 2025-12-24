@@ -45,7 +45,7 @@ export default async function GalleriePage() {
 			{/* Split Layout: Upload + Gallery */}
 			<GalleryLayout
 				upload={
-					<div className="space-y-8">
+					<div className="space-y-8 text-center">
 						<div>
 							<h2 className="text-2xl font-serif font-bold text-gray-900 mb-2">
 								{dict.gallery.upload.title}
@@ -59,7 +59,7 @@ export default async function GalleriePage() {
 				}
 				gallery={
 					<div className="space-y-8">
-						<div>
+						<div className="text-center">
 							<h2 className="text-2xl font-serif font-bold text-gray-900 mb-2">
 								{dict.gallery.gallery.title}
 							</h2>

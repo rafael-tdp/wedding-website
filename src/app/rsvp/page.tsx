@@ -51,7 +51,7 @@ export default async function RSVPPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="bg-background p-4 sm:p-6 rounded-lg">
-              <h3 className="text-base sm:text-lg font-serif text-foreground mb-2 sm:mb-3 flex items-center gap-2">
+              <h3 className="text-base sm:text-lg font-serif text-foreground mb-2 sm:mb-3 flex items-center gap-2 text-primary">
                 <MdCalendarMonth className="text-lg sm:text-xl flex-shrink-0" />
                 <span>{dict.rsvp.deadline}</span>
               </h3>
@@ -61,7 +61,7 @@ export default async function RSVPPage() {
             </div>
 
             <div className="bg-background p-4 sm:p-6 rounded-lg">
-              <h3 className="text-base sm:text-lg font-serif text-foreground mb-2 sm:mb-3 flex items-center gap-2">
+              <h3 className="text-base sm:text-lg font-serif text-foreground mb-2 sm:mb-3 flex items-center gap-2 text-primary">
                 <MdRestaurant className="text-lg sm:text-xl flex-shrink-0" />
                 <span>{dict.rsvp.menu}</span>
               </h3>
@@ -71,7 +71,7 @@ export default async function RSVPPage() {
             </div>
 
             <div className="bg-background p-4 sm:p-6 rounded-lg">
-              <h3 className="text-base sm:text-lg font-serif text-foreground mb-2 sm:mb-3 flex items-center gap-2">
+              <h3 className="text-base sm:text-lg font-serif text-foreground mb-2 sm:mb-3 flex items-center gap-2 text-primary">
                 <MdMusicNote className="text-lg sm:text-xl flex-shrink-0" />
                 <span>{dict.rsvp.music}</span>
               </h3>
@@ -81,7 +81,7 @@ export default async function RSVPPage() {
             </div>
 
             <div className="bg-background p-4 sm:p-6 rounded-lg">
-              <h3 className="text-base sm:text-lg font-serif text-foreground mb-2 sm:mb-3 flex items-center gap-2">
+              <h3 className="text-base sm:text-lg font-serif text-foreground mb-2 sm:mb-3 flex items-center gap-2 text-primary">
                 <MdHelpOutline className="text-lg sm:text-xl flex-shrink-0" />
                 <span>{dict.rsvp.questions}</span>
               </h3>

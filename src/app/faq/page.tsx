@@ -49,11 +49,11 @@ export default async function FAQPage() {
     <main className="min-h-screen">
       {/* Hero Section */}
       <Section variant="gradient" spacing="md" isHero>
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-2 sm:space-y-4">
           <Title level="h1" align="center" withAccent>
             {dict.faq.title}
           </Title>
-          <p className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto px-4">
             {dict.faq.subtitle}
           </p>
         </div>
@@ -62,14 +62,14 @@ export default async function FAQPage() {
       {/* FAQ par catégorie */}
       {Object.keys(faqsByCategory).length > 0 ? (
         <Section variant="default" spacing="lg">
-          <div className="max-w-4xl mx-auto space-y-12">
+          <div className="max-w-4xl mx-auto space-y-6 sm:space-y-12 px-4">
             {Object.entries(faqsByCategory).map(([categoryName, categoryFaqs]) => (
               <div key={categoryName}>
-                <h2 className="text-2xl md:text-3xl font-serif text-foreground mb-6 pb-3 border-b border-primary/20">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-serif text-foreground mb-3 sm:mb-6 pb-2 sm:pb-3 border-b border-primary/20">
                   {categoryName}
                 </h2>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {categoryFaqs.map((faq) => {
                     const translated = getTranslatedFAQ(faq);
                     return (
@@ -98,21 +98,21 @@ export default async function FAQPage() {
 
       {/* Contact */}
       <Section variant="soft" spacing="lg">
-        <div className="max-w-3xl mx-auto text-center space-y-6">
+        <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6 px-4">
           <Title level="h2" align="center" withAccent>
             {dict.faq.contact.title}
           </Title>
-          <p className="text-foreground-muted text-lg">
+          <p className="text-sm sm:text-base text-foreground-muted md:text-lg">
             {dict.faq.contact.subtitle}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+          <div className="flex flex-col gap-2 sm:gap-4 justify-center items-center pt-2 sm:pt-4">
             <a
               href="mailto:tavaresrafael93@gmail.com"
-              className="flex items-center gap-2 px-6 py-2.5 rounded-md font-medium bg-primary text-white hover:bg-primary-dark transition-colors"
+              className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-md font-medium text-sm sm:text-base bg-primary text-white hover:bg-primary-dark transition-colors w-full sm:w-auto justify-center"
             >
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 sm:w-5 sm:h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -128,10 +128,10 @@ export default async function FAQPage() {
             </a>
             <a
               href="tel:+33695224932"
-              className="flex items-center gap-2 px-6 py-2.5 rounded-md font-medium border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors"
+              className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-md font-medium text-sm sm:text-base border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors w-full sm:w-auto justify-center"
             >
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 sm:w-5 sm:h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -148,28 +148,28 @@ export default async function FAQPage() {
           </div>
 
           {/* Navigation */}
-          <div className="pt-8 border-t border-primary/10">
-            <p className="text-foreground-muted mb-4">
+          <div className="pt-4 sm:pt-8 border-t border-primary/10">
+            <p className="text-sm sm:text-base text-foreground-muted mb-3 sm:mb-4">
               {dict.faq.see.title}
             </p>
-            <div className="flex gap-4 justify-center flex-wrap">
+            <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
               <a
                 href="/programme"
-                className="text-primary hover:text-primary-dark underline"
+                className="text-xs sm:text-sm text-primary hover:text-primary-dark underline"
               >
                 {dict.faq.see.programme}
               </a>
-              <span className="text-foreground-muted">•</span>
+              <span className="text-foreground-muted hidden sm:inline">•</span>
               <a
                 href="/lieu"
-                className="text-primary hover:text-primary-dark underline"
+                className="text-xs sm:text-sm text-primary hover:text-primary-dark underline"
               >
                 {dict.faq.see.venue}
               </a>
-              <span className="text-foreground-muted">•</span>
+              <span className="text-foreground-muted hidden sm:inline">•</span>
               <a
                 href="/hebergements"
-                className="text-primary hover:text-primary-dark underline"
+                className="text-xs sm:text-sm text-primary hover:text-primary-dark underline"
               >
                 {dict.faq.see.accommodation}
               </a>

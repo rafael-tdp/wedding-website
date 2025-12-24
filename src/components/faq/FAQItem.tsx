@@ -16,13 +16,13 @@ export default function FAQItem({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border border-primary/10 rounded-lg overflow-hidden bg-background-soft mb-4">
+    <div className="border border-primary/10 rounded-lg overflow-hidden bg-background-soft mb-3">
       {/* Question - Clickable */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left p-6 flex items-start justify-between gap-4 hover:bg-background-soft transition-colors"
+        className="w-full text-left p-3 sm:p-6 flex items-start justify-between gap-2 sm:gap-4 hover:bg-background-soft transition-colors"
       >
-        <h3 className="text-lg font-serif text-foreground pr-4">{question}</h3>
+        <h3 className="text-sm sm:text-lg font-serif text-foreground pr-2">{question}</h3>
         <svg
           className={`w-5 h-5 text-primary flex-shrink-0 transition-transform ${
             isOpen ? "rotate-180" : ""
@@ -47,8 +47,8 @@ export default function FAQItem({
           isOpen ? "max-h-96" : "max-h-0"
         }`}
       >
-        <div className="px-6 py-6 border-t border-primary/10">
-          <p className="text-foreground-muted leading-relaxed whitespace-pre-wrap">
+        <div className="px-3 sm:px-6 py-3 sm:py-6 border-t border-primary/10">
+          <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed whitespace-pre-wrap">
             {answer}
           </p>
         </div>

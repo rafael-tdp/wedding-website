@@ -21,7 +21,7 @@ interface ProgrammeItemProps {
  * Composant pour afficher l'icône et son contenu
  */
 function EventIcon({ icon }: { icon: string | null }) {
-	return <div className="text-8xl text-gray-200">{getIcon(icon)}</div>;
+	return <div className="text-8xl text-secondary-light">{getIcon(icon)}</div>;
 }
 
 /**
@@ -186,12 +186,12 @@ export default function ProgrammeItem({
 
 			{/* Mobile view */}
 			<div className="md:hidden">
-				<div className="flex gap-4 items-start mb-8">
+				<div className={`flex gap-4 items-start mb-8 pb-6 ${!isLast ? "border-b border-background-soft" : ""}`}>
 					<div className="flex flex-col items-center flex-shrink-0">
 						<div className="text-3xl font-serif text-primary/30 font-bold">
 							{index + 1}
 						</div>
-						<div className="text-4xl text-gray-200 mt-2">
+						<div className="text-4xl text-secondary-light mt-2">
 							{getIcon(item.icon)}
 						</div>
 					</div>

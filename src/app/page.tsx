@@ -2,7 +2,6 @@ import Link from "next/link";
 import Section from "@/components/ui/Section";
 import Title from "@/components/ui/Title";
 import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
 import Countdown from "@/components/home/Countdown";
 import { StoryTimeline } from "@/components/home/StoryTimeline";
 import PracticalInfo from "@/components/infos/PracticalInfo";
@@ -68,7 +67,7 @@ export default async function Home() {
 
       {/* Section Compteur */}
       <Section variant="soft" spacing="none">
-        <div className="max-w-3xl mx-auto text-center pb-8 sm:pb-16 pt-4 sm:pt-6 px-3 sm:px-4">
+        <div className="max-w-3xl mx-auto text-center pb-8 sm:pb-16 pt-12 sm:pt-6 px-3 sm:px-4">
           {/* Titre principal */}
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif italic text-foreground font-normal">
@@ -123,7 +122,7 @@ export default async function Home() {
 
 
       {/* Section Informations Pratiques */}
-      <Section variant="soft" spacing="sm" className="px-3 sm:px-4">
+      <Section variant="soft" spacing="sm" className="px-3 sm:px-4 pb-16 sm:pb-24 md:pb-32">
         <Title level="h2" align="center" withAccent>
           {dict.home.info.title}
         </Title>
@@ -176,7 +175,7 @@ export default async function Home() {
       </Section>
 
       {/* Section CTA Finale */}
-      <Section variant="soft" spacing="none" className="py-16 sm:py-24 md:py-32 px-3 sm:px-4">
+      <Section variant="default" spacing="none" className="py-16 sm:py-24 md:py-32 px-3 sm:px-4">
         <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
           <Title level="h2" align="center" withAccent>
             {dict.home.cta.title}

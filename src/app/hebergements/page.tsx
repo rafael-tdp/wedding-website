@@ -45,7 +45,7 @@ export default async function HebergementsPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <Section variant="gradient" spacing="md" isHero>
+      <Section variant="gradient" spacing="md" isHero backgroundImage="/images/hero-bg-4.jpg">
         <div className="text-center space-y-3 sm:space-y-4 px-4">
           <Title level="h1" align="center" withAccent>
             {dict.accommodation.title}
@@ -58,7 +58,7 @@ export default async function HebergementsPage() {
 
       {/* Hébergements recommandés */}
       {recommended.length > 0 && (
-        <Section variant="soft" spacing="lg">
+        <Section variant="default" spacing="lg">
           <div className="max-w-6xl mx-auto px-4 sm:px-0">
             <div className="text-center mb-6 sm:mb-10">
               <h2 className="text-xl sm:text-3xl md:text-4xl font-serif text-foreground mb-2 sm:mb-3">
@@ -83,7 +83,7 @@ export default async function HebergementsPage() {
 
       {/* Tous les hébergements par type */}
       {hebergements.length > 0 && (
-        <Section variant="default" spacing="lg">
+        <Section variant="soft" spacing="lg">
           <div className="max-w-6xl mx-auto space-y-10 sm:space-y-14 px-4 sm:px-0">
             {/* Header */}
             <div className="text-center">
@@ -134,7 +134,7 @@ export default async function HebergementsPage() {
         </Section>
       )}
       {/* Conseils pratiques */}
-      <Section variant="soft" spacing="lg">
+      <Section variant="default" spacing="lg">
         <div className="max-w-4xl mx-auto space-y-8 sm:space-y-10 px-4 sm:px-0">
           <div className="text-center">
             <h2 className="text-xl sm:text-3xl md:text-4xl font-serif text-foreground mb-2 sm:mb-3">

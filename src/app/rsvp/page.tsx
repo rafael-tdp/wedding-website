@@ -24,7 +24,7 @@ export default async function RSVPPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <Section variant="gradient" spacing="md" isHero>
+      <Section variant="gradient" spacing="md" isHero backgroundImage="/images/hero-bg-6.jpg">
         <div className="text-center space-y-3 sm:space-y-4 px-4">
           <Title level="h1" align="center" withAccent>
             {dict.rsvp.title}

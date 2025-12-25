@@ -44,7 +44,7 @@ export default async function ProgrammePage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <Section variant="gradient" spacing="md" isHero>
+      <Section variant="gradient" spacing="md" isHero backgroundImage="/images/hero-bg-2.jpg">
         <div className="text-center space-y-4">
           <Title level="h1" align="center" withAccent>
             {dict.programme.title}

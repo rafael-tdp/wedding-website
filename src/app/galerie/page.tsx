@@ -31,7 +31,7 @@ export default async function GalleriePage() {
 	return (
 		<main className="min-h-screen bg-white">
 			{/* Hero Section */}
-			<Section variant="gradient" spacing="md" isHero>
+			<Section variant="gradient" spacing="md" isHero backgroundImage="/images/hero-bg-5.jpg">
 				<div className="text-center space-y-4">
 					<Title level="h1" align="center" withAccent>
 						{dict.gallery.title}

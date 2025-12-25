@@ -36,10 +36,10 @@ export default function LieuPageClient({ dict }: { dict: any }) {
   }, []);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen animate-page-enter">
       {/* Hero Section */}
       <Section variant="gradient" spacing="md" isHero backgroundImage="/images/hero-bg-3.jpg">
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-4 animate-slide-up">
           <Title level="h1" align="center" withAccent>
             {dict.venue.title}
           </Title>

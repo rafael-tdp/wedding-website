@@ -20,6 +20,7 @@ export default function Section({
   backgroundImage,
 }: SectionProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const [isVisible, setIsVisible] = useState(!isHero);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -29,6 +30,17 @@ export default function Section({
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  useEffect(() => {
+    if (!isHero) return;
+
+    // Trigger animation après le rendu
+    const timer = requestAnimationFrame(() => {
+      setIsVisible(true);
+    });
+
+    return () => cancelAnimationFrame(timer);
+  }, [isHero]);
 
   const variantStyles = {
     default: "bg-background",
@@ -45,6 +57,9 @@ export default function Section({
 
   const heroStyles = isHero ? "pt-28 md:pt-32" : "";
 
+  // Animation classes pour les héros
+  const animationClasses = isHero && isVisible ? "animate-fade-in" : isHero ? "opacity-0" : "";
+
   const sectionStyle = backgroundImage
     ? {
         backgroundImage: `url('${backgroundImage}')`,
@@ -57,7 +72,7 @@ export default function Section({
   return (
     <section
       style={sectionStyle}
-      className={`${variantStyles[variant]} ${spacingStyles[spacing]} ${heroStyles} ${className} relative`}
+      className={`${variantStyles[variant]} ${spacingStyles[spacing]} ${heroStyles} ${animationClasses} ${className} relative transition-opacity duration-1000`}
     >
       {backgroundImage && (
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-white/60 pointer-events-none" />

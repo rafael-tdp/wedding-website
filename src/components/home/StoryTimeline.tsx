@@ -2,6 +2,7 @@
 
 import { Dictionary } from "@/lib/i18n/get-dictionary";
 import Title from "@/components/ui/Title";
+import { useEffect, useRef, useState } from "react";
 
 interface StoryTimelineProps {
 	dict: Dictionary;
@@ -37,6 +38,31 @@ function StoryTimelineText({ text }: { text: string }) {
 }
 
 function StoryItem({ label, title, text, image, imageAlt, reversed }: StoryItemProps) {
+	const imageRef = useRef<HTMLDivElement>(null);
+	const [isVisible, setIsVisible] = useState(false);
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					setIsVisible(true);
+					observer.unobserve(entry.target);
+				}
+			},
+			{ threshold: 0.1 }
+		);
+
+		if (imageRef.current) {
+			observer.observe(imageRef.current);
+		}
+
+		return () => observer.disconnect();
+	}, []);
+
+	const animationClass = isVisible 
+		? (reversed ? "animate-slide-in-right" : "animate-slide-in-left")
+		: "opacity-0";
+
 	return (
 		<div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
 			<div className={reversed ? "order-2 md:order-1" : "order-2 md:order-2"}>
@@ -44,7 +70,7 @@ function StoryItem({ label, title, text, image, imageAlt, reversed }: StoryItemP
 				<Title level="h4">{title}</Title>
 				<StoryTimelineText text={text} />
 			</div>
-			<div className={reversed ? "order-1 md:order-2" : "order-1 md:order-1"}>
+			<div ref={imageRef} className={`order-1 md:order-1 ${reversed ? "md:order-2" : ""} ${animationClass}`}>
 				<StoryTimelineImage src={image} alt={imageAlt} />
 			</div>
 		</div>

@@ -22,10 +22,10 @@ export default async function RSVPPage() {
   const dict = await getDictionary(locale);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen animate-page-enter">
       {/* Hero Section */}
       <Section variant="gradient" spacing="md" isHero backgroundImage="/images/hero-bg-6.jpg">
-        <div className="text-center space-y-3 sm:space-y-4 px-4">
+        <div className="text-center space-y-3 sm:space-y-4 px-4 animate-slide-up">
           <Title level="h1" align="center" withAccent>
             {dict.rsvp.title}
           </Title>

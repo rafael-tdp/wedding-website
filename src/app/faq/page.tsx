@@ -46,10 +46,10 @@ export default async function FAQPage() {
   );
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen animate-page-enter">
       {/* Hero Section */}
       <Section variant="gradient" spacing="md" isHero backgroundImage="/images/hero-bg-7.jpg">
-        <div className="text-center space-y-2 sm:space-y-4">
+        <div className="text-center space-y-2 sm:space-y-4 animate-slide-up">
           <Title level="h1" align="center" withAccent>
             {dict.faq.title}
           </Title>

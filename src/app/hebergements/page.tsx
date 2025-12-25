@@ -43,10 +43,10 @@ export default async function HebergementsPage() {
   );
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white animate-page-enter">
       {/* Hero Section */}
       <Section variant="gradient" spacing="md" isHero backgroundImage="/images/hero-bg-4.jpg">
-        <div className="text-center space-y-3 sm:space-y-4 px-4">
+        <div className="text-center space-y-3 sm:space-y-4 px-4 animate-slide-up">
           <Title level="h1" align="center" withAccent>
             {dict.accommodation.title}
           </Title>

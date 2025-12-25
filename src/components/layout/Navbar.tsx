@@ -64,7 +64,7 @@ function NavbarContent() {
   const shouldBeTransparent = isHomepage && !isScrolled && !isOpen;
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
       shouldBeTransparent
         ? "bg-transparent"
         : isOpen ? "bg-white" : "bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-md"

@@ -29,10 +29,10 @@ export default async function GalleriePage() {
 	const dict = await getDictionary(locale);
 	
 	return (
-		<main className="min-h-screen bg-white">
+		<main className="min-h-screen bg-white animate-page-enter">
 			{/* Hero Section */}
 			<Section variant="gradient" spacing="md" isHero backgroundImage="/images/hero-bg-5.jpg">
-				<div className="text-center space-y-4">
+				<div className="text-center space-y-4 animate-slide-up">
 					<Title level="h1" align="center" withAccent>
 						{dict.gallery.title}
 					</Title>

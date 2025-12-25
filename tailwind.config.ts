@@ -42,6 +42,40 @@ const config: Config = {
       spacing: {
         section: "var(--section-spacing)",
       },
+      animation: {
+        "fade-in": "fadeIn 1s ease-in-out forwards",
+        "slide-up": "slideUp 0.8s ease-out forwards",
+        "pulse-scale": "pulseScale 1.5s ease-in-out infinite",
+        "slide-in-left": "slideInLeft 0.8s ease-out forwards",
+        "slide-in-right": "slideInRight 0.8s ease-out forwards",
+        "page-enter": "pageEnter 0.5s ease-out forwards",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        slideUp: {
+          "0%": { transform: "translateY(30px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        pulseScale: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
+        },
+        slideInLeft: {
+          "0%": { transform: "translateX(-60px)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+        slideInRight: {
+          "0%": { transform: "translateX(60px)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+        pageEnter: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
     },
   },
   plugins: [],

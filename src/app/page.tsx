@@ -20,7 +20,7 @@ export default async function Home() {
   const dict = await getDictionary(locale);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen animate-page-enter">
       {/* Hero Section avec image de fond */}
       <div className="relative w-full min-h-[550px] sm:min-h-[750px] bg-cover bg-center sm:bg-fixed flex items-center justify-center overflow-hidden"
         style={{
@@ -28,7 +28,7 @@ export default async function Home() {
           backgroundPosition: "center center",
           backgroundSize: "cover"
         }}>
-        <div className="text-center space-y-3 sm:space-y-4 md:space-y-6 text-white px-3 sm:px-4 py-6 sm:py-8 md:py-0 max-w-3xl">
+        <div className="text-center space-y-3 sm:space-y-4 md:space-y-6 text-white px-3 sm:px-4 py-6 sm:py-8 md:py-0 max-w-3xl animate-slide-up">
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-serif italic font-normal" style={{ fontFamily: "var(--font-parisienne)" }}>
             {dict.home.hero.title}
           </h1>
@@ -66,7 +66,7 @@ export default async function Home() {
       </div>
 
       {/* Section Compteur */}
-      <Section variant="soft" spacing="none">
+      <Section variant="soft" spacing="none" className="animate-fade-in">
         <div className="max-w-3xl mx-auto text-center pb-8 sm:pb-16 pt-12 sm:pt-6 px-3 sm:px-4">
           {/* Titre principal */}
           <div className="space-y-3 sm:space-y-4">
@@ -104,7 +104,7 @@ export default async function Home() {
       </Section>
 
       {/* Section Notre Histoire */}
-      <Section variant="default" spacing="md" className="pt-8 pb-20 sm:py-16">
+      <Section variant="default" spacing="md" className="pt-8 pb-20 sm:py-16 animate-fade-in">
         <StoryTimeline dict={dict} />
       </Section>
 
@@ -122,7 +122,7 @@ export default async function Home() {
 
 
       {/* Section Informations Pratiques */}
-      <Section variant="soft" spacing="sm" className="px-3 sm:px-4 pb-16 sm:pb-24 md:pb-32">
+      <Section variant="soft" spacing="sm" className="px-3 sm:px-4 pb-16 sm:pb-24 md:pb-32 animate-fade-in">
         <Title level="h2" align="center" withAccent>
           {dict.home.info.title}
         </Title>
@@ -175,7 +175,7 @@ export default async function Home() {
       </Section>
 
       {/* Section CTA Finale */}
-      <Section variant="default" spacing="none" className="py-16 sm:py-24 md:py-32 px-3 sm:px-4">
+      <Section variant="default" spacing="none" className="py-16 sm:py-24 md:py-32 px-3 sm:px-4 animate-fade-in">
         <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
           <Title level="h2" align="center" withAccent>
             {dict.home.cta.title}

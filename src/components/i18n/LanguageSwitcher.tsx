@@ -13,6 +13,48 @@ import { LOCALE_COOKIE } from "@/middleware";
  * Adapt ses couleurs selon le state de la navbar (scrolled ou non)
  */
 
+// Composant pour afficher l'icône de la langue (emoji ou fallback SVG)
+function LanguageIcon({ locale, className = "" }: { locale: Locale; className?: string }) {
+  const [showEmoji, setShowEmoji] = useState(true);
+
+  if (showEmoji) {
+    return (
+      <span 
+        className={className}
+        onError={() => setShowEmoji(false)}
+      >
+        {languages[locale].flag}
+      </span>
+    );
+  }
+
+  // Fallback SVG pour les appareils qui ne supportent pas les emojis flags
+  if (locale === "fr") {
+    return (
+      <svg className={`${className} inline`} viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+        <rect width="20" height="40" fill="#002395" />
+        <rect x="20" width="20" height="40" fill="white" />
+        <rect x="40" width="20" height="40" fill="#ED2939" />
+      </svg>
+    );
+  }
+
+  if (locale === "pt") {
+    return (
+      <svg className={`${className} inline`} viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+        <rect width="24" height="40" fill="#006600" />
+        <rect x="24" width="36" height="40" fill="#FF0000" />
+        <circle cx="24" cy="20" r="12" fill="gold" />
+        <circle cx="24" cy="20" r="10" fill="white" />
+        <path d="M 19 20 L 29 20 M 24 15 L 24 25" stroke="#006600" strokeWidth="1.5" />
+      </svg>
+    );
+  }
+
+  // Fallback final avec le code de langue
+  return <span className={className}>{(languages as Record<string, any>)[locale]?.icon || (locale as string).toUpperCase()}</span>;
+}
+
 export function LanguageSwitcher({ isScrolled = false }: { isScrolled?: boolean }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -65,7 +107,7 @@ export function LanguageSwitcher({ isScrolled = false }: { isScrolled?: boolean 
           aria-label="Changer de langue"
           disabled={true}
         >
-          <span className="text-lg">{languages[i18n.defaultLocale].flag}</span>
+          <LanguageIcon locale={i18n.defaultLocale} className="text-lg" />
           <span className={`text-sm font-medium hidden sm:inline ${
             isScrolled ? "text-gray-700" : "text-white"
           }`}>
@@ -89,7 +131,7 @@ export function LanguageSwitcher({ isScrolled = false }: { isScrolled?: boolean 
         aria-label="Changer de langue"
         disabled={isPending}
       >
-        <span className="text-lg">{languages[currentLocale].flag}</span>
+        <LanguageIcon locale={currentLocale} className="text-lg" />
         <span className={`text-sm font-medium hidden sm:inline`}>
           {languages[currentLocale].code.toUpperCase()}
         </span>
@@ -135,7 +177,7 @@ export function LanguageSwitcher({ isScrolled = false }: { isScrolled?: boolean 
                 `}
                 disabled={isPending}
               >
-                <span className="text-lg">{languages[locale].flag}</span>
+                <LanguageIcon locale={locale} className="text-lg flex-shrink-0" />
                 <span>{languages[locale].name}</span>
                 {locale === currentLocale && (
                   <svg

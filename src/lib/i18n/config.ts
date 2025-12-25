@@ -19,10 +19,12 @@ export const languages = {
     code: 'fr',
     name: 'Français',
     flag: '🇫🇷',
+    icon: 'FR',
   },
   pt: {
     code: 'pt',
     name: 'Português',
     flag: '🇵🇹',
+    icon: 'PT',
   },
 } as const;

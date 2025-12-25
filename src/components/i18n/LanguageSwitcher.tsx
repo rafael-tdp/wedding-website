@@ -15,7 +15,18 @@ import { LOCALE_COOKIE } from "@/middleware";
 
 // Composant pour afficher l'icône de la langue (emoji ou fallback SVG)
 function LanguageIcon({ locale, className = "" }: { locale: Locale; className?: string }) {
-  const [showEmoji, setShowEmoji] = useState(true);
+  const [showEmoji, setShowEmoji] = useState<boolean | null>(null);
+
+  // Détecter si c'est un appareil Apple au montage
+  useEffect(() => {
+    const isApple = /iPhone|iPad|iPod|Mac/.test(navigator.userAgent);
+    setShowEmoji(isApple);
+  }, []);
+
+  // En attente de détection
+  if (showEmoji === null) {
+    return <span className={className} />;
+  }
 
   if (showEmoji) {
     return (
@@ -28,31 +39,17 @@ function LanguageIcon({ locale, className = "" }: { locale: Locale; className?: 
     );
   }
 
-  // Fallback SVG pour les appareils qui ne supportent pas les emojis flags
-  if (locale === "fr") {
-    return (
-      <svg className={`${className} inline`} viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
-        <rect width="20" height="40" fill="#002395" />
-        <rect x="20" width="20" height="40" fill="white" />
-        <rect x="40" width="20" height="40" fill="#ED2939" />
-      </svg>
-    );
-  }
-
-  if (locale === "pt") {
-    return (
-      <svg className={`${className} inline`} viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
-        <rect width="24" height="40" fill="#006600" />
-        <rect x="24" width="36" height="40" fill="#FF0000" />
-        <circle cx="24" cy="20" r="12" fill="gold" />
-        <circle cx="24" cy="20" r="10" fill="white" />
-        <path d="M 19 20 L 29 20 M 24 15 L 24 25" stroke="#006600" strokeWidth="1.5" />
-      </svg>
-    );
-  }
-
-  // Fallback final avec le code de langue
-  return <span className={className}>{(languages as Record<string, any>)[locale]?.icon || (locale as string).toUpperCase()}</span>;
+  // Fallback avec SVG statique
+  const svgPath = locale === "fr" ? "/images/france.svg" : "/images/portugal.svg";
+  return (
+    <img
+      src={svgPath}
+      alt={locale === "fr" ? "Français" : "Português"}
+      width={18}
+      height={18}
+      className={`${className} inline`}
+    />
+  );
 }
 
 export function LanguageSwitcher({ isScrolled = false }: { isScrolled?: boolean }) {
@@ -132,9 +129,10 @@ export function LanguageSwitcher({ isScrolled = false }: { isScrolled?: boolean 
         disabled={isPending}
       >
         <LanguageIcon locale={currentLocale} className="text-lg" />
-        <span className={`text-sm font-medium hidden sm:inline`}>
+        <span className={`hidden sm:inline text-sm font-medium`}>
           {languages[currentLocale].code.toUpperCase()}
         </span>
+        <span className="sm:hidden text-gray-700 font-med">{languages[currentLocale].name}</span>
         <svg
           className={`w-4 h-4 transition-transform ${
             isOpen ? "rotate-180" : ""

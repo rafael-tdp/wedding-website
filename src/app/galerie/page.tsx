@@ -45,8 +45,8 @@ export default async function GalleriePage() {
 			{/* Split Layout: Upload + Gallery */}
 			<GalleryLayout
 				upload={
-					<div className="space-y-8 text-center">
-						<div>
+					<div className="space-y-8">
+						<div className="text-center">
 							<h2 className="text-2xl font-serif font-bold text-gray-900 mb-2">
 								{dict.gallery.upload.title}
 							</h2>
@@ -54,11 +54,7 @@ export default async function GalleriePage() {
 								{dict.gallery.upload.subtitle}
 							</p>
 						</div>
-						<div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-							<p className="text-gray-700 text-base">
-								ℹ️ This is a demo version. Photo upload is disabled for portfolio purposes.
-							</p>
-						</div>
+						<PhotoUpload texts={dict.gallery.upload} />
 					</div>
 				}
 				gallery={

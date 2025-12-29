@@ -422,8 +422,8 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
           type="submit"
           variant="primary"
           size="lg"
-          disabled={isPending || attending === null}
-          className="min-w-[250px]"
+          disabled={true}
+          className="min-w-[250px] opacity-60 cursor-not-allowed"
         >
           {isPending ? (
             <span className="flex items-center gap-2">

@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   title: "Notre Mariage",
   description: "Rejoignez-nous pour célébrer notre union le 15 Août 2026",
   icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.json",
   appleWebApp: {

@@ -512,16 +512,10 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
         {/* Bouton submit */}
         <Button
           type="submit"
-          disabled={
-            selectedFiles.length === 0 ||
-            isUploading ||
-            !uploadLimit.allowed
-          }
-          className="w-full"
+          disabled={true}
+          className="w-full opacity-60 cursor-not-allowed"
         >
-          {isUploading
-            ? `${texts.submitting} (${uploadProgress.completed}/${uploadProgress.total})`
-            : `${texts.submit.replace("ma photo", selectedFiles.length > 0 ? `${selectedFiles.length} photo${selectedFiles.length > 1 ? "s" : ""}` : "ma photo")}`}
+          {`${texts.submit.replace("ma photo", selectedFiles.length > 0 ? `${selectedFiles.length} photo${selectedFiles.length > 1 ? "s" : ""}` : "ma photo")} - ${texts.disabledMessage || "Désactivé"}`}
         </Button>
       </form>
     </div>

@@ -97,8 +97,8 @@ self.addEventListener('push', event => {
   if (event.data) {
     const options = {
       body: event.data.text(),
-      icon: '/icon-192x192.png',
-      badge: '/favicon.png',
+      icon: '/android-chrome-192x192.png',
+      badge: '/android-chrome-192x192.png',
       tag: 'notification',
       requireInteraction: false
     };

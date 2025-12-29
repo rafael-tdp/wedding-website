@@ -515,7 +515,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
           disabled={true}
           className="w-full opacity-60 cursor-not-allowed"
         >
-          {`${texts.submit.replace("ma photo", selectedFiles.length > 0 ? `${selectedFiles.length} photo${selectedFiles.length > 1 ? "s" : ""}` : "ma photo")} - ${texts.disabledMessage || "Désactivé"}`}
+          {`${texts.submit.replace("ma photo", selectedFiles.length > 0 ? `${selectedFiles.length} photo${selectedFiles.length > 1 ? "s" : ""}` : "ma photo")} (Demo)`}
         </Button>
       </form>
     </div>

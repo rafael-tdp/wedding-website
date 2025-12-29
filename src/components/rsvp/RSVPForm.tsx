@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useTransition, useRef } from "react";
-import { submitRSVP } from "@/app/actions/rsvp";
 import Button from "@/components/ui/Button";
 import { FamilyMembersSection } from "./FamilyMembersSection";
 
@@ -110,13 +109,14 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
 
     // Appeler la Server Action
     startTransition(async () => {
-      const response = await submitRSVP(formData);
+      // PORTFOLIO: RSVP bloqué - afficher message de démo
+      const response = { success: false, message: "RSVP disabled in portfolio mode" };
       setResult(response);
       
       if (response.success) {
         // Appeler le callback si fourni (pour mettre à jour AdminDashboard)
-        if (onSuccess && response.rsvp) {
-          onSuccess(response.rsvp);
+        if (onSuccess) {
+          // onSuccess(response.rsvp);
         }
         setSubmitted(true);
         // Scroller vers le message de succès (sauf si on est dans un modal)

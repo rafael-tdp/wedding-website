@@ -1,12 +1,20 @@
 "use client";
 
-import { Programme } from "@/lib/supabase/queries";
-import { formatTime } from "@/lib/supabase/queries";
+import { Programme } from "@/lib/types";
 import { GiBigDiamondRing, GiCakeSlice } from "react-icons/gi";
 import { MdPhotoCamera } from "react-icons/md";
 import { GiWineGlass } from "react-icons/gi";
 import { PiForkKnife } from "react-icons/pi";
 import { CiMusicNote1 } from "react-icons/ci";
+
+/**
+ * Formate une heure HH:MM:SS en HH:MM
+ */
+function formatTime(time: string): string {
+  if (!time) return "";
+  const [hours, minutes] = time.split(":").slice(0, 2);
+  return `${hours}:${minutes}`;
+}
 
 
 

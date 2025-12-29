@@ -1,8 +1,18 @@
-import { Hebergement, translateHebergementType } from "@/lib/supabase/queries";
+import { Hebergement } from "@/lib/types";
 import { MdLocationOn, MdPhone, MdLanguage, MdMailOutline } from "react-icons/md";
 
 interface HebergementCardProps {
   hebergement: Hebergement;
+}
+
+function translateHebergementType(type: string): string {
+  const translations: Record<string, string> = {
+    hotel: "Hôtel",
+    gite: "Gîte",
+    chambres_hotes: "Chambres d'hôtes",
+    airbnb: "Airbnb",
+  };
+  return translations[type] || type;
 }
 
 export default function HebergementCard({ hebergement }: HebergementCardProps) {

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useTransition, useRef, useEffect } from "react";
-import { uploadPhoto } from "@/app/actions/photo";
 import {
   validateImageFile,
   checkUploadLimit,

@@ -22,8 +22,8 @@ export default function Countdown() {
     setMounted(true);
 
     const calculateCountdown = () => {
-      // Date cible: 1er août 2026 à minuit
-      const targetDate = new Date("2026-08-01T00:00:00").getTime();
+      // Date cible: 15 août 2026 à minuit
+      const targetDate = new Date("2026-08-15T00:00:00").getTime();
       const now = new Date().getTime();
       const difference = targetDate - now;
 

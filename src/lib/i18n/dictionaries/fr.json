@@ -31,15 +31,15 @@
   },
   "home": {
     "hero": {
-      "title": "Ana & Rafael",
+      "title": "Marie & Antoine",
       "subtitle": "Nous nous marions !",
-      "date": "Le 15 Août 2026 · Quinta das Tulipas",
+      "date": "Le 15 Août 2026 · Château de Vallée",
       "confirmPresence": "Confirmer ma présence",
       "seeProgramme": "Voir le programme"
     },
     "countdown": {
-      "title": "Ana & Rafael <br/> Ont le plaisir de vous inviter",
-      "description": "À leur mariage le <strong>15 Août 2026</strong> <br /> À 14h00 à Quinta das Tulipas."
+      "title": "Marie & Antoine <br/> Ont le plaisir de vous inviter",
+      "description": "À leur mariage le <strong>15 Août 2026</strong> <br /> À 14h00 au Château de Vallée."
     },
     "story": {
       "title": "Notre Histoire",
@@ -47,20 +47,20 @@
       "meeting": {
         "label": "Notre Rencontre",
         "title": "C'était une journée d'été",
-        "text": "C'était un jour d'été, le 7 juillet 2024, dans une fête avec des amis communs. Même si nous ne nous sommes pas parlé beaucoup ce jour-là, un petit intérêt s'est allumé entre nous.",
-        "image": "/images/story-meeting.svg"
+        "text": "C'était un jour d'été dans une fête avec des amis communs. Nos regards se sont croisés et quelque chose de magique s'est allumé entre nous à ce moment-là.",
+        "image": "/images/story-1.jpg"
       },
       "proposal": {
         "label": "La Demande",
-        "title": "Un moment inoubliable au lac de Côme",
-        "text": "Lors d'un voyage en Italie au bord du lac de Côme, Rafael a (presque) surpris avec une demande en mariage dans une belle villa au bord de l'eau. Un moment inoubliable rempli d'émotions et de joie.",
-        "image": "/images/story-proposal.svg"
+        "title": "Un moment inoubliable",
+        "text": "Lors d'une escapade romantique, une demande en mariage avec une belle bague. Un moment inoubliable rempli de larmes de joie et de bonheur pur que nous chérirons à jamais.",
+        "image": "/images/story-2.jpg"
       },
       "firstDate": {
         "label": "Notre Premier Rendez-vous",
-        "title": "Une balade à Paris",
-        "text": "Notre premier rendez-vous officiel a eu lieu à Paris avec une balade le long des Passages Couverts, suivie d'un dîner. Ce fut le début d'une belle aventure ensemble.",
-        "image": "/images/story-3.svg"
+        "title": "Une balade en ville",
+        "text": "Notre premier rendez-vous officiel a été une belle promenade dans le centre-ville historique, suivie d'un dîner dans un restaurant cosy. Ce fut le début de notre belle aventure ensemble.",
+        "image": "/images/story-3.jpg"
       }
     },
     "info": {
@@ -72,7 +72,7 @@
       },
       "venue": {
         "title": "Lieu & Accès",
-        "description": "Comment nous rejoindre au Quinta das Tulipas"
+        "description": "Comment nous rejoindre au Château de Vallée"
       },
       "accommodation": {
         "title": "Hébergements",
@@ -299,7 +299,7 @@
   },
   "footer": {
     "about": {
-      "title": "Ana & Rafael",
+      "title": "Marie & Antoine",
       "text": "Nous sommes ravis de partager ce jour spécial avec vous. Merci de faire partie de notre histoire."
     },
     "navigation": "Navigation",

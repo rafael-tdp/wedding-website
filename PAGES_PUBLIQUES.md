@@ -101,7 +101,7 @@ const programme = await getProgramme();
 **Configuration** :
 ```typescript
 const WEDDING_VENUE = {
-  name: "Quinta das Tulipas",
+  name: "Château de Vallée",
   address: "12 Route du Château, 75001 Paris",
   lat: 48.8566,
   lng: 2.3522,

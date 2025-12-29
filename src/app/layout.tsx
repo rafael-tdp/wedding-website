@@ -26,7 +26,7 @@ const parisienne = Parisienne({
 });
 
 export const metadata: Metadata = {
-  title: "Ana & Rafael - Notre Mariage",
+  title: "Notre Mariage",
   description: "Rejoignez-nous pour célébrer notre union le 15 Août 2026",
   icons: {
     icon: "/favicon.png",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Ana & Rafael - Mariage",
+    title: "Notre Mariage",
   },
   formatDetection: {
     telephone: false,

@@ -1,11 +1,7 @@
 import Section from "@/components/ui/Section";
 import Title from "@/components/ui/Title";
 import HebergementCard from "@/components/hebergements/HebergementCard";
-import {
-  getHebergements,
-  getRecommendedHebergements,
-  Hebergement,
-} from "@/lib/supabase/queries";
+import type { Hebergement } from "@/lib/types";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocale } from "@/lib/i18n/get-locale";
 import Link from "next/link";
@@ -18,6 +14,96 @@ export const metadata = {
 };
 
 /**
+ * Mock hébergements pour le mode portfolio
+ */
+const MOCK_HEBERGEMENTS: Hebergement[] = [
+  {
+    id: "hotel-1",
+    name: "Hotel Grand Luxe",
+    type: "hotel",
+    description: "Un hôtel 4 étoiles avec vue panoramique",
+    address: "123 Rue de la Paix",
+    city: "Beaumont",
+    postal_code: "75001",
+    distance_km: 2,
+    phone: "+33 1 23 45 67 89",
+    email: "contact@grandluxe.fr",
+    website: "https://www.grandluxe.fr",
+    price_range: "€€€",
+    price_note: "À partir de 150€/nuit",
+    image_url: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500",
+    is_recommended: true,
+    display_order: 1,
+    is_visible: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "gite-1",
+    name: "Gîte Champêtre",
+    type: "gite",
+    description: "Un charmant gîte en montagne avec piscine",
+    address: "456 Route de la Montagne",
+    city: "Valmont",
+    postal_code: "75002",
+    distance_km: 8,
+    phone: "+33 1 98 76 54 32",
+    email: "contact@gite-champetre.fr",
+    website: "https://www.gite-champetre.fr",
+    price_range: "€€",
+    price_note: "À partir de 80€/nuit",
+    image_url: "https://images.unsplash.com/photo-1547561993-9fe9f2af3fd4?w=500",
+    is_recommended: true,
+    display_order: 2,
+    is_visible: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "chambre-1",
+    name: "Chambres d'Hôtes Le Verger",
+    type: "chambres_hotes",
+    description: "Chambres cosy dans une maison d'époque",
+    address: "789 Chemin des Fleurs",
+    city: "Villeneuve",
+    postal_code: "75003",
+    distance_km: 5,
+    phone: "+33 1 55 44 33 22",
+    email: "contact@leverger.fr",
+    website: "https://www.leverger.fr",
+    price_range: "€",
+    price_note: "À partir de 60€/nuit",
+    image_url: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500",
+    is_recommended: false,
+    display_order: 3,
+    is_visible: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "airbnb-1",
+    name: "Appartement avec Vue",
+    type: "airbnb",
+    description: "Apartement moderne avec balcon vue lac",
+    address: "321 Boulevard du Lac",
+    city: "Lakeview",
+    postal_code: "75004",
+    distance_km: 3,
+    phone: "+33 1 77 88 99 00",
+    email: "contact@apartement-lac.fr",
+    website: "https://www.apartement-lac.fr",
+    price_range: "€€",
+    price_note: "À partir de 90€/nuit",
+    image_url: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500",
+    is_recommended: true,
+    display_order: 4,
+    is_visible: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+];
+
+/**
  * PAGE : HÉBERGEMENTS (Multilingue)
  * 
  * Server Component qui récupère la liste des hébergements
@@ -26,9 +112,9 @@ export const metadata = {
 export default async function HebergementsPage() {
   const locale = await getLocale();
   const dict = await getDictionary(locale);
-  // Récupération des données côté serveur
-  const hebergements = await getHebergements();
-  const recommended = await getRecommendedHebergements();
+  // Utiliser les mock hébergements au lieu de Supabase
+  const hebergements = MOCK_HEBERGEMENTS;
+  const recommended = MOCK_HEBERGEMENTS.filter(h => h.is_recommended);
 
   // Grouper par type
   const hebergementsByType = hebergements.reduce(

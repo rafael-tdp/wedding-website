@@ -1,15 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { type Photo } from "@/lib/supabase/queries";
-import { supabase } from "@/lib/supabase/client";
+import { type Photo } from "@/lib/types";
 
 /**
  * Obtient l'URL publique d'une photo
  */
 function getPhotoPublicUrl(storagePath: string): string {
-  const { data } = supabase.storage.from("gallery").getPublicUrl(storagePath);
-  return data.publicUrl;
+  // Pour les mock photos, utiliser Picsum Photos API
+  if (storagePath.startsWith("mock-")) {
+    const photoIndex = parseInt(storagePath.split("-")[1], 10);
+    return `https://picsum.photos/600/400?random=${photoIndex}`;
+  }
+  
+  // Portfolio mode: retourner une URL de fallback
+  return storagePath;
 }
 
 /**
@@ -234,12 +239,12 @@ function PhotoCard({
         </div>
       )}
 
-      {/* Bouton télécharger (non-sélection) */}
+      {/* Bouton télécharger (non-sélection) - DÉSACTIVÉ */}
       {!isSelectionMode && (
         <button
-          onClick={onDownload}
-          className="absolute top-3 right-3 bg-white/90 hover:bg-white text-gray-700 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
-          title="Télécharger cette photo"
+          disabled
+          className="absolute top-3 right-3 bg-gray-300/50 text-gray-500 rounded-full p-2 opacity-0 group-hover:opacity-50 transition-opacity cursor-not-allowed shadow-md"
+          title="Download disabled in demo version"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -430,28 +435,15 @@ export function PhotoGalleryClient({ photos }: { photos: Photo[] }) {
               {selectedPhotos.size > 0 && (
                 <>
                   <button
-                    onClick={downloadSelectedPhotos}
-                    disabled={isDownloading}
-                    className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-primary text-white hover:bg-primary/90 rounded font-medium text-xs sm:text-sm transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                    disabled
+                    className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-gray-300 text-gray-500 rounded font-medium text-xs sm:text-sm cursor-not-allowed opacity-50 flex items-center justify-center gap-2"
+                    title="Download disabled in demo version"
                   >
-                    {isDownloading ? (
-                      <>
-                        <svg className="animate-spin w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span className="hidden sm:inline">Téléchargement...</span>
-                        <span className="sm:hidden">...</span>
-                      </>
-                    ) : (
-                      <>
-                        <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        <span className="hidden sm:inline">Télécharger ({selectedPhotos.size})</span>
-                        <span className="sm:hidden">↓ {selectedPhotos.size}</span>
-                      </>
-                    )}
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    <span className="hidden sm:inline">Download ({selectedPhotos.size})</span>
+                    <span className="sm:hidden">↓ {selectedPhotos.size}</span>
                   </button>
 
                   <button

@@ -1,11 +1,7 @@
 import Section from "@/components/ui/Section";
 import Title from "@/components/ui/Title";
 import FAQItem from "@/components/faq/FAQItem";
-import {
-  getFAQ,
-  getFAQTranslation,
-  FAQ as FAQType,
-} from "@/lib/supabase/queries";
+import type { FAQ as FAQType } from "@/lib/types";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocale } from "@/lib/i18n/get-locale";
 
@@ -13,6 +9,77 @@ export const metadata = {
   title: "FAQ - Notre Mariage",
   description: "Questions fréquemment posées sur notre mariage",
 };
+
+/**
+ * Mock FAQ pour le mode portfolio
+ */
+const MOCK_FAQS: FAQType[] = [
+  {
+    id: "faq-1",
+    category_fr: "Présence",
+    category_pt: "Presença",
+    question_fr: "Que dois-je porter?",
+    question_pt: "O que devo vestir?",
+    answer_fr: "Une tenue habillée ou formelle est recommandée. La cérémonie se déroule en plein air, donc des chaussures confortables sont appréciées.",
+    answer_pt: "Recomenda-se roupas elegantes ou formais. A cerimônia ocorre ao ar livre, portanto sapatos confortáveis são bem-vindos.",
+    created_at: new Date().toISOString(),
+    display_order: 1,
+    is_visible: true,
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "faq-2",
+    category_fr: "Logistique",
+    category_pt: "Logística",
+    question_fr: "Y a-t-il un parking?",
+    question_pt: "Há estacionamento disponível?",
+    answer_fr: "Oui, un parking gratuit est disponible sur place avec environ 200 places.",
+    answer_pt: "Sim, estacionamento gratuito está disponível no local com aproximadamente 200 lugares.",
+    created_at: new Date().toISOString(),
+    display_order: 2,
+    is_visible: true,
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "faq-3",
+    category_fr: "Hébergement",
+    category_pt: "Alojamento",
+    question_fr: "Quand dois-je arriver?",
+    question_pt: "Quando devo chegar?",
+    answer_fr: "Veuillez arriver 15 minutes avant l'heure du début de la cérémonie pour être assis confortablement.",
+    answer_pt: "Por favor, chegue 15 minutos antes do início da cerimônia para ser acomodado confortavelmente.",
+    created_at: new Date().toISOString(),
+    display_order: 3,
+    is_visible: true,
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "faq-4",
+    category_fr: "Menu & Régime",
+    category_pt: "Menu & Dieta",
+    question_fr: "Pouvez-vous adapter les restrictions alimentaires?",
+    question_pt: "Pode acomodar restrições dietéticas?",
+    answer_fr: "Absolument! Veuillez indiquer toute restriction alimentaire dans le formulaire RSVP afin que nous puissions préparer en conséquence.",
+    answer_pt: "Absolutamente! Indique qualquer restrição dietética no formulário RSVP para que possamos preparar adequadamente.",
+    created_at: new Date().toISOString(),
+    display_order: 4,
+    is_visible: true,
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "faq-5",
+    category_fr: "Présence",
+    category_pt: "Presença",
+    question_fr: "Puis-je amener un accompagnant?",
+    question_pt: "Posso trazer um acompanhante?",
+    answer_fr: "Si votre invitation inclut un plus-one, oui! Sinon, veuillez nous contacter pour en discuter.",
+    answer_pt: "Se seu convite inclui um acompanhante, sim! Caso contrário, entre em contato conosco para discutir.",
+    created_at: new Date().toISOString(),
+    display_order: 5,
+    is_visible: true,
+    updated_at: new Date().toISOString(),
+  },
+];
 
 /**
  * PAGE : FAQ (Questions Fréquentes - Multilingue)
@@ -23,19 +90,30 @@ export const metadata = {
 export default async function FAQPage() {
   const locale = await getLocale();
   const dict = await getDictionary(locale);
-  // Récupération des données côté serveur
-  const faqs = await getFAQ();
+  // Utiliser les mock FAQs au lieu de Supabase
+  const faqs = MOCK_FAQS;
 
   // Fonction pour obtenir la traduction
   const getTranslatedFAQ = (faq: FAQType) => {
-    return getFAQTranslation(faq, locale === "pt" ? "pt" : "fr");
+    if (locale === "pt") {
+      return {
+        category: faq.category_pt,
+        question: faq.question_pt,
+        answer: faq.answer_pt,
+      };
+    }
+    return {
+      category: faq.category_fr,
+      question: faq.question_fr,
+      answer: faq.answer_fr,
+    };
   };
 
   // Grouper les FAQ par catégorie traduite
   const faqsByCategory = faqs.reduce(
-    (acc, faq) => {
+    (acc: Record<string, FAQType[]>, faq) => {
       const translated = getTranslatedFAQ(faq);
-      const categoryName = translated.category;
+      const categoryName = translated.category || "Autres";
       if (!acc[categoryName]) {
         acc[categoryName] = [];
       }
@@ -75,8 +153,8 @@ export default async function FAQPage() {
                     return (
                       <FAQItem
                         key={faq.id}
-                        question={translated.question}
-                        answer={translated.answer}
+                        question={translated.question ?? ""}
+                        answer={translated.answer ?? ""}
                       />
                     );
                   })}

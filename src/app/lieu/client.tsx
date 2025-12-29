@@ -11,7 +11,7 @@ import { SiGooglemaps, SiWaze, SiApple } from "react-icons/si";
 
 // Configuration du lieu (à personnaliser)
 const WEDDING_VENUE = {
-  name: "Quinta das Tulipas",
+  name: "Château de Vallée",
   address: "12 Route du Château, 75001 Paris, France",
   lat: 48.8566,
   lng: 2.3522,

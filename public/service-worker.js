@@ -103,7 +103,7 @@ self.addEventListener('push', event => {
       requireInteraction: false
     };
     event.waitUntil(
-      self.registration.showNotification('Ana & Rafael', options)
+      self.registration.showNotification('Marie & Antoine', options)
     );
   }
 });

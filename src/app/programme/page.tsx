@@ -1,7 +1,7 @@
 import Section from "@/components/ui/Section";
 import Title from "@/components/ui/Title";
 import ProgrammeItem from "@/components/programme/ProgrammeItem";
-import { getProgramme, getProgrammeTranslation } from "@/lib/supabase/queries";
+import type { Programme } from "@/lib/types";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocale } from "@/lib/i18n/get-locale";
 import Link from "next/link";
@@ -11,6 +11,138 @@ export const metadata = {
   title: "Programme - Notre Mariage",
   description: "Déroulé de notre journée de mariage",
 };
+
+/**
+ * Mock programme pour le mode portfolio
+ */
+const MOCK_PROGRAMME: Programme[] = [
+  {
+    id: "prog-1",
+    title: "Arrivée des invités",
+    title_fr: "Arrivée des invités",
+    title_pt: "Chegada dos convidados",
+    description: null,
+    description_fr: null,
+    description_pt: null,
+    event_time: "13:00:00",
+    duration_minutes: 30,
+    location: "Parking & Entrée",
+    address: null,
+    icon: "arrival",
+    display_order: 1,
+    is_visible: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "prog-2",
+    title: "Cérémonie",
+    title_fr: "Cérémonie",
+    title_pt: "Cerimônia",
+    description: "Échange des vœux",
+    description_fr: "Échange des vœux",
+    description_pt: "Troca de votos",
+    event_time: "14:00:00",
+    duration_minutes: 45,
+    location: "Jardin principal",
+    address: null,
+    icon: "ceremony",
+    display_order: 2,
+    is_visible: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "prog-3",
+    title: "Cocktail de bienvenue",
+    title_fr: "Cocktail de bienvenue",
+    title_pt: "Coquetel de boas-vindas",
+    description: "Boissons et amuse-bouches",
+    description_fr: "Boissons et amuse-bouches",
+    description_pt: "Bebidas e acompanhamentos",
+    event_time: "15:00:00",
+    duration_minutes: 60,
+    location: "Terrasse",
+    address: null,
+    icon: "cocktail",
+    display_order: 3,
+    is_visible: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "prog-4",
+    title: "Dîner",
+    title_fr: "Dîner",
+    title_pt: "Jantar",
+    description: "Service du repas",
+    description_fr: "Service du repas",
+    description_pt: "Serviço de refeições",
+    event_time: "16:30:00",
+    duration_minutes: 120,
+    location: "Salle des festins",
+    address: null,
+    icon: "dinner",
+    display_order: 4,
+    is_visible: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "prog-5",
+    title: "Toasts et discours",
+    title_fr: "Toasts et discours",
+    title_pt: "Brindes e discursos",
+    description: "Moments d'émotion",
+    description_fr: "Moments d'émotion",
+    description_pt: "Momentos de emoção",
+    event_time: "18:30:00",
+    duration_minutes: 45,
+    location: "Salle des festins",
+    address: null,
+    icon: "toasts",
+    display_order: 5,
+    is_visible: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "prog-6",
+    title: "Gâteau & Moments sucrés",
+    title_fr: "Gâteau & Moments sucrés",
+    title_pt: "Bolo & Momentos doces",
+    description: "Découpe du gâteau",
+    description_fr: "Découpe du gâteau",
+    description_pt: "Corte do bolo",
+    event_time: "19:30:00",
+    duration_minutes: 30,
+    location: "Salle des festins",
+    address: null,
+    icon: "cake",
+    display_order: 6,
+    is_visible: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "prog-7",
+    title: "Danse & Célébration",
+    title_fr: "Danse & Célébration",
+    title_pt: "Dança & Celebração",
+    description: "Première danse et bal",
+    description_fr: "Première danse et bal",
+    description_pt: "Primeira dança e baile",
+    event_time: "20:30:00",
+    duration_minutes: 180,
+    location: "Piste de danse",
+    address: null,
+    icon: "party",
+    display_order: 7,
+    is_visible: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+];
 
 /**
  * PAGE : PROGRAMME
@@ -23,7 +155,8 @@ export default async function ProgrammePage() {
   const dict = await getDictionary(locale);
 
   // Récupération des données côté serveur
-  const programme = await getProgramme();
+  // PORTFOLIO: Utilisation de mock données au lieu de Supabase
+  const programme = MOCK_PROGRAMME;
 
   // Caso onde o programme est vide
   if (programme.length === 0) {
@@ -61,11 +194,14 @@ export default async function ProgrammePage() {
           {/* Liste des événements */}
           <div className="relative">
             {programme.map((item, index) => {
-              const translated = getProgrammeTranslation(item, locale === "pt" ? "pt" : "fr");
+              // Pour les mocks avec title_fr/title_pt, utiliser directement
+              const title = locale === "pt" ? (item.title_pt || item.title) : (item.title_fr || item.title);
+              const description = locale === "pt" ? (item.description_pt || item.description) : (item.description_fr || item.description);
+              
               return (
                 <ProgrammeItem 
                   key={item.id} 
-                  item={{ ...item, title: translated.title, description: translated.description }}
+                  item={{ ...item, title, description }}
                   index={index}
                   isLast={index === programme.length - 1}
                   eventTranslations={dict.programme.events}

@@ -81,8 +81,8 @@ function NavbarContent() {
             }`}
             style={{ fontFamily: "var(--font-parisienne)" }}
           >
-            <span className="hidden sm:inline">Ana & Rafael</span>
-            <span className="sm:hidden">A<span className="text-sm">&</span>R</span>
+            <span className="hidden sm:inline">Marie & Antoine</span>
+            <span className="sm:hidden">M<span className="text-sm">&</span>A</span>
           </Link>
 
           {/* Menu Desktop */}
@@ -211,7 +211,7 @@ export function Navbar() {
               href="/"
               className="flex items-center space-x-2 text-xl font-serif font-bold text-primary hover:text-primary/80 transition-colors"
             >
-              <span>Ana & Rafael</span>
+              <span>Marie & Antoine</span>
             </Link>
             <div className="hidden md:flex items-center space-x-1">
               {DEFAULT_NAV_LINKS.map((link) => (

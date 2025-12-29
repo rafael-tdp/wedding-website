@@ -54,7 +54,11 @@ export default async function GalleriePage() {
 								{dict.gallery.upload.subtitle}
 							</p>
 						</div>
-						<PhotoUpload texts={dict.gallery.upload} />
+						<div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+							<p className="text-gray-700 text-base">
+								ℹ️ This is a demo version. Photo upload is disabled for portfolio purposes.
+							</p>
+						</div>
 					</div>
 				}
 				gallery={

@@ -31,15 +31,15 @@
 	},
 	"home": {
 		"hero": {
-			"title": "Ana & Rafael",
+			"title": "Marie & Antoine",
 			"subtitle": "Vamos casar!",
-			"date": "15 de Agosto de 2026 · Quinta das Tulipas",
+			"date": "15 de Agosto de 2026 · Château de Vallée",
 			"confirmPresence": "Confirmar presença",
 			"seeProgramme": "Ver programa"
 		},
 		"countdown": {
-			"title": "Ana & Rafael <br/> Têm o prazer de vos convidar",
-			"description": "Ao seu casamento no <strong>15 de Agosto de 2026</strong> as 14:00 <br /> Na Quinta das Tulipas."
+			"title": "Marie & Antoine <br/> Têm o prazer de vos convidar",
+			"description": "Ao seu casamento no <strong>15 de Agosto de 2026</strong> as 14:00 <br /> No Château de Vallée."
 		},
 		"story": {
 			"title": "A Nossa História",
@@ -47,19 +47,19 @@
 			"meeting": {
 				"label": "O Nosso Encontro",
 				"title": "Foi um dia de verão",
-				"text": "Foi num dia de verão, no dia 7 de Julho de 2024, que nos conhecemos numa festa de amigos em comum. Mesmo se não falamos muito nesse dia, algo especial estava a começar.",
+				"text": "Foi num dia de verão numa festa de amigos em comum que nos conhecemos. Os nossos olhares cruzaram-se e algo mágico se acendeu entre nós naquele momento.",
 				"image": "/images/story-meeting.svg"
 			},
 			"proposal": {
 				"label": "O Pedido",
-				"title": "Um momento inesquecível no lago de Como",
-				"text": "Durante uma viagem à Itália à beira do lago de Como, Rafael (quase) surpreendeu com um pedido de casamento numa bela villa à beira da água. Um momento inesquecível cheio de emoções e alegria.",
+				"title": "Um momento inesquecível",
+				"text": "Durante uma escapada romântica, um pedido de casamento com um belo anel. Um momento inesquecível cheio de lágrimas de alegria e felicidade pura que guardaremos para sempre.",
 				"image": "/images/story-proposal.svg"
 			},
 			"firstDate": {
 				"label": "Nosso Primeiro Encontro",
-				"title": "Uma tarde inesquecível em Paris",
-				"text": "O nosso primeiro encontro oficial aconteceu em Paris com um passeio pelas Passagens Cobertas, seguido de um jantar. Foi o início de uma bela aventura juntos.",
+				"title": "Um passeio pela cidade",
+				"text": "O nosso primeiro encontro oficial foi um belo passeio pelo centro histórico da cidade, seguido de um jantar num restaurante aconchegante. Foi o início de uma bela aventura juntos.",
 				"image": "/images/story-3.svg"
 			}
 		},
@@ -72,7 +72,7 @@
 			},
 			"venue": {
 				"title": "Local & Acesso",
-				"description": "Como chegar ao Quinta das Tulipas"
+				"description": "Como chegar ao Château de Vallée"
 			},
 			"accommodation": {
 				"title": "Alojamento",
@@ -299,7 +299,7 @@
 	},
 	"footer": {
 		"about": {
-			"title": "Ana & Rafael",
+			"title": "Marie & Antoine",
 			"text": "Estamos muito felizes por partilhar este dia especial convosco. Obrigado por fazerem parte da nossa história."
 		},
 		"navigation": "Navegação",

@@ -41,7 +41,7 @@ export default function Footer() {
           {/* Colonne 1 : À propos */}
           <div>
             <h3 className="text-yellow-50 font-serif text-2xl mb-4 flex items-center gap-2" style={{ fontFamily: "var(--font-parisienne)" }}>
-              Ana & Rafael
+              Marie & Antoine
             </h3>
             <p className="text-sm text-gray-200 leading-relaxed">
               {footerAboutText}
@@ -62,14 +62,6 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  href="/admin"
-                  className="text-sm text-gray-300 hover:text-yellow-50 transition-colors opacity-75"
-                >
-                  Admin
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -138,7 +130,7 @@ export default function Footer() {
         <div className="border-t border-accent-light/30 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-200">
-              © {new Date().getFullYear()} Ana & Rafael. {footerCopyright}
+              © {new Date().getFullYear()} Marie & Antoine. {footerCopyright}
             </p>
             <p className="text-xs text-gray-300">
               {footerMadeWith}

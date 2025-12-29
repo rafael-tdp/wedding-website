@@ -22,9 +22,9 @@ export default async function Home() {
   return (
     <main className="min-h-screen animate-page-enter">
       {/* Hero Section avec image de fond */}
-      <div className="relative w-full min-h-[550px] sm:min-h-[750px] bg-cover bg-center sm:bg-fixed flex items-center justify-center overflow-hidden"
+      <div className="relative w-full min-h-[550px] sm:min-h-[750px] bg-cover bg-bottom sm:bg-fixed flex items-center justify-center overflow-hidden"
         style={{
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url('/images/hero-bg.jpeg')",
+          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url('/images/hero-bg.jpg')",
           backgroundPosition: "center center",
           backgroundSize: "cover"
         }}>

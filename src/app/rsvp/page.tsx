@@ -38,7 +38,11 @@ export default async function RSVPPage() {
       {/* Formulaire */}
       <Section variant="default" spacing="lg">
         <div className="px-4 sm:px-0">
-          <RSVPForm texts={dict.rsvp.form} errors={dict.rsvp.errors} success={dict.rsvp.success} />
+          <div className="max-w-2xl mx-auto bg-blue-50 border border-blue-200 rounded-lg p-6 sm:p-8">
+            <p className="text-center text-gray-700 text-lg">
+              ℹ️ This is a demo version. Form submission is disabled for portfolio purposes.
+            </p>
+          </div>
         </div>
       </Section>
 

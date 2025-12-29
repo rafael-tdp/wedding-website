@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Parisienne } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { ConfigWarning } from "@/components/ui/ConfigWarning";
 import PWAInit from "@/components/pwa/PWAInit";
 import { I18nProvider } from "@/lib/i18n/context";
 import { getLocale } from "@/lib/i18n/get-locale";
@@ -70,7 +69,6 @@ export default async function RootLayout({
       >
         <PWAInit />
         <I18nProvider locale={locale} dict={dict}>
-          <ConfigWarning />
           <Navbar />
           <div className="flex-1">
             {children}

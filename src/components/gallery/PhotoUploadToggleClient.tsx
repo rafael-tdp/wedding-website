@@ -20,6 +20,8 @@ interface PhotoUploadToggleClientProps {
     remaining: string;
     formats: string;
     maxSize: string;
+    addMore: string;
+    removeAll: string;
   };
 }
 

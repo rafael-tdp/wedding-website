@@ -30,8 +30,20 @@ const DEFAULT_NAV_LINKS = [
 function NavbarContent() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const pathname = usePathname();
   const { dict } = useI18n();
+
+  // Détecter la fermeture du menu et appliquer transition-none temporairement
+  useEffect(() => {
+    if (isOpen) {
+      setIsClosing(false);
+    } else if (!isOpen && isClosing) {
+      // Menu vient de se fermer, garder transition-none pour cette fermeture
+      const timer = setTimeout(() => setIsClosing(false), 0);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, isClosing]);
 
   // Détecter le scroll
   useEffect(() => {
@@ -64,10 +76,14 @@ function NavbarContent() {
   const shouldBeTransparent = isHomepage && !isScrolled && !isOpen;
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-      shouldBeTransparent
+    <nav className={`fixed top-0 left-0 right-0 z-40 ${
+      isOpen || isClosing ? "transition-none" : "transition-colors duration-300"
+    } ${
+      isOpen
+        ? "bg-white shadow-md border-b border-gray-200"
+        : shouldBeTransparent
         ? "bg-transparent"
-        : isOpen ? "bg-white" : "bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-md"
+        : "bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-md"
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -82,7 +98,7 @@ function NavbarContent() {
             style={{ fontFamily: "var(--font-parisienne)" }}
           >
             <span className="hidden sm:inline">Ana & Rafael</span>
-            <span className="sm:hidden">A<span className="text-sm">&</span>R</span>
+            {!shouldBeTransparent && (<span className="sm:hidden">A<span className="text-sm">&</span>R</span>)}
           </Link>
 
           {/* Menu Desktop */}
@@ -117,7 +133,12 @@ function NavbarContent() {
 
           {/* Bouton Mobile */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => {
+              if (isOpen) {
+                setIsClosing(true);
+              }
+              setIsOpen(!isOpen);
+            }}
             className={`md:hidden p-2 rounded-lg transition-colors ${
               shouldBeTransparent
                 ? "hover:bg-white/20"

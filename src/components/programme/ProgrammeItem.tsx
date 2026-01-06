@@ -7,6 +7,7 @@ import { MdPhotoCamera } from "react-icons/md";
 import { GiWineGlass } from "react-icons/gi";
 import { PiForkKnife } from "react-icons/pi";
 import { CiMusicNote1 } from "react-icons/ci";
+import { useEffect, useRef, useState } from "react";
 
 
 
@@ -145,7 +146,7 @@ function EventTimeline({ index, isLast }: { index: number; isLast: boolean }) {
 				</div>
 				<div className="absolute top-1/2 left-0 w-[32rem] h-0.5 bg-background-soft/50 transform -translate-x-1/2 z-0" />
 			</div>
-			<div className="w-1 h-40 bg-primary" />
+			<div className="w-[2px] h-40 bg-primary" />
 		</div>
 	);
 }
@@ -157,9 +158,46 @@ export default function ProgrammeItem({
 	eventTranslations = {},
 }: ProgrammeItemProps) {
 	const isEven = index % 2 === 0;
+	const itemRef = useRef<HTMLDivElement>(null);
+	const [isVisible, setIsVisible] = useState(false);
+
+	// Intersection Observer pour détecter quand l'item entre dans le viewport
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						setIsVisible(true);
+						// Optionnel: arrêter d'observer après la première apparition
+						if (itemRef.current) {
+							observer.unobserve(itemRef.current);
+						}
+					}
+				});
+			},
+			{ threshold: 0.1 }
+		);
+
+		if (itemRef.current) {
+			observer.observe(itemRef.current);
+		}
+
+		return () => {
+			if (itemRef.current) {
+				observer.unobserve(itemRef.current);
+			}
+		};
+	}, []);
 
 	return (
-		<div className="relative">
+		<div 
+			ref={itemRef}
+			className={`relative transition-all duration-700 ${
+				isVisible
+					? "opacity-100 translate-y-0"
+					: "opacity-0 translate-y-10"
+			}`}
+		>
 			{/* Desktop view - 3 columns */}
 			<div className="hidden md:grid grid-cols-12 items-start">
 				{/* Colonne 1 - Gauche (icône/numéro pour pairs, contenu pour impairs) */}

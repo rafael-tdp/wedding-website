@@ -2,108 +2,114 @@
 
 import { useState, ReactNode } from "react";
 import { FaPlus } from "react-icons/fa6";
+import Button from "@/components/ui/Button";
+import { ModalPortal } from "@/components/ui/ModalPortal";
+import { MdClose } from "react-icons/md";
+import { UploadModalProvider } from "./UploadModalContext";
 
 interface GalleryLayoutProps {
-  gallery: ReactNode;
-  upload: ReactNode;
+	gallery: ReactNode;
+	upload: ReactNode;
+	onUploadClick?: () => void;
+	dict?: any;
 }
 
-export function GalleryLayout({ gallery, upload }: GalleryLayoutProps) {
-  // État pour l'onglet actif et la modal
-  const [activeTab, setActiveTab] = useState<"gallery" | "upload">("gallery");
-  const [showUploadModal, setShowUploadModal] = useState(false);
+export function GalleryLayout({
+	gallery,
+	upload,
+	onUploadClick,
+	dict,
+}: GalleryLayoutProps) {
+	const [showUploadModal, setShowUploadModal] = useState(false);
 
-  return (
-    <>
-      {/* Desktop : Onglets + Contenu */}
-      <div className="hidden lg:block w-full bg-white py-6">
-        {/* Onglets */}
-        <div className="border-b border-gray-200 px-4 sm:px-8">
-          <div className="flex gap-6">
-            <button
-              onClick={() => setActiveTab("gallery")}
-              className={`py-4 font-medium transition-all border-b-2 ${
-                activeTab === "gallery"
-                  ? "border-primary text-primary"
-                  : "border-transparent text-foreground-muted hover:text-foreground"
-              }`}
-            >
-              Galerie
-            </button>
-            <button
-              onClick={() => setActiveTab("upload")}
-              className={`py-4 font-medium transition-all border-b-2 ${
-                activeTab === "upload"
-                  ? "border-primary text-primary"
-                  : "border-transparent text-foreground-muted hover:text-foreground"
-              }`}
-            >
-              Ajouter des photos
-            </button>
-          </div>
-        </div>
+	const handleUploadClick = () => {
+		setShowUploadModal(true);
+		onUploadClick?.();
+	};
 
-        {/* Contenu */}
-        <div className="p-4 sm:p-8">
-          {activeTab === "gallery" && gallery}
-          {activeTab === "upload" && upload}
-        </div>
-      </div>
+	return (
+		<UploadModalProvider onOpenUploadModal={handleUploadClick}>
+			{/* Galerie principale */}
+			<div className="w-full bg-white py-8 sm:py-12">
+				<div className="relative max-w-8xl mx-auto px-4 sm:px-8">
+					{/* Bouton d'upload desktop */}
+					<div className="flex justify-start sm:justify-end mb-6 sm:mb-8">
+						<Button
+							variant="primary"
+							onClick={handleUploadClick}
+							className="hidden sm:flex items-center gap-2 w-full sm:w-auto"
+						>
+							<FaPlus className="w-4 h-4" />
+							{dict?.gallery.addPhotos || "Ajouter des photos"}
+						</Button>
+					</div>
 
-      {/* Mobile : Galerie avec bouton flottant */}
-      <div className="lg:hidden w-full bg-white py-6">
-        <div className="p-4 sm:p-8">{gallery}</div>
+					{/* Contenu galerie */}
+					{gallery}
+				</div>
+			</div>
 
-        {/* Bouton flottant pour ouvrir la modal */}
-        <button
-          onClick={() => setShowUploadModal(true)}
-          className="fixed bottom-6 right-6 z-30 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white shadow-lg transition-all"
-          title="Ajouter des photos"
-        >
-            <FaPlus className="w-5 h-5" />
-        </button>
-
-        {/* Modal du formulaire sur mobile */}
-        {showUploadModal && (
-          <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 transition-opacity duration-300">
-            <div
-              className="bg-white w-full rounded-t-2xl shadow-lg max-h-[90vh] overflow-y-auto transform transition-all duration-300"
-              style={{
-                animation: "slideUp 0.3s ease-out forwards",
-              }}
-            >
-              <style>{`
-                @keyframes slideUp {
-                  from {
-                    opacity: 0;
-                    transform: translateY(100%);
-                  }
-                  to {
-                    opacity: 1;
-                    transform: translateY(0);
-                  }
+			{/* Modal pour l'upload */}
+			<ModalPortal
+				isOpen={showUploadModal}
+				onClose={() => setShowUploadModal(false)}
+			>
+				<div
+					className="fixed inset-0 bg-black/50 sm:bg-black/40 sm:flex sm:items-center sm:justify-center z-40"
+					onClick={() => setShowUploadModal(false)}
+				>
+					<div
+						className="fixed bottom-0 sm:relative sm:bottom-auto w-full sm:w-full sm:max-w-2xl bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto transform transition-all duration-300"
+						data-modal-content
+						onClick={(e) => e.stopPropagation()}
+					>
+						<style>{`
+              @keyframes slideUp {
+                from {
+                  opacity: 0;
+                  transform: translateY(100%);
                 }
-              `}</style>
+                to {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+              }
+              @keyframes fadeIn {
+                from {
+                  opacity: 0;
+                  transform: scale(0.95);
+                }
+                to {
+                  opacity: 1;
+                  transform: scale(1);
+                }
+              }
+              [data-modal-content] {
+                animation: slideUp 0.3s ease-out forwards;
+              }
+              @media (min-width: 640px) {
+                [data-modal-content] {
+                  animation: fadeIn 0.3s ease-out forwards !important;
+                }
+              }
+            `}</style>
 
-              {/* En-tête de la modal */}
-              <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
-                <h2 className="text-xl font-serif text-foreground">
-                  Ajouter des photos
-                </h2>
-                <button
-                  onClick={() => setShowUploadModal(false)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl transition-colors"
-                >
-                  ✕
-                </button>
-              </div>
+						{/* En-tête modal */}
+						<div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center rounded-t-2xl sm:rounded-t-0">
+							<h2 className="text-xl font-serif text-foreground"></h2>
+							<button
+								onClick={() => setShowUploadModal(false)}
+								className="text-gray-500 hover:text-gray-700 text-2xl transition-colors"
+							>
+								<MdClose />
+							</button>
+						</div>
 
-              {/* Contenu du formulaire */}
-              <div className="p-6">{upload}</div>
-            </div>
-          </div>
-        )}
-      </div>
-    </>
-  );
+						{/* Contenu formulaire */}
+						<div className="p-6 sm:p-8 pb-12 sm:pb-8">{upload}</div>
+					</div>
+				</div>
+			</ModalPortal>
+		</UploadModalProvider>
+	);
 }

@@ -11,9 +11,9 @@ import { PhotoGalleryClient } from "./PhotoGalleryClient";
 /**
  * Composant : Galerie complète (Server Component)
  */
-export async function PhotoGallery() {
+export async function PhotoGallery({ dict }: { dict: any }) {
   const photos = await getApprovedPhotos();
-  return <PhotoGalleryClient photos={photos} />;
+  return <PhotoGalleryClient photos={photos} dict={dict} />;
 }
 
 /**

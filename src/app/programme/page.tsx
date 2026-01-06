@@ -1,11 +1,11 @@
 import Section from "@/components/ui/Section";
 import Title from "@/components/ui/Title";
-import ProgrammeItem from "@/components/programme/ProgrammeItem";
+import HeroSection from "@/components/ui/HeroSection";
+import ProgrammeTimeline from "@/components/programme/ProgrammeTimeline";
+import ProgrammePractical from "@/components/programme/ProgrammePractical";
 import { getProgramme, getProgrammeTranslation } from "@/lib/supabase/queries";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocale } from "@/lib/i18n/get-locale";
-import Link from "next/link";
-import Button from "@/components/ui/Button";
 
 export const metadata = {
   title: "Programme - Notre Mariage",
@@ -41,64 +41,37 @@ export default async function ProgrammePage() {
     );
   }
 
+  // Préparer les données avec traductions
+  const programmeWithTranslations = programme.map((item) => {
+    const translated = getProgrammeTranslation(item, locale === "pt" ? "pt" : "fr");
+    return {
+      ...item,
+      title: translated.title,
+      description: translated.description,
+    };
+  });
+
   return (
     <main className="min-h-screen animate-page-enter">
-      {/* Hero Section */}
-      <Section variant="gradient" spacing="md" isHero backgroundImage="/images/hero-bg-2.jpg">
-        <div className="text-center space-y-4 animate-slide-up">
-          <Title level="h1" align="center" withAccent>
-            {dict.programme.title}
-          </Title>
-          <p className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto">
-            {dict.programme.subtitle}
-          </p>
-        </div>
-      </Section>
+      <HeroSection
+        title={dict.programme.title}
+        subtitle={dict.programme.subtitle}
+        backgroundImage="/images/hero-bg-2.jpg"
+        withAccent
+        withBackgroundLetter
+      />
 
-      {/* Timeline */}
-      <Section variant="default" spacing="lg">
-        <div className="max-w-6xl mx-auto px-4">
-          {/* Liste des événements */}
-          <div className="relative">
-            {programme.map((item, index) => {
-              const translated = getProgrammeTranslation(item, locale === "pt" ? "pt" : "fr");
-              return (
-                <ProgrammeItem 
-                  key={item.id} 
-                  item={{ ...item, title: translated.title, description: translated.description }}
-                  index={index}
-                  isLast={index === programme.length - 1}
-                  eventTranslations={dict.programme.events}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </Section>
+      <ProgrammeTimeline 
+        items={programmeWithTranslations}
+        eventTranslations={dict.programme.events}
+      />
 
-      {/* Section info pratique */}
-      <Section variant="soft" spacing="md">
-        <div className="max-w-2xl mx-auto text-center space-y-4">
-          <h2 className="text-2xl font-serif text-foreground">
-            {dict.programme.practical}
-          </h2>
-          <p className="text-foreground-muted">
-            {dict.programme.practicalDescription}
-          </p>
-          <div className="flex gap-2 sm:gap-3 md:gap-4 justify-center flex-wrap pt-4">
-            <Link href="/lieu" className="w-full sm:w-auto">
-              <Button variant="primary" size="lg" className="w-full sm:w-auto text-sm sm:text-base">
-                {dict.programme.seeVenue}
-              </Button>
-            </Link>
-            <Link href="/hebergements" className="w-full sm:w-auto">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto text-sm sm:text-base">
-                {dict.programme.seeAccommodation}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </Section>
+      <ProgrammePractical
+        title={dict.programme.practical}
+        description={dict.programme.practicalDescription}
+        venueButtonLabel={dict.programme.seeVenue}
+        accommodationButtonLabel={dict.programme.seeAccommodation}
+      />
     </main>
   );
 }

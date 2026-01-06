@@ -95,7 +95,7 @@
 			"title": "Mal podemos esperar para vos ver!",
 			"text": "A vossa presença é o melhor presente que nos podem oferecer. Não se esqueçam de confirmar a participação e de consultar todas as informações práticas para aproveitarem ao máximo este dia.",
 			"confirmPresence": "Confirmar presença",
-			"seeQuestions": "Perguntas frequentes"
+			"seeProgram": "Ver programa"
 		}
 	},
 	"rsvp": {
@@ -214,7 +214,7 @@
 	},
 	"accommodation": {
 		"title": "Alojamento",
-		"subtitle": "Selecionámos para si alojamentos de qualidade perto do local do casamento",
+		"subtitle": "Procuramos para si alojamentos de qualidade perto do local do casamento",
 		"recommended": "As Nossas Recomendações",
 		"recommendedText": "Estes alojamentos são os nossos favoritos, testados e aprovados!",
 		"practicalTips": "Dicas Práticas",
@@ -258,6 +258,13 @@
 	"gallery": {
 		"title": "Galeria de Fotos",
 		"subtitle": "Partilhe as suas melhores recordações do nosso casamento!",
+		"addPhotos": "Adicionar fotos",
+		"selectPhotos": "Selecionar",
+		"cancel": "Cancelar",
+		"selectAll": "Sel. tudo",
+		"deselectAll": "Desel. tudo",
+		"downloadBtn": "Descarregar",
+		"downloading": "A descarregar...",
 		"upload": {
 			"title": "Partilhe as suas fotos",
 			"subtitle": "Carregue as suas fotos preferidas do dia. Adicione o seu nome e uma mensagem se quiser!",
@@ -268,14 +275,16 @@
 			"namePlaceholder": "Nome Apelido",
 			"message": "Mensagem",
 			"messagePlaceholder": "Adicione uma palavrinha para acompanhar a sua foto...",
-			"photo": "Foto",
+			"photo": "Fotos",
 			"selectFile": "Clique para escolher",
 			"dragDrop": "ou arraste e solte",
 			"compressing": "A comprimir...",
 			"remove": "Remover",
-			"submit": "Partilhar foto",
+			"submit": "Partilhar fotos",
 			"submitting": "A carregar...",
-			"remaining": "foto(s) restante(s) nesta sessão"
+			"remaining": "foto(s) restante(s) nesta sessão",
+			"addMore": "+ Adicionar mais fotos",
+			"removeAll": "Remover tudo"
 		},
 		"gallery": {
 			"title": "As nossas recordações partilhadas",

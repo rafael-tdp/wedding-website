@@ -45,6 +45,8 @@ interface PhotoUploadTexts {
   remaining: string;
   formats: string;
   maxSize: string;
+  addMore: string;
+  removeAll: string;
 }
 
 export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
@@ -449,7 +451,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
                     }
                   `}
                 >
-                  <span className="text-sm text-gray-700">+ Ajouter d&apos;autres photos</span>
+                  <span className="text-sm text-gray-700">{texts.addMore}</span>
                 </label>
               </div>
 
@@ -460,7 +462,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
                 disabled={isUploading}
                 className="text-sm text-red-600 hover:text-red-800 disabled:opacity-50"
               >
-                Supprimer tout
+                {texts.removeAll}
               </button>
             </div>
           )}

@@ -95,7 +95,7 @@
       "title": "Nous avons hâte de vous voir !",
       "text": "Votre présence est le plus beau cadeau que vous puissiez nous offrir. N'oubliez pas de confirmer votre participation et de consulter toutes les informations pratiques pour profiter pleinement de cette journée.",
       "confirmPresence": "Confirmer ma présence",
-      "seeQuestions": "Questions fréquentes"
+      "seeProgram": "Voir le programme"
     }
   },
   "rsvp": {
@@ -214,7 +214,7 @@
   },
   "accommodation": {
     "title": "Hébergements",
-    "subtitle": "Nous avons sélectionné pour vous des hébergements de qualité à proximité du lieu du mariage",
+    "subtitle": "Nous avons cherché pour vous des hébergements à proximité du lieu du mariage",
     "recommended": "Nos Recommandations",
     "recommendedText": "Ces hébergements sont nos coups de cœur, testés et approuvés !",
     "practicalTips": "Conseils Pratiques",
@@ -258,6 +258,13 @@
   "gallery": {
     "title": "Galerie Photo",
     "subtitle": "Partagez vos plus beaux souvenirs de notre mariage !",
+    "addPhotos": "Ajouter des photos",
+    "selectPhotos": "Sélectionner",
+    "cancel": "Annuler",
+    "selectAll": "Sél. tout",
+    "deselectAll": "Dés. tout",
+    "downloadBtn": "Télécharger",
+    "downloading": "Téléchargement...",
     "upload": {
       "title": "Partagez vos photos",
       "subtitle": "Partagez vos photos préférées de la journée. Ajoutez votre nom et un petit message si vous le souhaitez !",
@@ -268,18 +275,20 @@
       "namePlaceholder": "Prénom Nom",
       "message": "Message",
       "messagePlaceholder": "Ajoutez un petit mot pour accompagner votre photo...",
-      "photo": "Photo",
+      "photo": "Photos",
       "selectFile": "Cliquez pour choisir",
       "dragDrop": "ou glissez-déposez",
       "compressing": "Compression en cours...",
       "remove": "Supprimer",
-      "submit": "Partager ma photo",
+      "submit": "Partager mes photos",
       "submitting": "Upload en cours...",
-      "remaining": "photo(s) restante(s) dans cette session"
+      "remaining": "photo(s) restante(s) dans cette session",
+      "addMore": "+ Ajouter d'autres photos",
+      "removeAll": "Supprimer tout"
     },
     "gallery": {
       "title": "Nos souvenirs partagés",
-      "subtitle": "Découvrez les photos uploadées par nos invités",
+      "subtitle": "Découvrez les photos de nos invités",
       "empty": "Aucune photo pour le moment",
       "emptySubtitle": "Soyez le premier à partager vos souvenirs !",
       "count": "photo(s) partagée(s)"

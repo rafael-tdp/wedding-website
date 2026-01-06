@@ -8,9 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        xxs: "0.625rem",
+      },
       colors: {
-        // Couleurs du thème - Modifiables dans globals.css
-        // Syntaxe Tailwind v3+ avec support de l'opacité
         primary: {
           DEFAULT: "rgb(var(--primary) / <alpha-value>)",
           light: "rgb(var(--primary-light) / <alpha-value>)",

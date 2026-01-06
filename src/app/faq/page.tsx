@@ -1,5 +1,5 @@
 import Section from "@/components/ui/Section";
-import Title from "@/components/ui/Title";
+import HeroSection from "@/components/ui/HeroSection";
 import FAQItem from "@/components/faq/FAQItem";
 import {
   getFAQ,
@@ -8,6 +8,7 @@ import {
 } from "@/lib/supabase/queries";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocale } from "@/lib/i18n/get-locale";
+import Title from "@/components/ui/Title";
 
 export const metadata = {
   title: "FAQ - Notre Mariage",
@@ -48,16 +49,12 @@ export default async function FAQPage() {
   return (
     <main className="min-h-screen animate-page-enter">
       {/* Hero Section */}
-      <Section variant="gradient" spacing="md" isHero backgroundImage="/images/hero-bg-7.jpg">
-        <div className="text-center space-y-2 sm:space-y-4 animate-slide-up">
-          <Title level="h1" align="center" withAccent>
-            {dict.faq.title}
-          </Title>
-          <p className="text-base sm:text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto px-4">
-            {dict.faq.subtitle}
-          </p>
-        </div>
-      </Section>
+      <HeroSection
+        title={dict.faq.title}
+        subtitle={dict.faq.subtitle}
+        backgroundImage="/images/hero-bg-7.jpg"
+        withBackgroundLetter
+      />
 
       {/* FAQ par catégorie */}
       {Object.keys(faqsByCategory).length > 0 ? (

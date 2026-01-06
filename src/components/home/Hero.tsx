@@ -28,7 +28,7 @@ export default function Hero({ dict }: HeroProps) {
 					</h1>
 					{/* Mobile title */}
 					<h1
-						className="sm:hidden w-full text-8xl font-serif italic font-extralight leading-[0.6]"
+						className="sm:hidden w-full text-7xl font-serif italic font-extralight leading-[0.6]"
 						style={{ fontFamily: "var(--font-parisienne)" }}
 					>
 						{dict.home.hero.title

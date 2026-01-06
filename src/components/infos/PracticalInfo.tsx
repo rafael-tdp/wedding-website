@@ -68,7 +68,7 @@ export default function PracticalInfo({ items }: PracticalInfoProps) {
               : "opacity-0 translate-y-10"
           }`}
         >
-          <Link href={item.href} className="block group">
+          <Link href={item.href} className="block group h-full">
             <Card variant="default" className="h-full transition-all duration-300 group-hover:shadow-lg">
               <div className="flex flex-col items-center text-center space-y-3 sm:space-y-4">
                 {/* Icon in circle */}

@@ -49,7 +49,7 @@ export default function LieuAccessModes({ dict }: LieuAccessModesProps) {
 						: "opacity-0 translate-y-10"
 				}`}
 			>
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
 					<div className={`h-full transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: isVisible ? "0ms" : "0ms" }}>
 						<Card variant="default" className="h-full">
 							<div className="h-full flex flex-col justify-center text-center space-y-3 sm:space-y-4">
@@ -66,7 +66,7 @@ export default function LieuAccessModes({ dict }: LieuAccessModesProps) {
 						</Card>
 					</div>
 
-					<div className={`h-full transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: isVisible ? "100ms" : "0ms" }}>
+					{/* <div className={`h-full transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: isVisible ? "100ms" : "0ms" }}>
 						<Card variant="default" className="h-full">
 							<div className="h-full flex flex-col justify-center text-center space-y-3 sm:space-y-4">
 								<div className="w-12 sm:w-16 h-12 sm:h-16 mx-auto rounded-full bg-secondary/10 flex items-center justify-center">
@@ -80,7 +80,7 @@ export default function LieuAccessModes({ dict }: LieuAccessModesProps) {
 								</p>
 							</div>
 						</Card>
-					</div>
+					</div> */}
 
 					<div className={`h-full transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: isVisible ? "200ms" : "0ms" }}>
 						<Card variant="default" className="h-full">

@@ -9,7 +9,13 @@
 		"save": "Guardar",
 		"cancel": "Cancelar",
 		"confirm": "Confirmar",
-		"back": "Voltar"
+		"back": "Voltar",
+		"learnMore": "Saiba mais",
+		"language": "Idioma",
+		"days": "Dias",
+		"hours": "Horas",
+		"minutes": "Minutos",
+		"seconds": "Segundos"
 	},
 	"nav": {
 		"home": "Início",
@@ -33,13 +39,13 @@
 		"hero": {
 			"title": "Ana & Rafael",
 			"subtitle": "Vamos casar!",
-			"date": "15 de Agosto de 2026 · Quinta das Tulipas",
+			"date": "11 de Agosto de 2026 · Quinta das Tulipas",
 			"confirmPresence": "Confirmar presença",
 			"seeProgramme": "Ver programa"
 		},
 		"countdown": {
 			"title": "Ana & Rafael <br/> Têm o prazer de vos convidar",
-			"description": "Ao seu casamento no <strong>15 de Agosto de 2026</strong> as 14:00 <br /> Na Quinta das Tulipas."
+			"description": "Ao seu casamento no <strong>11 de Agosto de 2026</strong> as 14:00 <br /> Na Quinta das Tulipas."
 		},
 		"story": {
 			"title": "A Nossa História",
@@ -72,7 +78,7 @@
 			},
 			"venue": {
 				"title": "Local & Acesso",
-				"description": "Como chegar ao Quinta das Tulipas"
+				"description": "Como chegar a Quinta das Tulipas"
 			},
 			"accommodation": {
 				"title": "Alojamento",
@@ -194,19 +200,23 @@
 	"venue": {
 		"title": "Local & Acesso",
 		"subtitle": "Todas as informações para nos encontrarem no dia",
+		"directions": "Acesso ao local",
+		"directionsText": "Clique no botão abaixo para abrir seu aplicativo de navegação preferido e obter as direções.",
+		"copyAddress": "Clique para copiar",
+		"copiedAddress": "✓ Copiado!",
 		"byCar": "De Carro",
-		"byCarText": "Estacionamento gratuito no local\nAproximadamente 200 lugares disponíveis",
+		"byCarText": "Estacionamento gratuito no local\nHaverá lugares para todos os convidados",
 		"byTrain": "De Comboio",
-		"byTrainText": "Estação mais próxima: Paris Gare de Lyon\nDepois 15 min de táxi",
+		"byTrainText": "Estação mais próxima: Barcelos\nDepois 15 min de táxi",
 		"byPlane": "De Avião",
-		"byPlaneText": "Aeroporto Paris-CDG\nDepois 45 min de carro",
+		"byPlaneText": "Aeroporto Porto\nDepois 45 min de carro",
 		"gps": "Coordenadas GPS",
 		"latitude": "Latitude",
 		"longitude": "Longitude",
 		"openMaps": "Abrir no Google Maps",
 		"practical": "Informações Práticas",
 		"contact": "Contacto do Local",
-		"website": "Website do castelo",
+		"website": "Website da quinta",
 		"accessibility": "Acessibilidade",
 		"accessibilityText": "O local é acessível para pessoas com mobilidade reduzida. Há lugares de estacionamento reservados perto da entrada. Não hesitem em contactar-nos para qualquer dúvida específica.",
 		"seeProgramme": "Ver programa",
@@ -258,6 +268,7 @@
 	"gallery": {
 		"title": "Galeria de Fotos",
 		"subtitle": "Partilhe as suas melhores recordações do nosso casamento!",
+		"comingSoon": "Poderá adicionar fotos a partir do dia do casamento.",
 		"addPhotos": "Adicionar fotos",
 		"selectPhotos": "Selecionar",
 		"cancel": "Cancelar",
@@ -316,10 +327,23 @@
 			"title": "Contacto",
 			"email": "tavaresrafael93@gmail.com",
 			"phone": "06 95 22 49 32",
-			"date": "15 de Agosto de 2026"
+			"date": "11 de Agosto de 2026"
 		},
 		"copyright": "Todos os direitos reservados.",
 		"madeWith": "Criado com ❤️ para o nosso grande dia"
+	},
+	"admin": {
+		"title": "Admin",
+		"subtitle": "Acesso reservado aos noivos",
+		"email": "Email",
+		"emailPlaceholder": "exemplo@email.pt",
+		"password": "Senha",
+		"passwordPlaceholder": "••••••••",
+		"login": "Conectar",
+		"loggingIn": "Conectando...",
+		"successTitle": "Conexão bem-sucedida",
+		"successText": "Redirecionando...",
+		"errorNote": "Nota: Este espaço é apenas para os noivos para gerir as respostas e fotos. Se é um convidado, por favor utilize o site principal."
 	},
 	"config": {
 		"warning": {

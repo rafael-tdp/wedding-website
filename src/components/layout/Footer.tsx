@@ -30,7 +30,7 @@ export default function Footer() {
   const footerContactTitle = dict?.footer?.contact?.title || "Contact";
   const footerContactEmail = dict?.footer?.contact?.email || "tavaresrafael93@gmail.com";
   const footerContactPhone = dict?.footer?.contact?.phone || "06 95 22 49 32";
-  const footerContactDate = dict?.footer?.contact?.date || "15 Août 2026";
+  const footerContactDate = dict?.footer?.contact?.date || "15 août 2026";
   const footerCopyright = dict?.footer?.copyright || "Tous droits réservés.";
   const footerMadeWith = dict?.footer?.madeWith || "Créé avec ❤️ pour notre grand jour";
 

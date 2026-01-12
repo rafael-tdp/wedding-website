@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { i18n, languages, type Locale } from "@/lib/i18n/config";
 import { useState, useTransition, useEffect } from "react";
 import { LOCALE_COOKIE } from "@/middleware";
+import { useI18n } from "@/lib/i18n/context";
 
 /**
  * LANGUAGE SWITCHER (Cookie-based)
@@ -52,12 +53,13 @@ function LanguageIcon({ locale, className = "" }: { locale: Locale; className?: 
   );
 }
 
-export function LanguageSwitcher({ isScrolled = false }: { isScrolled?: boolean }) {
+export function LanguageSwitcher({ isScrolled = false, mobile = false }: { isScrolled?: boolean; mobile?: boolean }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isOpen, setIsOpen] = useState(false);
   const [currentLocale, setCurrentLocale] = useState<Locale>(i18n.defaultLocale);
   const [mounted, setMounted] = useState(false);
+  const { dict } = useI18n();
 
   // Lire les cookies uniquement côté client après montage
   useEffect(() => {
@@ -96,7 +98,7 @@ export function LanguageSwitcher({ isScrolled = false }: { isScrolled?: boolean 
     return (
       <div className="relative">
         <button
-          className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+          className={`flex items-center gap-2 px-3 py-2 rounded-full transition-colors ${
             isScrolled
               ? "hover:bg-gray-100"
               : "hover:bg-white/20"
@@ -120,62 +122,102 @@ export function LanguageSwitcher({ isScrolled = false }: { isScrolled?: boolean 
       {/* Bouton langue actuelle */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-2 px-0 sm:px-3 py-2 rounded-lg transition-colors ${
-          isScrolled
-            ? "text-gray-700 hover:bg-gray-100"
-            : "text-white hover:bg-white/20"
+        className={`flex items-center gap-2 transition-colors ${
+          mobile
+            ? "block px-4 py-3 text-xl font-normal text-gray-700 tracking-widest w-full text-left"
+            : `px-0 sm:px-3 py-2 rounded-full ${
+                isScrolled
+                  ? "text-gray-700 hover:bg-gray-100"
+                  : "text-white hover:bg-white/20"
+              }`
         }`}
         aria-label="Changer de langue"
         disabled={isPending}
       >
-        <LanguageIcon locale={currentLocale} className="text-lg" />
-        <span className={`hidden sm:inline text-sm font-medium`}>
-          {languages[currentLocale].code.toUpperCase()}
-        </span>
-        <span className="sm:hidden text-gray-700 font-med">{languages[currentLocale].name}</span>
-        <svg
-          className={`w-4 h-4 transition-transform ${
-            isOpen ? "rotate-180" : ""
-          } ${isScrolled ? "text-gray-500" : "text-gray-300"}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        {mobile ? (
+          <>
+            <span>{dict?.common?.language || "Langue"}</span>
+            <svg
+              className={`w-4 h-4 transition-transform ml-auto flex-shrink-0 ${
+                isOpen ? "rotate-180" : ""
+              } text-gray-500`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </>
+        ) : (
+          <>
+            <LanguageIcon locale={currentLocale} className="text-lg hidden sm:inline" />
+            <span className="hidden sm:inline text-sm font-medium">
+              {languages[currentLocale].code.toUpperCase()}
+            </span>
+            <span className="sm:hidden text-gray-700">{languages[currentLocale].name}</span>
+            <svg
+              className={`w-4 h-4 transition-transform ${
+                isOpen ? "rotate-180" : ""
+              } ${isScrolled ? "text-gray-500" : "text-gray-300"}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </>
+        )}
       </button>
 
       {/* Dropdown */}
       {isOpen && (
         <>
           {/* Overlay pour fermer en cliquant à l'extérieur */}
+          {!mobile && (
           <div
             className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
           />
+          )}
 
           {/* Menu */}
-          <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-20">
+          <div className={`absolute z-20 ${
+            mobile 
+              ? "left-0 right-0 mt-0 w-full" 
+              : "right-0 mt-2 w-40 bg-white rounded-md shadow-lg border border-gray-200 py-1"
+          }`}>
             {i18n.locales.map((locale) => (
               <button
                 key={locale}
                 onClick={() => switchLanguage(locale)}
                 className={`
-                  w-full flex items-center gap-3 px-4 py-2 text-sm transition-colors
-                  ${
-                    locale === currentLocale
-                      ? "bg-primary/10 text-primary font-medium"
-                      : "text-gray-700 hover:bg-gray-50"
+                  w-full flex items-center gap-3 transition-colors ${
+                    mobile
+                      ? `px-4 pl-10 py-3 text-lg font-normal tracking-widest ${
+                          locale === currentLocale
+                            ? "text-primary font-medium"
+                            : "text-gray-700 hover:bg-white/50"
+                        }`
+                      : `px-4 py-2 text-sm ${
+                          locale === currentLocale
+                            ? "bg-primary/10 text-primary font-medium"
+                            : "text-gray-700 hover:bg-gray-50"
+                        }`
                   }
                 `}
                 disabled={isPending}
               >
-                <LanguageIcon locale={locale} className="text-lg flex-shrink-0" />
+                {!mobile && <LanguageIcon locale={locale} className="text-lg flex-shrink-0" />}
                 <span>{languages[locale].name}</span>
                 {locale === currentLocale && (
                   <svg

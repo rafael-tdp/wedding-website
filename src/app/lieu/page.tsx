@@ -8,17 +8,10 @@ import LieuGPS from "@/components/lieu/LieuGPS";
 import LieuInfo from "@/components/lieu/LieuInfo";
 import LieuActions from "@/components/lieu/LieuActions";
 import { useI18n } from "@/lib/hooks/useI18n";
+import { getVenueInfo } from "@/lib/config/wedding-config";
 
-// Configuration du lieu (à personnaliser)
-const WEDDING_VENUE = {
-	name: "Quinta das Tulipas",
-	address: "12 Route du Château, 75001 Paris, France",
-	lat: 48.8566,
-	lng: 2.3522,
-	phone: "01 23 45 67 89",
-	email: "contact@chateau-vallee.fr",
-	website: "https://www.chateau-vallee.fr",
-};
+// Récupérer la configuration du lieu depuis wedding-config
+const WEDDING_VENUE = getVenueInfo();
 
 export default function LieuPage() {
 	const { data, isLoading } = useI18n();

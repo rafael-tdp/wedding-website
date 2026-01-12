@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useI18n } from "@/lib/hooks/useI18n";
 
 interface CountdownTime {
   days: number;
@@ -10,6 +11,7 @@ interface CountdownTime {
 }
 
 export default function Countdown() {
+  const { data } = useI18n();
   const [time, setTime] = useState<CountdownTime>({
     days: 0,
     hours: 0,
@@ -22,8 +24,8 @@ export default function Countdown() {
     setMounted(true);
 
     const calculateCountdown = () => {
-      // Date cible: 1er août 2026 à minuit
-      const targetDate = new Date("2026-08-01T00:00:00").getTime();
+      // Date: 11 august 2026 14h00
+      const targetDate = new Date("2026-08-11T14:00:00").getTime();
       const now = new Date().getTime();
       const difference = targetDate - now;
 
@@ -49,6 +51,12 @@ export default function Countdown() {
     return null;
   }
 
+  if (!data?.dict) {
+    return null;
+  }
+
+  const dict = data.dict;
+
   function CountdownItem({ value, label }: { value: number; label: string }) {
     return (
       <div className="text-center">
@@ -64,10 +72,10 @@ export default function Countdown() {
 
   return (
     <div className="flex justify-center gap-4 sm:gap-8 md:gap-16 lg:gap-20">
-      <CountdownItem value={time.days} label="Jours" />
-      <CountdownItem value={time.hours} label="Heures" />
-      <CountdownItem value={time.minutes} label="Minutes" />
-      <CountdownItem value={time.seconds} label="Secondes" />
+      <CountdownItem value={time.days} label={dict.common.days} />
+      <CountdownItem value={time.hours} label={dict.common.hours} />
+      <CountdownItem value={time.minutes} label={dict.common.minutes} />
+      <CountdownItem value={time.seconds} label={dict.common.seconds} />
     </div>
   );
 }

@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Section from "@/components/ui/Section";
 import Card from "@/components/ui/Card";
 import { SiGooglemaps, SiWaze, SiApple } from "react-icons/si";
+import { Title } from "../ui";
 
 interface LieuGPSProps {
   dict: any;
@@ -17,42 +19,45 @@ interface LieuGPSProps {
 }
 
 export default function LieuGPS({ dict, venue, isMobile, isIOS }: LieuGPSProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyAddress = () => {
+    navigator.clipboard.writeText(venue.address);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <Section variant="soft" spacing="lg">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-2 sm:mb-3">
+          <Title level="h3" align="center" className="mb-2">
             {venue.name}
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg text-foreground-muted">
-            {venue.address}
-          </p>
+          </Title>
+          <button
+            onClick={handleCopyAddress}
+            className="text-sm sm:text-base md:text-lg text-foreground-muted hover:text-foreground cursor-pointer transition-colors"
+            title="Cliquez pour copier"
+          >
+            <p>{venue.address}</p>
+            <p className="text-xs mt-1 opacity-75">
+              {copied ? dict.venue.copiedAddress : dict.venue.copyAddress}
+            </p>
+          </button>
         </div>
 
-        <Card variant="bordered">
-          <div className="text-center space-y-3 sm:space-y-4">
-            <h3 className="text-xl sm:text-2xl font-serif text-foreground">
-              {dict.venue.gps}
-            </h3>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-              <div>
-                <p className="text-xs sm:text-sm text-foreground-muted mb-1">
-                  {dict.venue.latitude}
-                </p>
-                <p className="text-base sm:text-lg font-mono text-foreground">
-                  {venue.lat}
-                </p>
-              </div>
-              <div>
-                <p className="text-xs sm:text-sm text-foreground-muted mb-1">
-                  {dict.venue.longitude}
-                </p>
-                <p className="text-base sm:text-lg font-mono text-foreground">
-                  {venue.lng}
-                </p>
-              </div>
+        <Card variant="default" className="p-6 sm:p-8 lg:p-10">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="text-center space-y-3">
+              <Title level="h4" align="center">
+                {dict.venue.directions || "Accès au lieu"}
+              </Title>
+              <p className="text-sm sm:text-base text-foreground-muted max-w-2xl mx-auto">
+                {dict.venue.directionsText || "Cliquez sur le bouton ci-dessous pour ouvrir votre application de navigation préférée et obtenir les directions."}
+              </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center pt-4">
+
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center flex-wrap">
               {isMobile ? (
                 <>
                   {isIOS ? (
@@ -61,7 +66,7 @@ export default function LieuGPS({ dict, venue, isMobile, isIOS }: LieuGPSProps) 
                         href={`maps://maps.apple.com/?address=${encodeURIComponent(venue.address)}&adr=${venue.lat},${venue.lng}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-2.5 rounded-md text-sm sm:text-base font-medium bg-gray-800 text-white hover:bg-gray-900 transition-colors"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
                       >
                         <SiApple className="w-5 h-5" />
                         Plans
@@ -70,8 +75,7 @@ export default function LieuGPS({ dict, venue, isMobile, isIOS }: LieuGPSProps) 
                         href={`https://waze.com/ul?ll=${venue.lat},${venue.lng}&navigate=yes`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-2.5 rounded-md text-sm sm:text-base font-medium text-white transition-colors"
-                        style={{ backgroundColor: 'rgba(8, 200, 247)' }}
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md text-base font-medium bg-secondary text-secondary-foreground hover:bg-secondary/90 transition-colors"
                       >
                         <SiWaze className="w-5 h-5" />
                         Waze
@@ -83,7 +87,7 @@ export default function LieuGPS({ dict, venue, isMobile, isIOS }: LieuGPSProps) 
                         href={`https://maps.app.goo.gl/?q=${venue.lat},${venue.lng}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-md text-sm sm:text-base font-medium bg-red-500 text-white hover:bg-red-600 transition-colors"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
                       >
                         <SiGooglemaps className="w-5 h-5" />
                         Google Maps
@@ -92,7 +96,7 @@ export default function LieuGPS({ dict, venue, isMobile, isIOS }: LieuGPSProps) 
                         href={`https://waze.com/ul?ll=${venue.lat},${venue.lng}&navigate=yes`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-md text-sm sm:text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md text-base font-medium bg-secondary text-secondary-foreground hover:bg-secondary/90 transition-colors"
                       >
                         <SiWaze className="w-5 h-5" />
                         Waze
@@ -105,10 +109,10 @@ export default function LieuGPS({ dict, venue, isMobile, isIOS }: LieuGPSProps) 
                   href={`https://www.google.com/maps/search/?api=1&query=${venue.lat},${venue.lng}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-md text-sm sm:text-base font-medium bg-red-500 text-white hover:bg-red-600 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
                 >
                   <SiGooglemaps className="w-5 h-5" />
-                  Ouvrir sur Google Maps
+                  Google Maps
                 </a>
               )}
             </div>

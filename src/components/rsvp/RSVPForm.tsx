@@ -290,7 +290,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
             <button
               type="button"
               onClick={() => setAttending(true)}
-              className={`flex-1 py-3 px-6 rounded-md font-medium transition-all ${
+              className={`flex-1 py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md font-medium transition-all ${
                 attending === true
                   ? "bg-primary text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-primary/10"
@@ -301,7 +301,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
             <button
               type="button"
               onClick={() => setAttending(false)}
-              className={`flex-1 py-3 px-6 rounded-md font-medium transition-all ${
+              className={`flex-1 py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md font-medium transition-all ${
                 attending === false
                   ? "bg-gray-600 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"

@@ -64,7 +64,7 @@ export default async function InfosPage() {
 
       {/* Section Grille d'informations pratiques */}
       <Section variant="default" spacing="lg">
-        <PracticalInfo items={practicalItems} />
+        <PracticalInfo items={practicalItems} learnMoreText={dict.common.learnMore} />
       </Section>
 
       {/* Section Recommandations supplémentaires */}

@@ -9,7 +9,13 @@
     "save": "Enregistrer",
     "cancel": "Annuler",
     "confirm": "Confirmer",
-    "back": "Retour"
+    "back": "Retour",
+    "learnMore": "En savoir plus",
+    "language": "Langue",
+    "days": "Jours",
+    "hours": "Heures",
+    "minutes": "Minutes",
+    "seconds": "Secondes"
   },
   "nav": {
     "home": "Accueil",
@@ -33,13 +39,13 @@
     "hero": {
       "title": "Ana & Rafael",
       "subtitle": "Nous nous marions !",
-      "date": "Le 15 Août 2026 · Quinta das Tulipas",
+      "date": "Le 1 Août 2026 · Quinta das Tulipas",
       "confirmPresence": "Confirmer ma présence",
       "seeProgramme": "Voir le programme"
     },
     "countdown": {
       "title": "Ana & Rafael <br/> Ont le plaisir de vous inviter",
-      "description": "À leur mariage le <strong>15 Août 2026</strong> <br /> À 14h00 à Quinta das Tulipas."
+      "description": "À leur mariage le <strong>11 Août 2026</strong> <br /> À 14h00 à Quinta das Tulipas."
     },
     "story": {
       "title": "Notre Histoire",
@@ -194,19 +200,23 @@
   "venue": {
     "title": "Lieu & Accès",
     "subtitle": "Toutes les informations pour nous rejoindre le jour J",
+    "directions": "Accès au lieu",
+    "directionsText": "Cliquez sur le bouton ci-dessous pour ouvrir votre application de navigation préférée et obtenir les directions.",
+    "copyAddress": "Cliquez pour copier",
+    "copiedAddress": "✓ Copié!",
     "byCar": "En Voiture",
-    "byCarText": "Parking gratuit sur place\nEnviron 200 places disponibles",
+    "byCarText": "Parking gratuit sur place\nIl y aura de la place pour tous les invités",
     "byTrain": "En Train",
-    "byTrainText": "Gare la plus proche : Paris Gare de Lyon\nPuis 15 min en taxi",
+    "byTrainText": "Gare la plus proche : Barcelos\nPuis 15 min en taxi",
     "byPlane": "En Avion",
-    "byPlaneText": "Aéroport Paris-CDG\nPuis 45 min en voiture",
+    "byPlaneText": "Aéroport de Porto\nPuis 45 min en voiture",
     "gps": "Coordonnées GPS",
     "latitude": "Latitude",
     "longitude": "Longitude",
     "openMaps": "Ouvrir dans Google Maps",
     "practical": "Informations Pratiques",
     "contact": "Contact du Lieu",
-    "website": "Site web du château",
+    "website": "Site web du lieu",
     "accessibility": "Accessibilité",
     "accessibilityText": "Le lieu est accessible aux personnes à mobilité réduite. Des places de parking réservées sont disponibles à proximité de l'entrée. N'hésitez pas à nous contacter pour toute question spécifique.",
     "seeProgramme": "Voir le programme",
@@ -258,6 +268,7 @@
   "gallery": {
     "title": "Galerie Photo",
     "subtitle": "Partagez vos plus beaux souvenirs de notre mariage !",
+    "comingSoon": "L'ajout de photos sera disponible à partir du mariage.",
     "addPhotos": "Ajouter des photos",
     "selectPhotos": "Sélectionner",
     "cancel": "Annuler",
@@ -316,10 +327,23 @@
       "title": "Contact",
       "email": "tavaresrafael93@gmail.com",
       "phone": "06 95 22 49 32",
-      "date": "15 Août 2026"
+      "date": "11 Août 2026"
     },
     "copyright": "Tous droits réservés.",
     "madeWith": "Créé avec ❤️ pour notre grand jour"
+  },
+  "admin": {
+    "title": "Admin",
+    "subtitle": "Accès réservé aux mariés",
+    "email": "Email",
+    "emailPlaceholder": "exemple@mail.fr",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "••••••••",
+    "login": "Se connecter",
+    "loggingIn": "Connexion...",
+    "successTitle": "Connexion réussie",
+    "successText": "Redirection en cours...",
+    "errorNote": "Note: Cet espace est réservé aux mariés pour l'organisation du mariage."
   },
   "config": {
     "warning": {

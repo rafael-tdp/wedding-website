@@ -27,7 +27,7 @@ const parisienne = Parisienne({
 
 export const metadata: Metadata = {
   title: "Ana & Rafael - Notre Mariage",
-  description: "Rejoignez-nous pour célébrer notre union le 15 Août 2026",
+  description: "Rejoignez-nous pour célébrer notre union le 15 août 2026",
   icons: {
     icon: "/favicon.png",
     apple: "/favicon.png",

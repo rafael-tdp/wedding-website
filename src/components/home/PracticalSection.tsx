@@ -21,42 +21,43 @@ export default function PracticalSection({ dict }: PracticalSectionProps) {
         <PracticalInfo 
           items={[
             {
-              icon: <MdCalendarMonth className="text-4xl" />,
+              icon: <MdCalendarMonth className="text-2xl md:text-4xl" />,
               title: dict.home.info.programme.title,
               description: dict.home.info.programme.description,
               href: "/programme",
             },
             {
-              icon: <MdLocationOn className="text-4xl" />,
+              icon: <MdLocationOn className="text-2xl md:text-4xl" />,
               title: dict.home.info.venue.title,
               description: dict.home.info.venue.description,
               href: "/lieu",
             },
             {
-              icon: <MdHotel className="text-4xl" />,
+              icon: <MdHotel className="text-2xl md:text-4xl" />,
               title: dict.home.info.accommodation.title,
               description: dict.home.info.accommodation.description,
               href: "/hebergements",
             },
             {
-              icon: <MdPhotoCamera className="text-4xl" />,
+              icon: <MdPhotoCamera className="text-2xl md:text-4xl" />,
               title: dict.home.info.gallery.title,
               description: dict.home.info.gallery.description,
               href: "/galerie",
             },
             {
-              icon: <MdMailOutline className="text-4xl" />,
+              icon: <MdMailOutline className="text-2xl md:text-4xl" />,
               title: dict.home.info.rsvp.title,
               description: dict.home.info.rsvp.description,
               href: "/rsvp",
             },
             {
-              icon: <MdQuestionAnswer className="text-4xl" />,
+              icon: <MdQuestionAnswer className="text-2xl md:text-4xl" />,
               title: dict.home.info.faq.title,
               description: dict.home.info.faq.description,
               href: "/faq",
             },
           ]}
+          learnMoreText={dict.common.learnMore}
         />
       </div>
     </Section>

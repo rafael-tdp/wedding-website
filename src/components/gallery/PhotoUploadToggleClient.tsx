@@ -23,19 +23,29 @@ interface PhotoUploadToggleClientProps {
     addMore: string;
     removeAll: string;
   };
+  isWeddingPassed: boolean;
 }
 
 /**
  * Composant client pour afficher le formulaire d'upload photo de manière dépliable
  * Permet d'économiser de l'espace en cachant le formulaire par défaut
  */
-export function PhotoUploadToggleClient({ texts }: PhotoUploadToggleClientProps) {
+export function PhotoUploadToggleClient({ texts, isWeddingPassed }: PhotoUploadToggleClientProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
+      {/* Message si le mariage n'a pas encore eu lieu */}
+      {!isWeddingPassed && (
+        <div className="flex justify-center mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <p className="text-blue-800 text-center">
+            Les photos seront disponibles après la cérémonie.
+          </p>
+        </div>
+      )}
+
       {/* Bouton pour ouvrir le formulaire */}
-      {!isOpen && (
+      {!isOpen && isWeddingPassed && (
         <div className="flex justify-center mb-8">
           <button
             onClick={() => setIsOpen(true)}
@@ -60,7 +70,7 @@ export function PhotoUploadToggleClient({ texts }: PhotoUploadToggleClientProps)
       )}
 
       {/* Formulaire d'upload (caché/visible selon l'état) */}
-      {isOpen && (
+      {isOpen && isWeddingPassed && (
         <div className="mb-12 p-6 bg-white rounded-lg border-2 border-primary/20 relative">
           {/* Bouton de fermeture */}
           <button

@@ -7,7 +7,7 @@ interface LieuActionsProps {
 
 export default function LieuActions({ dict }: LieuActionsProps) {
 	return (
-		<div className="flex flex-col sm:flex-row px-4 sm:px-0 gap-2 sm:gap-3 md:gap-4 justify-center flex-wrap pt-4 pb-16 sm:pb-20 2xl:pb-24">
+		<div className="flex flex-col sm:flex-row px-8 sm:px-4 gap-2 sm:gap-3 md:gap-4 justify-center flex-wrap pt-4 pb-16 sm:pb-20 2xl:pb-24">
 			<Link href="/programme">
 				<Button
 					variant="primary"

@@ -65,9 +65,9 @@ export default function LieuInfo({ dict, venue }: LieuInfoProps) {
           {/* Contact */}
           <div className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: isVisible ? "100ms" : "0ms" }}>
             <Card variant="soft">
-              <h3 className="text-lg sm:text-xl font-serif text-foreground mb-4">
+              <Title level="h5" align="left" withAccent={false} className="mb-4">
                 {dict.venue.contact}
-              </h3>
+              </Title>
               <div className="space-y-3 text-sm sm:text-base text-foreground-muted">
                 <div className="flex items-center gap-3">
                   <MdPhone className="w-5 h-5 text-primary flex-shrink-0" />
@@ -105,9 +105,9 @@ export default function LieuInfo({ dict, venue }: LieuInfoProps) {
           {/* Accessibility */}
           <div className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`} style={{ transitionDelay: isVisible ? "200ms" : "0ms" }}>
             <Card variant="soft">
-              <h3 className="text-lg sm:text-xl font-serif text-foreground mb-4">
+              <Title level="h5" align="left" withAccent={false} className="mb-4">
                 {dict.venue.accessibility}
-              </h3>
+              </Title>
               <p className="text-sm sm:text-base text-foreground-muted">
                 {dict.venue.accessibilityText}
               </p>

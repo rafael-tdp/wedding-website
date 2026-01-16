@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from "react";
 import HeroSection from "@/components/ui/HeroSection";
-import LieuMap from "@/components/lieu/LieuMap";
-import LieuAccessModes from "@/components/lieu/LieuAccessModes";
-import LieuGPS from "@/components/lieu/LieuGPS";
-import LieuInfo from "@/components/lieu/LieuInfo";
-import LieuActions from "@/components/lieu/LieuActions";
+import LocationMap from "@/components/location/LocationMap";
+import LocationAccessModes from "@/components/location/LocationAccessModes";
+import LocationGPS from "@/components/location/LocationGPS";
+import LocationInfo from "@/components/location/LocationInfo";
+import LocationActions from "@/components/location/LocationActions";
 import { useI18n } from "@/lib/hooks/useI18n";
 import { getVenueInfo } from "@/lib/config/wedding-config";
 
 // Récupérer la configuration du lieu depuis wedding-config
 const WEDDING_VENUE = getVenueInfo();
 
-export default function LieuPage() {
+export default function LocationPage() {
 	const { data, isLoading } = useI18n();
 	const [isMobile, setIsMobile] = useState(false);
 	const [isIOS, setIsIOS] = useState(false);
@@ -44,24 +44,24 @@ export default function LieuPage() {
 				withBackgroundLetter
 			/>
 
-			<LieuMap
+			<LocationMap
 				address={WEDDING_VENUE.address}
 				lat={WEDDING_VENUE.lat}
 				lng={WEDDING_VENUE.lng}
 			/>
 
-			<LieuAccessModes dict={dict} />
+			<LocationAccessModes dict={dict} />
 
-			<LieuGPS
+			<LocationGPS
 				dict={dict}
 				venue={WEDDING_VENUE}
 				isMobile={isMobile}
 				isIOS={isIOS}
 			/>
 
-			<LieuInfo dict={dict} venue={WEDDING_VENUE} />
+			<LocationInfo dict={dict} venue={WEDDING_VENUE} />
 
-			<LieuActions dict={dict} />
+			<LocationActions dict={dict} />
 		</main>
 	);
 }

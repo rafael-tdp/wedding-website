@@ -11,13 +11,13 @@ import {
 } from "react-icons/md";
 import { Title } from "../ui";
 
-interface HebergementPracticalTipsProps {
+interface AccommodationPracticalTipsProps {
 	dict: any;
 }
 
-export default function HebergementPracticalTips({
+export default function AccommodationPracticalTips({
 	dict,
-}: HebergementPracticalTipsProps) {
+}: AccommodationPracticalTipsProps) {
 	const tips = [
 		{
 			icon: MdLocalOffer,
@@ -75,7 +75,7 @@ export default function HebergementPracticalTips({
 				</div>
 
 				<div className="flex gap-2 sm:gap-3 md:gap-4 justify-center flex-wrap pt-4">
-					<Link href="/lieu" className="w-full sm:w-auto">
+					<Link href="/location" className="w-full sm:w-auto">
 						<Button
 							variant="primary"
 							size="lg"
@@ -84,7 +84,7 @@ export default function HebergementPracticalTips({
 							{dict.accommodation.seeVenue}
 						</Button>
 					</Link>
-					<Link href="/programme" className="w-full sm:w-auto">
+					<Link href="/schedule" className="w-full sm:w-auto">
 						<Button
 							variant="outline"
 							size="lg"

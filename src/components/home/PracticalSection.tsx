@@ -1,6 +1,6 @@
 import Section from "@/components/ui/Section";
 import Title from "@/components/ui/Title";
-import PracticalInfo from "@/components/infos/PracticalInfo";
+import PracticalInfo from "@/components/home/PracticalInfo";
 import { MdCalendarMonth, MdLocationOn, MdHotel, MdPhotoCamera, MdMailOutline, MdQuestionAnswer } from "react-icons/md";
 
 interface PracticalSectionProps {
@@ -24,19 +24,19 @@ export default function PracticalSection({ dict }: PracticalSectionProps) {
               icon: <MdCalendarMonth className="text-2xl md:text-4xl" />,
               title: dict.home.info.programme.title,
               description: dict.home.info.programme.description,
-              href: "/programme",
+              href: "/schedule",
             },
             {
               icon: <MdLocationOn className="text-2xl md:text-4xl" />,
               title: dict.home.info.venue.title,
               description: dict.home.info.venue.description,
-              href: "/lieu",
+              href: "/location",
             },
             {
               icon: <MdHotel className="text-2xl md:text-4xl" />,
               title: dict.home.info.accommodation.title,
               description: dict.home.info.accommodation.description,
-              href: "/hebergements",
+              href: "/accommodations",
             },
             {
               icon: <MdPhotoCamera className="text-2xl md:text-4xl" />,

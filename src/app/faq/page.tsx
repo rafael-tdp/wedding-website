@@ -15,12 +15,6 @@ export const metadata = {
   description: "Questions fréquemment posées sur notre mariage",
 };
 
-/**
- * PAGE : FAQ (Questions Fréquentes - Multilingue)
- * 
- * Server Component qui récupère les FAQ depuis Supabase
- * et les affiche groupées par catégorie avec traductions.
- */
 export default async function FAQPage() {
   const locale = await getLocale();
   const dict = await getDictionary(locale);
@@ -151,21 +145,21 @@ export default async function FAQPage() {
             </p>
             <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
               <a
-                href="/programme"
+                href="/schedule"
                 className="text-xs sm:text-sm text-primary hover:text-primary-dark underline"
               >
                 {dict.faq.see.programme}
               </a>
               <span className="text-foreground-muted hidden sm:inline">•</span>
               <a
-                href="/lieu"
+                href="/location"
                 className="text-xs sm:text-sm text-primary hover:text-primary-dark underline"
               >
                 {dict.faq.see.venue}
               </a>
               <span className="text-foreground-muted hidden sm:inline">•</span>
               <a
-                href="/hebergements"
+                href="/accommodations"
                 className="text-xs sm:text-sm text-primary hover:text-primary-dark underline"
               >
                 {dict.faq.see.accommodation}

@@ -23,7 +23,7 @@ export default function CTASection({ dict }: CTASectionProps) {
               {dict.home.cta.confirmPresence}
             </Button>
           </Link>
-          <Link href="/programme" className="w-full sm:w-auto">
+          <Link href="/schedule" className="w-full sm:w-auto">
             <Button variant="outline" size="lg" className="w-full sm:w-auto">
               {dict.home.cta.seeProgram}
             </Button>

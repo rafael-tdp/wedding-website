@@ -1,18 +1,18 @@
 'use client';
 
 import Section from '@/components/ui/Section';
-import HebergementTypeGroup from './HebergementTypeGroup';
+import AccommodationTypeGroup from './AccommodationTypeGroup';
 import type { Hebergement } from '@/lib/supabase/queries';
 
-interface HebergementsByTypeProps {
+interface AccommodationsByTypeProps {
 	hebergements: Hebergement[];
 	dict: any;
 }
 
-export default function HebergementsByType({
+export default function AccommodationsByType({
 	hebergements,
 	dict,
-}: HebergementsByTypeProps) {
+}: AccommodationsByTypeProps) {
 	if (hebergements.length === 0) {
 		return (
 			<Section variant="default" spacing="lg">
@@ -41,7 +41,7 @@ export default function HebergementsByType({
 		<Section variant="default" spacing="lg">
 			<div className="max-w-4xl mx-auto px-4 sm:px-0 space-y-12 sm:space-y-16">
 				{Object.entries(hebergementsByType).map(([type, items]) => (
-					<HebergementTypeGroup
+					<AccommodationTypeGroup
 						key={type}
 						type={type as Hebergement['type']}
 						items={items}
@@ -58,7 +58,7 @@ function getTypeLabel(type: Hebergement['type']): string {
 		hotel: 'Hôtels',
 		gite: 'Gîtes',
 		chambres_hotes: "Chambres d'Hôtes",
-		airbnb: 'Locations de Vacances',
+		airbnb: 'AirBnb / Locations de vacances',
 	};
 	return labels[type] || type;
 }

@@ -118,6 +118,7 @@
 		"questionsText": "Para qualquer dúvida, consultem as nossas Perguntas Frequentes ou contactem-nos diretamente.",
 		"seeProgramme": "Ver programa",
 		"seeAccommodation": "Encontrar alojamento",
+		"seeFAQ": "Perguntas frequentes",
 		"form": {
 			"optional": "(opcional)",
 			"infoSection": "Os seus dados",
@@ -220,7 +221,8 @@
 		"accessibility": "Acessibilidade",
 		"accessibilityText": "O local é acessível para pessoas com mobilidade reduzida. Há lugares de estacionamento reservados perto da entrada. Não hesitem em contactar-nos para qualquer dúvida específica.",
 		"seeProgramme": "Ver programa",
-		"seeAccommodation": "Alojamento"
+		"seeAccommodation": "Alojamento",
+		"seeRSVP": "RSVP"
 	},
 	"accommodation": {
 		"title": "Alojamento",

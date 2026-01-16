@@ -10,7 +10,7 @@ interface RSVPNavigationProps {
 export default function RSVPNavigation({ dict }: RSVPNavigationProps) {
 	return (
 		<div className="flex gap-2 sm:gap-3 md:gap-4 justify-center flex-wrap pt-12">
-			<Link href="/programme" className="w-full sm:w-auto">
+			<Link href="/schedule" className="w-full sm:w-auto">
 				<Button
 					variant="primary"
 					size="lg"
@@ -19,13 +19,13 @@ export default function RSVPNavigation({ dict }: RSVPNavigationProps) {
 					{dict.rsvp.seeProgramme}
 				</Button>
 			</Link>
-			<Link href="/hebergements" className="w-full sm:w-auto">
+			<Link href="/faq" className="w-full sm:w-auto">
 				<Button
 					variant="outline"
 					size="lg"
 					className="w-full sm:w-auto"
 				>
-					{dict.rsvp.seeAccommodation}
+					{dict.rsvp.seeFAQ}
 				</Button>
 			</Link>
 		</div>

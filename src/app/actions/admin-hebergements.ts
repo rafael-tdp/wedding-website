@@ -30,33 +30,27 @@ export async function getHebergements() {
 // CREATE - Ajouter un nouvel hébergement
 export async function createHebergement(formData: FormData) {
   try {
-    const name = formData.get("name") as string;
-    const description = formData.get("description") as string;
-    const price = formData.get("price") as string;
-    const phone = formData.get("phone") as string;
-    const website = formData.get("website") as string;
-    const image_url = formData.get("image_url") as string;
     const name_fr = formData.get("name_fr") as string;
     const description_fr = formData.get("description_fr") as string;
-    const price_note_fr = formData.get("price_note_fr") as string;
+    const type = formData.get("type") as string;
+    const price = formData.get("price") as string;
+    const website = formData.get("website") as string;
+    const image_url = formData.get("image_url") as string;
     const name_pt = formData.get("name_pt") as string;
     const description_pt = formData.get("description_pt") as string;
-    const price_note_pt = formData.get("price_note_pt") as string;
+    const length = formData.get("length") as string;
 
     const { error } = await supabase.from("hebergements").insert([
       {
-        name,
-        description,
-        price,
-        phone,
-        website,
-        image_url: image_url || null,
         name_fr,
-        description_fr,
-        price_note_fr,
-        name_pt,
-        description_pt,
-        price_note_pt,
+        description_fr: description_fr || null,
+        type: type || "hotel",
+        price: price || null,
+        website: website || null,
+        image_url: image_url || null,
+        name_pt: name_pt || null,
+        description_pt: description_pt || null,
+        length: length || null,
       },
     ]);
 
@@ -64,27 +58,23 @@ export async function createHebergement(formData: FormData) {
     return { success: true, message: "Hébergement créé avec succès" };
   } catch (error) {
     console.error("Error creating hebergement:", error);
-    return { success: false, message: "Erreur lors de la création de l'hébergement" };
+    return { success: false, message: `Erreur lors de la création de l'hébergement: ${error}` };
   }
 }
 
 // UPDATE - Mettre à jour un hébergement
 export async function updateHebergement(id: string, formData: FormData) {
   try {
-    const image_url = formData.get("image_url") as string;
     const updates = {
-      name: formData.get("name") as string,
-      description: formData.get("description") as string,
-      price: formData.get("price") as string,
-      phone: formData.get("phone") as string,
-      website: formData.get("website") as string,
-      image_url: image_url || null,
       name_fr: formData.get("name_fr") as string,
       description_fr: formData.get("description_fr") as string,
-      price_note_fr: formData.get("price_note_fr") as string,
+      type: formData.get("type") as string,
+      price: formData.get("price") as string,
+      website: formData.get("website") as string,
+      image_url: formData.get("image_url") as string,
       name_pt: formData.get("name_pt") as string,
       description_pt: formData.get("description_pt") as string,
-      price_note_pt: formData.get("price_note_pt") as string,
+      length: formData.get("length") as string,
       updated_at: new Date().toISOString(),
     };
 
@@ -97,7 +87,7 @@ export async function updateHebergement(id: string, formData: FormData) {
     return { success: true, message: "Hébergement mis à jour avec succès" };
   } catch (error) {
     console.error("Error updating hebergement:", error);
-    return { success: false, message: "Erreur lors de la mise à jour de l'hébergement" };
+    return { success: false, message: `Erreur lors de la mise à jour de l'hébergement: ${error}` };
   }
 }
 

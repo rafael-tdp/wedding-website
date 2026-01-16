@@ -1,8 +1,8 @@
 import Section from "@/components/ui/Section";
 import Title from "@/components/ui/Title";
 import HeroSection from "@/components/ui/HeroSection";
-import ProgrammeTimeline from "@/components/programme/ProgrammeTimeline";
-import ProgrammePractical from "@/components/programme/ProgrammePractical";
+import ScheduleTimeline from "@/components/schedule/ScheduleTimeline";
+import SchedulePractical from "@/components/schedule/SchedulePractical";
 import { getProgramme, getProgrammeTranslation } from "@/lib/supabase/queries";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocale } from "@/lib/i18n/get-locale";
@@ -18,7 +18,7 @@ export const metadata = {
  * Server Component multilingue qui récupère le programme depuis Supabase
  * et l'affiche sous forme de timeline avec traductions.
  */
-export default async function ProgrammePage() {
+export default async function SchedulePage() {
   const locale = await getLocale();
   const dict = await getDictionary(locale);
 
@@ -61,12 +61,12 @@ export default async function ProgrammePage() {
         withBackgroundLetter
       />
 
-      <ProgrammeTimeline 
+      <ScheduleTimeline 
         items={programmeWithTranslations}
         eventTranslations={dict.programme.events}
       />
 
-      <ProgrammePractical
+      <SchedulePractical
         title={dict.programme.practical}
         description={dict.programme.practicalDescription}
         venueButtonLabel={dict.programme.seeVenue}

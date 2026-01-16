@@ -3,6 +3,8 @@
 import { useState, useTransition, useEffect } from "react";
 import { getProgramme, createProgrammeEvent, updateProgrammeEvent, deleteProgrammeEvent } from "@/app/actions/admin-programme";
 import Button from "@/components/ui/Button";
+import { AdminFormModal } from "./AdminFormModal";
+import { Title } from "../ui";
 
 interface ProgrammeEvent {
   id: string;
@@ -24,7 +26,7 @@ interface ProgrammeEvent {
 /**
  * COMPOSANT : ADMIN PROGRAMME MANAGEMENT
  */
-export default function AdminProgrammeManager({ showForm, setShowForm }: { showForm: boolean; setShowForm: (show: boolean) => void }) {
+export default function AdminProgrammeManager({ showCreateForm, setShowCreateForm, showEditForm, setShowEditForm }: { showCreateForm: boolean; setShowCreateForm: (show: boolean) => void; showEditForm: boolean; setShowEditForm: (show: boolean) => void }) {
   const [events, setEvents] = useState<ProgrammeEvent[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isLoading, startTransition] = useTransition();
@@ -92,8 +94,11 @@ export default function AdminProgrammeManager({ showForm, setShowForm }: { showF
           description_pt: "",
         });
         setEditingId(null);
-        setShowForm(false);
+        setShowCreateForm(false);
+        setShowEditForm(false);
         handleLoadEvents();
+      } else {
+        alert(result.message || "Erreur lors de l'opération");
       }
     });
   };
@@ -114,7 +119,7 @@ export default function AdminProgrammeManager({ showForm, setShowForm }: { showF
       description_pt: event.description_pt || "",
     });
     setEditingId(event.id);
-    setShowForm(true);
+    setShowEditForm(true);
   };
 
   const handleDelete = (id: string) => {
@@ -130,124 +135,205 @@ export default function AdminProgrammeManager({ showForm, setShowForm }: { showF
 
   return (
     <>
-      {/* Liste ou Formulaire d'édition */}
+      {/* Modal pour ajouter un événement */}
+      <AdminFormModal
+        isOpen={showCreateForm}
+        onClose={() => setShowCreateForm(false)}
+        title="Ajouter un événement"
+        onSubmit={handleSubmit}
+        isLoading={isLoading}
+        submitLabel="Créer"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Titre (FR)</label>
+            <input
+              type="text"
+              value={formData.title_fr}
+              onChange={(e) => setFormData({ ...formData, title_fr: e.target.value })}
+              className="w-full px-3 py-2 border rounded-lg"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Titre (PT)</label>
+            <input
+              type="text"
+              value={formData.title_pt}
+              onChange={(e) => setFormData({ ...formData, title_pt: e.target.value })}
+              className="w-full px-3 py-2 border rounded-lg"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Description (FR)</label>
+            <textarea
+              value={formData.description_fr}
+              onChange={(e) => setFormData({ ...formData, description_fr: e.target.value })}
+              rows={3}
+              className="w-full px-3 py-2 border rounded-lg"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Description (PT)</label>
+            <textarea
+              value={formData.description_pt}
+              onChange={(e) => setFormData({ ...formData, description_pt: e.target.value })}
+              rows={3}
+              className="w-full px-3 py-2 border rounded-lg"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Heure</label>
+            <input
+              type="time"
+              value={formData.event_time}
+              onChange={(e) => setFormData({ ...formData, event_time: e.target.value })}
+              className="w-full px-3 py-2 border rounded-lg"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Durée (minutes)</label>
+            <input
+              type="number"
+              value={formData.duration_minutes}
+              onChange={(e) => setFormData({ ...formData, duration_minutes: e.target.value })}
+              className="w-full px-3 py-2 border rounded-lg"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Lieu</label>
+            <input
+              type="text"
+              value={formData.location}
+              onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+              className="w-full px-3 py-2 border rounded-lg"
+            />
+          </div>
+        </div>
+      </AdminFormModal>
+
+      {/* Modal pour modifier un événement */}
+      <AdminFormModal
+        isOpen={showEditForm}
+        onClose={() => {
+          setEditingId(null);
+          setShowEditForm(false);
+          setFormData({
+            title: "",
+            description: "",
+            event_time: "",
+            duration_minutes: "",
+            location: "",
+            address: "",
+            display_order: 0,
+            icon: "",
+            title_fr: "",
+            description_fr: "",
+            title_pt: "",
+            description_pt: "",
+          });
+        }}
+        title="Modifier l'événement"
+        onSubmit={handleSubmit}
+        isLoading={isLoading}
+        submitLabel="Mettre à jour"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Titre (FR)</label>
+            <input
+              type="text"
+              value={formData.title_fr}
+              onChange={(e) => setFormData({ ...formData, title_fr: e.target.value })}
+              className="w-full px-3 py-2 border rounded-lg"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Titre (PT)</label>
+            <input
+              type="text"
+              value={formData.title_pt}
+              onChange={(e) => setFormData({ ...formData, title_pt: e.target.value })}
+              className="w-full px-3 py-2 border rounded-lg"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Description (FR)</label>
+            <textarea
+              value={formData.description_fr}
+              onChange={(e) => setFormData({ ...formData, description_fr: e.target.value })}
+              rows={3}
+              className="w-full px-3 py-2 border rounded-lg"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Description (PT)</label>
+            <textarea
+              value={formData.description_pt}
+              onChange={(e) => setFormData({ ...formData, description_pt: e.target.value })}
+              rows={3}
+              className="w-full px-3 py-2 border rounded-lg"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Heure</label>
+            <input
+              type="time"
+              value={formData.event_time}
+              onChange={(e) => setFormData({ ...formData, event_time: e.target.value })}
+              className="w-full px-3 py-2 border rounded-lg"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Durée (minutes)</label>
+            <input
+              type="number"
+              value={formData.duration_minutes}
+              onChange={(e) => setFormData({ ...formData, duration_minutes: e.target.value })}
+              className="w-full px-3 py-2 border rounded-lg"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Lieu</label>
+            <input
+              type="text"
+              value={formData.location}
+              onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+              className="w-full px-3 py-2 border rounded-lg"
+            />
+          </div>
+        </div>
+      </AdminFormModal>
+
       {events.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-foreground-muted">Aucun événement pour le moment</p>
         </div>
       ) : (
         <div className="space-y-4">
-          {events.map((event) =>
-            editingId === event.id ? (
-              /* Formulaire d'édition à la place de l'élément */
-              <form key={event.id} onSubmit={handleSubmit} className="bg-background-soft p-4 sm:p-6 rounded-lg space-y-4 border border-primary">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-1">Titre (FR)</label>
-                    <input
-                      type="text"
-                      value={formData.title_fr}
-                      onChange={(e) => setFormData({ ...formData, title_fr: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg"
-                      required
-                    />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Titre (PT)</label>
-              <input
-                type="text"
-                value={formData.title_pt}
-                onChange={(e) => setFormData({ ...formData, title_pt: e.target.value })}
-                className="w-full px-3 py-2 border rounded-lg"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Description (FR)</label>
-              <textarea
-                value={formData.description_fr}
-                onChange={(e) => setFormData({ ...formData, description_fr: e.target.value })}
-                rows={3}
-                className="w-full px-3 py-2 border rounded-lg"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Description (PT)</label>
-              <textarea
-                value={formData.description_pt}
-                onChange={(e) => setFormData({ ...formData, description_pt: e.target.value })}
-                rows={3}
-                className="w-full px-3 py-2 border rounded-lg"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Heure</label>
-              <input
-                type="time"
-                value={formData.event_time}
-                onChange={(e) => setFormData({ ...formData, event_time: e.target.value })}
-                className="w-full px-3 py-2 border rounded-lg"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Durée (minutes)</label>
-              <input
-                type="number"
-                value={formData.duration_minutes}
-                onChange={(e) => setFormData({ ...formData, duration_minutes: e.target.value })}
-                className="w-full px-3 py-2 border rounded-lg"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Lieu</label>
-              <input
-                type="text"
-                value={formData.location}
-                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                className="w-full px-3 py-2 border rounded-lg"
-              />
-            </div>
-          </div>
-
-          <Button type="submit" disabled={isLoading}>
-            {editingId ? "Mettre à jour" : "Créer"}
-          </Button>
-          <button
-            type="button"
-            onClick={() => {
-              setEditingId(null);
-              setFormData({
-                title: "",
-                description: "",
-                event_time: "",
-                duration_minutes: "",
-                location: "",
-                address: "",
-                display_order: 0,
-                icon: "",
-                title_fr: "",
-                description_fr: "",
-                title_pt: "",
-                description_pt: "",
-              });
-            }}
-            className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            Annuler
-          </button>
-              </form>
-            ) : (
-              /* Affichage normal de l'élément */
-              <div key={event.id} className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
-                <div className="flex flex-col gap-2">
+          {events.map((event) => (
+            /* Affichage normal de l'élément */
+            <div key={event.id} className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
+              <div className="flex flex-col gap-2">
                   <div className="flex-1">
-                    <h3 className="font-semibold text-base sm:text-lg text-gray-900">{event.title_fr}</h3>
+                    <Title level="h6" align="left" className="m-0">
+                      {event.title_fr}
+                    </Title>
                     <div className="flex flex-wrap items-center gap-1 sm:gap-2 mt-1 text-xs sm:text-sm text-gray-600">
                       <span>{event.event_time}{event.duration_minutes ? ` (${event.duration_minutes}min)` : ""}</span>
                       {event.location && (

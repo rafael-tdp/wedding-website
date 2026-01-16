@@ -1,6 +1,14 @@
+import { Playfair_Display } from "next/font/google";
+
+const playfairDisplay = Playfair_Display({
+	subsets: ["latin"],
+	weight: ["400", "500", "600", "700"],
+	variable: "--font-playfair",
+});
+
 interface TitleProps {
 	children: React.ReactNode;
-	level?: "h1" | "h2" | "h3" | "h4";
+	level?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 	className?: string;
 	align?: "left" | "center" | "right";
 	withAccent?: boolean;
@@ -32,6 +40,8 @@ export default function Title({
 		h2: "text-3xl md:text-4xl lg:text-5xl",
 		h3: "text-2xl md:text-3xl lg:text-4xl",
 		h4: "text-xl md:text-2xl lg:text-3xl",
+		h5: "text-lg md:text-xl lg:text-2xl",
+		h6: "text-base md:text-lg lg:text-xl",
 	};
 
 	const fontStyles = {
@@ -39,6 +49,8 @@ export default function Title({
 		h2: "",
 		h3: "",
 		h4: "",
+		h5: "",
+		h6: "",
 	};
 
 	const alignStyles = {
@@ -54,6 +66,8 @@ export default function Title({
 				style={
 					level === "h1"
 						? { fontFamily: "var(--font-parisienne)", ...style }
+						: level === "h2" || level === "h3" || level === "h4" || level === "h5" || level === "h6"
+						? { fontFamily: "var(--font-playfair)", ...style }
 						: style
 				}
 			>

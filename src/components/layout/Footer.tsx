@@ -16,9 +16,9 @@ export default function Footer() {
   const { dict } = useI18n();
 
   const footerLinks = [
-    { href: "/programme", label: dict?.navbar?.programme || "Programme" },
-    { href: "/lieu", label: dict?.navbar?.venue || "Lieu & Accès" },
-    { href: "/hebergements", label: dict?.navbar?.accommodation || "Hébergements" },
+    { href: "/schedule", label: dict?.navbar?.programme || "Programme" },
+    { href: "/location", label: dict?.navbar?.venue || "Lieu & Accès" },
+    { href: "/accommodations", label: dict?.navbar?.accommodation || "Hébergements" },
     { href: "/galerie", label: dict?.navbar?.gallery || "Galerie" },
     { href: "/rsvp", label: dict?.navbar?.rsvp || "RSVP" },
     { href: "/faq", label: dict?.navbar?.faq || "FAQ" },

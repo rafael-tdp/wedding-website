@@ -1,20 +1,21 @@
 'use client';
 
-import HebergementCard from './HebergementCard';
+import AccommodationCard from './AccommodationCard';
 import type { Hebergement } from '@/lib/supabase/queries';
 import { useRef, useState, useEffect } from 'react';
+import { Title } from '../ui';
 
-interface HebergementTypeGroupProps {
+interface AccommodationTypeGroupProps {
 	type: Hebergement['type'];
 	items: Hebergement[];
 	typeLabel: string;
 }
 
-export default function HebergementTypeGroup({
+export default function AccommodationTypeGroup({
 	type,
 	items,
 	typeLabel,
-}: HebergementTypeGroupProps) {
+}: AccommodationTypeGroupProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isVisible, setIsVisible] = useState(false);
 
@@ -55,12 +56,12 @@ export default function HebergementTypeGroup({
 					transitionDelay: isVisible ? '0ms' : '0ms',
 				}}
 			>
-				<h3 className="text-lg sm:text-2xl font-serif text-foreground flex items-center gap-2">
+				<Title level="h5" align="left">
 					{typeLabel}
 					<span className="text-foreground-muted text-sm sm:text-lg ml-2 font-normal">
 						({items.length})
 					</span>
-				</h3>
+				</Title>
 			</div>
 
 			{/* Grid */}
@@ -77,7 +78,7 @@ export default function HebergementTypeGroup({
 							transitionDelay: isVisible ? `${(index + 1) * 100}ms` : '0ms',
 						}}
 					>
-						<HebergementCard hebergement={hebergement} />
+						<AccommodationCard hebergement={hebergement} />
 					</div>
 				))}
 			</div>

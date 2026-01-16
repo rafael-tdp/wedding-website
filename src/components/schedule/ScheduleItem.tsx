@@ -151,7 +151,7 @@ function EventTimeline({ index, isLast }: { index: number; isLast: boolean }) {
 	);
 }
 
-export default function ProgrammeItem({
+export default function ScheduleItem({
 	item,
 	index,
 	isLast = false,

@@ -1,5 +1,7 @@
 "use client";
 
+import { Title } from "../ui";
+
 interface RSVP {
 	id: string;
 	guest_name: string;
@@ -48,9 +50,9 @@ export default function RSVPCard({
 			{/* En-tête */}
 			<div className="flex flex-col sm:flex-row sm:items-start md:items-center md:justify-between gap-3 sm:gap-4 mb-4">
 				<div className="min-w-0">
-					<h3 className="text-base sm:text-lg font-semibold text-gray-900 truncate">
+					<Title level="h6" align="left" className="m-0">
 						{rsvp.guest_name}
-					</h3>
+					</Title>
 					<div className="flex flex-col sm:flex-wrap gap-1 sm:gap-4 mt-2 text-xs sm:text-sm text-gray-600">
 						{rsvp.guest_email && (
 							<span className="truncate">📧 {rsvp.guest_email}</span>

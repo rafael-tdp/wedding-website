@@ -178,83 +178,150 @@ async function translateFAQ() {
 }
 
 /**
- * Translates Accommodations in batch
+ * Translates Accommodations in batch (both directions: FR→PT and PT→FR)
  */
 async function translateHebergements() {
   console.log("\n🏨 Translating Accommodations...");
 
   const { data: hebergements, error } = await supabase
     .from("hebergements")
-    .select("id, name_fr, description_fr, price_note_fr, name_pt, description_pt, price_note_pt");
+    .select("id, name_fr, description_fr, name_pt, description_pt");
 
   if (error) {
     console.error("Error fetching Accommodations:", error);
     return;
   }
 
-  // Filtrer les accommodations qui nécessitent une traduction
-  const hebsToTranslate = hebergements.filter(heb =>
-    !heb.name_pt || !heb.description_pt || (heb.price_note_fr && !heb.price_note_pt)
+  // Separate items needing FR→PT translation and PT→FR translation
+  const hebsToTranslateFR_PT = hebergements.filter(heb =>
+    heb.name_fr && (!heb.name_pt || !heb.description_pt)
+  );
+  
+  const hebsToTranslatePT_FR = hebergements.filter(heb =>
+    heb.name_pt && (!heb.name_fr || !heb.description_fr)
   );
 
-  if (hebsToTranslate.length === 0) {
-    console.log("✅ All accommodations are already translated!");
-    return;
+  // Translate FR → PT
+  if (hebsToTranslateFR_PT.length > 0) {
+    console.log(`🔄 Found ${hebsToTranslateFR_PT.length} accommodation(s) to translate (FR→PT)...`);
+    await translateHebergementsBatch(hebsToTranslateFR_PT, "FR→PT");
   }
 
-  console.log(`🔄 Found ${hebsToTranslate.length} accommodation(s) to translate...`);
+  // Translate PT → FR
+  if (hebsToTranslatePT_FR.length > 0) {
+    console.log(`🔄 Found ${hebsToTranslatePT_FR.length} accommodation(s) to translate (PT→FR)...`);
+    await translateHebergementsBatch(hebsToTranslatePT_FR, "PT→FR");
+  }
 
-  // Prepare batch translation object
+  if (hebsToTranslateFR_PT.length === 0 && hebsToTranslatePT_FR.length === 0) {
+    console.log("✅ All accommodations are already translated!");
+  }
+}
+
+/**
+ * Helper function to translate accommodations in a specific direction
+ */
+async function translateHebergementsBatch(hebergements, direction) {
   const textsToBatch = {};
   const hebMapping = {};
 
-  for (const heb of hebsToTranslate) {
-    if (!heb.name_pt) {
-      const key = `heb_${heb.id}_n`;
-      textsToBatch[key] = heb.name_fr;
-      hebMapping[key] = { hebId: heb.id, field: "name_pt" };
-    }
-    if (heb.description_fr && !heb.description_pt) {
-      const key = `heb_${heb.id}_d`;
-      textsToBatch[key] = heb.description_fr;
-      hebMapping[key] = { hebId: heb.id, field: "description_pt" };
-    }
-    if (heb.price_note_fr && !heb.price_note_pt) {
-      const key = `heb_${heb.id}_p`;
-      textsToBatch[key] = heb.price_note_fr;
-      hebMapping[key] = { hebId: heb.id, field: "price_note_pt" };
+  for (const heb of hebergements) {
+    if (direction === "FR→PT") {
+      if (!heb.name_pt && heb.name_fr) {
+        const key = `heb_${heb.id}_n`;
+        textsToBatch[key] = heb.name_fr;
+        hebMapping[key] = { hebId: heb.id, field: "name_pt" };
+      }
+      if (heb.description_fr && !heb.description_pt) {
+        const key = `heb_${heb.id}_d`;
+        textsToBatch[key] = heb.description_fr;
+        hebMapping[key] = { hebId: heb.id, field: "description_pt" };
+      }
+    } else if (direction === "PT→FR") {
+      if (!heb.name_fr && heb.name_pt) {
+        const key = `heb_${heb.id}_n`;
+        textsToBatch[key] = heb.name_pt;
+        hebMapping[key] = { hebId: heb.id, field: "name_fr" };
+      }
+      if (heb.description_pt && !heb.description_fr) {
+        const key = `heb_${heb.id}_d`;
+        textsToBatch[key] = heb.description_pt;
+        hebMapping[key] = { hebId: heb.id, field: "description_fr" };
+      }
     }
   }
 
   if (Object.keys(textsToBatch).length === 0) {
-    console.log("✅ All accommodations are already translated!");
+    console.log(`✅ All accommodations already have ${direction} translations!`);
     return;
   }
+
+  // Determine source and target language
+  const [source, target] = direction.split("→");
+  const targetLangName = target === "PT" ? "Portuguese (Portugal)" : "French";
 
   // Translate all at once
-  console.log(`📤 Sending ${Object.keys(textsToBatch).length} texts to Gemini...`);
-  const translations = await translateBatch(textsToBatch);
+  console.log(`📤 Sending ${Object.keys(textsToBatch).length} texts to Gemini (${direction})...`);
+  
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  
+  const textLines = Object.entries(textsToBatch)
+    .map(([key, text]) => `[${key}]\n${text}`)
+    .join("\n\n");
 
-  if (!translations) {
-    console.error("❌ Batch translation failed");
-    return;
-  }
+  const prompt = `Translate the following texts from ${source === "FR" ? "French" : "Portuguese (Portugal)"} to ${targetLangName}.
+Maintain the same format with [key] labels:
 
-  // Update database with translations
-  for (const [key, translation] of Object.entries(translations)) {
-    const mapping = hebMapping[key];
-    if (mapping) {
-      const { error: updateError } = await supabase
-        .from("hebergements")
-        .update({ [mapping.field]: translation })
-        .eq("id", mapping.hebId);
+${textLines}
 
-      if (updateError) {
-        console.error(`❌ Error updating Accommodation ${mapping.hebId}: ${updateError.message}`);
-      } else {
-        console.log(`✅ Accommodation ${mapping.hebId} (${mapping.field}) updated`);
+Return ONLY the translated texts with [key] labels, no additional text.`;
+
+  try {
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const translatedText = response.text().trim();
+
+    // Parse response back into object
+    const translations = {};
+    const lines = translatedText.split("\n");
+    let currentKey = null;
+    let currentText = [];
+
+    for (const line of lines) {
+      const keyMatch = line.match(/^\[(.+)\]$/);
+      if (keyMatch) {
+        if (currentKey) {
+          translations[currentKey] = currentText.join("\n").trim();
+        }
+        currentKey = keyMatch[1];
+        currentText = [];
+      } else if (currentKey) {
+        currentText.push(line);
       }
     }
+
+    if (currentKey) {
+      translations[currentKey] = currentText.join("\n").trim();
+    }
+
+    // Update database with translations
+    for (const [key, translation] of Object.entries(translations)) {
+      const mapping = hebMapping[key];
+      if (mapping) {
+        const { error: updateError } = await supabase
+          .from("hebergements")
+          .update({ [mapping.field]: translation })
+          .eq("id", mapping.hebId);
+
+        if (updateError) {
+          console.error(`❌ Error updating Accommodation ${mapping.hebId}: ${updateError.message}`);
+        } else {
+          console.log(`✅ Accommodation ${mapping.hebId} (${mapping.field}) updated`);
+        }
+      }
+    }
+  } catch (error) {
+    console.error(`Error translating accommodations (${direction}): ${error.message}`);
   }
 }
 

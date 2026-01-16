@@ -118,6 +118,7 @@
     "questionsText": "Pour toute question, consultez notre FAQ ou contactez-nous directement.",
     "seeProgramme": "Voir le programme",
     "seeAccommodation": "Trouver un hébergement",
+    "seeFAQ": "Foire aux questions",
     "form": {
       "optional": "(optionnel)",
       "infoSection": "Vos informations",
@@ -220,7 +221,8 @@
     "accessibility": "Accessibilité",
     "accessibilityText": "Le lieu est accessible aux personnes à mobilité réduite. Des places de parking réservées sont disponibles à proximité de l'entrée. N'hésitez pas à nous contacter pour toute question spécifique.",
     "seeProgramme": "Voir le programme",
-    "seeAccommodation": "Hébergements"
+    "seeAccommodation": "Hébergements",
+    "seeRSVP": "RSVP"
   },
   "accommodation": {
     "title": "Hébergements",

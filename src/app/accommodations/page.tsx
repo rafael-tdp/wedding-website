@@ -1,26 +1,21 @@
-import Section from "@/components/ui/Section";
 import HeroSection from "@/components/ui/HeroSection";
 import {
 	getHebergements,
-	getRecommendedHebergements,
-	Hebergement,
 } from "@/lib/supabase/queries";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocale } from "@/lib/i18n/get-locale";
-import HebergementRecommended from "@/components/hebergements/HebergementRecommended";
-import HebergementsByType from "@/components/hebergements/HebergementsByType";
-import HebergementPracticalTips from "@/components/hebergements/HebergementPracticalTips";
+import AccommodationsByType from "@/components/accommodations/AccommodationsByType";
+import AccommodationPracticalTips from "@/components/accommodations/AccommodationPracticalTips";
 
 export const metadata = {
 	title: "Hébergements - Notre Mariage",
 	description: "Hébergements recommandés près du lieu du mariage",
 };
 
-export default async function HebergementsPage() {
+export default async function AccommodationsPage() {
 	const locale = await getLocale();
 	const dict = await getDictionary(locale);
 	const hebergements = await getHebergements();
-	const recommended = await getRecommendedHebergements();
 
 	return (
 		<main className="min-h-screen bg-white animate-page-enter">
@@ -31,16 +26,12 @@ export default async function HebergementsPage() {
 				withBackgroundLetter
 			/>
 
-			{recommended.length > 0 && (
-				<HebergementRecommended
-					hebergements={recommended}
-					dict={dict}
-				/>
-			)}
+			<AccommodationsByType hebergements={hebergements} dict={dict} />
 
-			<HebergementsByType hebergements={hebergements} dict={dict} />
-
-			<HebergementPracticalTips dict={dict} />
+			<AccommodationPracticalTips dict={dict} />
 		</main>
 	);
 }
+
+// Lien pour les logements à proximité:
+// https://www.google.fr/travel/search?qs=CAE4Bg&ts=CAESCgoCCAMKAggDEAAaTAouEiwyFjB4MDoweGI1YjUyOTBkOGE0OTY3NTk6ElF1aW50YSBEYXMgVHVsaXBhcxIaEhQKBwjqDxACGAsSBwjqDxACGAwYATICCAIqBwoFOgNFVVI&ap=KigKEgnxaZOhHrZEQBF_78Qsc0AhwBISCfnLRiTQwkRAEX_vxCzYFyHAMAC6AQhvdmVydmlldw&ved=0CAAQ5JsGahgKEwiQ5LSMuIuSAxUAAAAAHQAAAAAQiA8

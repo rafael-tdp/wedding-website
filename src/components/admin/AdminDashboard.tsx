@@ -17,7 +17,9 @@ import PhotoSection from "./PhotoSection";
 import AdminFAQManager from "./AdminFAQManager";
 import AdminProgrammeManager from "./AdminProgrammeManager";
 import AdminHebergementManager from "./AdminHebergementManager";
+import { AdminFormModal } from "./AdminFormModal";
 import { BiPlus, BiDownload } from "react-icons/bi";
+import { Title } from "../ui";
 
 interface RSVP {
 	id: string;
@@ -89,9 +91,12 @@ export default function AdminDashboard({
 	const [faqCount, setFaqCount] = useState(0);
 	const [programmeCount, setProgrammeCount] = useState(0);
 	const [hebergementCount, setHebergementCount] = useState(0);
-	const [showAddFAQForm, setShowAddFAQForm] = useState(false);
-	const [showAddProgrammeForm, setShowAddProgrammeForm] = useState(false);
-	const [showAddHebergementForm, setShowAddHebergementForm] = useState(false);
+	const [showAddFAQCreateForm, setShowAddFAQCreateForm] = useState(false);
+	const [showAddFAQEditForm, setShowAddFAQEditForm] = useState(false);
+	const [showAddProgrammeCreateForm, setShowAddProgrammeCreateForm] = useState(false);
+	const [showAddProgrammeEditForm, setShowAddProgrammeEditForm] = useState(false);
+	const [showAddHebergementCreateForm, setShowAddHebergementCreateForm] = useState(false);
+	const [showAddHebergementEditForm, setShowAddHebergementEditForm] = useState(false);
 
 	// Charger l'onglet depuis localStorage après le montage
 	useEffect(() => {
@@ -269,9 +274,9 @@ export default function AdminDashboard({
 				{/* Header */}
 				<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
 					<div>
-						<h1 className="text-2xl md:text-4xl font-serif text-foreground mb-2">
+						<Title level="h3" align="left">
 							Tableau de bord
-						</h1>
+						</Title>
 						<p className="text-foreground-muted"> 
 							Gestion du mariage
 						</p>
@@ -302,10 +307,11 @@ export default function AdminDashboard({
 								<span className="text-foreground-muted">│</span>
 							</>
 						)}
+						
 						{activeTab === "faq" && (
 							<>
 								<button
-									onClick={() => setShowAddFAQForm(true)}
+									onClick={() => setShowAddFAQCreateForm(true)}
 									className="text-foreground-muted hover:text-foreground underline transition-colors"
 									title="Ajouter une FAQ"
 								>
@@ -318,7 +324,7 @@ export default function AdminDashboard({
 						{activeTab === "programme" && (
 							<>
 								<button
-									onClick={() => setShowAddProgrammeForm(true)}
+									onClick={() => setShowAddProgrammeCreateForm(true)}
 									className="text-foreground-muted hover:text-foreground underline transition-colors"
 									title="Ajouter un événement"
 								>
@@ -331,7 +337,7 @@ export default function AdminDashboard({
 						{activeTab === "hebergements" && (
 							<>
 								<button
-									onClick={() => setShowAddHebergementForm(true)}
+									onClick={() => setShowAddHebergementCreateForm(true)}
 									className="text-foreground-muted hover:text-foreground underline transition-colors"
 									title="Ajouter un hébergement"
 								>
@@ -438,73 +444,53 @@ export default function AdminDashboard({
 
 			{/* Section FAQs */}
 			{activeTab === "faq" && (
-				<AdminFAQManager showForm={showAddFAQForm} setShowForm={setShowAddFAQForm} />
+				<AdminFAQManager showCreateForm={showAddFAQCreateForm} setShowCreateForm={setShowAddFAQCreateForm} showEditForm={showAddFAQEditForm} setShowEditForm={setShowAddFAQEditForm} />
 			)}
 
 			{/* Section Programme */}
 			{activeTab === "programme" && (
-				<AdminProgrammeManager showForm={showAddProgrammeForm} setShowForm={setShowAddProgrammeForm} />
+				<AdminProgrammeManager showCreateForm={showAddProgrammeCreateForm} setShowCreateForm={setShowAddProgrammeCreateForm} showEditForm={showAddProgrammeEditForm} setShowEditForm={setShowAddProgrammeEditForm} />
 			)}
 
 			{/* Section Hébergements */}
 			{activeTab === "hebergements" && (
-				<AdminHebergementManager showForm={showAddHebergementForm} setShowForm={setShowAddHebergementForm} />
+				<AdminHebergementManager showCreateForm={showAddHebergementCreateForm} setShowCreateForm={setShowAddHebergementCreateForm} showEditForm={showAddHebergementEditForm} setShowEditForm={setShowAddHebergementEditForm} />
 			)}
 
 			{/* Modal pour ajouter un invité */}
-			{showAddGuestForm && (
-			<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
-				<div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-					{/* En-tête du modal */}
-					<div className="sticky top-0 bg-white border-b border-gray-200 px-4 sm:px-6 py-4 flex justify-between items-center gap-2">
-						<h2 className="text-lg sm:text-2xl font-serif text-foreground">
-							Ajouter un invité
-						</h2>
-						<button
-							onClick={() => setShowAddGuestForm(false)}
-							className="text-gray-500 hover:text-gray-700 text-xl sm:text-2xl flex-shrink-0"
-						>
-							✕
-						</button>
-					</div>
-
-					{/* Contenu du formulaire */}
-					<div className="p-4 sm:p-6">
-						</div>
-					</div>
-				</div>
-			)}
+			<AdminFormModal
+				isOpen={showAddGuestForm}
+				onClose={() => setShowAddGuestForm(false)}
+				title="Ajouter un invité"
+				onSubmit={(e) => e.preventDefault()}
+				submitLabel="Fermer"
+				isFormWrapper={false}
+			>
+				<RSVPForm 
+					onSuccess={(newRsvp) => {
+						handleAddGuestSuccess(newRsvp);
+						setShowAddGuestForm(false);
+					}}
+				/>
+			</AdminFormModal>
 
 			{/* Modal pour modifier un invité */}
-			{editingRsvp && (
-				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-					<div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-						{/* En-tête du modal */}
-						<div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
-							<h2 className="text-2xl font-serif text-foreground">
-							Modifier l&apos;invité
-							</h2>
-							<button
-								onClick={() => setEditingRsvp(null)}
-								className="text-gray-500 hover:text-gray-700 text-2xl"
-							>
-								✕
-							</button>
-						</div>
-
-						{/* Contenu du formulaire */}
-						<div className="p-6">
-							<RSVPForm 
-								onSuccess={(updatedRsvp) => {
-									handleAddGuestSuccess(updatedRsvp);
-									setEditingRsvp(null);
-								}}
-								initialData={editingRsvp || undefined}
-							/>
-						</div>
-					</div>
-				</div>
-			)}
+			<AdminFormModal
+				isOpen={!!editingRsvp}
+				onClose={() => setEditingRsvp(null)}
+				title="Modifier l'invité"
+				onSubmit={(e) => e.preventDefault()}
+				submitLabel="Fermer"
+				isFormWrapper={false}
+			>
+				<RSVPForm 
+					onSuccess={(updatedRsvp) => {
+						handleAddGuestSuccess(updatedRsvp);
+						setEditingRsvp(null);
+					}}
+					initialData={editingRsvp || undefined}
+				/>
+			</AdminFormModal>
 			</div>
 		</main>
 	);

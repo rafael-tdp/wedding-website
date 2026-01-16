@@ -19,9 +19,9 @@ import { useI18n } from "@/lib/i18n/context";
 
 const DEFAULT_NAV_LINKS = [
 	{ href: "/", label: "Accueil" },
-	{ href: "/programme", label: "Programme" },
-	{ href: "/lieu", label: "Lieu & Accès" },
-	{ href: "/hebergements", label: "Hébergements" },
+	{ href: "/schedule", label: "Programme" },
+	{ href: "/location", label: "Lieu & Accès" },
+	{ href: "/accommodations", label: "Hébergements" },
 	{ href: "/galerie", label: "Galerie" },
 	{ href: "/rsvp", label: "RSVP" },
 	{ href: "/faq", label: "FAQ" },
@@ -57,10 +57,10 @@ function NavbarContent() {
 
 	const navLinks = [
 		{ href: "/", label: dict?.navbar?.home || "Accueil" },
-		{ href: "/programme", label: dict?.navbar?.programme || "Programme" },
-		{ href: "/lieu", label: dict?.navbar?.venue || "Lieu & Accès" },
+		{ href: "/schedule", label: dict?.navbar?.programme || "Programme" },
+		{ href: "/location", label: dict?.navbar?.venue || "Lieu & Accès" },
 		{
-			href: "/hebergements",
+			href: "/accommodations",
 			label: dict?.navbar?.accommodation || "Hébergements",
 		},
 		{ href: "/galerie", label: dict?.navbar?.gallery || "Galerie" },

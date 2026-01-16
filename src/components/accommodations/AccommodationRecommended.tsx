@@ -1,20 +1,20 @@
 'use client';
 
 import Section from '@/components/ui/Section';
-import HebergementCard from './HebergementCard';
+import AccommodationCard from './AccommodationCard';
 import type { Hebergement } from '@/lib/supabase/queries';
 import { useRef, useState, useEffect } from 'react';
 import { Title } from '../ui';
 
-interface HebergementRecommendedProps {
+interface AccommodationRecommendedProps {
 	hebergements: Hebergement[];
 	dict: any;
 }
 
-export default function HebergementRecommended({
+export default function AccommodationRecommended({
 	hebergements,
 	dict,
-}: HebergementRecommendedProps) {
+}: AccommodationRecommendedProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isVisible, setIsVisible] = useState(false);
 
@@ -69,7 +69,7 @@ export default function HebergementRecommended({
 								transitionDelay: isVisible ? `${index * 100}ms` : '0ms',
 							}}
 						>
-							<HebergementCard hebergement={hebergement} />
+							<AccommodationCard hebergement={hebergement} />
 						</div>
 					))}
 				</div>

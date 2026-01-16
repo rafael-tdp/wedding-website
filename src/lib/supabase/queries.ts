@@ -49,22 +49,15 @@ export interface FAQ {
 
 export interface Hebergement {
   id: string;
-  name: string;
+  name_fr: string;
+  description_fr: string | null;
   type: "hotel" | "gite" | "chambres_hotes" | "airbnb";
-  description: string | null;
-  address: string;
-  city: string;
-  postal_code: string | null;
-  distance_km: number | null;
-  phone: string | null;
-  email: string | null;
+  price: string | null;
   website: string | null;
-  price_range: string | null;
-  price_note: string | null;
   image_url: string | null;
-  is_recommended: boolean;
-  display_order: number;
-  is_visible: boolean;
+  name_pt: string | null;
+  description_pt: string | null;
+  length: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -207,15 +200,13 @@ export async function getFAQCategories(): Promise<string[]> {
 
 /**
  * Récupère tous les hébergements
- * Triés par recommandation puis ordre d'affichage
+ * Triés par date de création
  */
 export async function getHebergements(): Promise<Hebergement[]> {
   const { data, error } = await supabase
     .from("hebergements")
     .select("*")
-    .eq("is_visible", true)
-    .order("is_recommended", { ascending: false })
-    .order("display_order", { ascending: true });
+    .order("created_at", { ascending: false });
 
   if (error) {
     console.error("Error fetching hebergements:", error);
@@ -234,10 +225,8 @@ export async function getHebergementsByType(
   const { data, error } = await supabase
     .from("hebergements")
     .select("*")
-    .eq("is_visible", true)
     .eq("type", type)
-    .order("is_recommended", { ascending: false })
-    .order("display_order", { ascending: true });
+    .order("created_at", { ascending: false });
 
   if (error) {
     console.error("Error fetching hebergements by type:", error);
@@ -254,9 +243,8 @@ export async function getRecommendedHebergements(): Promise<Hebergement[]> {
   const { data, error } = await supabase
     .from("hebergements")
     .select("*")
-    .eq("is_visible", true)
-    .eq("is_recommended", true)
-    .order("display_order", { ascending: true });
+    .order("created_at", { ascending: false })
+    .limit(3);
 
   if (error) {
     console.error("Error fetching recommended hebergements:", error);

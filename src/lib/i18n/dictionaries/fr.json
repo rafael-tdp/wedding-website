@@ -222,7 +222,8 @@
     "accessibilityText": "Le lieu est accessible aux personnes à mobilité réduite. Des places de parking réservées sont disponibles à proximité de l'entrée. N'hésitez pas à nous contacter pour toute question spécifique.",
     "seeProgramme": "Voir le programme",
     "seeAccommodation": "Hébergements",
-    "seeRSVP": "RSVP"
+    "seeRSVP": "RSVP",
+    "address": "Adresse"
   },
   "accommodation": {
     "title": "Hébergements",
@@ -230,6 +231,54 @@
     "recommended": "Nos Recommandations",
     "recommendedText": "Ces hébergements sont nos coups de cœur, testés et approuvés !",
     "practicalTips": "Conseils Pratiques",
+    "search": {
+      "title": "Trouvez Votre Hébergement",
+      "description": "Nous avons préparé une recherche personnalisée sur Google Travel pour vous aider à trouver l'hébergement parfait près du lieu du mariage.",
+      "button": "Rechercher sur Google Travel"
+    },
+    "guide": {
+      "title": "Comment Utiliser la Recherche :",
+      "step1": {
+        "title": "Personnaliser les Dates",
+        "description": "Cliquez sur 'Modifier les dates' et sélectionnez vos dates d'arrivée et de départ.",
+        "tip": "Le mariage est le 11 août 2026"
+      },
+      "step2": {
+        "title": "Nombre de Voyageurs",
+        "description": "Modifiez le nombre de personnes dans votre groupe. Vous pouvez ajouter plusieurs chambres si nécessaire."
+      },
+      "step3": {
+        "title": "Filtrer les Résultats",
+        "description": "Utilisez les filtres pour ajuster le prix, le type d'hébergement, les avis et les services offerts."
+      },
+      "step4": {
+        "title": "Vérifier la Distance",
+        "description": "Assurez-vous que l'hébergement est situé à 10-20 km du lieu du mariage. Consultez la carte pour vérifier le temps de trajet exact."
+      },
+      "step5": {
+        "title": "Comparer et Choisir",
+        "description": "Comparez les options, lisez les avis des clients et réservez directement sur le site de réservation."
+      }
+    },
+    "practicalTipsSection": {
+      "title": "Conseils Pratiques",
+      "distance": {
+        "title": "Distance",
+        "description": "Recherchez à 10-20 km du lieu du mariage pour un trajet facile jusqu'à votre hébergement."
+      },
+      "travel": {
+        "title": "Temps de Trajet",
+        "description": "Vérifiez le temps de trajet jusqu'au lieu du mariage pour bien planifier votre arrivée et votre départ."
+      },
+      "booking": {
+        "title": "Réservez à l'Avance",
+        "description": "Recherchez et réservez à l'avance - les dates peuvent être complètes rapidement !"
+      },
+      "reviews": {
+        "title": "Vérifier les Avis",
+        "description": "Lisez les avis des voyageurs précédents pour choisir un hébergement de qualité et fiable."
+      }
+    },
     "bookEarly": {
       "title": "Réservez tôt",
       "description": "Nous vous conseillons de réserver dès que possible, surtout pour les hébergements recommandés qui se remplissent rapidement."

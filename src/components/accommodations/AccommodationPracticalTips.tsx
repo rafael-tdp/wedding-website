@@ -4,10 +4,10 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Section from "@/components/ui/Section";
 import {
-	MdLocalOffer,
-	MdDirectionsCar,
 	MdLocationOn,
-	MdQuestionAnswer,
+	MdDirectionsCar,
+	MdAccessTime,
+	MdRateReview,
 } from "react-icons/md";
 import { Title } from "../ui";
 
@@ -18,53 +18,58 @@ interface AccommodationPracticalTipsProps {
 export default function AccommodationPracticalTips({
 	dict,
 }: AccommodationPracticalTipsProps) {
+	const { accommodation } = dict;
+	
 	const tips = [
 		{
-			icon: MdLocalOffer,
-			title: dict.accommodation.bookEarly.title,
-			description: dict.accommodation.bookEarly.description,
+			icon: MdLocationOn,
+			title: accommodation.practicalTipsSection.distance.title,
+			description: accommodation.practicalTipsSection.distance.description,
 		},
 		{
 			icon: MdDirectionsCar,
-			title: dict.accommodation.carpooling.title,
-			description: dict.accommodation.carpooling.description,
+			title: accommodation.practicalTipsSection.travel.title,
+			description: accommodation.practicalTipsSection.travel.description,
 		},
 		{
-			icon: MdLocationOn,
-			title: dict.accommodation.distance.title,
-			description: dict.accommodation.distance.description,
+			icon: MdAccessTime,
+			title: accommodation.practicalTipsSection.booking.title,
+			description: accommodation.practicalTipsSection.booking.description,
 		},
 		{
-			icon: MdQuestionAnswer,
-			title: dict.accommodation.questions.title,
-			description: dict.accommodation.questions.description,
+			icon: MdRateReview,
+			title: accommodation.practicalTipsSection.reviews.title,
+			description: accommodation.practicalTipsSection.reviews.description,
 		},
 	];
 
 	return (
 		<Section variant="soft" spacing="lg">
-			<div className="max-w-4xl mx-auto space-y-8 sm:space-y-10 px-4 sm:px-0">
+			<div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 sm:space-y-10 px-2 sm:px-4 sm:px-0">
 				<Title level="h2" align="center" withAccent>
-					{dict.accommodation.practicalTips}
+					{accommodation.practicalTipsSection.title}
 				</Title>
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 auto-rows-fr">
 					{tips.map((tip, index) => {
 						const Icon = tip.icon;
 						return (
 							<div
 								key={index}
-								className="bg-white p-4 sm:p-6 rounded-lg border border-gray-200"
+								className="bg-white p-4 sm:p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow h-full flex flex-col animate-fade-in"
+								style={{
+									animationDelay: `${index * 100}ms`,
+								}}
 							>
 								<div className="flex items-start gap-3 sm:gap-4">
-									<div className="text-2xl sm:text-3xl flex-shrink-0 text-primary">
-										<Icon />
-									</div>
-									<div className="flex-grow">
-										<h3 className="text-base sm:text-lg font-serif text-foreground mb-1 sm:mb-2">
-											{tip.title}
-										</h3>
-										<p className="text-foreground-muted text-xs sm:text-sm">
+										<div className="text-xl sm:text-2xl md:text-3xl flex-shrink-0 text-primary">
+											<Icon />
+										</div>
+										<div className="flex-grow">
+											<h3 className="text-sm sm:text-base md:text-lg font-serif text-foreground mb-0.5 sm:mb-2">
+												{tip.title}
+											</h3>
+											<p className="text-foreground-muted text-xs sm:text-xs md:text-sm leading-relaxed">
 											{tip.description}
 										</p>
 									</div>
@@ -81,7 +86,7 @@ export default function AccommodationPracticalTips({
 							size="lg"
 							className="w-full sm:w-auto"
 						>
-							{dict.accommodation.seeVenue}
+							{accommodation.seeVenue}
 						</Button>
 					</Link>
 					<Link href="/schedule" className="w-full sm:w-auto">
@@ -90,7 +95,7 @@ export default function AccommodationPracticalTips({
 							size="lg"
 							className="w-full sm:w-auto"
 						>
-							{dict.accommodation.seeProgramme}
+							{accommodation.seeProgramme}
 						</Button>
 					</Link>
 				</div>

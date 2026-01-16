@@ -222,7 +222,8 @@
 		"accessibilityText": "O local é acessível para pessoas com mobilidade reduzida. Há lugares de estacionamento reservados perto da entrada. Não hesitem em contactar-nos para qualquer dúvida específica.",
 		"seeProgramme": "Ver programa",
 		"seeAccommodation": "Alojamento",
-		"seeRSVP": "RSVP"
+		"seeRSVP": "RSVP",
+		"address": "Endereço"
 	},
 	"accommodation": {
 		"title": "Alojamento",
@@ -230,6 +231,54 @@
 		"recommended": "As Nossas Recomendações",
 		"recommendedText": "Estes alojamentos são os nossos favoritos, testados e aprovados!",
 		"practicalTips": "Dicas Práticas",
+		"search": {
+			"title": "Encontre o Seu Alojamento",
+			"description": "Preparámos uma busca personalizada no Google Travel para o ajudar a encontrar o alojamento perfeito perto do local do casamento.",
+			"button": "Procurar no Google Travel"
+		},
+		"guide": {
+			"title": "Como Usar a Busca:",
+			"step1": {
+				"title": "Personalizar Datas",
+				"description": "Clique em 'Alterar datas' e selecione as suas datas de chegada e partida.",
+				"tip": "O casamento é em 11 de agosto de 2026"
+			},
+			"step2": {
+				"title": "Número de Hóspedes",
+				"description": "Modifique o número de pessoas no seu grupo. Pode adicionar várias quartos se necessário."
+			},
+			"step3": {
+				"title": "Filtrar Resultados",
+				"description": "Use os filtros para ajustar o preço, tipo de alojamento, classificação e serviços oferecidos."
+			},
+			"step4": {
+				"title": "Verificar a Distância",
+				"description": "Certifique-se de que o alojamento está localizado entre 10-20 km do local do casamento. Consulte o mapa para verificar o tempo de deslocação exato."
+			},
+			"step5": {
+				"title": "Comparar e Escolher",
+				"description": "Compare as opções, leia as avaliações dos hóspedes e faça a sua reserva diretamente no site de reservas."
+			}
+		},
+		"practicalTipsSection": {
+			"title": "Dicas Práticas",
+			"distance": {
+				"title": "Distância",
+				"description": "Procure à 10-20 km da quinta para uma viagem fácil até ao seu alojamento."
+			},
+			"travel": {
+				"title": "Tempo de Deslocação",
+				"description": "Verifique o tempo de deslocação até ao local do casamento para planear bem a sua chegada e partida."
+			},
+			"booking": {
+				"title": "Reserve com Antecedência",
+				"description": "Procure e reserve com antecedência - as datas podem estar cheias rapidamente!"
+			},
+			"reviews": {
+				"title": "Verificar Avaliações",
+				"description": "Leia as avaliações dos viajantes anteriores para escolher um alojamento de qualidade e confiável."
+			}
+		},
 		"bookEarly": {
 			"title": "Reserve cedo",
 			"description": "Recomendamos que reserve o mais cedo possível, especialmente para os alojamentos recomendados que se enchem rapidamente."

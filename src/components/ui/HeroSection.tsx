@@ -13,7 +13,7 @@ export default function HeroSection({
 	title,
 	subtitle,
 	backgroundImage,
-	withAccent = true,
+	withAccent = false,
 	withBackgroundLetter = true,
 }: HeroSectionProps) {
 	return (

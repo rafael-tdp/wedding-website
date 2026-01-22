@@ -170,7 +170,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-8">
+    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
       {/* Message d'erreur global */}
       {result && !result.success && (
         <div 
@@ -194,7 +194,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
 
       {/* Informations personnelles */}
       <div className="space-y-6">
-        <h3 className="text-xl font-serif text-gray-900 border-b border-primary/20 pb-2">
+        <h3 className="text-xl text-gray-900 border-b border-primary/20 pb-2 font-medium">
           {texts.infoSection || "Vos informations"}
         </h3>
 
@@ -277,8 +277,8 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
       </div>
 
       {/* Confirmation de présence */}
-      <div className="space-y-6">
-        <h3 className="text-xl font-serif text-gray-900 border-b border-primary/20 pb-2">
+      <div className="space-y-6 mt-12">
+        <h3 className="text-xl text-gray-900 border-b border-primary/20 pb-2 font-medium">
           {texts.attendingSection || "Confirmation de présence"}
         </h3>
 
@@ -286,14 +286,14 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
           <p className="text-sm font-medium text-gray-900 mb-3">
             {texts.attending || "Serez-vous présent(e) ?"} <span className="text-red-500">*</span>
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 mb-8">
             <button
               type="button"
               onClick={() => setAttending(true)}
               className={`flex-1 py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md font-medium transition-all ${
                 attending === true
                   ? "bg-primary text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-primary/10"
+                  : "bg-green-300/20 text-gray-700 hover:bg-green-300/30"
               }`}
             >
               ✓ {texts.yes || "Oui, je serai là !"}
@@ -304,7 +304,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
               className={`flex-1 py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md font-medium transition-all ${
                 attending === false
                   ? "bg-gray-600 text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  : "bg-red-300/20 text-gray-700 hover:bg-red-300/30"
               }`}
             >
               ✗ {texts.no || "Non, malheureusement"}
@@ -330,8 +330,8 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
 
       {/* Détails pratiques (si présent) */}
       {attending === true && (
-        <div className="space-y-6">
-          <h3 className="text-xl font-serif text-gray-900 border-b border-primary/20 pb-2">
+        <div className="space-y-6 mt-12">
+          <h3 className="text-xl text-gray-900 border-b border-primary/20 pb-2 font-medium">
             {texts.practicalSection || "Informations pratiques"}
           </h3>
 
@@ -395,7 +395,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
       )}
 
       {/* Message */}
-      <div>
+      <div className="mt-6">
         <label
           htmlFor="message"
           className="block text-sm font-medium text-gray-900 mb-2"
@@ -456,7 +456,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
       </div>
 
       {/* Note RGPD */}
-      <p className="text-xs text-center text-gray-500 pt-4">
+      <p className="text-xs text-center text-gray-500 mt-12">
         {texts.gdprNote || "Vos données sont stockées de manière sécurisée et ne seront utilisées que pour l'organisation du mariage. Vous pouvez modifier votre réponse à tout moment en soumettant à nouveau ce formulaire."}
       </p>
     </form>

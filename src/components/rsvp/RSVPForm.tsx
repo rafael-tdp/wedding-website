@@ -360,7 +360,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
               htmlFor="allergies"
               className="block text-sm font-medium text-gray-900 mb-2"
             >
-              Vos allergies alimentaires
+              {texts.allergies || "Vos allergies alimentaires"}
             </label>
             <input
               type="text"
@@ -369,7 +369,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
               maxLength={1000}
               defaultValue={initialData?.allergies ?? ""}
               className="w-full px-4 py-2.5 border border-primary/20 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              placeholder="Arachides, fruits de mer..."
+              placeholder={texts.allergiesPlaceholder || "Arachides, fruits de mer..."}
             />
           </div>
 
@@ -379,7 +379,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
               htmlFor="special_needs"
               className="block text-sm font-medium text-gray-900 mb-2"
             >
-              Besoins spéciaux (PMR, poussette...)
+              {texts.specialNeeds || "Besoins spéciaux (PMR, poussette...)"}
             </label>
             <input
               type="text"
@@ -388,7 +388,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
               maxLength={1000}
               defaultValue={initialData?.special_needs ?? ""}
               className="w-full px-4 py-2.5 border border-primary/20 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              placeholder="Accès PMR nécessaire"
+              placeholder={texts.specialNeedsPlaceholder || "Accès PMR nécessaire"}
             />
           </div>
         </div>

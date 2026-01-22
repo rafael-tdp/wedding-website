@@ -123,7 +123,7 @@
       "optional": "(optionnel)",
       "infoSection": "Vos informations",
       "attendingSection": "Confirmation de présence",
-      "practicalSection": "Informações práticas",
+      "practicalSection": "Détails pratiques",
       "name": "Votre nom",
       "namePlaceholder": "Prénom Nom",
       "email": "Votre email",
@@ -156,6 +156,8 @@
       "agePlaceholder": "Âge en années",
       "allergies": "Allergies alimentaires",
       "allergiesPlaceholder": "Arachides, fruits de mer...",
+      "specialNeeds": "Besoins spéciaux (PMR, poussette...)",
+      "specialNeedsPlaceholder": "Accès PMR nécessaire",
       "familyYes": "Oui, sera présent(e)",
       "familyNo": "Non, ne pourra pas venir",
       "addPerson": "Ajouter une personne"

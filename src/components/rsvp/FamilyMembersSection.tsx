@@ -62,9 +62,9 @@ export function FamilyMembersSection({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 mt-12">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-serif text-gray-900 border-b border-primary/20 pb-2 flex-1">
+        <h3 className="text-xl text-gray-900 border-b border-primary/20 pb-2 flex-1 font-medium">
           {texts.familySection || "Personnes de mon groupe/famille"}
         </h3>
         <span className="text-sm text-gray-500 ml-4">

@@ -8,7 +8,7 @@ interface StoryProps {
 export default function StorySection({ dict }: StoryProps) {
   return (
     <>
-      <Section variant="default" spacing="md" className="px-3 sm:px-4 pt-8 pb-20 sm:py-16 animate-fade-in">
+      <Section variant="default" spacing="md" className="pt-8 pb-20 sm:py-16 animate-fade-in">
         <StoryTimeline dict={dict} />
       </Section>
 

@@ -79,7 +79,7 @@ function StepItem({ step, index }: { step: AccommodationGuideStep; index: number
 					</div>
 				</div>
 				<div className="flex-grow">
-					<h4 className="font-semibold text-foreground text-sm sm:text-base mb-0.5 sm:mb-1">
+					<h4 className="font-semibold text-foreground text-sm sm:text-base mb-0.5 sm:mb-1 font-sans">
 						{step.title}
 					</h4>
 					<p className="text-foreground-muted text-xs sm:text-sm">

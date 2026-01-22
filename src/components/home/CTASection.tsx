@@ -9,7 +9,7 @@ interface CTASectionProps {
 
 export default function CTASection({ dict }: CTASectionProps) {
   return (
-    <Section variant="default" spacing="none" className="py-16 sm:py-24 md:py-32 px-3 sm:px-4 animate-fade-in">
+    <Section variant="default" spacing="none" className="py-16 sm:py-24 md:py-32 animate-fade-in">
       <div className="max-w-3xl mx-auto text-center space-y-8">
         <Title level="h2" align="center" withAccent>
           {dict.home.cta.title}

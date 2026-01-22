@@ -79,7 +79,7 @@ export default function PracticalInfo({
 					<Link href={item.href} className="block group h-full">
 						<Card
 							variant="default"
-							className="h-full transition-all duration-300 group-hover:shadow-lg flex flex-col"
+							className="h-full transition-all duration-300 flex flex-col"
 						>
 							<div className="flex flex-row md:flex-col items-center justify-center gap-6 md:gap-4 h-full">
 								{/* Icon in circle */}
@@ -90,7 +90,7 @@ export default function PracticalInfo({
 								{/* Content container */}
 								<div className="flex-grow md:flex-grow-0 space-y-2 md:space-y-3 md:sm:space-y-4 flex flex-col justify-between md:items-center md:text-center">
 									{/* Title */}
-									<h3 className="text-base md:text-xl font-serif text-primary font-semibold">
+									<h3 className="text-sm md:text-lg text-primary uppercase tracking-wide font-normal">
 										{item.title}
 									</h3>
 

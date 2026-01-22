@@ -27,13 +27,11 @@ export default async function RSVPPage() {
 
 			{/* Formulaire */}
 			<Section variant="default" spacing="lg">
-				<div className="px-4 sm:px-0">
-					<RSVPForm
-						texts={dict.rsvp.form}
-						errors={dict.rsvp.errors}
-						success={dict.rsvp.success}
-					/>
-				</div>
+				<RSVPForm
+					texts={dict.rsvp.form}
+					errors={dict.rsvp.errors}
+					success={dict.rsvp.success}
+				/>
 			</Section>
 
 			{/* Informations complémentaires */}

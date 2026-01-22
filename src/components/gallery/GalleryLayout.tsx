@@ -31,7 +31,7 @@ export function GalleryLayout({
 		<UploadModalProvider onOpenUploadModal={handleUploadClick}>
 			{/* Galerie principale */}
 			<div className="w-full bg-white py-8 sm:py-12">
-				<div className="relative max-w-8xl mx-auto px-4 sm:px-8">
+			<div className="relative max-w-8xl mx-auto px-6 md:px-8">
 					{/* Bouton d'upload desktop */}
 					<div className="flex justify-start sm:justify-end mb-6 sm:mb-8">
 						<Button

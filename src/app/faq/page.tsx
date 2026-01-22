@@ -54,7 +54,7 @@ export default async function FAQPage() {
       {/* FAQ par catégorie */}
       {Object.keys(faqsByCategory).length > 0 ? (
         <Section variant="default" spacing="lg">
-          <div className="max-w-4xl mx-auto space-y-6 sm:space-y-12 px-4">
+          <div className="max-w-4xl mx-auto space-y-6 sm:space-y-12">
             {Object.entries(faqsByCategory).map(([categoryName, categoryFaqs]) => (
               <div key={categoryName}>
                 <h2 className="text-xl sm:text-2xl md:text-3xl text-foreground mb-3 sm:mb-6 pb-2 sm:pb-3 border-b border-primary/20 font-medium">
@@ -90,7 +90,7 @@ export default async function FAQPage() {
 
       {/* Contact */}
       <Section variant="soft" spacing="lg">
-        <div className="mx-auto text-center space-y-4 sm:space-y-6 px-4">
+        <div className="mx-auto text-center space-y-4 sm:space-y-6">
           <Title level="h2" align="center" withAccent>
             {dict.faq.contact.title}
           </Title>

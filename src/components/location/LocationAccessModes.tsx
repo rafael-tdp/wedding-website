@@ -43,7 +43,7 @@ export default function LieuAccessModes({ dict }: LieuAccessModesProps) {
 		<Section variant="soft" spacing="lg">
 			<div 
 				ref={containerRef}
-				className="max-w-5xl mx-auto px-4 sm:px-6"
+				className="max-w-5xl mx-auto"
 			>
 				<div className={`text-center mb-12 transition-all duration-700 ${
 					isVisible

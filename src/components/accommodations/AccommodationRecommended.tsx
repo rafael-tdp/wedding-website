@@ -46,7 +46,7 @@ export default function AccommodationRecommended({
 
 	return (
 		<Section variant="default" spacing="lg">
-			<div ref={containerRef} className="max-w-4xl mx-auto px-4 sm:px-0">
+			<div ref={containerRef} className="max-w-4xl mx-auto">
 				<div className="text-center mb-8 sm:mb-10">
 					<Title level="h3" align="center">
 						{dict.accommodation.recommended}

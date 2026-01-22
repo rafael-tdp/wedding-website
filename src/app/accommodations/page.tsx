@@ -53,7 +53,7 @@ export default async function AccommodationsPage() {
 
 			{/* Section principale - Recherche Google Travel */}
 			<Section variant="default" spacing="lg">
-				<div className="max-w-4xl mx-auto px-2 sm:px-4">
+			<div className="max-w-4xl mx-auto">
 					<GoogleTravelSearch
 						title={accommodation.search.title}
 						description={accommodation.search.description}

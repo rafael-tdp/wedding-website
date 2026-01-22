@@ -194,7 +194,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
 
       {/* Informations personnelles */}
       <div className="space-y-6">
-        <h3 className="text-xl text-gray-900 border-b border-primary/20 pb-2 font-medium">
+        <h3 className="text-lg sm:text-xl text-gray-900 border-b border-primary/20 pb-2 font-medium">
           {texts.infoSection || "Vos informations"}
         </h3>
 
@@ -278,7 +278,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
 
       {/* Confirmation de présence */}
       <div className="space-y-6 mt-12">
-        <h3 className="text-xl text-gray-900 border-b border-primary/20 pb-2 font-medium">
+        <h3 className="text-lg sm:text-xl text-gray-900 border-b border-primary/20 pb-2 font-medium">
           {texts.attendingSection || "Confirmation de présence"}
         </h3>
 
@@ -331,7 +331,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
       {/* Détails pratiques (si présent) */}
       {attending === true && (
         <div className="space-y-6 mt-12">
-          <h3 className="text-xl text-gray-900 border-b border-primary/20 pb-2 font-medium">
+          <h3 className="text-lg sm:text-xl text-gray-900 border-b border-primary/20 pb-2 font-medium">
             {texts.practicalSection || "Informations pratiques"}
           </h3>
 
@@ -417,7 +417,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
       </div>
 
       {/* Bouton de soumission */}
-      <div className="flex justify-center pt-4">
+      <div className="flex justify-center pt-8 sm:pt-4">
         <Button
           type="submit"
           variant="primary"

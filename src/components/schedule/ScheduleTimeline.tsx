@@ -13,7 +13,7 @@ export default function ScheduleTimeline({
 }: ScheduleTimelineProps) {
 	return (
 		<Section variant="default" spacing="lg">
-			<div className="max-w-6xl mx-auto px-4">
+			<div className="max-w-6xl mx-auto">
 				<div className="relative">
 					{items.map((item: Programme, index: number) => (
 						<ScheduleItem

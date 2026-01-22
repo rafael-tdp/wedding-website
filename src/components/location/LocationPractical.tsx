@@ -68,7 +68,7 @@ export default function LocationPractical({
     <Section variant="soft" spacing="lg">
       <div
         ref={containerRef}
-        className={`max-w-5xl mx-auto px-4 sm:px-6 transition-all duration-700 ${
+        className={`max-w-5xl mx-auto transition-all duration-700 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >

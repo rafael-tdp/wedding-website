@@ -29,7 +29,7 @@ export default function LieuGPS({ dict, venue, isMobile, isIOS }: LieuGPSProps) 
 
   return (
     <Section variant="soft" spacing="lg">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="max-w-5xl mx-auto">
         <div className="text-center mb-8 sm:mb-12">
           <Title level="h3" align="center" className="mb-2">
             {venue.name}

@@ -39,7 +39,7 @@ export default function AccommodationsByType({
 
 	return (
 		<Section variant="default" spacing="lg">
-			<div className="max-w-4xl mx-auto px-4 sm:px-0 space-y-12 sm:space-y-16">
+				<div className="max-w-4xl mx-auto space-y-12 sm:space-y-16">
 				{Object.entries(hebergementsByType).map(([type, items]) => (
 					<AccommodationTypeGroup
 						key={type}

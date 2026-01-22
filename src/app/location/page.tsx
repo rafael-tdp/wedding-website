@@ -46,7 +46,7 @@ export default function LocationPage() {
 
 			{/* Lieu et Adresse */}
 			<Section variant="default" spacing="none" className="pt-16 sm:pt-20">
-				<div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+				<div className="max-w-5xl mx-auto text-center">
 					<Title level="h3" align="center" className="mb-3">
 						{WEDDING_VENUE.name}
 					</Title>

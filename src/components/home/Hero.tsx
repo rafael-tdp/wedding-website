@@ -18,7 +18,7 @@ export default function Hero({ dict }: HeroProps) {
 					backgroundSize: "cover",
 				}}
 			>
-				<div className="text-center w-full space-y-6 sm:space-y-8 text-white px-3 sm:px-4 pb-24 md:pb-32 max-w-3xl animate-slide-up">
+				<div className="text-center w-full space-y-6 sm:space-y-8 text-white pb-24 md:pb-32 max-w-3xl animate-slide-up">
 					{/* Deskstop title */}
 					<h1
 						className="hidden sm:block text-6xl sm:text-7xl md:text-8xl font-serif italic font-extralight leading-none"

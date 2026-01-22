@@ -21,7 +21,7 @@ export default function SchedulePractical({
 }: SchedulePracticalProps) {
 	return (
 		<Section variant="soft" spacing="md">
-			<div className="max-w-2xl mx-auto text-center space-y-4 px-3 sm:px-4">
+				<div className="max-w-2xl mx-auto text-center space-y-4">
 				<Title level="h2" align="center" withAccent>
 					{title}
 				</Title>

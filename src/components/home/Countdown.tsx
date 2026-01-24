@@ -59,7 +59,7 @@ export default function Countdown() {
 
   function CountdownItem({ value, label }: { value: number; label: string }) {
     return (
-      <div className="text-center">
+      <div className="text-center flex-1 sm:flex-none">
         <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-secondary">
           {String(value).padStart(2, "0")}
         </div>

@@ -53,7 +53,7 @@ export default function Hero({ dict }: HeroProps) {
 						<p className="text-sm md:text-base font-serif italic">
 							{dict.home.hero.subtitle}
 						</p>
-						<p className="text-sm text-gray-300">
+						<p className="text-sm md:text-base text-gray-300">
 							{dict.home.hero.date}
 						</p>
 					</div>

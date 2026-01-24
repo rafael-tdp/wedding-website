@@ -93,32 +93,38 @@ export default function RSVPSection({
 				/>
 			</div>
 
-            {/* Statistiques pour mobile */}
-            <div className="md:hidden grid grid-cols-2 gap-2 mb-6">
-                <div className="text-sm">
-                    <span className="text-gray-600">Total: </span>
-                    <span className="font-bold text-blue-600">{stats.total}</span>
-                </div>
-                <div className="text-sm">
-                    <span className="text-gray-600">Présents: </span>
-                    <span className="font-bold text-green-600">{stats.attending}</span>
-                </div>
-                <div className="text-sm">
-                    <span className="text-gray-600">Absents: </span>
-                    <span className="font-bold text-red-600">{stats.notAttending}</span>
-                </div>
-                <div className="text-sm">
-                    <span className="text-gray-600">Avec groupe: </span>
-                    <span className="font-bold text-blue-600">{stats.withFamilyMembers}</span>
-                </div>
-                <div className="text-sm">
-                    <span className="text-gray-600">Total invités: </span>
-                    <span className="font-bold text-green-600">{stats.totalGuests}</span>
+            {/* Statistiques pour mobile - format compact moderne en une ligne */}
+            <div className="md:hidden mb-6 px-0 py-2 bg-gradient-to-r from-blue-50 via-purple-50 to-green-50 rounded-lg border border-gray-200">
+                <div className="flex items-center justify-between">
+                    <div className="text-center flex-1">
+                        <div className="text-xl font-bold text-blue-400">{stats.total}</div>
+                        <div className="text-xs text-gray-500">Rép.</div>
+                    </div>
+                    <div className="w-px h-8 bg-gray-300"></div>
+                    <div className="text-center flex-1">
+                        <div className="text-xl font-bold text-green-400">{stats.attending}</div>
+                        <div className="text-xs text-gray-500">Oui</div>
+                    </div>
+                    <div className="w-px h-8 bg-gray-300"></div>
+                    <div className="text-center flex-1">
+                        <div className="text-xl font-bold text-red-400">{stats.notAttending}</div>
+                        <div className="text-xs text-gray-500">Non</div>
+                    </div>
+                    <div className="w-px h-8 bg-gray-300"></div>
+                    <div className="text-center flex-1">
+                        <div className="text-xl font-bold text-purple-400">{stats.withFamilyMembers}</div>
+                        <div className="text-xs text-gray-500">Accomp.</div>
+                    </div>
+                    <div className="w-px h-8 bg-gray-300"></div>
+                    <div className="text-center flex-1">
+                        <div className="text-xl font-bold text-green-400">{stats.totalGuests}</div>
+                        <div className="text-xs text-gray-500">Présents</div>
+                    </div>
                 </div>
             </div>
 
 			{/* Filtres */}
-			<div className="mb-8 flex gap-3 flex-wrap">
+			<div className="mb-8 grid grid-cols-3 gap-2 flex-wrap text-xs">
 				<button
 					onClick={() => onFilterChange("all")}
 					className={`px-4 py-2 rounded-lg transition-all ${
@@ -133,7 +139,7 @@ export default function RSVPSection({
 					onClick={() => onFilterChange("attending")}
 					className={`px-4 py-2 rounded-lg transition-all ${
 						filter === "attending"
-							? "bg-green-500 text-white"
+							? "bg-green-700/70 text-white"
 							: "bg-gray-200 text-gray-700 hover:bg-gray-300"
 					}`}
 				>
@@ -143,7 +149,7 @@ export default function RSVPSection({
 					onClick={() => onFilterChange("not-attending")}
 					className={`px-4 py-2 rounded-lg transition-all ${
 						filter === "not-attending"
-							? "bg-red-500 text-white"
+							? "bg-red-700/70 text-white"
 							: "bg-gray-200 text-gray-700 hover:bg-gray-300"
 					}`}
 				>

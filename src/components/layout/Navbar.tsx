@@ -15,6 +15,7 @@ import { useI18n } from "@/lib/i18n/context";
  * - Menu mobile (hamburger)
  * - Indicateur de page active
  * - Effet transparent au départ, opaque au scroll
+ * - Bouton Admin si l'utilisateur est connecté
  */
 
 const DEFAULT_NAV_LINKS = [
@@ -27,7 +28,7 @@ const DEFAULT_NAV_LINKS = [
 	{ href: "/faq", label: "FAQ" },
 ];
 
-function NavbarContent() {
+function NavbarContent({ isAdmin = false }: { isAdmin?: boolean }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [isClosing, setIsClosing] = useState(false);
@@ -144,6 +145,35 @@ function NavbarContent() {
 							}`}
 						/>
 
+						{/* Admin Button */}
+						{isAdmin && (
+							<>
+							<Link
+								href={"/admin"}
+								className={`
+                  px-4 py-2 rounded-full text-sm font-medium transition-all
+                  ${
+						isActive("/admin")
+							? "bg-primary/80 text-white"
+							: shouldBeTransparent
+							? "text-white hover:bg-white/20 hover:text-white"
+							: "text-gray-700 hover:bg-gray-100 hover:text-primary"
+					}
+                `}
+							>
+								Admin
+							</Link>
+							{/* Séparateur */}
+						<div
+							className={`w-px h-6 mx-2 ${
+								shouldBeTransparent
+									? "bg-white/30"
+									: "bg-gray-300"
+							}`}
+						/>
+							</>
+						)}
+
 						{/* Language Switcher */}
 						<LanguageSwitcher isScrolled={!shouldBeTransparent} />
 					</div>
@@ -224,6 +254,21 @@ function NavbarContent() {
 						))}
 					</div>
 
+					{/* Admin Link Mobile */}
+					{isAdmin && (
+						<>
+							<div className="border-t border-gray-200 py-2 mt-2">
+								<Link
+									href="/admin"
+									onClick={() => setIsOpen(false)}
+									className="block px-4 py-3 text-xl font-normal transition-all text-primary tracking-widest hover:bg-primary/10 rounded"
+								>
+									Admin
+								</Link>
+							</div>
+						</>
+					)}
+
 					{/* Language Switcher Mobile */}
 					<div className="border-t border-gray-200 pt-2 mt-2">
 						<LanguageSwitcher mobile={true} />
@@ -237,9 +282,9 @@ function NavbarContent() {
 /**
  * Export Navbar avec gestion d'erreur du contexte
  */
-export function Navbar() {
+export function Navbar({ isAdmin = false }: { isAdmin?: boolean }) {
 	try {
-		return <NavbarContent />;
+		return <NavbarContent isAdmin={isAdmin} />;
 	} catch (e) {
 		// Si le contexte I18n n'est pas disponible, afficher un navbar simple
 		return (

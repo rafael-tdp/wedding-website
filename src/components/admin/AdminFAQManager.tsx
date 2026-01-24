@@ -5,6 +5,7 @@ import { getFAQs, createFAQ, updateFAQ, deleteFAQ } from "@/app/actions/admin-fa
 import Button from "@/components/ui/Button";
 import { AdminFormModal } from "./AdminFormModal";
 import { Title } from "../ui";
+import FAQCard from "./FAQCard";
 
 interface FAQItem {
   id: string;
@@ -282,40 +283,13 @@ export default function AdminFAQManager({ showCreateForm, setShowCreateForm, sho
       ) : (
         <div className="space-y-4">
           {faqs.map((faq) => (
-            /* Affichage normal de l'élément */
-            <div key={faq.id} className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
-                <div className="flex flex-col gap-2">
-                  <div className="flex-1 w-full">
-                    <Title level="h6" align="left" className="m-0">
-                      {faq.question_fr}
-                    </Title>
-                    <p className="text-xs sm:text-sm text-gray-600 mt-1">{faq.answer_fr}</p>
-                  </div>
-                  <div className="flex justify-between items-center gap-2">
-                    {faq.category_fr && (
-                      <p className="text-xs text-gray-400 font-medium">{faq.category_fr}</p>
-                    )}
-                    <div className="flex gap-2 flex-shrink-0">
-                      <button
-                        onClick={() => handleEdit(faq)}
-                        title="Modifier"
-                        className="w-8 h-8 flex items-center justify-center bg-primary/10 text-primary hover:bg-primary/20 rounded transition-all text-sm"
-                      >
-                        ✎
-                      </button>
-                      <button
-                        onClick={() => handleDelete(faq.id)}
-                        title="Supprimer"
-                        className="w-8 h-8 flex items-center justify-center bg-accent/10 text-accent hover:bg-accent/20 rounded transition-all text-sm"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )
-          )}
+            <FAQCard
+              key={faq.id}
+              faq={faq}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          ))}
         </div>
       )}
     </>

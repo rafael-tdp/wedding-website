@@ -57,7 +57,6 @@ export default async function SchedulePage() {
         title={dict.programme.title}
         subtitle={dict.programme.subtitle}
         backgroundImage="/images/hero-bg-2.jpg"
-        withAccent
         withBackgroundLetter
       />
 

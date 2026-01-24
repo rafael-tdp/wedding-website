@@ -49,7 +49,7 @@ export default function PhotoCard({
 			</div>
 
 			{/* Info */}
-			<div className="p-2 sm:p-3">
+			<div className="p-2.5 sm:p-3 md:p-4">
 				<p className="text-xs sm:text-sm font-semibold text-foreground truncate">
 					{photo.uploaded_by ||
 						"Utilisateur"}
@@ -64,24 +64,24 @@ export default function PhotoCard({
 				</p>
 
 				{/* Actions */}
-				<div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 mt-2 sm:mt-3 text-xs">
+				<div className="flex flex-col gap-1.5 sm:gap-0 sm:flex-row sm:items-center mt-2.5 sm:mt-3 md:mt-4 text-xs">
 					<button
 						onClick={() => onToggleVisibility(photo.id)}
 						disabled={isHiding}
-						className="text-foreground-muted hover:text-gray-900 underline transition-colors disabled:opacity-50 flex items-center gap-1 w-full sm:w-auto"
+						className="text-foreground-muted hover:text-gray-900 underline transition-colors disabled:opacity-50 flex items-center gap-1.5 w-full sm:w-auto py-1.5 sm:py-0"
 						title={photo.is_visible ? "Désactiver la photo" : "Activer la photo"}
 					>
 						{isHiding
 							? "..."
 							: photo.is_visible ? (
 								<>
-									<IoEyeOutline className="w-3 h-3 sm:w-4 sm:h-4" />
-									Désactiver
+								<IoEyeOutline className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+								<span>Désactiver</span>
 								</>
 							) : (
 								<>
-									<IoEyeOffOutline className="w-3 h-3 sm:w-4 sm:h-4" />
-									Activer
+								<IoEyeOffOutline className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+								<span>Activer</span>
 								</>
 							)}
 					</button>
@@ -89,7 +89,7 @@ export default function PhotoCard({
 					<button
 						onClick={() => onDelete(photo.id)}
 						disabled={isDeleting}
-						className="text-foreground-muted hover:text-red-600 underline transition-colors disabled:opacity-50 w-full sm:w-auto text-left sm:text-inherit"
+						className="text-foreground-muted hover:text-red-600 underline transition-colors disabled:opacity-50 w-full sm:w-auto text-left sm:text-inherit py-1.5 sm:py-0"
 						title="Supprimer la photo"
 					>
 						{isDeleting

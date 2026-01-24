@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Parisienne, Playfair_Display } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -68,6 +69,10 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
   const dict = await getDictionary(locale);
+  
+  // Vérifier si l'utilisateur est connecté en tant qu'admin
+  const cookieStore = await cookies();
+  const isAdmin = cookieStore.has("admin_auth_token");
 
   return (
     <html lang={locale}>
@@ -77,7 +82,7 @@ export default async function RootLayout({
         <PWAInit />
         <I18nProvider locale={locale} dict={dict}>
           <ConfigWarning />
-          <Navbar />
+          <Navbar isAdmin={isAdmin} />
           <div className="flex-1">
             {children}
           </div>

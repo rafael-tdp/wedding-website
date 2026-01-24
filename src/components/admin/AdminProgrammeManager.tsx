@@ -5,6 +5,21 @@ import { getProgramme, createProgrammeEvent, updateProgrammeEvent, deleteProgram
 import Button from "@/components/ui/Button";
 import { AdminFormModal } from "./AdminFormModal";
 import { Title } from "../ui";
+import ProgrammeCard from "./ProgrammeCard";
+import { GiBigDiamondRing, GiCakeSlice } from "react-icons/gi";
+import { MdPhotoCamera } from "react-icons/md";
+import { GiWineGlass } from "react-icons/gi";
+import { PiForkKnife } from "react-icons/pi";
+import { CiMusicNote1 } from "react-icons/ci";
+
+const ICON_OPTIONS = [
+  { value: "ceremony", label: "Cérémonie", icon: GiBigDiamondRing },
+  { value: "cocktail", label: "Cocktail", icon: GiWineGlass },
+  { value: "dinner", label: "Dîner", icon: PiForkKnife },
+  { value: "party", label: "Danse", icon: CiMusicNote1 },
+  { value: "photo", label: "Photos", icon: MdPhotoCamera },
+  { value: "cake", label: "Gâteau", icon: GiCakeSlice },
+];
 
 interface ProgrammeEvent {
   id: string;
@@ -217,6 +232,27 @@ export default function AdminProgrammeManager({ showCreateForm, setShowCreateFor
             />
           </div>
         </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-3">Icône</label>
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+            {ICON_OPTIONS.map(({ value, label, icon: Icon }) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setFormData({ ...formData, icon: value })}
+                className={`p-3 rounded-lg border-2 transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 ${
+                  formData.icon === value
+                    ? "border-primary bg-primary/10"
+                    : "border-gray-200 hover:border-gray-300"
+                }`}
+              >
+                <Icon size={24} />
+                <span className="text-xs text-center">{label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
       </AdminFormModal>
 
       {/* Modal pour modifier un événement */}
@@ -318,6 +354,27 @@ export default function AdminProgrammeManager({ showCreateForm, setShowCreateFor
             />
           </div>
         </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-3">Icône</label>
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+            {ICON_OPTIONS.map(({ value, label, icon: Icon }) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setFormData({ ...formData, icon: value })}
+                className={`p-3 rounded-lg border-2 transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 ${
+                  formData.icon === value
+                    ? "border-primary bg-primary/10"
+                    : "border-gray-200 hover:border-gray-300"
+                }`}
+              >
+                <Icon size={24} />
+                <span className="text-xs text-center">{label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
       </AdminFormModal>
 
       {events.length === 0 ? (
@@ -327,46 +384,13 @@ export default function AdminProgrammeManager({ showCreateForm, setShowCreateFor
       ) : (
         <div className="space-y-4">
           {events.map((event) => (
-            /* Affichage normal de l'élément */
-            <div key={event.id} className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
-              <div className="flex flex-col gap-2">
-                  <div className="flex-1">
-                    <Title level="h6" align="left" className="m-0">
-                      {event.title_fr}
-                    </Title>
-                    <div className="flex flex-wrap items-center gap-1 sm:gap-2 mt-1 text-xs sm:text-sm text-gray-600">
-                      <span>{event.event_time}{event.duration_minutes ? ` (${event.duration_minutes}min)` : ""}</span>
-                      {event.location && (
-                        <>
-                          <span className="text-gray-300">•</span>
-                          <span>{event.location}</span>
-                        </>
-                      )}
-                    </div>
-                    {event.description_fr && (
-                      <p className="text-xs sm:text-sm text-gray-600 mt-1">{event.description_fr}</p>
-                    )}
-                  </div>
-                  <div className="flex justify-end gap-2 flex-shrink-0">
-                    <button
-                      onClick={() => handleEdit(event)}
-                      title="Modifier"
-                      className="w-8 h-8 flex items-center justify-center bg-primary/10 text-primary hover:bg-primary/20 rounded transition-all text-sm"
-                    >
-                      ✎
-                    </button>
-                    <button
-                      onClick={() => handleDelete(event.id)}
-                      title="Supprimer"
-                      className="w-8 h-8 flex items-center justify-center bg-accent/10 text-accent hover:bg-accent/20 rounded transition-all text-sm"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )
-          )}
+            <ProgrammeCard
+              key={event.id}
+              event={event}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          ))}
         </div>
       )}
     </>

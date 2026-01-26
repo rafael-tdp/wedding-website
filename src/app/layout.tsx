@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Parisienne, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Parisienne, Playfair_Display, Gilda_Display } from "next/font/google";
 import { cookies } from "next/headers";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
@@ -30,6 +30,12 @@ const playfairDisplay = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const gildaDisplay = Gilda_Display({
+  variable: "--font-gilda",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -77,7 +83,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${parisienne.variable} ${playfairDisplay.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} ${parisienne.variable} ${playfairDisplay.variable} ${gildaDisplay.variable} antialiased min-h-screen flex flex-col`}
       >
         <PWAInit />
         <I18nProvider locale={locale} dict={dict}>

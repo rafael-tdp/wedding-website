@@ -11,7 +11,7 @@ export default function CountdownSection({ dict }: CountdownSectionProps) {
       <div className="max-w-3xl mx-auto text-center pb-8 sm:pb-12 pt-12 sm:pt-16 space-y-6 sm:space-y-8">
         {/* Titre principal */}
         <div className="space-y-3 sm:space-y-4">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif italic text-foreground font-normal">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif italic text-foreground font-normal font-gilda">
             {dict.home.countdown.title.split(/<br\s*\/?>/g).map((text: string, index: number, array: string[]) => (
               <span key={index}>
                 {text}
@@ -19,7 +19,7 @@ export default function CountdownSection({ dict }: CountdownSectionProps) {
               </span>
             ))}
           </h2>
-          <p className="text-base sm:text-xl md:text-2xl text-foreground font-serif leading-relaxed font-light">
+          <p className="text-base sm:text-xl md:text-2xl text-foreground font-serif leading-relaxed font-light font-gilda">
             {dict.home.countdown.description.split(/<br\s*\/?>/g).map((part: string, index: number, array: string[]) => (
               <span key={index}>
                 {part.split(/<\/?strong>/g).map((text: string, i: number) =>

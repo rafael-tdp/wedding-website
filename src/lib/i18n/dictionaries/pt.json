@@ -54,19 +54,19 @@
 				"label": "O Nosso Encontro",
 				"title": "Foi um dia de verão",
 				"text": "Foi num dia de verão, no dia 7 de Julho de 2024, que nos conhecemos numa festa de amigos em comum. Mesmo se não falamos muito nesse dia, algo especial estava a começar.",
-				"image": "/images/story-meeting.svg"
-			},
-			"proposal": {
-				"label": "O Pedido",
-				"title": "Um momento inesquecível no lago de Como",
-				"text": "Durante uma viagem à Itália à beira do lago de Como, Rafael (quase) surpreendeu com um pedido de casamento numa bela villa à beira da água. Um momento inesquecível cheio de emoções e alegria.",
-				"image": "/images/story-proposal.svg"
+				"image": "/images/story/story-1.jpeg"
 			},
 			"firstDate": {
 				"label": "Nosso Primeiro Encontro",
-				"title": "Uma tarde inesquecível em Paris",
+				"title": "Uma tarde em Paris",
 				"text": "O nosso primeiro encontro oficial aconteceu em Paris com um passeio pelas Passagens Cobertas, seguido de um jantar. Foi o início de uma bela aventura juntos.",
-				"image": "/images/story-3.svg"
+				"image": "/images/story/story-2.jpeg"
+			},
+			"proposal": {
+				"label": "O Pedido",
+				"title": "Um momento inesquecível",
+				"text": "Durante uma viagem à Itália à beira do lago de Como, Rafael (quase) surpreendeu com um pedido de casamento numa bela villa à beira da água. Um momento inesquecível cheio de emoções e alegria.",
+				"image": "/images/story/story-3.jpeg"
 			}
 		},
 		"info": {

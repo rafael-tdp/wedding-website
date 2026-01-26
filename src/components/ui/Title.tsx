@@ -37,7 +37,7 @@ export default function Title({
 
 	const sizeStyles = {
 		h1: "text-5xl md:text-7xl lg:text-8xl",
-		h2: "text-2xl md:text-4xl lg:text-5xl",
+		h2: "text-2xl md:text-3xl lg:text-4xl",
 		h3: "text-2xl md:text-3xl lg:text-4xl",
 		h4: "text-xl md:text-2xl lg:text-3xl",
 		h5: "text-lg md:text-xl lg:text-2xl",
@@ -46,7 +46,7 @@ export default function Title({
 
 	const fontStyles = {
 		h1: "italic",
-		h2: "",
+		h2: "uppercase tracking-wide",
 		h3: "",
 		h4: "",
 		h5: "",
@@ -66,7 +66,7 @@ export default function Title({
 				style={
 					level === "h1"
 						? { fontFamily: "var(--font-parisienne)", ...style }
-						: level === "h2" || level === "h3" || level === "h4" || level === "h5" || level === "h6"
+						: level === "h2" ? { fontFamily: "var(--font-gilda)", ...style } : level === "h3" || level === "h4" || level === "h5" || level === "h6"
 						? { fontFamily: "var(--font-playfair)", ...style }
 						: style
 				}
@@ -75,26 +75,14 @@ export default function Title({
 			</Tag>
 			{withAccent && (
 				<div
-					className={`mt-0 sm:mt-2 flex items-center ${
+					className={`mt-2 sm:mt-3 h-px w-40 bg-gradient-to-r from-transparent via-accent to-transparent ${
 						align === "center"
-							? "justify-center"
+							? "mx-auto"
 							: align === "right"
-							? "justify-end"
-							: "justify-start"
+							? "ml-auto"
+							: ""
 					}`}
-				>
-					<svg 
-						width="160" 
-						height="20" 
-						viewBox="0 0 160 20" 
-						fill="none" 
-						className="text-accent"
-					>
-						<path d="M0 10 L70 10" stroke="currentColor" strokeWidth="0.8" />
-						<rect x="77" y="7" width="6" height="6" transform="rotate(45 80 10)" fill="currentColor" opacity="1" />
-						<path d="M90 10 L160 10" stroke="currentColor" strokeWidth="0.8" />
-					</svg>
-				</div>
+				></div>
 			)}
 		</div>
 	);

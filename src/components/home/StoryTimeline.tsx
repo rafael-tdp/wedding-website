@@ -23,12 +23,19 @@ function StoryTimelineLabel({ label }: { label: string }) {
 
 function StoryTimelineImage({ src, alt }: { src: string; alt: string }) {
     return (
-        <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-video">
-            <img
-                src={src}
-                alt={alt}
-                className="w-full h-full object-cover"
-            />
+        <div className="relative group cursor-pointer aspect-video">
+            {/* Fond grisé statique derrière */}
+            <div className="absolute inset-0 bg-secondary-light/70 z-0 aspect-video sm:scale-90 group-hover:-rotate-2 transition-transform duration-500" />
+            
+            {/* Conteneur image avec animation au survol */}
+            <div className="absolute inset-0 aspect-video overflow-hidden bg-gray-200 relative z-10 transition-transform duration-500 sm:scale-90 group-hover:rotate-6 group-hover:saturate-125">
+                <img
+                    src={src}
+                    alt={alt}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                />
+                <div className="absolute inset-0 bg-secondary/50 mix-blend-multiply pointer-events-none transition-opacity duration-500 group-hover:opacity-75" />
+            </div>
         </div>
     );
 }

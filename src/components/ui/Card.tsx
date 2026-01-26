@@ -16,7 +16,7 @@ export default function Card({
   };
   
   return (
-    <div className={`rounded-lg p-6 md:p-8 transition-all ${variantStyles[variant]} ${className}`}>
+    <div className={`rounded-lg p-2 md:p-4 transition-all ${variantStyles[variant]} ${className}`}>
       {children}
     </div>
   );

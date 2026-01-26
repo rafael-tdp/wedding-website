@@ -39,6 +39,9 @@ const config: Config = {
       fontFamily: {
         serif: ["var(--font-serif)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        parisienne: "var(--font-parisienne)",
+        playfair: "var(--font-playfair)",
+        gilda: "var(--font-gilda)",
       },
       spacing: {
         section: "var(--section-spacing)",
@@ -51,6 +54,8 @@ const config: Config = {
         "slide-in-left": "slideInLeft 0.8s ease-out forwards",
         "slide-in-right": "slideInRight 0.8s ease-out forwards",
         "page-enter": "pageEnter 0.5s ease-out forwards",
+        "slide-down-top": "slideDownTop 0.5s ease-out forwards",
+        "slide-up-out": "slideUpOut 0.5s ease-out forwards",
       },
       keyframes: {
         fadeIn: {
@@ -80,6 +85,14 @@ const config: Config = {
         pageEnter: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
+        },
+        slideDownTop: {
+          "0%": { transform: "translateY(-100%)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        slideUpOut: {
+          "0%": { transform: "translateY(0)", opacity: "1" },
+          "100%": { transform: "translateY(100%)", opacity: "0" },
         },
       },
     },

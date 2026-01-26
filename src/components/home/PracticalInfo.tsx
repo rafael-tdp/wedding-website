@@ -63,7 +63,7 @@ export default function PracticalInfo({
 	}, []);
 
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 auto-rows-fr">
+		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 auto-rows-fr">
 			{items.map((item, index) => (
 				<div
 					key={index}
@@ -79,18 +79,18 @@ export default function PracticalInfo({
 					<Link href={item.href} className="block group h-full">
 						<Card
 							variant="default"
-							className="h-full transition-all duration-300 flex flex-col"
+							className="h-full transition-all duration-300"
 						>
-							<div className="flex flex-row md:flex-col items-center justify-center gap-6 md:gap-4 h-full">
+							<div className="flex flex-col items-center justify-center text-center gap-3 sm:gap-4 md:gap-5 h-full border-[1px] border-primary/20 p-3 sm:p-4 md:p-6 rounded-sm group-hover:border-primary/50 transition-all duration-300">
 								{/* Icon in circle */}
-								<div className="p-3 md:p-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-primary group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300 flex-shrink-0">
+								<div className="p-3 sm:p-3 md:p-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-primary group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300 flex-shrink-0">
 									{item.icon}
 								</div>
 
 								{/* Content container */}
-								<div className="flex-grow md:flex-grow-0 space-y-2 md:space-y-3 md:sm:space-y-4 flex flex-col justify-between md:items-center md:text-center">
+								<div className="flex-grow md:flex-grow-0 space-y-1 sm:space-y-2 md:space-y-3 flex flex-col justify-between md:items-center md:text-center">
 									{/* Title */}
-									<h3 className="text-sm md:text-lg text-primary uppercase tracking-wide font-normal">
+									<h3 className="text-sm md:text-lg text-primary uppercase tracking-wide font-medium" style={{ fontFamily: "var(--font-gilda)" }}>
 										{item.title}
 									</h3>
 
@@ -100,7 +100,7 @@ export default function PracticalInfo({
 									</p>
 
 									{/* Link */}
-									<div className="text-primary font-medium text-xs md:text-sm flex gap-2 group-hover:gap-3 transition-all">
+									<div className="text-primary font-medium text-xs sm:text-xs md:text-sm flex gap-1 sm:gap-2 group-hover:gap-3 transition-all items-center justify-center mt-1 sm:mt-2 md:mt-3">
 										<span>{learnMoreText}</span>
 										<span className="group-hover:translate-x-1 transition-transform">
 											→

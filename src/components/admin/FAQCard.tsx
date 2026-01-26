@@ -6,11 +6,15 @@ import { GoChevronDown } from "react-icons/go";
 
 interface FAQItem {
 	id: string;
+	question: string;
+	answer: string;
+	category: string;
 	question_fr: string;
 	answer_fr: string;
 	category_fr: string;
-	question_pt?: string;
-	answer_pt?: string;
+	question_pt: string;
+	answer_pt: string;
+	category_pt: string;
 }
 
 interface FAQCardProps {

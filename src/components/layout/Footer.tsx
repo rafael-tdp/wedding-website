@@ -38,9 +38,10 @@ export default function Footer() {
     <footer className="bg-accent-dark text-gray-100 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Colonne 1 : À propos */}
+
+          {/* Column 1 : About */}
           <div>
-            <h3 className="text-yellow-50 font-serif text-2xl mb-4 flex items-center gap-2" style={{ fontFamily: "var(--font-parisienne)" }}>
+            <h3 className="text-yellow-50 font-serif text-2xl mb-4 flex items-center gap-2 font-parisienne">
               Ana & Rafael
             </h3>
             <p className="text-sm text-gray-200 leading-relaxed">
@@ -48,10 +49,10 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Colonne 2 : Navigation */}
-          <div>
-            <h4 className="text-yellow-50 font-medium mb-4">{footerNavigation}</h4>
-            <ul className="space-y-2">
+          {/* Column 2 : Navigation */}
+          <div className="border-t border-accent-light/30 pt-8 sm:pt-0 sm:border-t-0">
+            <h4 className="text-yellow-50 font-medium mb-4 font-gilda">{footerNavigation}</h4>
+            <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2">
               {footerLinks.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -73,9 +74,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Colonne 3 : Contact */}
-          <div>
-            <h4 className="text-yellow-50 font-medium mb-4">{footerContactTitle}</h4>
+          {/* Column 3 : Contact */}
+          <div className="border-t border-accent-light/30 pt-8 sm:pt-0 sm:border-t-0">
+            <h4 className="text-yellow-50 font-medium mb-4 font-gilda">{footerContactTitle}</h4>
             <ul className="space-y-2 text-sm text-gray-200">
               <li className="flex items-center gap-2">
                 <svg
@@ -134,7 +135,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Séparateur */}
+        {/* Separator */}
         <div className="border-t border-accent-light/30 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-200">

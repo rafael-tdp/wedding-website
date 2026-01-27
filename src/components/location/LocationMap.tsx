@@ -10,12 +10,12 @@ interface LocationMapProps {
 export default function LocationMap({ address, lat, lng }: LocationMapProps) {
   return (
     <Section variant="default" spacing="md">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-7xl sm:px-6 mx-auto">
         <Map
           address={address}
           lat={lat}
           lng={lng}
-          zoom={15}
+          zoom={10}
         />
       </div>
     </Section>

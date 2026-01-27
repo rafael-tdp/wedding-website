@@ -78,7 +78,7 @@
 			},
 			"venue": {
 				"title": "Lieu & Accès",
-				"description": "Comment nous rejoindre au Quinta das Tulipas"
+				"description": "Comment nous rejoindre à Quinta das Tulipas"
 			},
 			"accommodation": {
 				"title": "Hébergements",
@@ -203,7 +203,7 @@
 	"venue": {
 		"title": "Lieu & Accès",
 		"subtitle": "Toutes les informations pour nous rejoindre le jour J",
-		"directions": "Accès au lieu",
+		"directions": "Accès",
 		"directionsText": "Cliquez sur le bouton ci-dessous pour ouvrir votre application de navigation préférée et obtenir les directions.",
 		"copyAddress": "Cliquez pour copier",
 		"copiedAddress": "✓ Copié!",
@@ -218,7 +218,7 @@
 		"longitude": "Longitude",
 		"openMaps": "Ouvrir dans Google Maps",
 		"practical": "Informations Pratiques",
-		"contact": "Contact du Lieu",
+		"contact": "Contact",
 		"website": "Site web du lieu",
 		"accessibility": "Accessibilité",
 		"accessibilityText": "Le lieu est accessible aux personnes à mobilité réduite. Des places de parking réservées sont disponibles à proximité de l'entrée. N'hésitez pas à nous contacter pour toute question spécifique.",
@@ -229,7 +229,7 @@
 	},
 	"accommodation": {
 		"title": "Hébergements",
-		"subtitle": "Nous avons cherché pour vous des hébergements à proximité du lieu du mariage",
+		"subtitle": "Trouvez des hébergements près du lieu du mariage",
 		"recommended": "Nos Recommandations",
 		"recommendedText": "Ces hébergements sont nos coups de cœur, testés et approuvés !",
 		"practicalTips": "Conseils Pratiques",
@@ -239,7 +239,7 @@
 			"button": "Rechercher sur Google Travel"
 		},
 		"guide": {
-			"title": "Comment Utiliser la Recherche :",
+			"title": "Comment Utiliser la Recherche",
 			"step1": {
 				"title": "Personnaliser les Dates",
 				"description": "Cliquez sur 'Modifier les dates' et sélectionnez vos dates d'arrivée et de départ.",
@@ -266,7 +266,7 @@
 			"title": "Conseils Pratiques",
 			"distance": {
 				"title": "Distance",
-				"description": "Recherchez à 10-20 km du lieu du mariage pour un trajet facile jusqu'à votre hébergement."
+				"description": "Recherchez à moins de 20 km du lieu du mariage pour un trajet facile jusqu'à votre hébergement."
 			},
 			"travel": {
 				"title": "Temps de Trajet",

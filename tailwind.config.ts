@@ -56,6 +56,7 @@ const config: Config = {
         "page-enter": "pageEnter 0.5s ease-out forwards",
         "slide-down-top": "slideDownTop 0.5s ease-out forwards",
         "slide-up-out": "slideUpOut 0.5s ease-out forwards",
+        "section-expand": "sectionExpand 0.5s ease-out forwards",
       },
       keyframes: {
         fadeIn: {
@@ -93,6 +94,10 @@ const config: Config = {
         slideUpOut: {
           "0%": { transform: "translateY(0)", opacity: "1" },
           "100%": { transform: "translateY(100%)", opacity: "0" },
+        },
+        sectionExpand: {
+          "0%": { opacity: "0.7" },
+          "100%": { opacity: "1" },
         },
       },
     },

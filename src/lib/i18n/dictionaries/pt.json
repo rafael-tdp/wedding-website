@@ -203,7 +203,7 @@
 	"venue": {
 		"title": "Local & Acesso",
 		"subtitle": "Todas as informações para nos encontrarem no dia",
-		"directions": "Acesso ao local",
+		"directions": "Acesso",
 		"directionsText": "Clique no botão abaixo para abrir seu aplicativo de navegação preferido e obter as direções.",
 		"copyAddress": "Clique para copiar",
 		"copiedAddress": "✓ Copiado!",
@@ -218,7 +218,7 @@
 		"longitude": "Longitude",
 		"openMaps": "Abrir no Google Maps",
 		"practical": "Informações Práticas",
-		"contact": "Contacto do Local",
+		"contact": "Contacto",
 		"website": "Website da quinta",
 		"accessibility": "Acessibilidade",
 		"accessibilityText": "O local é acessível para pessoas com mobilidade reduzida. Há lugares de estacionamento reservados perto da entrada. Não hesitem em contactar-nos para qualquer dúvida específica.",
@@ -229,7 +229,7 @@
 	},
 	"accommodation": {
 		"title": "Alojamento",
-		"subtitle": "Procuramos para si alojamentos de qualidade perto do local do casamento",
+		"subtitle": "Encontre alojamentos perto do local do casamento",
 		"recommended": "As Nossas Recomendações",
 		"recommendedText": "Estes alojamentos são os nossos favoritos, testados e aprovados!",
 		"practicalTips": "Dicas Práticas",
@@ -239,7 +239,7 @@
 			"button": "Procurar no Google Travel"
 		},
 		"guide": {
-			"title": "Como Usar a Busca:",
+			"title": "Como Usar a Busca",
 			"step1": {
 				"title": "Personalizar Datas",
 				"description": "Clique em 'Alterar datas' e selecione as suas datas de chegada e partida.",
@@ -266,7 +266,7 @@
 			"title": "Dicas Práticas",
 			"distance": {
 				"title": "Distância",
-				"description": "Procure à 10-20 km da quinta para uma viagem fácil até ao seu alojamento."
+				"description": "Procure à menos de 20 km da quinta para uma viagem fácil até ao seu alojamento."
 			},
 			"travel": {
 				"title": "Tempo de Deslocação",

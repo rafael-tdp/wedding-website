@@ -59,7 +59,7 @@ export default function InfoCards({
 	};
 
 	return (
-			<div ref={containerRef} className="max-w-3xl mx-auto space-y-6">
+			<div ref={containerRef} className="max-w-3xl mx-auto space-y-12">
 			<Title level="h2" align="center" withAccent={withAccent}>
 				{title}
 			</Title>
@@ -70,7 +70,7 @@ export default function InfoCards({
 					return (
 						<div
 							key={index}
-							className={`bg-background p-5 sm:p-6 rounded-lg transition-all duration-1000 relative h-full ${
+							className={`bg-background p-6 sm:p-6 rounded-lg transition-all duration-1000 relative h-full ${
 								isVisible
 									? "opacity-100 translate-y-0"
 									: "opacity-0 translate-y-10"
@@ -81,13 +81,13 @@ export default function InfoCards({
 									: "0ms",
 							}}
 						>
-							<h3 className="text-base sm:text-lg text-foreground mb-2 sm:mb-3 flex items-center gap-2 text-primary font-semibold font-sans">
+							<h3 className="text-base sm:text-lg text-foreground mb-12 sm:mb-14 flex items-center gap-2 text-primary font-semibold font-sans">
 								<span>{card.title}</span>
 							</h3>
 							<p className="text-foreground-muted text-xs sm:text-sm">
 								{card.description}
 							</p>
-							<div className="absolute top-4 sm:top-6 right-4 sm:right-6 text-7xl sm:text-8xl text-primary/15 sm:text-5xl">
+							<div className="absolute top-5 sm:top-6 right-5 sm:right-6 text-6xl text-primary/15 sm:text-7xl">
 								<Icon />
 							</div>
 						</div>

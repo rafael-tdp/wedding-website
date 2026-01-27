@@ -67,7 +67,7 @@ export default function Title({
 					level === "h1"
 						? { fontFamily: "var(--font-parisienne)", ...style }
 						: level === "h2" ? { fontFamily: "var(--font-gilda)", ...style } : level === "h3" || level === "h4" || level === "h5" || level === "h6"
-						? { fontFamily: "var(--font-playfair)", ...style }
+						? { fontFamily: "var(--font-gilda)", ...style }
 						: style
 				}
 			>

@@ -18,7 +18,7 @@ interface MapProps {
   zoom?: number;
 }
 
-export default function Map({ address, lat, lng, zoom = 15 }: MapProps) {
+export default function Map({ address, lat, lng, zoom = 10 }: MapProps) {
   const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${
     process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""
   }&q=${encodeURIComponent(address)}&zoom=${zoom}`;
@@ -30,7 +30,7 @@ export default function Map({ address, lat, lng, zoom = 15 }: MapProps) {
     )}`;
 
     return (
-      <div className="w-full h-[400px] bg-background-soft rounded-lg flex items-center justify-center p-8 text-center">
+      <div className="w-full h-[400px] bg-background-soft flex items-center justify-center p-8 text-center">
         <div className="space-y-4">
           <svg
             className="w-16 h-16 mx-auto text-primary"
@@ -70,7 +70,7 @@ export default function Map({ address, lat, lng, zoom = 15 }: MapProps) {
 
   // Affichage de la carte Google Maps
   return (
-    <div className="w-full h-[400px] rounded-lg overflow-hidden shadow-elegant">
+    <div className="w-full h-[300px] sm:h-[400px] overflow-hidden shadow-elegant">
       <iframe
         src={mapUrl}
         width="100%"

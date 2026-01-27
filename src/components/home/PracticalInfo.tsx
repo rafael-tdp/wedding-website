@@ -79,9 +79,9 @@ export default function PracticalInfo({
 					<Link href={item.href} className="block group h-full">
 						<Card
 							variant="default"
-							className="h-full transition-all duration-300"
+							className="h-full transition-all duration-300 p-3 md:p-4 rounded-lg"
 						>
-							<div className="flex flex-col items-center justify-center text-center gap-3 sm:gap-4 md:gap-5 h-full border-[1px] border-primary/20 p-3 sm:p-4 md:p-6 rounded-sm group-hover:border-primary/50 transition-all duration-300">
+							<div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-4 md:gap-5 h-full border-[1px] border-primary/20 p-6 rounded-sm group-hover:border-primary/50 transition-all duration-300">
 								{/* Icon in circle */}
 								<div className="p-3 sm:p-3 md:p-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-primary group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300 flex-shrink-0">
 									{item.icon}

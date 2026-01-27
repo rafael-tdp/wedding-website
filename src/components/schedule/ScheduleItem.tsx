@@ -8,6 +8,7 @@ import { GiWineGlass } from "react-icons/gi";
 import { PiForkKnife } from "react-icons/pi";
 import { CiMusicNote1 } from "react-icons/ci";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 
 
@@ -15,6 +16,7 @@ interface ProgrammeItemProps {
 	item: Programme;
 	index: number;
 	isLast?: boolean;
+	isFirst?: boolean;
 	eventTranslations?: Record<string, string>;
 }
 
@@ -137,7 +139,7 @@ function EventContent({
 /**
  * Composant pour la timeline au centre
  */
-function EventTimeline({ index, isLast }: { index: number; isLast: boolean }) {
+function EventTimeline({ index }: { index: number }) {
 	return (
 		<div className="flex flex-col items-center col-span-2">
 			<div className="relative">
@@ -155,6 +157,7 @@ export default function ScheduleItem({
 	item,
 	index,
 	isLast = false,
+	isFirst = false,
 	eventTranslations = {},
 }: ProgrammeItemProps) {
 	const isEven = index % 2 === 0;
@@ -192,49 +195,88 @@ export default function ScheduleItem({
 	return (
 		<div 
 			ref={itemRef}
-			className={`relative transition-all duration-700 ${
-				isVisible
-					? "opacity-100 translate-y-0"
-					: "opacity-0 translate-y-10"
-			}`}
+			className="relative"
 		>
 			{/* Desktop view - 3 columns */}
 			<div className="hidden md:grid grid-cols-12 items-start">
 				{/* Colonne 1 - Gauche (icône/numéro pour pairs, contenu pour impairs) */}
-				<div className="flex flex-col items-end pr-4 col-span-5 h-full justify-center text-right">
+				<motion.div 
+					className="flex flex-col items-end pr-4 col-span-5 h-full justify-center text-right"
+					initial={{ opacity: 0, x: -20 }}
+					animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+					transition={{ duration: 0.7, delay: 0.2 }}
+				>
 					{isEven ? (
 						<EventIcon icon={item.icon} />
 					) : (
 						<EventContent item={item} eventTranslations={eventTranslations} />
 					)}
-				</div>
+				</motion.div>
 
 				{/* Colonne 2 - Centre (ligne verticale) */}
-				<EventTimeline index={index} isLast={isLast} />
+				<EventTimeline index={index} />
 
 				{/* Colonne 3 - Droite (contenu pour pairs, icône/numéro pour impairs) */}
-				<div className="flex flex-col items-start pl-4 col-span-5 h-full justify-center">
+				<motion.div 
+					className="flex flex-col items-start pl-4 col-span-5 h-full justify-center"
+					initial={{ opacity: 0, x: 20 }}
+					animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+					transition={{ duration: 0.7, delay: 0.2 }}
+				>
 					{!isEven ? (
 						<EventIcon icon={item.icon} />
 					) : (
 						<EventContent item={item} eventTranslations={eventTranslations} />
 					)}
-				</div>
+				</motion.div>
 			</div>
 
-			{/* Mobile view */}
-			<div className="md:hidden">
-				<div className={`flex gap-4 items-start mb-8 pb-6 ${!isLast ? "border-b border-background-soft" : ""}`}>
-					<div className="flex flex-col items-center flex-shrink-0">
-						<div className="text-3xl font-serif text-primary/30 font-bold">
-							{index + 1}
-						</div>
-						<div className="text-4xl text-secondary-light mt-2">
-							{getIcon(item.icon)}
-						</div>
+			{/* Mobile view - Timeline vertical */}
+			<div className="md:hidden relative">
+				{/* Icône de fond */}
+				<motion.div 
+					className="absolute inset-0 flex items-center justify-end overflow-hidden pointer-events-none"
+					initial={{ x: 100, opacity: 0 }}
+					animate={isVisible ? { opacity: 0.1, x: 0 } : { opacity: 0, x: 100 }}
+					transition={{ duration: 0.7, delay: 0.3 }}
+				>
+					<motion.div 
+						className="text-[120px] text-secondary-dark"
+						initial={{ x: 64 }}
+						animate={isVisible ? { x: 0 } : { x: 64 }}
+						transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+					>
+						{getIcon(item.icon)}
+					</motion.div>
+				</motion.div>
+
+				{/* Contenu */}
+				<div className={`flex gap-3 items-center mb-0 pb-0 relative z-10 min-h-48 ${!isLast ? "border-b border-background-soft/30" : ""}`}>
+					{/* Timeline center - gauche sur mobile */}
+					<div className="relative flex flex-col items-center flex-shrink-0 h-full justify-center">
+						<motion.div
+							initial={{ x: -64 }}
+							animate={isVisible ? { x: 0 } : { x: -64}}
+							transition={{ duration: 0.5, delay: 0.1 }}
+						>
+							<div className="bg-white rounded-full flex items-center justify-center w-8 h-8 text-primary shadow-md relative z-10 text-sm font-semibold">
+								{index + 1}
+							</div>
+						</motion.div>
+						{isFirst && <div className="absolute left-1/2 -translate-x-1/2 w-[2px] h-48 bg-gradient-to-b from-transparent to-primary/50" />}
+						{!isLast && !isFirst && <div className="absolute left-1/2 -translate-x-1/2 w-[2px] h-48 bg-primary/50" />}
+						{isLast &&  <div className="absolute left-1/2 -translate-x-1/2 w-[2px] h-48 bg-gradient-to-b from-primary/50 to-transparent" />}
 					</div>
 
-					<EventContent item={item} mobile eventTranslations={eventTranslations} />
+					{/* Content - droite sur mobile */}
+					<motion.div
+						className="flex-1 pt-0 pb-0"
+						initial={{ opacity: 0, x: 16 }}
+						animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 16 }}
+						transition={{ duration: 0.7, delay: 0.2 }}
+					>
+						<EventContent item={item} mobile eventTranslations={eventTranslations} />
+					</motion.div>
 				</div>
 			</div>
 		</div>

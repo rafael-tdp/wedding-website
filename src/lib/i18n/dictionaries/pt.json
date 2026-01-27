@@ -178,11 +178,11 @@
 		}
 	},
 	"programme": {
-		"title": "Programa do Dia",
+		"title": "Programa",
 		"subtitle": "Eis o desenrolar do nosso grande dia. Mal podemos esperar para partilhar estes momentos mágicos convosco!",
 		"empty": "O programa estará brevemente disponível.",
 		"practical": "Informações práticas",
-		"practicalDescription": "Recomendamos que cheguem 15 minutos antes do início de cada evento. Há estacionamento disponível no local.",
+		"practicalDescription": "Recomendamos que cheguem 15 minutos antes do início da cerimónia. Há estacionamento disponível no local.",
 		"seeVenue": "Ver local",
 		"seeAccommodation": "Alojamento",
 		"events": {

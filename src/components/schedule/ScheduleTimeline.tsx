@@ -20,6 +20,7 @@ export default function ScheduleTimeline({
 							key={item.id}
 							item={item}
 							index={index}
+							isFirst={index === 0}
 							isLast={index === items.length - 1}
 							eventTranslations={eventTranslations}
 						/>

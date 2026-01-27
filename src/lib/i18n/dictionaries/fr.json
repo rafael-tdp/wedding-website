@@ -178,11 +178,11 @@
 		}
 	},
 	"programme": {
-		"title": "Programme de la Journée",
+		"title": "Programme",
 		"subtitle": "Voici le déroulé de notre grand jour. Nous avons hâte de partager ces moments avec vous !",
 		"empty": "Le programme sera bientôt disponible.",
 		"practical": "Informations pratiques",
-		"practicalDescription": "Nous vous recommandons d'arriver 15 minutes avant le début de chaque événement. Un parking est disponible sur place.",
+		"practicalDescription": "Nous vous recommandons d'arriver 15 minutes avant le début de la cérémonie. Un parking est disponible sur place.",
 		"seeVenue": "Voir le lieu",
 		"seeAccommodation": "Hébergements",
 		"events": {

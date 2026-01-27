@@ -17,7 +17,7 @@ export default function Button({
     primary: "border-2 border-primary bg-primary text-white hover:bg-primary-dark active:scale-95 hover:border-primary-dark",
     secondary: "border-2 border-secondary bg-secondary text-white hover:bg-secondary-dark active:scale-95",
     accent: "border-2 border-accent bg-accent text-white hover:bg-accent-dark active:scale-95",
-    outline: "border-2 border-primary text-primary hover:bg-primary hover:text-white",
+    outline: "border-2 border-primary text-primary hover:bg-primary-dark hover:border-primary-dark hover:text-white",
   };
   
   return (

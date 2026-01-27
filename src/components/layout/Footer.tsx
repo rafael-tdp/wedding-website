@@ -41,7 +41,7 @@ export default function Footer() {
 
           {/* Column 1 : About */}
           <div>
-            <h3 className="text-yellow-50 font-serif text-2xl mb-4 flex items-center gap-2 font-parisienne">
+            <h3 className="text-yellow-50 font-serif text-2xl mb-4 flex items-center gap-2" style={{ fontFamily: "var(--font-parisienne)" }}>
               Ana & Rafael
             </h3>
             <p className="text-sm text-gray-200 leading-relaxed">

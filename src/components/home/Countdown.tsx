@@ -11,6 +11,7 @@ interface CountdownTime {
 }
 
 interface AnimatingFlags {
+  daysHundreds: boolean;
   daysUnits: boolean;
   daysTens: boolean;
   hoursUnits: boolean;
@@ -30,6 +31,7 @@ export default function Countdown() {
     seconds: 0,
   });
   const [animating, setAnimating] = useState<AnimatingFlags>({
+    daysHundreds: false,
     daysUnits: false,
     daysTens: false,
     hoursUnits: false,
@@ -47,6 +49,7 @@ export default function Countdown() {
     seconds: 0,
   });
   const displayValuesRef = useRef({
+    daysHundreds: "0",
     daysTens: "0",
     daysUnits: "0",
     hoursTens: "0",
@@ -57,6 +60,7 @@ export default function Countdown() {
     secondsUnits: "0",
   });
   const prevDisplayValuesRef = useRef({
+    daysHundreds: "0",
     daysTens: "0",
     daysUnits: "0",
     hoursTens: "0",
@@ -83,14 +87,15 @@ export default function Countdown() {
           seconds: Math.floor((difference / 1000) % 60),
         };
 
-        const daysStr = String(newTime.days).padStart(2, "0");
+        const daysStr = String(newTime.days).padStart(3, "0");
         const hoursStr = String(newTime.hours).padStart(2, "0");
         const minutesStr = String(newTime.minutes).padStart(2, "0");
         const secondsStr = String(newTime.seconds).padStart(2, "0");
 
         const newDisplayValues = {
-          daysTens: daysStr[0],
-          daysUnits: daysStr[1],
+          daysHundreds: daysStr[0],
+          daysTens: daysStr[1],
+          daysUnits: daysStr[2],
           hoursTens: hoursStr[0],
           hoursUnits: hoursStr[1],
           minutesTens: minutesStr[0],
@@ -101,6 +106,7 @@ export default function Countdown() {
 
         // Vérifier quels éléments ont changé
         const newAnimating: AnimatingFlags = {
+          daysHundreds: newDisplayValues.daysHundreds !== displayValuesRef.current.daysHundreds,
           daysUnits: newDisplayValues.daysUnits !== displayValuesRef.current.daysUnits,
           daysTens: newDisplayValues.daysTens !== displayValuesRef.current.daysTens,
           hoursUnits: newDisplayValues.hoursUnits !== displayValuesRef.current.hoursUnits,
@@ -125,6 +131,7 @@ export default function Countdown() {
         // Réinitialiser les flags d'animation après 500ms
         setTimeout(() => {
           setAnimating({
+            daysHundreds: false,
             daysUnits: false,
             daysTens: false,
             hoursUnits: false,
@@ -161,25 +168,59 @@ export default function Countdown() {
     label, 
     itemKey,
     shouldAnimateTens, 
-    shouldAnimateUnits 
+    shouldAnimateUnits,
+    shouldAnimateHundreds 
   }: { 
     value: number; 
     label: string; 
     itemKey: "days" | "hours" | "minutes" | "seconds";
     shouldAnimateTens: boolean; 
-    shouldAnimateUnits: boolean; 
+    shouldAnimateUnits: boolean;
+    shouldAnimateHundreds?: boolean;
   }) {
-    const displayValue = String(value).padStart(2, "0");
-    const tens = displayValue[0];
-    const units = displayValue[1];
-    const prevTens = prevDisplayValuesRef.current[`${itemKey}Tens` as keyof typeof prevDisplayValuesRef.current];
-    const prevUnits = prevDisplayValuesRef.current[`${itemKey}Units` as keyof typeof prevDisplayValuesRef.current];
+    const isThreeDigits = itemKey === "days";
+    const displayValue = isThreeDigits ? String(value).padStart(3, "0") : String(value).padStart(2, "0");
+    
+    let hundreds, tens, units;
+    let prevHundreds, prevTens, prevUnits;
+    
+    if (isThreeDigits) {
+      hundreds = displayValue[0];
+      tens = displayValue[1];
+      units = displayValue[2];
+      prevHundreds = prevDisplayValuesRef.current.daysHundreds;
+      prevTens = prevDisplayValuesRef.current.daysTens;
+      prevUnits = prevDisplayValuesRef.current.daysUnits;
+    } else {
+      tens = displayValue[0];
+      units = displayValue[1];
+      prevTens = prevDisplayValuesRef.current[`${itemKey}Tens` as keyof typeof prevDisplayValuesRef.current];
+      prevUnits = prevDisplayValuesRef.current[`${itemKey}Units` as keyof typeof prevDisplayValuesRef.current];
+    }
 
     return (
       <div className="text-center flex-1 sm:flex-none">
-        <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-secondary flex justify-center">
+        <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-secondary flex justify-center gap-0.5 sm:gap-0 md:gap-0">
+          {/* Chiffre des centaines (jours uniquement) */}
+          {isThreeDigits && (
+            <div className="relative h-[2rem] sm:h-[4rem] md:h-[5rem] lg:h-[7rem] w-[1.25rem] sm:w-[2rem] md:w-[2.5rem] lg:w-[3.5rem] flex items-center justify-center overflow-hidden">
+              {shouldAnimateHundreds ? (
+                <>
+                  <div className="absolute animate-slide-up-out">
+                    {prevHundreds}
+                  </div>
+                  <div className="absolute animate-slide-down-top">
+                    {hundreds}
+                  </div>
+                </>
+              ) : (
+                <div>{hundreds}</div>
+              )}
+            </div>
+          )}
+
           {/* Chiffre des dizaines */}
-          <div className="relative h-[4rem] sm:h-[5rem] md:h-[6rem] lg:h-[7rem] w-[2rem] sm:w-[2.5rem] md:w-[3rem] lg:w-[3.5rem] flex items-center justify-center overflow-hidden">
+          <div className="relative h-[2rem] sm:h-[4rem] md:h-[5rem] lg:h-[7rem] w-[1.25rem] sm:w-[2rem] md:w-[2.5rem] lg:w-[3.5rem] flex items-center justify-center overflow-hidden">
             {shouldAnimateTens ? (
               <>
                 <div className="absolute animate-slide-up-out">
@@ -195,7 +236,7 @@ export default function Countdown() {
           </div>
 
           {/* Chiffre des unités */}
-          <div className="relative h-[4rem] sm:h-[5rem] md:h-[6rem] lg:h-[7rem] w-[2rem] sm:w-[2.5rem] md:w-[3rem] lg:w-[3.5rem] flex items-center justify-center overflow-hidden">
+          <div className="relative h-[2rem] sm:h-[4rem] md:h-[5rem] lg:h-[7rem] w-[1.25rem] sm:w-[2rem] md:w-[2.5rem] lg:w-[3.5rem] flex items-center justify-center overflow-hidden">
             {shouldAnimateUnits ? (
               <>
                 <div className="absolute animate-slide-up-out">
@@ -210,7 +251,7 @@ export default function Countdown() {
             )}
           </div>
         </div>
-        <div className="text-[0.65rem] sm:text-xs md:text-sm font-medium text-gray-600 uppercase tracking-widest mt-1 sm:mt-2 md:mt-3">
+        <div className="text-[0.5rem] sm:text-xs md:text-sm font-medium text-gray-600 uppercase tracking-widest mt-1 sm:mt-2 md:mt-3">
           {label}
         </div>
       </div>
@@ -218,11 +259,12 @@ export default function Countdown() {
   }
 
   return (
-    <div className="flex justify-center gap-4 sm:gap-8 md:gap-16 lg:gap-20">
+    <div className="flex justify-center gap-2 sm:gap-6 md:gap-12 lg:gap-20">
       <CountdownItem 
         value={time.days} 
         label={dict.common.days} 
         itemKey="days"
+        shouldAnimateHundreds={animating.daysHundreds}
         shouldAnimateTens={animating.daysTens} 
         shouldAnimateUnits={animating.daysUnits} 
       />

@@ -19,14 +19,21 @@ export default function AccommodationGuide({
 	steps,
 }: AccommodationGuideProps) {
 	return (
-		<div className="border-l-4 border-primary bg-primary/5 rounded-r-lg p-4 sm:p-6 space-y-4 sm:space-y-6">
-			<Title level="h5" align="left">
+		<div className="border-l-4 border-primary bg-primary/5 rounded-lg p-4 sm:p-6 space-y-4 sm:space-y-6">
+			<h4 className="font-normal text-foreground text-lg sm:text-xl mb-0.5 sm:mb-1 font-sans">
 				{title}
-			</Title>
-        
+			</h4>
+
 			<div className="space-y-4 sm:space-y-6">
 				{steps.map((step, index) => (
-					<StepItem key={index} step={step} index={index} />
+					<div key={index}>
+						<StepItem step={step} index={index} />
+						<div
+							className={`border-t border-primary/20 mt-4 ${
+								index === steps.length - 1 ? "hidden" : ""
+							}`}
+						/>
+					</div>
 				))}
 			</div>
 		</div>
@@ -82,7 +89,7 @@ function StepItem({ step, index }: { step: AccommodationGuideStep; index: number
 					<h4 className="font-semibold text-foreground text-sm sm:text-base mb-0.5 sm:mb-1 font-sans">
 						{step.title}
 					</h4>
-					<p className="text-foreground-muted text-xs sm:text-sm">
+					<p className="text-foreground-muted text-sm sm:text-base">
 						{step.description}
 					</p>
 					{step.tip && (

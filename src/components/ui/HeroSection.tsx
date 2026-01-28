@@ -19,7 +19,7 @@ export default function HeroSection({
 	return (
 		<Section
 			variant="gradient"
-			spacing="md"
+			spacing="lg"
 			isHero
 			backgroundImage={backgroundImage}
 		>
@@ -29,14 +29,15 @@ export default function HeroSection({
 					align="center"
 					withAccent={withAccent}
 					withBackgroundLetter={withBackgroundLetter}
+					className="capitalize"
 				>
 					{title}
 				</Title>
-				{subtitle && (
+				{/* {subtitle && (
 					<p className="text-normal md:text-lg text-foreground-muted mx-auto">
 						{subtitle}
 					</p>
-				)}
+				)} */}
 			</div>
 		</Section>
 	);

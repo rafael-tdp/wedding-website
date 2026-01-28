@@ -4,12 +4,9 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Section from "@/components/ui/Section";
 import InfoCards from "@/components/ui/InfoCards";
-import {
-	MdLocationOn,
-	MdDirectionsCar,
-	MdAccessTime,
-	MdRateReview,
-} from "react-icons/md";
+import { Title } from "../ui";
+import { CiLocationOn, CiStar, CiTimer } from "react-icons/ci";
+import { PiCarThin } from "react-icons/pi";
 
 interface AccommodationPracticalTipsProps {
 	dict: any;
@@ -19,25 +16,26 @@ export default function AccommodationPracticalTips({
 	dict,
 }: AccommodationPracticalTipsProps) {
 	const { accommodation } = dict;
-	
+
 	const tips = [
 		{
-			icon: MdLocationOn,
+			icon: CiLocationOn,
 			title: accommodation.practicalTipsSection.distance.title,
-			description: accommodation.practicalTipsSection.distance.description,
+			description:
+				accommodation.practicalTipsSection.distance.description,
 		},
 		{
-			icon: MdDirectionsCar,
+			icon: PiCarThin,
 			title: accommodation.practicalTipsSection.travel.title,
 			description: accommodation.practicalTipsSection.travel.description,
 		},
 		{
-			icon: MdAccessTime,
+			icon: CiTimer,
 			title: accommodation.practicalTipsSection.booking.title,
 			description: accommodation.practicalTipsSection.booking.description,
 		},
 		{
-			icon: MdRateReview,
+			icon: CiStar,
 			title: accommodation.practicalTipsSection.reviews.title,
 			description: accommodation.practicalTipsSection.reviews.description,
 		},
@@ -46,8 +44,17 @@ export default function AccommodationPracticalTips({
 	return (
 		<Section variant="soft" spacing="lg">
 			<div className="max-w-4xl mx-auto">
-				<InfoCards 
-					title={accommodation.practicalTipsSection.title}
+				<div className="mb-12">
+					<Title level="h2" align="center" withAccent={true}>
+						{accommodation.practicalTipsSection.title}
+					</Title>
+					<p className="text-center text-foreground-muted mt-4">
+						{accommodation.practicalTipsText}
+					</p>
+				</div>
+
+				<InfoCards
+					title={accommodation.practicalTips.title}
 					cards={tips}
 					columns="2"
 				/>

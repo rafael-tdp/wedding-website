@@ -33,9 +33,12 @@ export default function RSVPInfoCards({ dict }: RSVPInfoCardsProps) {
 	];
 
 	return (
-		<InfoCards 
-			title={dict.rsvp.important}
-			cards={infoCards}
-			columns="2"
-		/>	);
+		<div className="max-w-4xl mx-auto">
+			<InfoCards
+				title={dict.rsvp.important}
+				cards={infoCards}
+				columns="2"
+			/>
+		</div>
+	);
 }

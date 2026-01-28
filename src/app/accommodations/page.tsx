@@ -61,7 +61,7 @@ export default async function AccommodationsPage() {
 						googleTravelLink={googleTravelLink}
 					/>
 
-					<div className="mt-12 sm:mt-20 mb-8 sm:mb-12">
+					<div className="mt-24 sm:mt-28 mb-8 sm:mb-12">
 						<AccommodationGuide
 							title={accommodation.guide.title}
 							steps={guideSteps}

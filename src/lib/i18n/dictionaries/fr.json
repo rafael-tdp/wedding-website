@@ -119,6 +119,8 @@
 		"seeProgramme": "Voir le programme",
 		"seeAccommodation": "Trouver un hébergement",
 		"seeFAQ": "Foire aux questions",
+		"additionalInfo": "Informations Complémentaires",
+		"additionalInfoSubtitle": "Ces informations vous aideront à organiser au mieux votre venue",
 		"form": {
 			"optional": "(optionnel)",
 			"infoSection": "Vos informations",
@@ -233,6 +235,7 @@
 		"recommended": "Nos Recommandations",
 		"recommendedText": "Ces hébergements sont nos coups de cœur, testés et approuvés !",
 		"practicalTips": "Conseils Pratiques",
+		"practicalTipsText": "Quelques conseils pour trouver l'hébergement parfait pour votre séjour.",
 		"search": {
 			"title": "Trouvez Votre Hébergement",
 			"description": "Nous avons préparé une recherche personnalisée sur Google Travel pour vous aider à trouver l'hébergement parfait près du lieu du mariage.",

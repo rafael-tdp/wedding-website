@@ -119,6 +119,8 @@
 		"seeProgramme": "Ver programa",
 		"seeAccommodation": "Encontrar alojamento",
 		"seeFAQ": "Perguntas frequentes",
+		"additionalInfo": "Informações Complementares",
+		"additionalInfoSubtitle": "Estas informações ajudarão a organizar melhor a sua vinda",
 		"form": {
 			"optional": "(opcional)",
 			"infoSection": "Os seus dados",
@@ -233,6 +235,7 @@
 		"recommended": "As Nossas Recomendações",
 		"recommendedText": "Estes alojamentos são os nossos favoritos, testados e aprovados!",
 		"practicalTips": "Dicas Práticas",
+		"practicalTipsText": "Algumas dicas para encontrar o alojamento perfeito para a sua estadia.",
 		"search": {
 			"title": "Encontre o Seu Alojamento",
 			"description": "Preparámos uma busca personalizada no Google Travel para o ajudar a encontrar o alojamento perfeito perto do local do casamento.",

@@ -18,7 +18,7 @@ export default function GalleryViewSection({
 				<Title level="h3" align="center">
 					{dict.gallery.gallery.title}
 				</Title>
-				<p className="text-gray-600 text-sm mt-2">
+				<p className="text-gray-600 text-sm md:text-base mt-2">
 					{dict.gallery.gallery.subtitle}
 				</p>
 			</div>

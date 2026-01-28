@@ -93,7 +93,7 @@ export function StoryTimeline({ dict }: StoryTimelineProps) {
 					{dict.home.story.title}
 				</Title>
 				{dict.home.story.subtitle && (
-					<p className="text-foreground-muted text-sm mt-4">
+					<p className="text-foreground-muted text-sm md:text-base mt-4">
 						{dict.home.story.subtitle}
 					</p>
 				)}

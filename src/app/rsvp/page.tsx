@@ -5,6 +5,7 @@ import RSVPInfoCards from "@/components/rsvp/RSVPInfoCards";
 import RSVPNavigation from "@/components/rsvp/RSVPNavigation";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocale } from "@/lib/i18n/get-locale";
+import { Title } from "@/components/ui";
 
 export const metadata = {
 	title: "RSVP - Notre Mariage",
@@ -36,6 +37,15 @@ export default async function RSVPPage() {
 
 			{/* Informations complémentaires */}
 			<Section variant="soft" spacing="md">
+				<div className="mb-12">
+					<Title level="h2" align="center" withAccent={true}>
+						{dict.rsvp.additionalInfo}
+					</Title>
+					<p className="text-center text-foreground-muted mt-4 max-w-2xl mx-auto">
+						{dict.rsvp.additionalInfoSubtitle}
+					</p>
+				</div>
+
 				<RSVPInfoCards dict={dict} />
 
 				{/* Navigation */}

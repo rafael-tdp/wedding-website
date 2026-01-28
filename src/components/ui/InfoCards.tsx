@@ -1,7 +1,7 @@
 "use client";
 
-import { Title } from "@/components/ui";
 import { useRef, useState, useEffect } from "react";
+import Card from "./Card";
 
 interface InfoCard {
 	icon: React.ComponentType<{ className?: string }>;
@@ -17,9 +17,7 @@ interface InfoCardsProps {
 }
 
 export default function InfoCards({
-	title,
 	cards,
-	withAccent = true,
 	columns = "2",
 }: InfoCardsProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -59,38 +57,25 @@ export default function InfoCards({
 	};
 
 	return (
-			<div ref={containerRef} className="max-w-3xl mx-auto space-y-12">
-			<Title level="h2" align="center" withAccent={withAccent}>
-				{title}
-			</Title>
+			<div ref={containerRef} className="max-w-7xl mx-auto space-y-12">
+			
 
 			<div className={`grid grid-cols-1 ${gridColsMap[columns]} gap-4 sm:gap-6 auto-rows-fr`}>
 				{cards.map((card, index) => {
 					const Icon = card.icon;
 					return (
-						<div
+						<Card
 							key={index}
-							className={`bg-background p-6 sm:p-6 rounded-lg transition-all duration-1000 relative h-full ${
+							variant="default"
+							className={`h-full rounded-lg p-6 transition-all duration-700 ${
 								isVisible
 									? "opacity-100 translate-y-0"
 									: "opacity-0 translate-y-10"
 							}`}
-							style={{
-								transitionDelay: isVisible
-									? `${index * 250}ms`
-									: "0ms",
-							}}
-						>
-							<h3 className="text-base sm:text-lg text-foreground mb-12 sm:mb-14 flex items-center gap-2 text-primary font-semibold font-sans">
-								<span>{card.title}</span>
-							</h3>
-							<p className="text-foreground-muted text-xs sm:text-sm">
-								{card.description}
-							</p>
-							<div className="absolute top-5 sm:top-6 right-5 sm:right-6 text-6xl text-primary/15 sm:text-7xl">
-								<Icon />
-							</div>
-						</div>
+							icon={<Icon className="w-8 h-8 text-primary" />}
+							title={card.title}
+							description={card.description}
+						/>
 					);
 				})}
 			</div>

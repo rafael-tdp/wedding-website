@@ -14,7 +14,7 @@ export default function PracticalSection({ dict }: PracticalSectionProps) {
       <Title level="h2" align="center" withAccent>
         {dict.home.info.title}
       </Title>
-      <p className="text-foreground-muted text-xs sm:text-sm mt-3 sm:mt-4 text-center max-w-2xl mx-auto">
+      <p className="text-foreground-muted text-sm md:text-base mt-3 sm:mt-4 text-center max-w-2xl mx-auto">
         {dict.home.info.subtitle}
       </p>
 

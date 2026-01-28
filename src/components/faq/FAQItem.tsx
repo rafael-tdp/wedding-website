@@ -20,9 +20,9 @@ export default function FAQItem({
       {/* Question - Clickable */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left p-3 sm:p-6 flex items-start justify-between gap-2 sm:gap-4 hover:bg-background-soft transition-colors"
+        className="w-full text-left p-4 sm:p-6 flex items-start justify-between gap-2 sm:gap-4 hover:bg-background-soft/50 transition-colors"
       >
-        <h3 className="text-sm sm:text-lg text-foreground pr-2 font-medium">{question}</h3>
+        <h3 className="text-sm sm:text-lg text-foreground pr-2 font-normal font-sans">{question}</h3>
         <svg
           className={`w-5 h-5 text-primary flex-shrink-0 transition-transform ${
             isOpen ? "rotate-180" : ""
@@ -48,7 +48,7 @@ export default function FAQItem({
         }`}
       >
         <div className="px-3 sm:px-6 py-3 sm:py-6 border-t border-primary/10">
-          <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed whitespace-pre-wrap">
+          <p className="text-sm md:text-base text-foreground-muted leading-relaxed whitespace-pre-wrap">
             {answer}
           </p>
         </div>

@@ -41,7 +41,7 @@ export default function PracticalDirectionsSection({
 					>
 						<Button
 							variant="primary"
-							className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm transition-all w-full"
+							className="flex items-center justify-center gap-2 px-4 py-2 text-sm transition-all w-full"
 						>
 							<SiApple className="w-4 h-4" />
 							Apple Maps

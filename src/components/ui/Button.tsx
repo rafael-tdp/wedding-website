@@ -11,7 +11,7 @@ export default function Button({
   className = "",
   ...props
 }: ButtonProps) {
-  const baseStyles = "rounded-full uppercase tracking-wider font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-xxs 2xl:text-xs px-6 sm:px-6 2xl:px-8 py-4 sm:py-4 2xl:py-5";
+  const baseStyles = "relative overflow-hidden rounded-full uppercase tracking-wider font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-xxs 2xl:text-xs px-6 sm:px-6 2xl:px-8 py-4 sm:py-4 2xl:py-5 group";
   
   const variantStyles = {
     primary: "border-2 border-primary bg-primary text-white hover:bg-primary-dark active:scale-95 hover:border-primary-dark",
@@ -25,7 +25,11 @@ export default function Button({
       className={`${baseStyles} ${variantStyles[variant]} ${className}`}
       {...props}
     >
-      {children}
+      {/* Shimmer effect - elegant shine animation */}
+      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+      
+      {/* Content */}
+      <span className="relative z-10">{children}</span>
     </button>
   );
 }

@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import { type Photo } from "@/lib/supabase/queries";
 import { supabase } from "@/lib/supabase/client";
 import { useUploadModal } from "./UploadModalContext";
+import { isBeforeWeddingGallery } from "@/lib/config/wedding-config";
 
 /**
  * Obtient l'URL publique d'une photo
@@ -262,6 +263,7 @@ export function PhotoGalleryClient({ photos, dict }: { photos: Photo[]; dict: an
   const [isSelectionMode, setIsSelectionMode] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const { onOpenUploadModal } = useUploadModal();
+  const isBeforeWedding = isBeforeWeddingGallery();
 
   // Toggle la sélection d'une photo
   const togglePhotoSelection = (photoId: string) => {
@@ -396,12 +398,36 @@ export function PhotoGalleryClient({ photos, dict }: { photos: Photo[]; dict: an
             />
           </svg>
         </div>
-        <h3 className="text-lg font-medium text-gray-900 mb-2">
-          {dict.gallery.gallery.empty}
-        </h3>
-        <p className="text-gray-600">
-          {dict.gallery.gallery.emptySubtitle}
-        </p>
+        {isBeforeWedding ? (
+          <>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
+              {dict.gallery.gallery.beforeWeddingTitle}
+            </h3>
+            <p className="text-gray-600">
+              {dict.gallery.gallery.beforeWeddingSubtitle}
+            </p>
+          </>
+        ) : (
+          <>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
+              {dict.gallery.gallery.empty}
+            </h3>
+            <p className="text-gray-600">
+              {dict.gallery.gallery.emptySubtitle}
+            </p>
+            {/* Bouton pour ajouter des photos quand galerie vide */}
+            <div className="mt-6">
+              <Button
+                variant="primary"
+                onClick={onOpenUploadModal}
+                className="flex items-center gap-2 justify-center mx-auto"
+              >
+                <FaPlus className="w-4 h-4" />
+                {dict.gallery.addPhotos}
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     );
   }
@@ -413,14 +439,28 @@ export function PhotoGalleryClient({ photos, dict }: { photos: Photo[]; dict: an
         <div className="mb-6 flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center">
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             {/* Bouton mobile pour ajouter des photos */}
-            <Button
-              variant="primary"
-              onClick={onOpenUploadModal}
-              className="sm:hidden w-full flex items-center gap-2 justify-center"
-            >
-              <FaPlus className="w-4 h-4" />
-              {dict.gallery.addPhotos}
-            </Button>
+            {!isBeforeWedding && (
+              <Button
+                variant="primary"
+                onClick={onOpenUploadModal}
+                className="sm:hidden w-full flex items-center gap-2 justify-center"
+              >
+                <FaPlus className="w-4 h-4" />
+                {dict.gallery.addPhotos}
+              </Button>
+            )}
+
+            {/* Bouton desktop pour ajouter des photos */}
+            {!isBeforeWedding && (
+              <Button
+                variant="primary"
+                onClick={onOpenUploadModal}
+                className="hidden sm:flex items-center gap-2 w-auto"
+              >
+                <FaPlus className="w-4 h-4" />
+                {dict.gallery.addPhotos}
+              </Button>
+            )}
 
             <Button
               variant={isSelectionMode ? "primary" : "outline"}

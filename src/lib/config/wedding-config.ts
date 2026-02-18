@@ -6,7 +6,7 @@ export const weddingConfig = {
 
 	wedding: {
 		date: "2026-08-11",
-		time: "14:00",
+		time: "12:00",
 		location: "Quinta das Tulipas",
 		address: "Rua De Mourens 625, 4775-225 Rio Covo – Barcelos",
 		city: "Barcelos",
@@ -59,6 +59,23 @@ export const weddingConfig = {
 
 export const getWeddingDate = () => new Date(weddingConfig.wedding.date);
 export const getRSVPDeadline = () => new Date(weddingConfig.rsvp.deadline);
+
+/**
+ * Retourne la date et l'heure exactes d'ouverture de la galerie photo
+ * (le jour du mariage à l'heure spécifiée)
+ */
+export const getGalleryOpenDateTime = () => {
+	const dateStr = weddingConfig.wedding.date;
+	const timeStr = weddingConfig.wedding.time;
+	return new Date(`${dateStr}T${timeStr}:00`);
+};
+
+/**
+ * Vérifie si la date actuelle est avant l'ouverture de la galerie
+ */
+export const isBeforeWeddingGallery = () => {
+	return new Date() < getGalleryOpenDateTime();
+};
 
 export const getFullWeddingAddress = () => {
 	const w = weddingConfig.wedding;

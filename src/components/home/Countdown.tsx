@@ -75,7 +75,7 @@ export default function Countdown() {
     setMounted(true);
 
     const calculateCountdown = () => {
-      const targetDate = new Date("2026-08-11T14:00:00").getTime();
+      const targetDate = new Date("2026-08-11T12:00:00").getTime();
       const now = new Date().getTime();
       const difference = targetDate - now;
 

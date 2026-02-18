@@ -32,9 +32,10 @@ export async function createProgrammeEvent(formData: FormData) {
   try {
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
-    const start_time = formData.get("start_time") as string;
-    const end_time = formData.get("end_time") as string;
+    const event_time = formData.get("event_time") as string;
+    const duration_minutes = formData.get("duration_minutes") as string;
     const location = formData.get("location") as string;
+    const icon = formData.get("icon") as string;
     const title_fr = formData.get("title_fr") as string;
     const description_fr = formData.get("description_fr") as string;
     const title_pt = formData.get("title_pt") as string;
@@ -44,9 +45,10 @@ export async function createProgrammeEvent(formData: FormData) {
       {
         title,
         description,
-        start_time,
-        end_time,
+        event_time,
+        duration_minutes: duration_minutes ? parseInt(duration_minutes) : null,
         location,
+        icon,
         title_fr,
         description_fr,
         title_pt,
@@ -65,12 +67,15 @@ export async function createProgrammeEvent(formData: FormData) {
 // UPDATE - Mettre à jour un événement
 export async function updateProgrammeEvent(id: string, formData: FormData) {
   try {
+    const duration_minutes_raw = formData.get("duration_minutes") as string;
+    
     const updates = {
       title: formData.get("title") as string,
       description: formData.get("description") as string,
-      start_time: formData.get("start_time") as string,
-      end_time: formData.get("end_time") as string,
+      event_time: formData.get("event_time") as string,
+      duration_minutes: duration_minutes_raw ? parseInt(duration_minutes_raw) : null,
       location: formData.get("location") as string,
+      icon: formData.get("icon") as string,
       title_fr: formData.get("title_fr") as string,
       description_fr: formData.get("description_fr") as string,
       title_pt: formData.get("title_pt") as string,

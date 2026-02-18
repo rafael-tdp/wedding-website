@@ -25,11 +25,7 @@ export default function Button({
       className={`${baseStyles} ${variantStyles[variant]} ${className}`}
       {...props}
     >
-      {/* Shimmer effect - elegant shine animation */}
-      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-      
-      {/* Content */}
-      <span className="relative z-10">{children}</span>
+      {children}
     </button>
   );
 }

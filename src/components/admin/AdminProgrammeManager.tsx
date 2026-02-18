@@ -2,24 +2,9 @@
 
 import { useState, useTransition, useEffect } from "react";
 import { getProgramme, createProgrammeEvent, updateProgrammeEvent, deleteProgrammeEvent } from "@/app/actions/admin-programme";
-import Button from "@/components/ui/Button";
 import { AdminFormModal } from "./AdminFormModal";
-import { Title } from "../ui";
 import ProgrammeCard from "./ProgrammeCard";
-import { GiBigDiamondRing, GiCakeSlice } from "react-icons/gi";
-import { MdPhotoCamera } from "react-icons/md";
-import { GiWineGlass } from "react-icons/gi";
-import { PiForkKnife } from "react-icons/pi";
-import { CiMusicNote1 } from "react-icons/ci";
-
-const ICON_OPTIONS = [
-  { value: "ceremony", label: "Cérémonie", icon: GiBigDiamondRing },
-  { value: "cocktail", label: "Cocktail", icon: GiWineGlass },
-  { value: "dinner", label: "Dîner", icon: PiForkKnife },
-  { value: "party", label: "Danse", icon: CiMusicNote1 },
-  { value: "photo", label: "Photos", icon: MdPhotoCamera },
-  { value: "cake", label: "Gâteau", icon: GiCakeSlice },
-];
+import { PROGRAMME_ICON_OPTIONS } from "@/lib/config/programme-icons";
 
 interface ProgrammeEvent {
   id: string;
@@ -236,7 +221,7 @@ export default function AdminProgrammeManager({ showCreateForm, setShowCreateFor
         <div>
           <label className="block text-sm font-medium mb-3">Icône</label>
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-            {ICON_OPTIONS.map(({ value, label, icon: Icon }) => (
+            {PROGRAMME_ICON_OPTIONS.map(({ value, label, icon: Icon }) => (
               <button
                 key={value}
                 type="button"
@@ -358,7 +343,7 @@ export default function AdminProgrammeManager({ showCreateForm, setShowCreateFor
         <div>
           <label className="block text-sm font-medium mb-3">Icône</label>
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-            {ICON_OPTIONS.map(({ value, label, icon: Icon }) => (
+            {PROGRAMME_ICON_OPTIONS.map(({ value, label, icon: Icon }) => (
               <button
                 key={value}
                 type="button"

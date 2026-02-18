@@ -2,77 +2,24 @@
 
 import { Programme } from "@/lib/supabase/queries";
 import { formatTime } from "@/lib/supabase/queries";
-import { GiBigDiamondRing, GiCakeSlice } from "react-icons/gi";
-import { MdPhotoCamera } from "react-icons/md";
-import { GiWineGlass } from "react-icons/gi";
-import { PiForkKnife } from "react-icons/pi";
-import { CiMusicNote1 } from "react-icons/ci";
+import { useI18n } from "@/lib/i18n/context";
+import { getProgrammeIcon } from "@/lib/config/programme-icons";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-
-
 
 interface ProgrammeItemProps {
 	item: Programme;
 	index: number;
 	isLast?: boolean;
 	isFirst?: boolean;
-	eventTranslations?: Record<string, string>;
 }
 
 /**
  * Composant pour afficher l'icône et son contenu
  */
 function EventIcon({ icon }: { icon: string | null }) {
-	return <div className="text-8xl text-secondary-light">{getIcon(icon)}</div>;
+	return <div className="text-8xl text-secondary-light">{getProgrammeIcon(icon)}</div>;
 }
-
-/**
- * Mapping des titres d'événements vers les clés de traduction
- */
-const TITLE_TO_KEY_MAPPING: Record<string, string> = {
-	// Français
-	"cérémonie": "ceremony",
-	"ceremonie": "ceremony",
-	"cocktail de bienvenue": "cocktail",
-	"apéritif": "aperitif",
-	"dîner": "dinner",
-	"dinner": "dinner",
-	"toasts": "toasts",
-	"gâteau & moments sucrés": "cake",
-	"gateau & moments sucres": "cake",
-	"danse & célébration": "party",
-	"soirée dansante": "party",
-	"soiree dansante": "party",
-	"photos de famille": "photo",
-	"photo de groupe": "photo_group",
-	"feu d'artifice": "fireworks",
-	"au revoir": "goodbye",
-	// Português
-	"cerimónia": "ceremony",
-	"coquetel de boas-vindas": "cocktail",
-	"aperitivo": "aperitif",
-	"jantar": "dinner",
-	"brindas": "toasts",
-	"bolo & momentos doces": "cake",
-	"dança & celebração": "party",
-	"fotos de família": "photo",
-	"foto de grupo": "photo_group",
-	"fogo de artifício": "fireworks",
-	"despedida": "goodbye",
-	"chegada dos convidados": "arrival",
-	// English
-	"ceremony": "ceremony",
-	"cocktail": "cocktail",
-	"aperitif": "aperitif",
-	"cake": "cake",
-	"party": "party",
-	"photo": "photo",
-	"photo group": "photo_group",
-	"fireworks": "fireworks",
-	"goodbye": "goodbye",
-	"arrival": "arrival",
-};
 
 /**
  * Composant pour afficher le contenu (titre, description, heure)
@@ -80,17 +27,24 @@ const TITLE_TO_KEY_MAPPING: Record<string, string> = {
 function EventContent({
 	item,
 	mobile = false,
-	eventTranslations = {},
 }: {
 	item: Programme;
 	mobile?: boolean;
-	eventTranslations?: Record<string, string>;
 }) {
-	// Obtenir le titre traduit s'il existe, sinon utiliser le titre de la BD
+	const { locale } = useI18n();
+
+	// Obtenir le titre traduit selon la locale
 	const getTranslatedTitle = () => {
-		const titleLower = item.title.toLowerCase();
-		const key = TITLE_TO_KEY_MAPPING[titleLower] || titleLower.replace(/\s+/g, "_");
-		return eventTranslations[key] || item.title;
+		if (locale === "pt" && item.title_pt) return item.title_pt;
+		if (locale === "fr" && item.title_fr) return item.title_fr;
+		return item.title;
+	};
+
+	// Obtenir la description traduite selon la locale
+	const getTranslatedDescription = () => {
+		if (locale === "pt" && item.description_pt) return item.description_pt;
+		if (locale === "fr" && item.description_fr) return item.description_fr;
+		return item.description;
 	};
 
 	return (
@@ -105,13 +59,13 @@ function EventContent({
 			</h3>
 
 			{/* Description */}
-			{item.description && (
+			{getTranslatedDescription() && (
 				<p
 					className={`text-foreground-muted leading-relaxed ${
 						mobile ? "text-sm mb-2" : ""
 					}`}
 				>
-					{item.description}
+					{getTranslatedDescription()}
 				</p>
 			)}
 
@@ -158,7 +112,6 @@ export default function ScheduleItem({
 	index,
 	isLast = false,
 	isFirst = false,
-	eventTranslations = {},
 }: ProgrammeItemProps) {
 	const isEven = index % 2 === 0;
 	const itemRef = useRef<HTMLDivElement>(null);
@@ -209,7 +162,7 @@ export default function ScheduleItem({
 					{isEven ? (
 						<EventIcon icon={item.icon} />
 					) : (
-						<EventContent item={item} eventTranslations={eventTranslations} />
+						<EventContent item={item} />
 					)}
 				</motion.div>
 
@@ -226,7 +179,7 @@ export default function ScheduleItem({
 					{!isEven ? (
 						<EventIcon icon={item.icon} />
 					) : (
-						<EventContent item={item} eventTranslations={eventTranslations} />
+						<EventContent item={item} />
 					)}
 				</motion.div>
 			</div>
@@ -246,7 +199,7 @@ export default function ScheduleItem({
 						animate={isVisible ? { x: 0 } : { x: 64 }}
 						transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
 					>
-						{getIcon(item.icon)}
+					{getProgrammeIcon(item.icon)}
 					</motion.div>
 				</motion.div>
 
@@ -275,34 +228,12 @@ export default function ScheduleItem({
 						animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 16 }}
 						transition={{ duration: 0.7, delay: 0.2 }}
 					>
-						<EventContent item={item} mobile eventTranslations={eventTranslations} />
+						<EventContent item={item} mobile />
 					</motion.div>
 				</div>
 			</div>
 		</div>
 	);
-}
-
-/**
- * Retourne l'icône correspondante avec react-icons
- */
-function getIcon(icon: string | null) {
-	switch (icon) {
-		case "ceremony":
-			return <GiBigDiamondRing />;
-		case "cocktail":
-			return <GiWineGlass />;
-		case "dinner":
-			return <PiForkKnife />;
-		case "party":
-			return <CiMusicNote1 />;
-		case "photo":
-			return <MdPhotoCamera />;
-		case "cake":
-			return <GiCakeSlice />;
-		default:
-			return <GiBigDiamondRing />;
-	}
 }
 
 /**

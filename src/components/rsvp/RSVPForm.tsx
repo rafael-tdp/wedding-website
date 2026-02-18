@@ -293,7 +293,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
               className={`flex-1 py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md font-medium transition-all ${
                 attending === true
                   ? "bg-primary text-white"
-                  : "bg-green-300/20 text-gray-700 hover:bg-green-300/30"
+                  : "bg-primary/50 text-gray-700 hover:bg-primary/60"
               }`}
             >
               ✓ {texts.yes || "Oui, je serai là !"}
@@ -304,7 +304,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
               className={`flex-1 py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md font-medium transition-all ${
                 attending === false
                   ? "bg-gray-600 text-white"
-                  : "bg-red-300/20 text-gray-700 hover:bg-red-300/30"
+                  : "bg-secondary/50 text-gray-700 hover:bg-secondary/60"
               }`}
             >
               ✗ {texts.no || "Non, malheureusement"}

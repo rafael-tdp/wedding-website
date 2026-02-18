@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import { ModalPortal } from "@/components/ui/ModalPortal";
 import { MdClose } from "react-icons/md";
 import { UploadModalProvider } from "./UploadModalContext";
+import { isBeforeWeddingGallery } from "@/lib/config/wedding-config";
 
 interface GalleryLayoutProps {
 	gallery: ReactNode;
@@ -21,6 +22,7 @@ export function GalleryLayout({
 	dict,
 }: GalleryLayoutProps) {
 	const [showUploadModal, setShowUploadModal] = useState(false);
+	const isBeforeWedding = isBeforeWeddingGallery();
 
 	const handleUploadClick = () => {
 		setShowUploadModal(true);
@@ -32,18 +34,6 @@ export function GalleryLayout({
 			{/* Galerie principale */}
 			<div className="w-full bg-white py-8 sm:py-12">
 			<div className="relative max-w-8xl mx-auto px-6 md:px-8">
-					{/* Bouton d'upload desktop */}
-					<div className="flex justify-start sm:justify-end mb-6 sm:mb-8">
-						<Button
-							variant="primary"
-							onClick={handleUploadClick}
-							className="hidden sm:flex items-center gap-2 w-full sm:w-auto"
-						>
-							<FaPlus className="w-4 h-4" />
-							{dict?.gallery.addPhotos || "Ajouter des photos"}
-						</Button>
-					</div>
-
 					{/* Contenu galerie */}
 					{gallery}
 				</div>

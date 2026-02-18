@@ -45,7 +45,7 @@
 		},
 		"countdown": {
 			"title": "Ana & Rafael <br/> Têm o prazer de vos convidar",
-			"description": "Ao seu casamento no <strong>11 de Agosto de 2026</strong> as 14:00 <br /> Na Quinta das Tulipas."
+			"description": "Ao seu casamento no <strong>11 de Agosto de 2026</strong> às 12h <br /> Na Quinta das Tulipas."
 		},
 		"story": {
 			"title": "A Nossa História",
@@ -90,7 +90,7 @@
 			},
 			"rsvp": {
 				"title": "RSVP",
-				"description": "Confirme a sua presença antes de 15 de julho de 2026"
+				"description": "Confirme a sua presença antes do 19 de maio de 2026"
 			},
 			"faq": {
 				"title": "FAQ",
@@ -358,6 +358,8 @@
 			"subtitle": "Descubra as fotos carregadas pelos nossos convidados",
 			"empty": "Ainda não há fotos",
 			"emptySubtitle": "Seja o primeiro a partilhar as suas recordações!",
+			"beforeWeddingTitle": "A galeria abrirá no dia do casamento",
+			"beforeWeddingSubtitle": "Volte no dia 11 de agosto de 2026 para partilhar as suas melhores recordações!",
 			"count": "foto(s) partilhada(s)"
 		},
 		"download": {

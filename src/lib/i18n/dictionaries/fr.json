@@ -45,7 +45,7 @@
 		},
 		"countdown": {
 			"title": "Ana & Rafael <br/> Ont le plaisir de vous inviter",
-			"description": "À leur mariage le <strong>11 Août 2026</strong> <br /> À 14h00 à Quinta das Tulipas."
+			"description": "À leur mariage le <strong>11 Août 2026</strong> <br /> À 12h00 à Quinta das Tulipas."
 		},
 		"story": {
 			"title": "Notre Histoire",
@@ -90,7 +90,7 @@
 			},
 			"rsvp": {
 				"title": "RSVP",
-				"description": "Confirmez votre présence avant le 15 juillet 2026"
+				"description": "Confirmez votre présence avant le 19 mai 2026"
 			},
 			"faq": {
 				"title": "FAQ",
@@ -109,7 +109,7 @@
 		"subtitle": "Nous serions ravis de partager ce jour spécial avec vous",
 		"important": "Informations Importantes",
 		"deadline": "Date limite",
-		"deadlineText": "Merci de confirmer votre présence avant le 1er juillet 2026 pour nous permettre de finaliser l'organisation.",
+		"deadlineText": "Merci de confirmer votre présence avant le 19 mai 2026 pour nous permettre de finaliser l'organisation.",
 		"menu": "Menu",
 		"menuText": "N'oubliez pas de nous indiquer vos éventuelles restrictions alimentaires ou allergies pour que nous puissions préparer un menu adapté.",
 		"music": "Musique",
@@ -358,6 +358,8 @@
 			"subtitle": "Découvrez les photos de nos invités",
 			"empty": "Aucune photo pour le moment",
 			"emptySubtitle": "Soyez le premier à partager vos souvenirs !",
+			"beforeWeddingTitle": "La galerie ouvrira le jour du mariage",
+			"beforeWeddingSubtitle": "Revenez le 11 août 2026 pour partager vos plus beaux souvenirs !",
 			"count": "photo(s) partagée(s)"
 		},
 		"download": {

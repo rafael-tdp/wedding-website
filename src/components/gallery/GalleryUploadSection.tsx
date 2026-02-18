@@ -1,6 +1,6 @@
 import { Title } from "../ui";
 import { PhotoUpload } from "./PhotoUpload";
-import { weddingConfig } from "@/lib/config/wedding-config";
+import { isBeforeWeddingGallery } from "@/lib/config/wedding-config";
 
 interface GalleryUploadSectionProps {
 	dict: any;
@@ -9,10 +9,7 @@ interface GalleryUploadSectionProps {
 export default function GalleryUploadSection({
 	dict,
 }: GalleryUploadSectionProps) {
-	// Vérifier si le mariage a eu lieu
-	const weddingDate = new Date(weddingConfig.wedding.date);
-	const now = new Date();
-	const isWeddingPassed = now >= weddingDate;
+	const isBeforeWedding = isBeforeWeddingGallery();
 
 	return (
 		<div className="space-y-8">
@@ -23,7 +20,7 @@ export default function GalleryUploadSection({
 				</p>
 			</div>
 
-			{!isWeddingPassed && (
+			{isBeforeWedding && (
 				<div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
 					<p className="text-blue-800 text-center">
 						{dict.gallery.comingSoon}
@@ -31,7 +28,7 @@ export default function GalleryUploadSection({
 				</div>
 			)}
 
-			{isWeddingPassed && <PhotoUpload texts={dict.gallery.upload} />}
+			{!isBeforeWedding && <PhotoUpload texts={dict.gallery.upload} />}
 		</div>
 	);
 }

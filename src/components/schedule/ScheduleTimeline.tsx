@@ -4,12 +4,10 @@ import { Programme } from "@/lib/supabase/queries";
 
 interface ScheduleTimelineProps {
 	items: Programme[];
-	eventTranslations: any;
 }
 
 export default function ScheduleTimeline({
 	items,
-	eventTranslations,
 }: ScheduleTimelineProps) {
 	return (
 		<Section variant="default" spacing="lg">
@@ -22,7 +20,6 @@ export default function ScheduleTimeline({
 							index={index}
 							isFirst={index === 0}
 							isLast={index === items.length - 1}
-							eventTranslations={eventTranslations}
 						/>
 					))}
 				</div>

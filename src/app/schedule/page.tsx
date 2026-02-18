@@ -62,7 +62,6 @@ export default async function SchedulePage() {
 
       <ScheduleTimeline 
         items={programmeWithTranslations}
-        eventTranslations={dict.programme.events}
       />
 
       <SchedulePractical

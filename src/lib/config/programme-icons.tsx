@@ -1,6 +1,6 @@
 import { GiCakeSlice } from "react-icons/gi";
 import { PiWineThin } from "react-icons/pi";
-import { CiLogin, CiMusicNote1, CiCamera, CiForkAndKnife, CiGlass } from "react-icons/ci";
+import { CiLogin, CiMusicNote1, CiCamera, CiForkAndKnife } from "react-icons/ci";
 import { ReactNode } from "react";
 import { LiaRingSolid } from "react-icons/lia";
 

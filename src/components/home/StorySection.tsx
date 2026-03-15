@@ -13,7 +13,7 @@ export default function StorySection({ dict }: StoryProps) {
       </Section>
 
       <svg
-        className="w-full"
+        className="w-full block bg-background relative z-20"
         viewBox="0 0 1200 120"
         preserveAspectRatio="none"
         style={{ marginTop: "-1px" }}

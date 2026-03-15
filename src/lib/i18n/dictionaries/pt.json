@@ -39,13 +39,13 @@
 		"hero": {
 			"title": "Ana & Rafael",
 			"subtitle": "Vamos casar!",
-			"date": "11 de Agosto de 2026 · Quinta das Tulipas",
+			"date": "11 de Agosto de 2026 · Quinta\u00A0das\u00A0Tulipas",
 			"confirmPresence": "Confirmar presença",
 			"seeProgramme": "Ver programa"
 		},
 		"countdown": {
 			"title": "Ana & Rafael <br/> Têm o prazer de vos convidar",
-			"description": "Ao seu casamento no <strong>11 de Agosto de 2026</strong> às 12h <br /> Na Quinta das Tulipas."
+			"description": "Ao seu casamento no <strong>11 de Agosto de 2026</strong> às 12h na <strong>Quinta\u00A0das\u00A0Tulipas</strong>."
 		},
 		"story": {
 			"title": "A Nossa História",
@@ -78,7 +78,7 @@
 			},
 			"venue": {
 				"title": "Local & Acesso",
-				"description": "Como chegar a Quinta das Tulipas"
+				"description": "Como chegar a Quinta\u00A0das\u00A0Tulipas"
 			},
 			"accommodation": {
 				"title": "Alojamento",
@@ -184,7 +184,7 @@
 		"subtitle": "Eis o desenrolar do nosso grande dia. Mal podemos esperar para partilhar estes momentos mágicos convosco!",
 		"empty": "O programa estará brevemente disponível.",
 		"practical": "Informações práticas",
-		"practicalDescription": "Recomendamos que cheguem 15 minutos antes do início da cerimónia. Há estacionamento disponível no local.",
+		"practicalDescription": "Recomendamos que cheguem 15 minutos antes do início da cerimónia. Há estacionamento disponível no local. Os horários mencionados são aproximados e podem sofrer ligeiras alterações.",
 		"seeVenue": "Ver local",
 		"seeAccommodation": "Alojamento",
 		"events": {

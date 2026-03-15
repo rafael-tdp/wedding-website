@@ -8,7 +8,7 @@ interface CountdownSectionProps {
 export default function CountdownSection({ dict }: CountdownSectionProps) {
   return (
     <Section variant="soft" spacing="none" className="animate-fade-in">
-      <div className="max-w-3xl mx-auto text-center pb-8 sm:pb-12 pt-12 sm:pt-16 space-y-6 sm:space-y-8">
+      <div className="max-w-3xl mx-auto text-center py-20 space-y-6 sm:space-y-8">
         {/* Titre principal */}
         <div className="space-y-3 sm:space-y-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl italic text-foreground font-normal font-gilda">
@@ -38,7 +38,7 @@ export default function CountdownSection({ dict }: CountdownSectionProps) {
         </div>
 
         {/* Countdown */}
-        <div className="pb-6 sm:pb-8 pt-8 sm:pt-12">
+        <div className="pt-8 sm:pt-12">
           <Countdown />
         </div>
       </div>

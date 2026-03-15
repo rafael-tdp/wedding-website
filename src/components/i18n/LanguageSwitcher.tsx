@@ -78,17 +78,17 @@ export function LanguageSwitcher({ isScrolled = false, mobile = false }: { isScr
       return;
     }
 
+    // Définir le cookie
+    document.cookie = `${LOCALE_COOKIE}=${newLocale}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
+    
+    // Mettre à jour l'état local
+    setCurrentLocale(newLocale);
+    
+    // Fermer le dropdown
+    setIsOpen(false);
+    
+    // Recharger la page pour appliquer la nouvelle langue (en dehors de la transition)
     startTransition(() => {
-      // Définir le cookie
-      document.cookie = `${LOCALE_COOKIE}=${newLocale}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
-      
-      // Mettre à jour l'état local
-      setCurrentLocale(newLocale);
-      
-      // Fermer le dropdown
-      setIsOpen(false);
-      
-      // Recharger la page pour appliquer la nouvelle langue
       router.refresh();
     });
   };

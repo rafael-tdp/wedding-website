@@ -13,8 +13,14 @@ export default async function Home() {
   return (
     <main className="min-h-screen animate-page-enter">
       <Hero dict={dict} />
-      <CountdownSection dict={dict} />
-      <StorySection dict={dict} />
+      <div className="relative">
+        <div className="sticky top-16 z-0">
+          <CountdownSection dict={dict} />
+        </div>
+        <div className="relative z-10">
+          <StorySection dict={dict} />
+        </div>
+      </div>
       <PracticalSection dict={dict} />
       <CTASection dict={dict} />
     </main>

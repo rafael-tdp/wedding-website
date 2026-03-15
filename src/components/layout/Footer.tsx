@@ -51,7 +51,7 @@ export default function Footer() {
 
           {/* Column 2 : Navigation */}
           <div className="border-t border-accent-light/30 pt-8 sm:pt-0 sm:border-t-0">
-            <h4 className="text-secondary font-medium mb-4 font-gilda">{footerNavigation}</h4>
+            <h4 className="text-secondary font-medium mb-4">{footerNavigation}</h4>
             <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2">
               {footerLinks.map((link) => (
                 <li key={link.href}>
@@ -76,7 +76,7 @@ export default function Footer() {
 
           {/* Column 3 : Contact */}
           <div className="border-t border-accent-light/30 pt-8 sm:pt-0 sm:border-t-0">
-            <h4 className="text-secondary font-medium mb-4 font-gilda">{footerContactTitle}</h4>
+            <h4 className="text-secondary font-medium mb-4">{footerContactTitle}</h4>
             <ul className="space-y-2 text-sm text-gray-200">
               <li className="flex items-center gap-2">
                 <svg

@@ -1,24 +1,47 @@
+"use client";
+
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import { useEffect, useState } from "react";
 
 interface HeroProps {
 	dict: any;
 }
 
 export default function Hero({ dict }: HeroProps) {
+	const [parallaxY, setParallaxY] = useState(0);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setParallaxY(window.scrollY * 0.15);
+		};
+
+		handleScroll();
+		window.addEventListener("scroll", handleScroll, { passive: true });
+
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
+
 	return (
 		<>
 			{/* Hero Section */}
 			<div
-				className="relative w-full min-h-screen bg-cover bg-center sm:bg-fixed flex flex-col items-center justify-end overflow-hidden"
-				style={{
-					backgroundImage:
-						"linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/hero-bg.jpeg')",
-					backgroundPosition: "center center",
-					backgroundSize: "cover",
-				}}
+				className="relative w-full min-h-screen flex flex-col items-center justify-end overflow-hidden"
 			>
-				<div className="text-center w-full space-y-6 sm:space-y-8 text-white pb-24 md:pb-32 max-w-3xl animate-slide-up">
+				<div
+					className="absolute inset-0 will-change-transform"
+					style={{
+						transform: `translateY(${parallaxY}px) scale(1.08)`,
+						backgroundImage:
+							"linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/hero-bg.jpeg')",
+						backgroundPosition: "center center",
+						backgroundSize: "cover",
+					}}
+				/>
+
+				<div className="relative z-10 text-center w-full space-y-6 sm:space-y-8 text-white pb-24 md:pb-32 max-w-3xl animate-slide-up">
 					{/* Deskstop title */}
 					<h1
 						className="hidden sm:block text-6xl sm:text-7xl md:text-8xl font-serif italic font-extralight leading-none"
@@ -76,18 +99,6 @@ export default function Hero({ dict }: HeroProps) {
 						</Link>
 					</div>
 				</div>
-
-				{/* <svg
-					className="absolute bottom-0 left-0 w-full"
-					viewBox="0 0 1200 120"
-					preserveAspectRatio="none"
-					style={{ marginBottom: "-1px" }}
-				>
-					<path
-						d="M 0,120 Q 600,20 1200,120 L 1200,120 L 0,120 Z"
-						className="fill-background-soft"
-					/>
-				</svg> */}
 			</div>
 		</>
 	);

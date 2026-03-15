@@ -47,7 +47,7 @@ export default function PracticalInfo({
 					}
 				});
 			},
-			{ threshold: 0.1 }
+			{ threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
 		);
 
 		itemRefs.current.forEach((ref) => {
@@ -69,10 +69,14 @@ export default function PracticalInfo({
 					ref={(el) => {
 						itemRefs.current[index] = el;
 					}}
-					className={`transition-all duration-700 ${
+					style={{
+						transitionDelay: `${index * 80}ms`,
+						transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+					}}
+					className={`transform-gpu transition-all duration-700 will-change-transform ${
 						visibleItems[index]
-							? "opacity-100 translate-y-0"
-							: "opacity-0 translate-y-10"
+							? "opacity-100 translate-y-0 blur-0 scale-100"
+							: "opacity-0 translate-y-4 blur-[2px] scale-[0.98]"
 					}`}
 				>
 					<Card

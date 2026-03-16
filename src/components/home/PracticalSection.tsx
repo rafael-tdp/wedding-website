@@ -10,7 +10,7 @@ interface PracticalSectionProps {
 
 export default function PracticalSection({ dict }: PracticalSectionProps) {
   return (
-    <Section variant="soft" spacing="sm" className="pb-16 sm:pb-24 md:pb-32 animate-fade-in">
+    <Section variant="soft" spacing="sm" className="pb-16 pt-16 sm:pb-24 md:pb-32 animate-fade-in -mt-1">
       <Title level="h2" align="center" withAccent>
         {dict.home.info.title}
       </Title>

@@ -62,7 +62,7 @@ export default function PracticalInfo({
 	}, []);
 
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 auto-rows-fr">
+		<div className="relative flex flex-col gap-8 sm:grid sm:grid-cols-2 md:grid-cols-3 sm:gap-4 md:gap-6 auto-rows-fr">
 			{items.map((item, index) => (
 				<div
 					key={index}
@@ -72,8 +72,11 @@ export default function PracticalInfo({
 					style={{
 						transitionDelay: `${index * 80}ms`,
 						transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+						zIndex: index + 1,
+						top: `${100 + index * 16}px`,
+						marginTop: index === 0 ? "0px" : "-12px",
 					}}
-					className={`transform-gpu transition-all duration-700 will-change-transform ${
+					className={`sticky sm:static transform-gpu transition-all duration-700 will-change-transform ${
 						visibleItems[index]
 							? "opacity-100 translate-y-0 blur-0 scale-100"
 							: "opacity-0 translate-y-4 blur-[2px] scale-[0.98]"

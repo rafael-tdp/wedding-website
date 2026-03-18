@@ -5,6 +5,7 @@ interface HeroSectionProps {
 	title: string;
 	subtitle?: string;
 	backgroundImage?: string;
+	backgroundPosition?: string;
 	withAccent?: boolean;
 	withBackgroundLetter?: boolean;
 }
@@ -13,6 +14,7 @@ export default function HeroSection({
 	title,
 	subtitle,
 	backgroundImage,
+	backgroundPosition = "center center",
 	withAccent = false,
 	withBackgroundLetter = true,
 }: HeroSectionProps) {
@@ -22,6 +24,7 @@ export default function HeroSection({
 			spacing="lg"
 			isHero
 			backgroundImage={backgroundImage}
+			backgroundPosition={backgroundPosition}
 		>
 			<div className="text-center space-y-4 animate-slide-up">
 				<Title

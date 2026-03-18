@@ -21,6 +21,7 @@ export default async function GalleriePage() {
 				title={dict.gallery.title}
 				subtitle={dict.gallery.subtitle}
 				backgroundImage="/images/hero-bg-5.jpg"
+				backgroundPosition="center 65%"
 				withBackgroundLetter
 			/>
 

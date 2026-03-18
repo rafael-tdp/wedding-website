@@ -41,6 +41,7 @@ export default function LocationPage() {
 				title={dict.venue.title}
 				subtitle={dict.venue.subtitle}
 				backgroundImage="/images/hero-bg-3.jpg"
+				backgroundPosition="center 60%"
 				withBackgroundLetter
 			/>
 

@@ -2,25 +2,42 @@
 
 import Link from "next/link";
 import Button from "@/components/ui/Button";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 interface HeroProps {
 	dict: any;
 }
 
 export default function Hero({ dict }: HeroProps) {
-	const [parallaxY, setParallaxY] = useState(0);
+	const backgroundRef = useRef<HTMLDivElement>(null);
+	const rafRef = useRef<number>();
+	const lastScrollRef = useRef(0);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
+		if (!backgroundRef.current) return;
+
 		const handleScroll = () => {
-			setParallaxY(window.scrollY * 0.15);
+			lastScrollRef.current = window.scrollY;
+			
+			if (rafRef.current) {
+				cancelAnimationFrame(rafRef.current);
+			}
+
+			rafRef.current = requestAnimationFrame(() => {
+				if (backgroundRef.current) {
+					const parallaxY = lastScrollRef.current * 0.15;
+					backgroundRef.current.style.transform = `translateY(${parallaxY}px) scale(1.08)`;
+				}
+			});
 		};
 
-		handleScroll();
 		window.addEventListener("scroll", handleScroll, { passive: true });
 
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
+			if (rafRef.current) {
+				cancelAnimationFrame(rafRef.current);
+			}
 		};
 	}, []);
 
@@ -31,12 +48,13 @@ export default function Hero({ dict }: HeroProps) {
 				className="relative w-full min-h-screen flex flex-col items-center justify-end overflow-hidden"
 			>
 				<div
+					ref={backgroundRef}
 					className="absolute inset-0 will-change-transform"
 					style={{
-						transform: `translateY(${parallaxY}px) scale(1.08)`,
+						transform: "translateY(0px) scale(1.08)",
 						backgroundImage:
-							"linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/hero-bg.jpeg')",
-						backgroundPosition: "center center",
+							"linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), url('/images/hero-bg.jpg')",
+						backgroundPosition: "center bottom",
 						backgroundSize: "cover",
 					}}
 				/>
@@ -76,7 +94,7 @@ export default function Hero({ dict }: HeroProps) {
 						<p className="text-sm md:text-base font-serif italic">
 							{dict.home.hero.subtitle}
 						</p>
-						<p className="text-sm md:text-base text-gray-300">
+						<p className="text-sm md:text-base text-gray-200">
 							{dict.home.hero.date}
 						</p>
 					</div>

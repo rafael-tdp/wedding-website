@@ -48,7 +48,7 @@ export default function AdminLogin() {
     return (
       <div
         className="min-h-screen bg-cover bg-center flex items-center justify-center p-4"
-        style={{ backgroundImage: "url('/images/hero-bg.jpeg')" }}
+        style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
       >
         <div className="bg-white rounded-lg shadow-xl p-6 sm:p-8 max-w-md w-full text-center space-y-4">
           <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
@@ -79,7 +79,7 @@ export default function AdminLogin() {
   return (
     <div
       className="min-h-screen bg-cover bg-center flex items-center justify-center p-4"
-      style={{ backgroundImage: "url('/images/hero-bg.jpeg')" }}
+      style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
     >
       <div className="bg-white rounded-lg shadow-xl p-6 sm:p-8 max-w-md w-full space-y-4">
         {/* Header */}

@@ -48,6 +48,7 @@ export default async function AccommodationsPage() {
 				title={accommodation.title}
 				subtitle={accommodation.subtitle}
 				backgroundImage="/images/hero-bg-4.jpg"
+				backgroundPosition="center 90%"
 				withBackgroundLetter
 			/>
 

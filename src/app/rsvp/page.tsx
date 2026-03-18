@@ -23,6 +23,7 @@ export default async function RSVPPage() {
 				title={dict.rsvp.title}
 				subtitle={dict.rsvp.subtitle}
 				backgroundImage="/images/hero-bg-6.jpg"
+				backgroundPosition="center 70%"
 				withBackgroundLetter
 			/>
 

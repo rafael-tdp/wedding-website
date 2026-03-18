@@ -48,6 +48,7 @@ export default async function FAQPage() {
         title={dict.faq.title}
         subtitle={dict.faq.subtitle}
         backgroundImage="/images/hero-bg-7.jpg"
+        backgroundPosition="center 97%"
         withBackgroundLetter
       />
 

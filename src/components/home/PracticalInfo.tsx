@@ -62,7 +62,7 @@ export default function PracticalInfo({
 	}, []);
 
 	return (
-		<div className="relative flex flex-col gap-8 sm:grid sm:grid-cols-2 md:grid-cols-3 sm:gap-4 md:gap-6 auto-rows-fr">
+		<div className="relative grid grid-cols-1 gap-8 sm:grid sm:grid-cols-2 md:grid-cols-3 sm:gap-4 md:gap-6 auto-rows-fr">
 			{items.map((item, index) => (
 				<div
 					key={index}

@@ -5,7 +5,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ConfigWarning } from "@/components/ui/ConfigWarning";
-import PWAInit from "@/components/pwa/PWAInit";
+// import PWAInit from "@/components/pwa/PWAInit";
 import { I18nProvider } from "@/lib/i18n/context";
 import { getLocale } from "@/lib/i18n/get-locale";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
@@ -85,7 +85,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${parisienne.variable} ${playfairDisplay.variable} ${gildaDisplay.variable} antialiased min-h-screen flex flex-col`}
       >
-        <PWAInit />
+        {/* <PWAInit /> */}
         <I18nProvider locale={locale} dict={dict}>
           <ConfigWarning />
           <Navbar isAdmin={isAdmin} />

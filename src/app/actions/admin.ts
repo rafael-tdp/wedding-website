@@ -74,6 +74,14 @@ export async function fetchRSVPs(): Promise<
     allergies?: string;
     special_needs?: string;
     message?: string;
+    family_members?: Array<{
+      name: string;
+      attending: boolean;
+      isChild: boolean;
+      age?: number;
+      dietary_restrictions?: string;
+      allergies?: string;
+    }>;
     created_at: string;
     updated_at: string;
   }[]
@@ -117,35 +125,113 @@ export async function exportRSVPsAsCSV(): Promise<string> {
       return "";
     }
 
+    const csvCell = (value: unknown): string => {
+      const normalized = value === null || value === undefined ? "" : String(value);
+      return `"${normalized.replace(/"/g, '""')}"`;
+    };
+
+    const csvPhoneCell = (value: unknown): string => {
+      const normalized = value === null || value === undefined ? "" : String(value).trim();
+
+      if (!normalized) {
+        return csvCell("");
+      }
+
+      const escaped = normalized.replace(/"/g, '""');
+      return `"=""${escaped}"""`;
+    };
+
+    const formatDateTime = (dateString: string): string => {
+      return new Date(dateString).toLocaleString("fr-FR", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    };
+
+    const toBoolean = (value: unknown, defaultValue = false): boolean => {
+      if (typeof value === "boolean") return value;
+      if (typeof value === "number") return value === 1;
+      if (typeof value === "string") {
+        const normalized = value.trim().toLowerCase();
+        if (["true", "1", "oui", "yes", "y"].includes(normalized)) return true;
+        if (["false", "0", "non", "no", "n"].includes(normalized)) return false;
+      }
+      return defaultValue;
+    };
+
+    const getFamilyMembers = (value: unknown): Array<{
+      name?: string;
+      attending?: unknown;
+      isChild?: boolean;
+      age?: number;
+      dietary_restrictions?: string;
+      allergies?: string;
+    }> => {
+      if (Array.isArray(value)) return value;
+
+      if (typeof value === "string") {
+        try {
+          const parsed = JSON.parse(value);
+          return Array.isArray(parsed) ? parsed : [];
+        } catch {
+          return [];
+        }
+      }
+
+      return [];
+    };
+
     // En-têtes CSV
     const headers = [
       "Nom",
       "Email",
       "Téléphone",
       "Présent",
-      "Accompagnant",
-      "Nom accompagnant",
+      "Type",
+      "Âge",
       "Restrictions alimentaires",
       "Allergies",
       "Besoins spéciaux",
-      "Message",
       "Date",
     ];
 
     // Rows CSV
-    const rows = rsvps.map((rsvp) => [
-      `"${rsvp.guest_name.replace(/"/g, '""')}"`,
-      `"${rsvp.guest_email}"`,
-      `"${rsvp.guest_phone || ""}"`,
-      rsvp.attending ? "Oui" : "Non",
-      rsvp.plus_one ? "Oui" : "Non",
-      `"${rsvp.plus_one_name || ""}"`,
-      `"${rsvp.dietary_restrictions || ""}"`,
-      `"${rsvp.allergies || ""}"`,
-      `"${rsvp.special_needs || ""}"`,
-      `"${(rsvp.message || "").replace(/"/g, '""')}"`,
-      new Date(rsvp.created_at).toLocaleDateString("fr-FR"),
-    ]);
+    const rows: string[][] = [];
+
+    rsvps.forEach((rsvp) => {
+      rows.push([
+        csvCell(rsvp.guest_name),
+        csvCell(rsvp.guest_email),
+        csvPhoneCell(rsvp.guest_phone),
+        csvCell(rsvp.attending ? "Oui" : "Non"),
+        csvCell("Adulte"),
+        csvCell(""),
+        csvCell(rsvp.dietary_restrictions),
+        csvCell(rsvp.allergies),
+        csvCell(rsvp.special_needs),
+        csvCell(formatDateTime(rsvp.created_at)),
+      ]);
+
+      const familyMembers = getFamilyMembers(rsvp.family_members);
+
+      familyMembers.forEach((member) => {
+        rows.push([
+          csvCell(member.name),
+          csvCell(""),
+          csvCell(""),
+          csvCell(toBoolean(member.attending, true) ? "Oui" : "Non"),
+          csvCell(member.isChild ? "Enfant" : "Adulte"),
+          csvCell(member.isChild ? member.age ?? "" : ""),
+          csvCell(member.dietary_restrictions),
+          csvCell(member.allergies),
+          csvCell(""),
+          csvCell(formatDateTime(rsvp.created_at)),
+        ]);
+      });
+    });
 
     const csv = [headers, ...rows].map((row) => row.join(",")).join("\n");
 

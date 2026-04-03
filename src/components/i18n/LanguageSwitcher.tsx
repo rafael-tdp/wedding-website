@@ -98,18 +98,12 @@ export function LanguageSwitcher({ isScrolled = false, mobile = false }: { isScr
     return (
       <div className="relative">
         <button
-          className={`flex items-center gap-2 px-3 py-2 rounded-full transition-colors ${
-            isScrolled
-              ? "hover:bg-gray-100"
-              : "hover:bg-white/20"
-          }`}
+          className="flex items-center gap-2 px-3 py-2 rounded-full transition-colors hover:bg-white/20"
           aria-label="Changer de langue"
           disabled={true}
         >
           <LanguageIcon locale={i18n.defaultLocale} className="text-lg" />
-          <span className={`text-sm font-medium hidden sm:inline ${
-            isScrolled ? "text-gray-700" : "text-white"
-          }`}>
+          <span className="text-sm font-medium hidden sm:inline text-gray-700">
             {languages[i18n.defaultLocale].code.toUpperCase()}
           </span>
         </button>
@@ -125,11 +119,7 @@ export function LanguageSwitcher({ isScrolled = false, mobile = false }: { isScr
         className={`flex items-center gap-2 transition-colors ${
           mobile
             ? "block px-4 py-3 text-xl font-normal text-gray-700 tracking-widest w-full text-left"
-            : `px-0 sm:px-3 py-2 rounded-full ${
-                isScrolled
-                  ? "text-gray-700 hover:bg-gray-100"
-                  : "text-white hover:bg-white/20"
-              }`
+            : "px-0 sm:px-3 py-1 ml-2 rounded-full text-gray-700 hover:bg-gray-300/30"
         }`}
         aria-label="Changer de langue"
         disabled={isPending}
@@ -161,9 +151,9 @@ export function LanguageSwitcher({ isScrolled = false, mobile = false }: { isScr
             </span>
             <span className="sm:hidden text-gray-700">{languages[currentLocale].name}</span>
             <svg
-              className={`w-4 h-4 transition-transform ${
+              className={`w-4 h-4 transition-transform text-gray-500 ${
                 isOpen ? "rotate-180" : ""
-              } ${isScrolled ? "text-gray-500" : "text-gray-300"}`}
+              }`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

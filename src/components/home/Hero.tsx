@@ -53,13 +53,13 @@ export default function Hero({ dict }: HeroProps) {
 					style={{
 						transform: "translateY(0px) scale(1.08)",
 						backgroundImage:
-							"linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), url('/images/hero-bg.jpg')",
+							"linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)), url('/images/hero-bg.jpg')",
 						backgroundPosition: "center bottom",
 						backgroundSize: "cover",
 					}}
 				/>
 
-				<div className="relative z-10 text-center w-full space-y-6 sm:space-y-8 text-white pb-24 md:pb-32 max-w-3xl animate-slide-up">
+				<div className="relative z-10 text-center w-full space-y-6 sm:space-y-8 text-primary pb-24 md:pb-32 max-w-3xl animate-slide-up">
 					{/* Deskstop title */}
 					<h1
 						className="hidden sm:block text-6xl sm:text-7xl md:text-8xl font-serif italic font-extralight leading-none"
@@ -90,11 +90,11 @@ export default function Hero({ dict }: HeroProps) {
 					<div className="h-48 sm:h-48 2xl:h-64 w-full"></div>
 
 					{/* Details */}
-					<div className="space-y-1 text-gray-200">
-						<p className="text-sm md:text-base font-serif italic">
+					<div className="text-sm md:text-base space-y-1 text-white">
+						<p className="font-serif italic text-shadow-md">
 							{dict.home.hero.subtitle}
 						</p>
-						<p className="text-sm md:text-base text-gray-200">
+						<p>
 							{dict.home.hero.date}
 						</p>
 					</div>

@@ -100,11 +100,7 @@ function NavbarContent({ isAdmin = false }: { isAdmin?: boolean }) {
 					{/* Logo / Titre */}
 					<Link
 						href="/"
-						className={`flex items-center space-x-2 text-2xl transition-colors ${
-							shouldBeTransparent
-								? "text-white hover:text-gray-100"
-								: "text-primary hover:text-primary/80"
-						}`}
+						className="flex items-center space-x-2 text-2xl transition-colors text-primary hover:text-primary/80"
 						style={{ fontFamily: "var(--font-parisienne)" }}
 					>
 						<span className="hidden sm:inline">Ana & Rafael</span>
@@ -126,9 +122,7 @@ function NavbarContent({ isAdmin = false }: { isAdmin?: boolean }) {
                   ${
 						isActive(link.href)
 							? "bg-primary/80 text-white"
-							: shouldBeTransparent
-							? "text-white hover:bg-white/20 hover:text-white"
-							: "text-gray-700 hover:bg-gray-100 hover:text-primary"
+							: "text-gray-700 hover:bg-gray-300/30 hover:text-primary"
 					}
                 `}
 							>
@@ -138,39 +132,29 @@ function NavbarContent({ isAdmin = false }: { isAdmin?: boolean }) {
 
 						{/* Séparateur */}
 						<div
-							className={`w-px h-6 mx-2 ${
-								shouldBeTransparent
-									? "bg-white/30"
-									: "bg-gray-300"
-							}`}
+							className="w-px h-6 mx-2 bg-gray-300"
 						/>
 
 						{/* Admin Button */}
 						{isAdmin && (
 							<>
-							<Link
-								href={"/admin"}
-								className={`
-                  px-4 py-2 rounded-full text-sm font-medium transition-all
-                  ${
-						isActive("/admin")
-							? "bg-primary/80 text-white"
-							: shouldBeTransparent
-							? "text-white hover:bg-white/20 hover:text-white"
-							: "text-gray-700 hover:bg-gray-100 hover:text-primary"
-					}
-                `}
-							>
-								Admin
-							</Link>
-							{/* Séparateur */}
-						<div
-							className={`w-px h-6 mx-2 ${
-								shouldBeTransparent
-									? "bg-white/30"
-									: "bg-gray-300"
-							}`}
-						/>
+								<Link
+									href={"/admin"}
+									className={`
+										px-4 py-2 rounded-full text-sm font-medium transition-all
+										${
+												isActive("/admin")
+													? "bg-primary/80 text-white"
+													: "text-gray-700 hover:bg-gray-300/30 hover:text-primary"
+											}
+										`}
+								>
+									Admin
+								</Link>
+								{/* Séparateur */}
+								<div
+									className="w-px h-6 mx-2 bg-gray-300"
+								/>
 							</>
 						)}
 
@@ -186,20 +170,12 @@ function NavbarContent({ isAdmin = false }: { isAdmin?: boolean }) {
 							}
 							setIsOpen(!isOpen);
 						}}
-						className={`md:hidden p-2 rounded-full transition-colors ${
-							shouldBeTransparent
-								? "hover:bg-white/20"
-								: "hover:bg-gray-100"
-						}`}
+						className={`md:hidden p-2 rounded-full transition-colors hover:bg-gray-100`}
 						aria-label="Toggle menu"
 					>
 						{isOpen ? (
 							<svg
-								className={`w-6 h-6 ${
-									shouldBeTransparent
-										? "text-white"
-										: "text-primary"
-								}`}
+								className="w-6 h-6 text-primary"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -213,11 +189,7 @@ function NavbarContent({ isAdmin = false }: { isAdmin?: boolean }) {
 							</svg>
 						) : (
 							<svg
-								className={`w-6 h-6 ${
-									shouldBeTransparent
-										? "text-white"
-										: "text-primary"
-								}`}
+								className="w-6 h-6 text-primary"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"

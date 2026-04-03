@@ -26,7 +26,7 @@ export default function Hero({ dict }: HeroProps) {
 			rafRef.current = requestAnimationFrame(() => {
 				if (backgroundRef.current) {
 					const parallaxY = lastScrollRef.current * 0.15;
-					backgroundRef.current.style.transform = `translateY(${parallaxY}px) scale(1.08)`;
+					backgroundRef.current.style.transform = `translateY(${parallaxY}px ) scale(${1 + parallaxY / 1000})`;
 				}
 			});
 		};
@@ -51,7 +51,7 @@ export default function Hero({ dict }: HeroProps) {
 					ref={backgroundRef}
 					className="absolute inset-0 will-change-transform"
 					style={{
-						transform: "translateY(0px) scale(1.08)",
+						transform: "translateY(0px) scale(1)",
 						backgroundImage:
 							"linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)), url('/images/hero-bg.jpg')",
 						backgroundPosition: "center bottom",

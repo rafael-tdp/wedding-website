@@ -112,7 +112,7 @@ function NavbarContent({ isAdmin = false }: { isAdmin?: boolean }) {
 					</Link>
 
 					{/* Menu Desktop */}
-					<div className="hidden md:flex items-center space-x-1">
+					<div className="hidden lg:flex items-center space-x-1">
 						{navLinks.map((link) => (
 							<Link
 								key={link.href}
@@ -170,7 +170,7 @@ function NavbarContent({ isAdmin = false }: { isAdmin?: boolean }) {
 							}
 							setIsOpen(!isOpen);
 						}}
-						className={`md:hidden p-2 rounded-full transition-colors hover:bg-gray-100`}
+						className={`lg:hidden p-2 rounded-full transition-colors hover:bg-gray-100`}
 						aria-label="Toggle menu"
 					>
 						{isOpen ? (
@@ -208,7 +208,7 @@ function NavbarContent({ isAdmin = false }: { isAdmin?: boolean }) {
 
 			{/* Menu Mobile */}
 			<div
-				className={`md:hidden overflow-hidden bg-white transition-all duration-300 ease-in-out ${
+				className={`lg:hidden overflow-hidden bg-white transition-all duration-300 ease-in-out ${
 					isOpen ? "h-[calc(100vh-64px)]" : "h-0"
 				}`}
 			>
@@ -269,7 +269,7 @@ export function Navbar({ isAdmin = false }: { isAdmin?: boolean }) {
 						>
 							<span>Ana & Rafael</span>
 						</Link>
-						<div className="hidden md:flex items-center space-x-1">
+						<div className="hidden lg:flex items-center space-x-1">
 							{DEFAULT_NAV_LINKS.map((link) => (
 								<Link
 									key={link.href}

@@ -45,7 +45,7 @@ export default function Hero({ dict }: HeroProps) {
 		<>
 			{/* Hero Section */}
 			<div
-				className="relative w-full min-h-screen flex flex-col items-center justify-end overflow-hidden"
+				className="relative w-full min-h-screen flex flex-col items-center overflow-hidden"
 			>
 				<div
 					ref={backgroundRef}
@@ -59,7 +59,10 @@ export default function Hero({ dict }: HeroProps) {
 					}}
 				/>
 
-				<div className="relative z-10 text-center w-full space-y-6 sm:space-y-8 text-primary pb-24 md:pb-32 max-w-3xl animate-slide-up">
+				{/* Navbar spacer */}
+				<div className="h-32 w-full shrink-0" />
+
+				<div className="relative z-10 grow flex flex-col items-center text-center w-full gap-6 sm:gap-8 text-primary pb-24 md:pb-32 max-w-3xl animate-slide-up">
 					{/* Deskstop title */}
 					<h1
 						className="hidden sm:block text-6xl sm:text-7xl md:text-8xl font-serif italic font-extralight leading-none"
@@ -87,7 +90,7 @@ export default function Hero({ dict }: HeroProps) {
 					</h1>
 
 					{/* Space */}
-					<div className="h-48 sm:h-48 2xl:h-64 w-full"></div>
+					<div className="grow w-full max-h-64"></div>
 
 					{/* Details */}
 					<div className="text-sm md:text-base space-y-1 text-white">

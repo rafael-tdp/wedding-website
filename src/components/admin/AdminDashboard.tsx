@@ -18,6 +18,7 @@ import AdminFAQManager from "./AdminFAQManager";
 import AdminProgrammeManager from "./AdminProgrammeManager";
 // import AdminHebergementManager from "./AdminHebergementManager"; // DESACTIVE TEMPORAIREMENT
 import { AdminFormModal } from "./AdminFormModal";
+import SearchAndFilters from "./SearchAndFilters";
 import { BiPlus, BiDownload } from "react-icons/bi";
 import { MdMenu, MdClose, MdMoreVert } from "react-icons/md";
 import { Title } from "../ui";
@@ -76,12 +77,12 @@ type TabType = "rsvp" | "photos" | "faq" | "programme";
 export default function AdminDashboard({
 	initialRsvps,
 	initialPhotos = [],
-}: AdminDashboardProps) {
-	const [rsvps, setRsvps] = useState<RSVP[]>(initialRsvps);
+}: AdminDashboardProps) {	const [rsvps, setRsvps] = useState<RSVP[]>(initialRsvps);
 	const [photos, setPhotos] = useState<Photo[]>(initialPhotos);
 	const [filter, setFilter] = useState<"all" | "attending" | "not-attending">(
 		"all",
 	);
+	const [searchQuery, setSearchQuery] = useState("");
 	const [exportLoading, setExportLoading] = useState(false);
 	const [activeTab, setActiveTabState] = useState<TabType>("rsvp");
 	const [hidingId, setHidingId] = useState<string | null>(null);
@@ -268,12 +269,29 @@ export default function AdminDashboard({
 		} finally {
 			setExportLoading(false);
 		}
-	};
-
-	// Filtrer les RSVPs
+	};	// Filtrer les RSVPs
 	const filtered = rsvps.filter((rsvp) => {
-		if (filter === "attending") return rsvp.attending;
-		if (filter === "not-attending") return !rsvp.attending;
+		// Filtre par présence
+		if (filter === "attending" && !rsvp.attending) return false;
+		if (filter === "not-attending" && rsvp.attending) return false;
+
+		// Filtre par recherche
+		if (searchQuery) {
+			const query = searchQuery.toLowerCase();
+			const matchesName = (rsvp.guest_name || "").toLowerCase().includes(query);
+			const matchesEmail = (rsvp.guest_email || "").toLowerCase().includes(query);
+			const matchesPhone = (rsvp.guest_phone || "").toLowerCase().includes(query);
+			
+			// Chercher aussi dans les accompagnants
+			const matchesFamilyMember = rsvp.family_members?.some(member =>
+				(member.name || "").toLowerCase().includes(query)
+			) || false;
+			
+			if (!matchesName && !matchesEmail && !matchesPhone && !matchesFamilyMember) {
+				return false;
+			}
+		}
+
 		return true;
 	});
 
@@ -530,17 +548,23 @@ export default function AdminDashboard({
 					</div>
 				</div>
 
-				{/* Section RSVPs */}
-				{activeTab === "rsvp" && (
+				{/* Section RSVPs */}			{activeTab === "rsvp" && (
+				<>
+					<SearchAndFilters
+						onSearchChange={setSearchQuery}
+						resultCount={filtered.length}
+						totalCount={rsvps.length}
+					/>
 					<RSVPSection
-						rsvps={rsvps}
+						rsvps={filtered}
 						filter={filter}
 						onFilterChange={setFilter}
 						onEdit={setEditingRsvp}
 						onDelete={handleDeleteRsvp}
 						deletingId={deletingId}
 					/>
-				)}
+				</>
+			)}
 
 				{/* Section Photos */}
 				{activeTab === "photos" && (

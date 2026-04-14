@@ -119,7 +119,7 @@ export function LanguageSwitcher({ isScrolled = false, mobile = false }: { isScr
         className={`flex items-center gap-2 transition-colors ${
           mobile
             ? "block px-4 py-3 text-xl font-normal text-gray-700 tracking-widest w-full text-left"
-            : "px-0 sm:px-3 py-1 ml-2 rounded-full text-gray-700 hover:bg-gray-300/30"
+            : "px-0 sm:px-3 py-2 ml-2 rounded-full text-gray-700 hover:bg-gray-300/30"
         }`}
         aria-label="Changer de langue"
         disabled={isPending}

@@ -42,7 +42,6 @@ export function middleware(request: NextRequest) {
       locale = i18n.defaultLocale;
     }
   }
-
   // Créer la réponse et définir le cookie si nécessaire
   const response = NextResponse.next();
   
@@ -52,6 +51,9 @@ export function middleware(request: NextRequest) {
     maxAge: 60 * 60 * 24 * 365, // 1 an
     sameSite: 'lax',
   });
+
+  // Désindexer le site de Google et autres moteurs de recherche
+  response.headers.set('x-robots-tag', 'noindex, nofollow');
 
   return response;
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition, useRef, useEffect } from "react";
+import imageCompression from "browser-image-compression";
 import { uploadPhoto } from "@/app/actions/photo";
 import {
   validateImageFile,
@@ -29,6 +30,17 @@ interface UploadError {
   message: string;
   fields?: Record<string, string[]>;
 }
+
+/**
+ * Options de compression côté client (économie du quota storage Supabase).
+ * Cible ~1,5 MB / 1920px : qualité parfaite à l'écran et pour tirages standards,
+ * ~3x plus léger que l'original d'un smartphone.
+ */
+const COMPRESSION_OPTIONS = {
+  maxSizeMB: 1.5,
+  maxWidthOrHeight: 1920,
+  useWebWorker: true,
+};
 
 interface PhotoUploadTexts {
   name: string;
@@ -72,6 +84,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
     percentage: 0,
   });
   const [isUploading, setIsUploading] = useState(false);
+  const [isCompressing, setIsCompressing] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -110,6 +123,8 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
     const newFiles: File[] = [];
     const newPreviews: string[] = [];
 
+    setIsCompressing(true);
+
     // Traiter chaque fichier
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -121,13 +136,23 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
         continue;
       }
 
+      // Compresser côté client pour économiser le quota storage.
+      // En cas d'échec, on retombe sur le fichier original.
+      let processedFile = file;
+      try {
+        processedFile = await imageCompression(file, COMPRESSION_OPTIONS);
+      } catch (error) {
+        console.error("Compression failed, using original file:", error);
+      }
+
       // Créer le preview
-      const objectUrl = URL.createObjectURL(file);
+      const objectUrl = URL.createObjectURL(processedFile);
       newPreviews.push(objectUrl);
 
-      // Ajouter le fichier sans compression
-      newFiles.push(file);
+      newFiles.push(processedFile);
     }
+
+    setIsCompressing(false);
 
     setSelectedFiles(newFiles);
     setPreviewUrls(newPreviews);
@@ -344,7 +369,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
                 type="file"
                 accept="image/jpeg,image/jpg,image/png,image/webp,image/heic,image/heif"
                 onChange={handleFileChange}
-                disabled={isUploading || !uploadLimit.allowed}
+                disabled={isUploading || isCompressing || !uploadLimit.allowed}
                 multiple
                 className="hidden"
                 id="photo-upload"
@@ -378,8 +403,14 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
                     />
                   </svg>
                   <p className="mb-2 text-sm text-gray-700">
-                    <span className="font-semibold">{texts.selectFile}</span>{" "}
-                    {texts.dragDrop}
+                    {isCompressing ? (
+                      <span className="font-semibold">{texts.compressing}</span>
+                    ) : (
+                      <>
+                        <span className="font-semibold">{texts.selectFile}</span>{" "}
+                        {texts.dragDrop}
+                      </>
+                    )}
                   </p>
                   <p className="text-xs text-gray-500">
                     {texts.formats}, HEIC ({texts.maxSize} par photo)
@@ -518,11 +549,14 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
           disabled={
             selectedFiles.length === 0 ||
             isUploading ||
+            isCompressing ||
             !uploadLimit.allowed
           }
           className="w-full"
         >
-          {isUploading
+          {isCompressing
+            ? texts.compressing
+            : isUploading
             ? `${texts.submitting} (${uploadProgress.completed}/${uploadProgress.total})`
             : `${texts.submit.replace("ma photo", selectedFiles.length > 0 ? `${selectedFiles.length} photo${selectedFiles.length > 1 ? "s" : ""}` : "ma photo")}`}
         </Button>

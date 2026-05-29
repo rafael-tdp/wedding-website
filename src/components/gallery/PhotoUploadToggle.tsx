@@ -1,7 +1,7 @@
 import { PhotoUploadToggleClient } from "@/components/gallery/PhotoUploadToggleClient";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocale } from "@/lib/i18n/get-locale";
-import { weddingConfig } from "@/lib/config/wedding-config";
+import { isBeforeWeddingGallery } from "@/lib/config/wedding-config";
 
 /**
  * Server component wrapper pour PhotoUploadToggle
@@ -10,11 +10,9 @@ import { weddingConfig } from "@/lib/config/wedding-config";
 export async function PhotoUploadToggle() {
   const locale = await getLocale();
   const dict = await getDictionary(locale);
-  
-  // Vérifier si le mariage a eu lieu
-  const weddingDate = new Date(weddingConfig.wedding.date);
-  const now = new Date();
-  const isWeddingPassed = now >= weddingDate;
+
+  // L'upload s'ouvre à l'heure de la cérémonie (date + time dans wedding-config)
+  const isWeddingPassed = !isBeforeWeddingGallery();
 
   return <PhotoUploadToggleClient texts={dict.gallery.upload} isWeddingPassed={isWeddingPassed} />;
 }

@@ -61,20 +61,31 @@ export const getWeddingDate = () => new Date(weddingConfig.wedding.date);
 export const getRSVPDeadline = () => new Date(weddingConfig.rsvp.deadline);
 
 /**
- * Retourne la date et l'heure exactes d'ouverture de la galerie photo
- * (le jour du mariage à l'heure spécifiée)
+ * Décalage horaire du lieu du mariage (Portugal continental).
+ * Le 11 août, le Portugal est en heure d'été (WEST = UTC+1).
+ * On fige l'offset pour que l'ouverture soit indépendante du fuseau
+ * du serveur (Vercel = UTC).
  */
-export const getGalleryOpenDateTime = () => {
+const WEDDING_UTC_OFFSET = "+01:00";
+
+/**
+ * Retourne la date et l'heure exactes du mariage (le jour J à l'heure
+ * de la cérémonie, en heure locale du Portugal).
+ *
+ * Instant de référence partagé : ouverture de l'upload galerie et cible
+ * du compte à rebours.
+ */
+export const getWeddingDateTime = () => {
 	const dateStr = weddingConfig.wedding.date;
 	const timeStr = weddingConfig.wedding.time;
-	return new Date(`${dateStr}T${timeStr}:00`);
+	return new Date(`${dateStr}T${timeStr}:00${WEDDING_UTC_OFFSET}`);
 };
 
 /**
  * Vérifie si la date actuelle est avant l'ouverture de la galerie
  */
 export const isBeforeWeddingGallery = () => {
-	return new Date() < getGalleryOpenDateTime();
+	return new Date() < getWeddingDateTime();
 };
 
 export const getFullWeddingAddress = () => {

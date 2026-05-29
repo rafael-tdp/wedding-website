@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useI18n } from "@/lib/hooks/useI18n";
+import { getWeddingDateTime } from "@/lib/config/wedding-config";
 
 interface CountdownTime {
   days: number;
@@ -78,7 +79,7 @@ const SLOT_CLASS =
   "relative h-[2rem] sm:h-[4rem] md:h-[5rem] lg:h-[7rem] w-[1.25rem] sm:w-[2rem] md:w-[2.5rem] lg:w-[3.5rem] flex items-center justify-center overflow-hidden";
 
 function getCountdownTime(): CountdownTime {
-  const targetDate = new Date("2026-08-11T12:00:00").getTime();
+  const targetDate = getWeddingDateTime().getTime();
   const now = Date.now();
   const difference = targetDate - now;
 

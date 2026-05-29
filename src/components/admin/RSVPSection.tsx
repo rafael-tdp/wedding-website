@@ -70,6 +70,15 @@ export default function RSVPSection({
 			}
 			return acc + count;
 		}, 0),
+		// Nombre de personnes absentes : invité principal qui décline + tout
+		// accompagnant marqué absent (y compris quand le principal vient).
+		totalAbsent: rsvps.reduce((acc, r) => {
+			let count = r.attending ? 0 : 1;
+			if (r.family_members && Array.isArray(r.family_members)) {
+				count += r.family_members.filter((m: any) => m.attending === false).length;
+			}
+			return acc + count;
+		}, 0),
 		totalShares: rsvps.reduce((acc, r) => {
 			// L'invité principal est toujours un adulte (1 part) s'il est présent
 			let shares = r.attending ? 1 : 0;
@@ -82,76 +91,37 @@ export default function RSVPSection({
 		}, 0),
 	};
 
+	// Cartes de statistiques (mêmes données desktop et mobile).
+	// La grille se répartit automatiquement en lignes selon la largeur d'écran.
+	const statCards: Array<{
+		label: string;
+		shortLabel: string;
+		value: number | string;
+		color: "primary" | "green" | "red" | "blue";
+	}> = [
+		{ label: "Total de réponses", shortLabel: "Réponses", value: stats.total, color: "primary" },
+		{ label: "Réponses positives", shortLabel: "Oui", value: stats.attending, color: "green" },
+		{ label: "Réponses négatives", shortLabel: "Non", value: stats.notAttending, color: "red" },
+		{ label: "Avec groupe/famille", shortLabel: "Groupes", value: stats.withFamilyMembers, color: "blue" },
+		{ label: "Total invités présents", shortLabel: "Présents", value: stats.totalGuests, color: "green" },
+		{ label: "Total invités absents", shortLabel: "Absents", value: stats.totalAbsent, color: "red" },
+		{ label: "Nombre de parts", shortLabel: "Parts", value: stats.totalShares.toLocaleString("fr-FR"), color: "primary" },
+	];
+
 	return (
 		<>
-			{/* Statistiques */}
-			<div className="hidden md:grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4 mb-8">
-				<StatCard
-					label="Total de réponses"
-					value={stats.total}
-					color="primary"
-				/>
-				<StatCard
-					label="Réponses positives"
-					value={stats.attending}
-					color="green"
-				/>
-				<StatCard
-					label="Absents"
-					value={stats.notAttending}
-					color="red"
-				/>
-				<StatCard
-					label="Avec groupe/famille"
-					value={stats.withFamilyMembers}
-					color="blue"
-				/>
-				<StatCard
-					label="Total invités présents"
-					value={stats.totalGuests}
-					color="green"
-				/>
-				<StatCard
-					label="Nombre de parts"
-					value={stats.totalShares.toLocaleString("fr-FR")}
-					color="primary"
-				/>
+			{/* Statistiques en cartes (responsive : 2 colonnes sur mobile -> 7 sur grand écran) */}
+			<div className="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-4 mb-8">
+				{statCards.map((card) => (
+					<StatCard
+						key={card.label}
+						label={card.label}
+						shortLabel={card.shortLabel}
+						value={card.value}
+						color={card.color}
+					/>
+				))}
 			</div>
-
-            {/* Statistiques pour mobile - format compact moderne en une ligne */}
-            <div className="md:hidden mb-6 px-0 py-2 bg-gradient-to-r from-blue-50 via-purple-50 to-green-50 rounded-lg border border-gray-200">
-                <div className="flex items-center justify-between">
-                    <div className="text-center flex-1">
-                        <div className="text-xl font-bold text-blue-400">{stats.total}</div>
-                        <div className="text-xs text-gray-500">Rép.</div>
-                    </div>
-                    <div className="w-px h-8 bg-gray-300"></div>
-                    <div className="text-center flex-1">
-                        <div className="text-xl font-bold text-green-400">{stats.attending}</div>
-                        <div className="text-xs text-gray-500">Oui</div>
-                    </div>
-                    <div className="w-px h-8 bg-gray-300"></div>
-                    <div className="text-center flex-1">
-                        <div className="text-xl font-bold text-red-400">{stats.notAttending}</div>
-                        <div className="text-xs text-gray-500">Non</div>
-                    </div>
-                    <div className="w-px h-8 bg-gray-300"></div>
-                    <div className="text-center flex-1">
-                        <div className="text-xl font-bold text-purple-400">{stats.withFamilyMembers}</div>
-                        <div className="text-xs text-gray-500">Accomp.</div>
-                    </div>
-                    <div className="w-px h-8 bg-gray-300"></div>
-                    <div className="text-center flex-1">
-                        <div className="text-xl font-bold text-green-400">{stats.totalGuests}</div>
-                        <div className="text-xs text-gray-500">Présents</div>
-                    </div>
-                    <div className="w-px h-8 bg-gray-300"></div>
-                    <div className="text-center flex-1">
-                        <div className="text-xl font-bold text-primary">{stats.totalShares.toLocaleString("fr-FR")}</div>
-                        <div className="text-xs text-gray-500">Parts</div>
-                    </div>
-                </div>
-            </div>
 
 			{/* Filtres */}
 			<div className="mb-8 grid grid-cols-3 gap-2 flex-wrap text-xs">
@@ -213,24 +183,30 @@ export default function RSVPSection({
 
 function StatCard({
 	label,
+	shortLabel,
 	value,
 	color,
 }: {
 	label: string;
+	shortLabel?: string;
 	value: number | string;
 	color: "primary" | "green" | "red" | "blue";
 }) {
-	const colorMap = {
-		primary: "bg-primary/10 text-primary",
-		green: "bg-green-100 text-green-700",
-		red: "bg-red-100 text-red-700",
-		blue: "bg-blue-100 text-blue-700",
+	// Fond doux et chiffres sobres, dans la charte du site
+	// (vert sauge / beige / vert bouteille).
+	const styleMap = {
+		primary: { bg: "bg-primary/10", value: "text-primary-dark" },
+		green: { bg: "bg-primary/15", value: "text-accent" },
+		red: { bg: "bg-secondary/25", value: "text-secondary-dark" },
+		blue: { bg: "bg-accent/10", value: "text-accent" },
 	};
+	const s = styleMap[color];
 
 	return (
-		<div className={`${colorMap[color]} rounded-lg p-6`}>
-			<p className="text-sm font-medium opacity-75">{label}</p>
-			<p className="text-3xl font-bold mt-2">{value}</p>
+		<div className={`text-center ${s.bg} rounded-lg px-2 py-3 sm:py-4`}>
+			<p className={`text-2xl sm:text-3xl font-semibold ${s.value}`}>{value}</p>
+			<p className="hidden sm:block text-xs sm:text-sm text-foreground-muted mt-1">{label}</p>
+			<p className="sm:hidden text-xs text-foreground-muted mt-1">{shortLabel ?? label}</p>
 		</div>
 	);
 }

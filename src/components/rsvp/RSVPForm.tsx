@@ -84,6 +84,24 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
   // useTransition pour gérer le loading state
   const [isPending, startTransition] = useTransition();
 
+  // Changer la réponse de présence du principal. Si on passe à "absent",
+  // on normalise les membres déjà saisis (tous absents, sans détails de présence).
+  const handleAttendingChange = (value: boolean) => {
+    setAttending(value);
+    if (value === false && familyMembers.length > 0) {
+      setFamilyMembers((prev) =>
+        prev.map((m) => ({
+          ...m,
+          attending: false,
+          isChild: false,
+          age: undefined,
+          dietary_restrictions: "",
+          allergies: "",
+        }))
+      );
+    }
+  };
+
   // Handler de soumission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -289,7 +307,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
           <div className="flex gap-4 mb-8">
             <button
               type="button"
-              onClick={() => setAttending(true)}
+              onClick={() => handleAttendingChange(true)}
               className={`flex-1 py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md font-medium transition-all ${
                 attending === true
                   ? "bg-primary text-white"
@@ -300,7 +318,7 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
             </button>
             <button
               type="button"
-              onClick={() => setAttending(false)}
+              onClick={() => handleAttendingChange(false)}
               className={`flex-1 py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md font-medium transition-all ${
                 attending === false
                   ? "bg-gray-600 text-white"
@@ -317,9 +335,9 @@ export default function RSVPForm({ onSuccess, initialData, texts = {}, errors: e
           )}
         </div>
 
-        {/* Section famille/groupe */}
-        {attending === true && (
-          <FamilyMembersSection 
+        {/* Section famille/groupe (présents ou absents selon la réponse du principal) */}
+        {attending !== null && (
+          <FamilyMembersSection
             members={familyMembers}
             onMembersChange={setFamilyMembers}
             mainGuestAttending={attending}

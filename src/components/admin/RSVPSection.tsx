@@ -47,6 +47,16 @@ export default function RSVPSection({
 		return true;
 	});
 
+	// Calcul du nombre de parts (repas) pour une personne présente.
+	// Barème enfants : < 4 ans => 0 part, 4-7 ans => 1/2 part, 8 ans et + => 1 part.
+	// Les adultes (et l'invité principal) comptent 1 part.
+	const sharesForMember = (member: { isChild?: boolean; age?: number }): number => {
+		if (!member.isChild || member.age === undefined) return 1;
+		if (member.age < 4) return 0;
+		if (member.age <= 7) return 0.5;
+		return 1;
+	};
+
 	// Statistiques
 	const stats = {
 		total: rsvps.length,
@@ -60,12 +70,22 @@ export default function RSVPSection({
 			}
 			return acc + count;
 		}, 0),
+		totalShares: rsvps.reduce((acc, r) => {
+			// L'invité principal est toujours un adulte (1 part) s'il est présent
+			let shares = r.attending ? 1 : 0;
+			if (r.family_members && Array.isArray(r.family_members)) {
+				shares += r.family_members
+					.filter((m: any) => m.attending === true)
+					.reduce((s, m) => s + sharesForMember(m), 0);
+			}
+			return acc + shares;
+		}, 0),
 	};
 
 	return (
 		<>
 			{/* Statistiques */}
-			<div className="hidden md:grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-4 mb-8">
+			<div className="hidden md:grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4 mb-8">
 				<StatCard
 					label="Total de réponses"
 					value={stats.total}
@@ -90,6 +110,11 @@ export default function RSVPSection({
 					label="Total invités présents"
 					value={stats.totalGuests}
 					color="green"
+				/>
+				<StatCard
+					label="Nombre de parts"
+					value={stats.totalShares.toLocaleString("fr-FR")}
+					color="primary"
 				/>
 			</div>
 
@@ -119,6 +144,11 @@ export default function RSVPSection({
                     <div className="text-center flex-1">
                         <div className="text-xl font-bold text-green-400">{stats.totalGuests}</div>
                         <div className="text-xs text-gray-500">Présents</div>
+                    </div>
+                    <div className="w-px h-8 bg-gray-300"></div>
+                    <div className="text-center flex-1">
+                        <div className="text-xl font-bold text-primary">{stats.totalShares.toLocaleString("fr-FR")}</div>
+                        <div className="text-xs text-gray-500">Parts</div>
                     </div>
                 </div>
             </div>
@@ -187,7 +217,7 @@ function StatCard({
 	color,
 }: {
 	label: string;
-	value: number;
+	value: number | string;
 	color: "primary" | "green" | "red" | "blue";
 }) {
 	const colorMap = {

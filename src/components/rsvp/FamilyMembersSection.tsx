@@ -32,11 +32,15 @@ export function FamilyMembersSection({
 }: FamilyMembersSectionProps) {
   const [nextId, setNextId] = useState(Math.max(...members.map(m => parseInt(m.id) || 0), 0) + 1);
 
+  // Quand l'invité principal ne vient pas, les personnes ajoutées sont
+  // forcément absentes : on ne demande que leur nom.
+  const isAbsentGroup = mainGuestAttending === false;
+
   const addMember = () => {
     const newMember: FamilyMember = {
       id: nextId.toString(),
       name: "",
-      attending: null,
+      attending: isAbsentGroup ? false : null,
       isChild: false,
       age: undefined,
       dietary_restrictions: "",
@@ -56,8 +60,8 @@ export function FamilyMembersSection({
     );
   };
 
-  // Ne montrer la section que si l'invité principal vient
-  if (mainGuestAttending !== true) {
+  // Ne montrer la section qu'une fois la présence du principal renseignée
+  if (mainGuestAttending === null) {
     return null;
   }
 
@@ -65,7 +69,9 @@ export function FamilyMembersSection({
     <div className="space-y-6 mt-12">
       <div className="flex items-center justify-between">
         <h3 className="text-lg sm:text-xl text-gray-900 border-b border-primary/20 pb-2 flex-1 font-medium">
-          {texts.familySection || "Personnes de mon groupe/famille"}
+          {isAbsentGroup
+            ? (texts.familySectionAbsent || "Autres personnes absentes")
+            : (texts.familySection || "Personnes de mon groupe/famille")}
         </h3>
         <span className="text-sm text-gray-500 ml-4">
           {members.length} {members.length === 1 ? (texts.person || "personne") : (texts.persons || "personnes")}
@@ -73,7 +79,9 @@ export function FamilyMembersSection({
       </div>
 
       <p className="text-gray-600 text-sm">
-        {texts.familyDescription || "Vous êtes déjà comptabilisé(e). Indiquez ici les autres personnes de votre groupe/famille (conjoint(e), enfants, proches) qui assisteront au mariage. Cela nous aide à avoir un décompte précis des invités."}
+        {isAbsentGroup
+          ? (texts.familyDescriptionAbsent || "Indiquez ici les autres personnes de votre groupe/famille qui ne pourront pas venir non plus. Cela nous aide à avoir un décompte précis des invités.")
+          : (texts.familyDescription || "Vous êtes déjà comptabilisé(e). Indiquez ici les autres personnes de votre groupe/famille (conjoint(e), enfants, proches) qui assisteront au mariage. Cela nous aide à avoir un décompte précis des invités.")}
       </p>
 
       {/* Liste des membres */}
@@ -110,36 +118,38 @@ export function FamilyMembersSection({
               />
             </div>
 
-            {/* Présence */}
-            <div>
-              <p className="text-sm font-medium text-gray-900 mb-3">
-                {texts.attending || "Sera présent(e) ?"} <span className="text-red-500">*</span>
-              </p>
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={() => updateMember(member.id, { attending: true })}
-                  className={`flex-1 py-2 px-3 rounded-md font-medium transition-all text-sm ${
-                    member.attending === true
-                      ? "bg-primary text-white"
-                      : "bg-gray-100 text-gray-700 hover:bg-primary/10"
-                  }`}
-                >
-                  {texts.familyYes || texts.yes || "Oui"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => updateMember(member.id, { attending: false })}
-                  className={`flex-1 py-2 px-3 rounded-md font-medium transition-all text-sm ${
-                    member.attending === false
-                      ? "bg-gray-600 text-white"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
-                >
-                  {texts.familyNo || texts.no || "Non"}
-                </button>
+            {/* Présence (masquée si le groupe est absent : tous absents par défaut) */}
+            {!isAbsentGroup && (
+              <div>
+                <p className="text-sm font-medium text-gray-900 mb-3">
+                  {texts.attending || "Sera présent(e) ?"} <span className="text-red-500">*</span>
+                </p>
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => updateMember(member.id, { attending: true })}
+                    className={`flex-1 py-2 px-3 rounded-md font-medium transition-all text-sm ${
+                      member.attending === true
+                        ? "bg-primary text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-primary/10"
+                    }`}
+                  >
+                    {texts.familyYes || texts.yes || "Oui"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => updateMember(member.id, { attending: false })}
+                    className={`flex-1 py-2 px-3 rounded-md font-medium transition-all text-sm ${
+                      member.attending === false
+                        ? "bg-gray-600 text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    {texts.familyNo || texts.no || "Non"}
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Type (enfant ou adulte) - seulement si présent */}
             {member.attending === true && (

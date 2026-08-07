@@ -14,7 +14,7 @@
 -- 2. Cliquer "New bucket"
 -- 3. Nom : "gallery"
 -- 4. Public : OUI (pour affichage direct)
--- 5. File size limit : 5 MB
+-- 5. File size limit : 10 MB
 -- 6. Allowed MIME types : image/jpeg, image/png, image/webp
 
 -- OU via SQL (à exécuter dans SQL Editor) :
@@ -24,10 +24,15 @@ VALUES (
   'gallery',
   'gallery',
   true,
-  5242880, -- 5 MB en bytes
+  10485760, -- 10 MB en bytes (couvre la compression 5 MB + le fallback fichier original)
   ARRAY['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
 )
 ON CONFLICT (id) DO NOTHING;
+
+-- Si le bucket "gallery" existe déjà (projet en cours), l'INSERT ci-dessus
+-- ne le mettra PAS à jour (ON CONFLICT DO NOTHING). Exécuter à la place :
+--
+-- UPDATE storage.buckets SET file_size_limit = 10485760 WHERE id = 'gallery';
 
 -- ============================================
 -- 2. POLICIES STORAGE : BUCKET GALLERY

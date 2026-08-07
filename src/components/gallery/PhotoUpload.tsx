@@ -33,12 +33,12 @@ interface UploadError {
 
 /**
  * Options de compression côté client (économie du quota storage Supabase).
- * Cible ~1,5 MB / 1920px : qualité parfaite à l'écran et pour tirages standards,
- * ~3x plus léger que l'original d'un smartphone.
+ * Cible ~5 MB / 3000px : qualité proche de l'original pour des tirages HD
+ * post-mariage, tout en restant sous la limite du bucket Storage.
  */
 const COMPRESSION_OPTIONS = {
-  maxSizeMB: 1.5,
-  maxWidthOrHeight: 1920,
+  maxSizeMB: 5,
+  maxWidthOrHeight: 3000,
   useWebWorker: true,
 };
 

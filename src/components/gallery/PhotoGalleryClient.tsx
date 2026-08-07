@@ -271,6 +271,7 @@ export function PhotoGalleryClient({
   const [selectedPhotos, setSelectedPhotos] = useState<Set<string>>(new Set());
   const [isSelectionMode, setIsSelectionMode] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState(0);
   const { onOpenUploadModal } = useUploadModal();
   const isBeforeWedding = isLocked;
 
@@ -345,6 +346,7 @@ export function PhotoGalleryClient({
     if (selectedPhotos.size === 0) return;
 
     setIsDownloading(true);
+    setDownloadProgress(0);
     try {
       // Importer JSZip dynamiquement
       const JSZip = (await import('jszip')).default;
@@ -352,23 +354,37 @@ export function PhotoGalleryClient({
 
       // Ajouter chaque photo au ZIP
       const selectedPhotoList = photos.filter(p => selectedPhotos.has(p.id));
-      
-      for (const photo of selectedPhotoList) {
+      // +1 pour l'étape finale de génération/compression du ZIP
+      const totalSteps = selectedPhotoList.length + 1;
+
+      for (let i = 0; i < selectedPhotoList.length; i++) {
+        const photo = selectedPhotoList[i];
         const imageUrl = getPhotoPublicUrl(photo.storage_path);
         const response = await fetch(imageUrl);
         let blob = await response.blob();
-        
+
         // S'assurer que le blob a le bon type MIME
         if (blob.type !== "image/jpeg" && blob.type !== "image/jpg") {
           blob = blob.slice(0, blob.size, "image/jpeg");
         }
-        
+
         const filename = getFilenameFromPath(photo.storage_path, photo.id);
         zip.file(filename, blob, { binary: true });
+
+        setDownloadProgress(Math.round(((i + 1) / totalSteps) * 100));
       }
 
       // Générer et télécharger le ZIP avec compression
-      const content = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } });
+      const content = await zip.generateAsync(
+        { type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } },
+        (metadata) => {
+          setDownloadProgress(
+            Math.round(
+              ((selectedPhotoList.length + metadata.percent / 100) / totalSteps) * 100
+            )
+          );
+        }
+      );
       const url = window.URL.createObjectURL(content);
       const a = document.createElement('a');
       a.href = url;
@@ -386,6 +402,7 @@ export function PhotoGalleryClient({
       alert('Erreur lors du téléchargement. Veuillez réessayer.');
     } finally {
       setIsDownloading(false);
+      setDownloadProgress(0);
     }
   };
 
@@ -506,8 +523,8 @@ export function PhotoGalleryClient({
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        <span className="hidden sm:inline">{dict.gallery.downloading}</span>
-                        <span className="sm:hidden">...</span>
+                        <span className="hidden sm:inline">{dict.gallery.downloading} {downloadProgress}%</span>
+                        <span className="sm:hidden">{downloadProgress}%</span>
                       </>
                     ) : (
                       <>

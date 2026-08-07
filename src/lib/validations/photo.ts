@@ -6,7 +6,7 @@ import { z } from "zod";
  * Schéma de validation pour l'upload de photos par les invités.
  * 
  * Contraintes :
- * - Taille max : 10 MB (compressé côté client à ~1,5 MB avant upload)
+ * - Taille max : 20 MB (compressé côté client avant upload)
  * - Formats acceptés : JPG, PNG, WEBP, HEIC
  * - Nom de l'invité obligatoire
  * - Message optionnel (max 500 caractères)
@@ -16,7 +16,7 @@ import { z } from "zod";
 // CONSTANTES
 // ============================================
 
-export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+export const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB
 export const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",

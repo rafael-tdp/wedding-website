@@ -338,7 +338,7 @@
 			"title": "Partagez vos photos",
 			"subtitle": "Partagez vos photos préférées de la journée. Ajoutez votre nom et un petit message si vous le souhaitez !",
 			"formats": "Formats : JPG, PNG, WEBP",
-			"maxSize": "Max. 10 MB",
+			"maxSize": "Max. 20 MB",
 			"maxPhotos": "5 photos par session",
 			"name": "Votre nom",
 			"namePlaceholder": "Prénom Nom",
@@ -372,7 +372,7 @@
 		"errors": {
 			"noFile": "Veuillez sélectionner une photo",
 			"invalidFormat": "Format non accepté. Formats autorisés : JPG, PNG, WEBP, HEIC",
-			"tooLarge": "Le fichier est trop volumineux. Taille max : 10 MB",
+			"tooLarge": "Le fichier est trop volumineux. Taille max : 20 MB",
 			"limitReached": "Vous avez atteint la limite de 5 photos par session (30 minutes). Réessayez plus tard.",
 			"generic": "Erreur lors de l'upload. Veuillez réessayer."
 		}

@@ -338,7 +338,7 @@
 			"title": "Partilhe as suas fotos",
 			"subtitle": "Carregue as suas fotos preferidas do dia. Adicione o seu nome e uma mensagem se quiser!",
 			"formats": "Formatos: JPG, PNG, WEBP",
-			"maxSize": "Máx. 10 MB",
+			"maxSize": "Máx. 20 MB",
 			"maxPhotos": "5 fotos por sessão",
 			"name": "O seu nome",
 			"namePlaceholder": "Nome Apelido",
@@ -372,7 +372,7 @@
 		"errors": {
 			"noFile": "Por favor selecione uma foto",
 			"invalidFormat": "Formato não aceite. Formatos permitidos: JPG, PNG, WEBP, HEIC",
-			"tooLarge": "O ficheiro é demasiado grande. Tamanho máx: 10 MB",
+			"tooLarge": "O ficheiro é demasiado grande. Tamanho máx: 20 MB",
 			"limitReached": "Atingiu o limite de 5 fotos por sessão (30 minutos). Tente mais tarde.",
 			"generic": "Erro ao carregar. Por favor tente novamente."
 		}

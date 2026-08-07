@@ -233,7 +233,7 @@ export async function uploadPhoto(
     // 6. VALIDATION DU FICHIER
     // ============================================
 
-    const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+    const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB
     const ACCEPTED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/heic", "image/heif"];
 
     if (!ACCEPTED_TYPES.includes(file.type)) {

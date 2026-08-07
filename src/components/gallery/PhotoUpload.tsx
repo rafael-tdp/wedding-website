@@ -97,6 +97,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
   });
   const [isUploading, setIsUploading] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
+  const [compressionProgress, setCompressionProgress] = useState(0);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -137,6 +138,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
     const newPreviews: string[] = [];
 
     setIsCompressing(true);
+    setCompressionProgress(0);
 
     // Traiter chaque fichier
     for (let i = 0; i < files.length; i++) {
@@ -153,7 +155,14 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
       // En cas d'échec, on retombe sur le fichier original.
       let processedFile = file;
       try {
-        processedFile = await imageCompression(file, COMPRESSION_OPTIONS);
+        processedFile = await imageCompression(file, {
+          ...COMPRESSION_OPTIONS,
+          onProgress: (fileProgress: number) => {
+            setCompressionProgress(
+              Math.round(((i + fileProgress / 100) / files.length) * 100)
+            );
+          },
+        });
       } catch (error) {
         console.error("Compression failed, using original file:", error);
       }
@@ -177,6 +186,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
     }
 
     setIsCompressing(false);
+    setCompressionProgress(0);
 
     setSelectedFiles(newFiles);
     setSelectedThumbnails(newThumbnails);
@@ -435,7 +445,9 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
                   </svg>
                   <p className="mb-2 text-sm text-gray-700">
                     {isCompressing ? (
-                      <span className="font-semibold">{texts.compressing}</span>
+                      <span className="font-semibold">
+                        {texts.compressing} {compressionProgress}%
+                      </span>
                     ) : (
                       <>
                         <span className="font-semibold">{texts.selectFile}</span>{" "}
@@ -496,7 +508,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
                   type="file"
                   accept="image/jpeg,image/jpg,image/png,image/webp,image/heic,image/heif"
                   onChange={handleFileChange}
-                  disabled={isUploading || !uploadLimit.allowed}
+                  disabled={isUploading || isCompressing || !uploadLimit.allowed}
                   multiple
                   className="hidden"
                   id="photo-upload-more"
@@ -513,7 +525,11 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
                     }
                   `}
                 >
-                  <span className="text-sm text-gray-700">{texts.addMore}</span>
+                  <span className="text-sm text-gray-700">
+                    {isCompressing
+                      ? `${texts.compressing} ${compressionProgress}%`
+                      : texts.addMore}
+                  </span>
                 </label>
               </div>
 
@@ -571,6 +587,18 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
           </div>
         )}
 
+        {/* Barre de progression de la compression */}
+        {isCompressing && (
+          <div className="space-y-1">
+            <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+              <div
+                className="bg-gradient-to-r from-primary to-primary/80 h-full rounded-full transition-all duration-200 ease-out"
+                style={{ width: `${compressionProgress}%` }}
+              />
+            </div>
+          </div>
+        )}
+
         {/* Barre de progression des uploads */}
         {isUploading && <UploadProgressBar progress={uploadProgress} isUploading={isUploading} />}
 
@@ -586,7 +614,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
           className="w-full"
         >
           {isCompressing
-            ? texts.compressing
+            ? `${texts.compressing} ${compressionProgress}%`
             : isUploading
             ? `${texts.submitting} (${uploadProgress.completed}/${uploadProgress.total})`
             : `${texts.submit.replace("ma photo", selectedFiles.length > 0 ? `${selectedFiles.length} photo${selectedFiles.length > 1 ? "s" : ""}` : "ma photo")}`}

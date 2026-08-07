@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { createClient } from "@supabase/supabase-js";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import AdminLogin from "@/components/admin/AdminLogin";
+import { getGalleryVisibilityMode } from "@/lib/supabase/queries";
 
 export const metadata = {
   title: "Admin - Notre Mariage",
@@ -29,6 +30,7 @@ interface Photo {
   id: string;
   storage_path: string;
   public_url: string;
+  thumbnail_url: string | null;
   filename: string;
   file_size: number | null;
   mime_type: string | null;
@@ -85,7 +87,7 @@ async function fetchPhotosServer(): Promise<Photo[]> {
 
     const { data, error } = await supabase
       .from("photos")
-      .select("id,storage_path,public_url,filename,file_size,mime_type,width,height,caption,alt_text,uploaded_by,uploader_email,is_approved,is_visible,created_at,updated_at")
+      .select("id,storage_path,public_url,thumbnail_url,filename,file_size,mime_type,width,height,caption,alt_text,uploaded_by,uploader_email,is_approved,is_visible,created_at,updated_at")
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -132,6 +134,15 @@ export default async function AdminPage() {
   // Charger les photos côté serveur
   const photos = await fetchPhotosServer();
 
+  // Charger le réglage de visibilité de la galerie
+  const galleryVisibility = await getGalleryVisibilityMode();
+
   // Si token existe, afficher le dashboard avec les données
-  return <AdminDashboard initialRsvps={rsvps} initialPhotos={photos} />;
+  return (
+    <AdminDashboard
+      initialRsvps={rsvps}
+      initialPhotos={photos}
+      initialGalleryVisibility={galleryVisibility}
+    />
+  );
 }

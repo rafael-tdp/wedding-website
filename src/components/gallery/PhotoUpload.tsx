@@ -42,6 +42,17 @@ const COMPRESSION_OPTIONS = {
   useWebWorker: true,
 };
 
+/**
+ * Miniature utilisée dans les grilles (galerie + admin) : ~500px / ~150 Ko.
+ * Économise l'essentiel de la bande passante Supabase, la version 1920px
+ * n'étant chargée que dans la lightbox et au téléchargement.
+ */
+const THUMBNAIL_COMPRESSION_OPTIONS = {
+  maxSizeMB: 0.15,
+  maxWidthOrHeight: 500,
+  useWebWorker: true,
+};
+
 interface PhotoUploadTexts {
   name: string;
   namePlaceholder: string;
@@ -67,6 +78,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
   // ============================================
 
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [selectedThumbnails, setSelectedThumbnails] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadError, setUploadError] = useState<UploadError | null>(null);
@@ -121,6 +133,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
     setUploadSuccess(false);
 
     const newFiles: File[] = [];
+    const newThumbnails: File[] = [];
     const newPreviews: string[] = [];
 
     setIsCompressing(true);
@@ -145,16 +158,28 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
         console.error("Compression failed, using original file:", error);
       }
 
+      // Générer la miniature (à partir du fichier déjà compressé, donc rapide).
+      // En cas d'échec, on retombe sur le fichier compressé complet : la grille
+      // sera juste un peu plus lourde pour cette photo, rien de bloquant.
+      let thumbnailFile = processedFile;
+      try {
+        thumbnailFile = await imageCompression(processedFile, THUMBNAIL_COMPRESSION_OPTIONS);
+      } catch (error) {
+        console.error("Thumbnail generation failed, using compressed file:", error);
+      }
+
       // Créer le preview
       const objectUrl = URL.createObjectURL(processedFile);
       newPreviews.push(objectUrl);
 
       newFiles.push(processedFile);
+      newThumbnails.push(thumbnailFile);
     }
 
     setIsCompressing(false);
 
     setSelectedFiles(newFiles);
+    setSelectedThumbnails(newThumbnails);
     setPreviewUrls(newPreviews);
   };
 
@@ -164,6 +189,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
 
   const handleRemoveFile = () => {
     setSelectedFiles([]);
+    setSelectedThumbnails([]);
     setPreviewUrls([]);
     setUploadError(null);
     setUploadSuccess(false);
@@ -175,6 +201,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
 
   const handleRemoveFileAt = (index: number) => {
     setSelectedFiles(selectedFiles.filter((_, i) => i !== index));
+    setSelectedThumbnails(selectedThumbnails.filter((_, i) => i !== index));
     setPreviewUrls(previewUrls.filter((_, i) => i !== index));
 
     if (fileInputRef.current) {
@@ -249,11 +276,14 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
     }
 
     // Ajouter les fichiers à la queue
-    queueRef.current.addFiles(selectedFiles, {
-      name: nameRef.current,
-      message: messageRef.current,
-      timestamp: formTimestamp.current,
-    });
+    queueRef.current.addFiles(
+      selectedFiles.map((file, i) => ({ file, thumbnail: selectedThumbnails[i] })),
+      {
+        name: nameRef.current,
+        message: messageRef.current,
+        timestamp: formTimestamp.current,
+      }
+    );
 
     // Attendre que la queue soit vide
     const checkQueue = setInterval(() => {
@@ -265,6 +295,7 @@ export function PhotoUpload({ texts }: { texts: PhotoUploadTexts }) {
         if (finalProgress.failed === 0) {
           setUploadSuccess(true);
           setSelectedFiles([]);
+          setSelectedThumbnails([]);
           setPreviewUrls([]);
           formRef.current?.reset();
           if (fileInputRef.current) {

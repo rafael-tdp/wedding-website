@@ -207,7 +207,11 @@ CREATE TABLE IF NOT EXISTS public.photos (
   -- Stockage
   storage_path TEXT NOT NULL UNIQUE, -- Chemin dans Supabase Storage
   public_url TEXT NOT NULL,
-  
+
+  -- Miniature (utilisée dans les grilles pour économiser la bande passante)
+  thumbnail_path TEXT,
+  thumbnail_url TEXT,
+
   -- Métadonnées image
   filename VARCHAR(255) NOT NULL,
   file_size INTEGER, -- En bytes
@@ -241,6 +245,32 @@ CREATE INDEX IF NOT EXISTS idx_photos_uploader ON public.photos(uploader_email);
 -- Trigger updated_at
 CREATE TRIGGER photos_updated_at
   BEFORE UPDATE ON public.photos
+  FOR EACH ROW
+  EXECUTE FUNCTION public.handle_updated_at();
+
+-- ============================================
+-- 6. TABLE : SITE_SETTINGS (Paramètres admin)
+-- ============================================
+
+-- Ligne unique (id = 1) contenant les paramètres globaux du site.
+-- gallery_visibility :
+--   - 'auto'    : galerie ouverte aux invités à partir de la date/heure du mariage (comportement historique)
+--   - 'visible' : galerie toujours ouverte, quelle que soit la date
+--   - 'hidden'  : galerie toujours masquée aux invités, quelle que soit la date
+CREATE TABLE IF NOT EXISTS public.site_settings (
+  id INTEGER PRIMARY KEY DEFAULT 1,
+  gallery_visibility TEXT NOT NULL DEFAULT 'auto'
+    CHECK (gallery_visibility IN ('auto', 'visible', 'hidden')),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  CONSTRAINT site_settings_singleton CHECK (id = 1)
+);
+
+INSERT INTO public.site_settings (id, gallery_visibility)
+VALUES (1, 'auto')
+ON CONFLICT (id) DO NOTHING;
+
+CREATE TRIGGER site_settings_updated_at
+  BEFORE UPDATE ON public.site_settings
   FOR EACH ROW
   EXECUTE FUNCTION public.handle_updated_at();
 

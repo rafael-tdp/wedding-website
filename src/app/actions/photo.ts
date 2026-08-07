@@ -137,6 +137,7 @@ export async function uploadPhoto(
     const website = formData.get("website") as string | undefined; // Honeypot
     const timestamp = formData.get("timestamp") as string | undefined;
     const file = formData.get("file") as File | null;
+    const thumbnailFile = formData.get("thumbnail") as File | null;
 
     if (!file) {
       return {
@@ -282,10 +283,38 @@ export async function uploadPhoto(
     }
 
     // ============================================
-    // 9. GÉNÉRER L'URL PUBLIQUE
+    // 8bis. UPLOADER LA MINIATURE (utilisée dans les grilles)
+    // ============================================
+
+    let thumbnailStoragePath: string | null = null;
+
+    if (thumbnailFile) {
+      thumbnailStoragePath = `uploads/thumbs/${fileName}`;
+      const thumbnailBuffer = new Uint8Array(await thumbnailFile.arrayBuffer());
+
+      const { error: thumbnailUploadError } = await supabase.storage
+        .from("gallery")
+        .upload(thumbnailStoragePath, thumbnailBuffer, {
+          contentType: thumbnailFile.type,
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      if (thumbnailUploadError) {
+        console.error("Thumbnail upload error:", thumbnailUploadError);
+        // Non bloquant : la galerie retombera sur public_url si thumbnail_url est absent
+        thumbnailStoragePath = null;
+      }
+    }
+
+    // ============================================
+    // 9. GÉNÉRER LES URLS PUBLIQUES
     // ============================================
 
     const publicUrl = await getPhotoPublicUrl(storagePath);
+    const thumbnailUrl = thumbnailStoragePath
+      ? await getPhotoPublicUrl(thumbnailStoragePath)
+      : null;
 
     // ============================================
     // 10. INSÉRER DANS LA TABLE PHOTOS
@@ -296,6 +325,8 @@ export async function uploadPhoto(
       .insert({
         storage_path: storagePath,
         public_url: publicUrl,
+        thumbnail_path: thumbnailStoragePath,
+        thumbnail_url: thumbnailUrl,
         filename: file.name,
         file_size: file.size,
         mime_type: file.type,
@@ -313,8 +344,10 @@ export async function uploadPhoto(
       console.error("Error message:", dbError.message);
       console.error("Error details:", dbError.details);
 
-      // Supprimer le fichier uploadé en cas d'erreur DB
-      await supabase.storage.from("gallery").remove([storagePath]);
+      // Supprimer le(s) fichier(s) uploadé(s) en cas d'erreur DB
+      const pathsToRemove = [storagePath];
+      if (thumbnailStoragePath) pathsToRemove.push(thumbnailStoragePath);
+      await supabase.storage.from("gallery").remove(pathsToRemove);
 
       return {
         success: false,

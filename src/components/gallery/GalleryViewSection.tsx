@@ -7,10 +7,12 @@ import { Title } from "../ui";
 
 interface GalleryViewSectionProps {
 	dict: any;
+	isLocked: boolean;
 }
 
 export default function GalleryViewSection({
 	dict,
+	isLocked,
 }: GalleryViewSectionProps) {
 	return (
 		<div className="space-y-8">
@@ -23,7 +25,7 @@ export default function GalleryViewSection({
 				</p>
 			</div>
 			<Suspense fallback={<PhotoGallerySkeleton />}>
-			<PhotoGallery dict={dict} />
+			<PhotoGallery dict={dict} isLocked={isLocked} />
 			</Suspense>
 		</div>
 	);

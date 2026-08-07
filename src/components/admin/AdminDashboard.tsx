@@ -7,6 +7,7 @@ import {
 	deleteRSVP,
 	hidePhoto,
 	deletePhoto,
+	type GalleryVisibilityMode,
 } from "@/app/actions/admin";
 import { getFAQCount } from "@/app/actions/admin-faq";
 import { getProgrammeCount } from "@/app/actions/admin-programme";
@@ -16,6 +17,7 @@ import RSVPSection from "./RSVPSection";
 import PhotoSection from "./PhotoSection";
 import AdminFAQManager from "./AdminFAQManager";
 import AdminProgrammeManager from "./AdminProgrammeManager";
+import AdminSettingsSection from "./AdminSettingsSection";
 // import AdminHebergementManager from "./AdminHebergementManager"; // DESACTIVE TEMPORAIREMENT
 import { AdminFormModal } from "./AdminFormModal";
 import SearchAndFilters from "./SearchAndFilters";
@@ -48,6 +50,7 @@ interface Photo {
 	id: string;
 	storage_path: string;
 	public_url: string;
+	thumbnail_url: string | null;
 	filename: string;
 	file_size: number | null;
 	mime_type: string | null;
@@ -66,9 +69,10 @@ interface Photo {
 interface AdminDashboardProps {
 	initialRsvps: RSVP[];
 	initialPhotos?: Photo[];
+	initialGalleryVisibility?: GalleryVisibilityMode;
 }
 
-type TabType = "rsvp" | "photos" | "faq" | "programme";
+type TabType = "rsvp" | "photos" | "faq" | "programme" | "settings";
 
 /**
  * COMPOSANT : DASHBOARD ADMIN
@@ -77,6 +81,7 @@ type TabType = "rsvp" | "photos" | "faq" | "programme";
 export default function AdminDashboard({
 	initialRsvps,
 	initialPhotos = [],
+	initialGalleryVisibility = "auto",
 }: AdminDashboardProps) {	const [rsvps, setRsvps] = useState<RSVP[]>(initialRsvps);
 	const [photos, setPhotos] = useState<Photo[]>(initialPhotos);
 	const [filter, setFilter] = useState<"all" | "attending" | "not-attending">(
@@ -123,7 +128,7 @@ export default function AdminDashboard({
 		const savedTab = localStorage.getItem(
 			"adminActiveTab",
 		) as TabType | null;
-		const validTabs: TabType[] = ["rsvp", "photos", "faq", "programme"];
+		const validTabs: TabType[] = ["rsvp", "photos", "faq", "programme", "settings"];
 		if (savedTab && validTabs.includes(savedTab)) {
 			setActiveTabState(savedTab);
 		}
@@ -545,6 +550,16 @@ export default function AdminDashboard({
 						>
 							Programme ({programmeCount})
 						</button>
+						<button
+							onClick={() => setActiveTab("settings")}
+							className={`px-3 sm:px-6 py-2 sm:py-3 font-medium transition-all border-b-2 text-xs sm:text-base whitespace-nowrap ${
+								activeTab === "settings"
+									? "border-primary text-primary"
+									: "border-transparent text-foreground-muted hover:text-foreground"
+							}`}
+						>
+							Paramètres
+						</button>
 					</div>
 				</div>
 
@@ -594,6 +609,13 @@ export default function AdminDashboard({
 						setShowCreateForm={setShowAddProgrammeCreateForm}
 						showEditForm={showAddProgrammeEditForm}
 						setShowEditForm={setShowAddProgrammeEditForm}
+					/>
+				)}
+
+				{/* Section Paramètres */}
+				{activeTab === "settings" && (
+					<AdminSettingsSection
+						initialGalleryVisibility={initialGalleryVisibility}
 					/>
 				)}
 

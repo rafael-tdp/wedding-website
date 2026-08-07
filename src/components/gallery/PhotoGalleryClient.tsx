@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { FaPlus } from "react-icons/fa6";
 import Button from "@/components/ui/Button";
 import { type Photo } from "@/lib/supabase/queries";
 import { supabase } from "@/lib/supabase/client";
 import { useUploadModal } from "./UploadModalContext";
-import { isBeforeWeddingGallery } from "@/lib/config/wedding-config";
 
 /**
  * Obtient l'URL publique d'une photo
@@ -60,7 +60,7 @@ function PhotoLightbox({
 
   return (
     <div
-      className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4"
       onClick={onClose}
     >
       <div
@@ -183,6 +183,7 @@ function PhotoCard({
   onDownload: () => void;
 }) {
   const imageUrl = getPhotoPublicUrl(photo.storage_path);
+  const thumbnailUrl = photo.thumbnail_url || imageUrl;
 
   return (
     <div className="group relative bg-white overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 aspect-[4/3]">
@@ -192,7 +193,7 @@ function PhotoCard({
         className="w-full h-full overflow-hidden bg-gray-100 cursor-pointer"
       >
         <img
-          src={imageUrl}
+          src={thumbnailUrl}
           alt={`Photo de ${photo.uploaded_by || "Invité"}`}
           loading="lazy"
           className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
@@ -257,13 +258,21 @@ function PhotoCard({
 /**
  * Composant : Wrapper client pour la galerie
  */
-export function PhotoGalleryClient({ photos, dict }: { photos: Photo[]; dict: any }) {
+export function PhotoGalleryClient({
+  photos,
+  dict,
+  isLocked,
+}: {
+  photos: Photo[];
+  dict: any;
+  isLocked: boolean;
+}) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [selectedPhotos, setSelectedPhotos] = useState<Set<string>>(new Set());
   const [isSelectionMode, setIsSelectionMode] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const { onOpenUploadModal } = useUploadModal();
-  const isBeforeWedding = isBeforeWeddingGallery();
+  const isBeforeWedding = isLocked;
 
   // Toggle la sélection d'une photo
   const togglePhotoSelection = (photoId: string) => {
@@ -541,23 +550,32 @@ export function PhotoGalleryClient({ photos, dict }: { photos: Photo[]; dict: an
         ))}
       </div>
 
-      {/* Lightbox */}
-      {selectedIndex !== null && !isSelectionMode && (
-        <PhotoLightbox
-          photo={photos[selectedIndex]}
-          allPhotos={photos}
-          currentIndex={selectedIndex}
-          onClose={() => setSelectedIndex(null)}
-          onNext={() =>
-            setSelectedIndex((selectedIndex + 1) % photos.length)
-          }
-          onPrev={() =>
-            setSelectedIndex(
-              selectedIndex === 0 ? photos.length - 1 : selectedIndex - 1
-            )
-          }
-        />
-      )}
+      {/* Lightbox : rendu via portail dans document.body.
+          Le <body> est en display:flex (flex flex-col dans layout.tsx) ;
+          la navbar (enfant flex direct, z-index explicite) peint alors
+          toute sa pile au-dessus de ses frères flex en z-index:auto,
+          quel que soit le z-index appliqué à un descendant imbriqué.
+          Le portail rend le lightbox frère direct de la navbar pour que
+          la comparaison de z-index s'applique normalement. */}
+      {selectedIndex !== null &&
+        !isSelectionMode &&
+        createPortal(
+          <PhotoLightbox
+            photo={photos[selectedIndex]}
+            allPhotos={photos}
+            currentIndex={selectedIndex}
+            onClose={() => setSelectedIndex(null)}
+            onNext={() =>
+              setSelectedIndex((selectedIndex + 1) % photos.length)
+            }
+            onPrev={() =>
+              setSelectedIndex(
+                selectedIndex === 0 ? photos.length - 1 : selectedIndex - 1
+              )
+            }
+          />,
+          document.body
+        )}
     </div>
   );
 }

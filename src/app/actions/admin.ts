@@ -401,3 +401,41 @@ export async function deletePhoto(
     return { success: false, message: "Erreur inattendue" };
   }
 }
+
+// ============================================
+// SERVER ACTIONS : PARAMÈTRES DU SITE
+// ============================================
+
+export type GalleryVisibilityMode = "auto" | "visible" | "hidden";
+
+/**
+ * SERVER ACTION : METTRE À JOUR LA VISIBILITÉ DE LA GALERIE
+ */
+export async function updateGalleryVisibility(
+  mode: GalleryVisibilityMode
+): Promise<{ success: boolean; message: string }> {
+  try {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+      return { success: false, message: "Configuration Supabase manquante" };
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const { error } = await supabase
+      .from("site_settings")
+      .upsert({ id: 1, gallery_visibility: mode });
+
+    if (error) {
+      console.error("Error updating gallery visibility:", error);
+      return { success: false, message: "Erreur lors de la mise à jour" };
+    }
+
+    return { success: true, message: "Réglage mis à jour avec succès" };
+  } catch (error) {
+    console.error("Unexpected error updating gallery visibility:", error);
+    return { success: false, message: "Erreur inattendue" };
+  }
+}

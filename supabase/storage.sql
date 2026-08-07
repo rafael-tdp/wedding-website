@@ -118,10 +118,11 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 CREATE OR REPLACE FUNCTION public.delete_storage_object()
 RETURNS TRIGGER AS $$
 BEGIN
-  -- Supprimer le fichier du storage
+  -- Supprimer le fichier du storage (photo + miniature)
   DELETE FROM storage.objects
-  WHERE bucket_id = 'gallery' AND name = OLD.storage_path;
-  
+  WHERE bucket_id = 'gallery'
+    AND name IN (OLD.storage_path, OLD.thumbnail_path);
+
   RETURN OLD;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

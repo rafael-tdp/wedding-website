@@ -19,6 +19,7 @@ ALTER TABLE public.programme ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.faq ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.hebergements ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.photos ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.site_settings ENABLE ROW LEVEL SECURITY;
 
 -- ============================================
 -- 2. POLICIES : RSVP
@@ -129,6 +130,19 @@ CREATE POLICY "Photos - No Public Delete"
   ON public.photos
   FOR DELETE
   USING (false);
+
+-- ============================================
+-- 7. POLICIES : SITE_SETTINGS
+-- ============================================
+
+-- Lecture publique : le site doit pouvoir savoir si la galerie est ouverte
+CREATE POLICY "Site Settings - Public Read"
+  ON public.site_settings
+  FOR SELECT
+  USING (true);
+
+-- Écriture : réservée aux administrateurs (server actions avec la clé service_role)
+-- Pas de policy INSERT/UPDATE/DELETE = bloqué pour la clé anonyme
 
 -- ============================================
 -- POLICIES AVANCÉES (Optionnel)

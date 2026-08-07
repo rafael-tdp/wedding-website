@@ -10,6 +10,7 @@ import { MAX_PARALLEL_UPLOADS, UPLOAD_TIMEOUT_MS } from "@/lib/validations/photo
 export interface QueuedUpload {
   id: string;
   file: File;
+  thumbnail: File;
   metadata: {
     name: string;
     message: string;
@@ -39,14 +40,14 @@ export class UploadQueue {
    * Ajoute des fichiers à la queue
    */
   addFiles(
-    files: File[],
+    files: { file: File; thumbnail: File }[],
     metadata: { name: string; message: string; timestamp: number }
   ): string[] {
     const ids: string[] = [];
-    
-    for (const file of files) {
+
+    for (const { file, thumbnail } of files) {
       const id = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-      this.queue.push({ id, file, metadata });
+      this.queue.push({ id, file, thumbnail, metadata });
       ids.push(id);
     }
 
@@ -109,6 +110,7 @@ export class UploadQueue {
       // Préparer le FormData
       const formData = new FormData();
       formData.append("file", upload.file);
+      formData.append("thumbnail", upload.thumbnail);
       formData.append("uploaded_by_name", upload.metadata.name);
       formData.append("message", upload.metadata.message);
       formData.append("timestamp", upload.metadata.timestamp.toString());

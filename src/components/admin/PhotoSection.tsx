@@ -7,6 +7,7 @@ interface Photo {
 	id: string;
 	storage_path: string;
 	public_url: string;
+	thumbnail_url: string | null;
 	filename: string;
 	file_size: number | null;
 	mime_type: string | null;
@@ -69,6 +70,7 @@ export default function PhotoSection({
 	const gridPhotos = photos.map((p) => ({
 		id: p.id,
 		public_url: p.public_url,
+		thumbnail_url: p.thumbnail_url,
 		filename: p.filename,
 		caption: p.caption,
 		alt_text: p.alt_text,

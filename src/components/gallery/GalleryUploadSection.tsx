@@ -1,16 +1,15 @@
 import { Title } from "../ui";
 import { PhotoUpload } from "./PhotoUpload";
-import { isBeforeWeddingGallery } from "@/lib/config/wedding-config";
 
 interface GalleryUploadSectionProps {
 	dict: any;
+	isLocked: boolean;
 }
 
 export default function GalleryUploadSection({
 	dict,
+	isLocked,
 }: GalleryUploadSectionProps) {
-	const isBeforeWedding = isBeforeWeddingGallery();
-
 	return (
 		<div className="space-y-8">
 			<div>
@@ -20,7 +19,7 @@ export default function GalleryUploadSection({
 				</p>
 			</div>
 
-			{isBeforeWedding && (
+			{isLocked && (
 				<div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
 					<p className="text-blue-800 text-center">
 						{dict.gallery.comingSoon}
@@ -28,7 +27,7 @@ export default function GalleryUploadSection({
 				</div>
 			)}
 
-			{!isBeforeWedding && <PhotoUpload texts={dict.gallery.upload} />}
+			{!isLocked && <PhotoUpload texts={dict.gallery.upload} />}
 		</div>
 	);
 }

@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 
 interface Photo {
 	id: string;
 	public_url: string;
+	thumbnail_url?: string | null;
 	filename: string;
 	caption: string | null;
 	alt_text: string | null;
@@ -35,7 +37,7 @@ function PhotoLightbox({
 }) {
 	return (
 		<div
-			className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+			className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4"
 			onClick={onClose}
 		>
 			<div
@@ -156,7 +158,7 @@ function PhotoGridItem({
 				className="w-full h-full cursor-pointer overflow-hidden bg-gray-100"
 			>
 				<img
-					src={photo.public_url}
+					src={photo.thumbnail_url || photo.public_url}
 					alt={photo.alt_text || "Photo"}
 					loading="lazy"
 					className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
@@ -223,20 +225,22 @@ export default function PhotoGrid({
 				))}
 			</div>
 
-			{selectedIndex !== null && (
-				<PhotoLightbox
-					photo={photos[selectedIndex]}
-					allPhotos={photos}
-					currentIndex={selectedIndex}
-					onClose={() => setSelectedIndex(null)}
-					onNext={() => setSelectedIndex((selectedIndex + 1) % photos.length)}
-					onPrev={() =>
-						setSelectedIndex(
-							(selectedIndex - 1 + photos.length) % photos.length
-						)
-					}
-				/>
-			)}
+			{selectedIndex !== null &&
+				createPortal(
+					<PhotoLightbox
+						photo={photos[selectedIndex]}
+						allPhotos={photos}
+						currentIndex={selectedIndex}
+						onClose={() => setSelectedIndex(null)}
+						onNext={() => setSelectedIndex((selectedIndex + 1) % photos.length)}
+						onPrev={() =>
+							setSelectedIndex(
+								(selectedIndex - 1 + photos.length) % photos.length
+							)
+						}
+					/>,
+					document.body
+				)}
 		</>
 	);
 }

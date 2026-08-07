@@ -1,4 +1,5 @@
 import { supabase } from "./client";
+import { isBeforeWeddingGallery } from "@/lib/config/wedding-config";
 
 /**
  * FONCTIONS DE LECTURE SUPABASE
@@ -66,6 +67,8 @@ export interface Photo {
   id: string;
   storage_path: string;
   public_url: string;
+  thumbnail_path: string | null;
+  thumbnail_url: string | null;
   filename: string;
   file_size: number | null;
   mime_type: string | null;
@@ -288,7 +291,7 @@ export async function getApprovedPhotos(): Promise<Photo[]> {
   try {
     const { data, error } = await supabase
       .from("photos")
-      .select("id,storage_path,public_url,filename,file_size,mime_type,width,height,caption,alt_text,uploaded_by,uploader_email,is_approved,is_visible,created_at,updated_at")
+      .select("id,storage_path,public_url,thumbnail_path,thumbnail_url,filename,file_size,mime_type,width,height,caption,alt_text,uploaded_by,uploader_email,is_approved,is_visible,created_at,updated_at")
       .eq("is_approved", true)
       .eq("is_visible", true)
       .order("created_at", { ascending: false });
@@ -313,7 +316,7 @@ export async function getAllPhotos(): Promise<Photo[]> {
   try {
     const { data, error } = await supabase
       .from("photos")
-      .select("id,storage_path,public_url,filename,file_size,mime_type,width,height,caption,alt_text,uploaded_by,uploader_email,is_approved,is_visible,created_at,updated_at")
+      .select("id,storage_path,public_url,thumbnail_path,thumbnail_url,filename,file_size,mime_type,width,height,caption,alt_text,uploaded_by,uploader_email,is_approved,is_visible,created_at,updated_at")
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -361,6 +364,45 @@ export async function getApprovedPhotosCount(): Promise<number> {
   }
 
   return count || 0;
+}
+
+// ============================================
+// QUERIES : PARAMÈTRES DU SITE
+// ============================================
+
+export type GalleryVisibilityMode = "auto" | "visible" | "hidden";
+
+/**
+ * Récupère le mode de visibilité de la galerie configuré par l'admin.
+ * Retombe sur "auto" (comportement basé sur la date) si le réglage
+ * n'existe pas encore (avant l'exécution de la migration) ou en cas d'erreur.
+ */
+export async function getGalleryVisibilityMode(): Promise<GalleryVisibilityMode> {
+  try {
+    const { data, error } = await supabase
+      .from("site_settings")
+      .select("gallery_visibility")
+      .eq("id", 1)
+      .single();
+
+    if (error || !data) return "auto";
+    return (data.gallery_visibility as GalleryVisibilityMode) || "auto";
+  } catch (err) {
+    console.error("Unexpected error fetching gallery visibility:", err);
+    return "auto";
+  }
+}
+
+/**
+ * Détermine si la galerie (vue + upload) doit rester verrouillée pour les invités.
+ * "visible" force l'ouverture, "hidden" force la fermeture, "auto" garde le
+ * comportement historique basé sur la date/heure du mariage.
+ */
+export async function isGalleryLockedForGuests(): Promise<boolean> {
+  const mode = await getGalleryVisibilityMode();
+  if (mode === "visible") return false;
+  if (mode === "hidden") return true;
+  return isBeforeWeddingGallery();
 }
 
 // ============================================

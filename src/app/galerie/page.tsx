@@ -4,6 +4,7 @@ import GalleryUploadSection from "@/components/gallery/GalleryUploadSection";
 import GalleryViewSection from "@/components/gallery/GalleryViewSection";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocale } from "@/lib/i18n/get-locale";
+import { isGalleryLockedForGuests } from "@/lib/supabase/queries";
 
 export const metadata = {
 	title: "Galerie Photo - Mariage",
@@ -14,6 +15,7 @@ export const metadata = {
 export default async function GalleriePage() {
 	const locale = await getLocale();
 	const dict = await getDictionary(locale);
+	const isLocked = await isGalleryLockedForGuests();
 
 	return (
 		<main className="min-h-screen bg-white animate-page-enter">
@@ -26,8 +28,8 @@ export default async function GalleriePage() {
 			/>
 
 			<GalleryLayout
-				upload={<GalleryUploadSection dict={dict} />}
-				gallery={<GalleryViewSection dict={dict} />}
+				upload={<GalleryUploadSection dict={dict} isLocked={isLocked} />}
+				gallery={<GalleryViewSection dict={dict} isLocked={isLocked} />}
 				dict={dict}
 			/>
 		</main>
